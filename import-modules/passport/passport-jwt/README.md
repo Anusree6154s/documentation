@@ -530,7 +530,6 @@
                         <summary>
                         <code>done</code> - (fucntion) To indicate the result of the verification.
                         </summary>
-                        </details>
 
                         - **Purpose**: To indicate the result of the verification.
                         - **Parameters**:
@@ -557,6 +556,7 @@
                                 });
                             }));
                             ```
+                          </details>
                 - Example:
                     ```js
                     const verify = (jwtPayload, done) => {
