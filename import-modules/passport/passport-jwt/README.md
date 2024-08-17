@@ -268,10 +268,11 @@
                                     secretOrKey: fs.readFileSync('./path/to/public.key', 'utf8')
                                 };
                                 ```
-                            > [!NOTE] <br>
-                            > If using symmetric encryption (e.g., HS256), the same secretOrKey must be used for both signing and verifying the token. <br>
-                            > If using asymmetric encryption (e.g., RS256), the secretOrKey should be the public key, while the private key is used to sign the token. <br>
-                            > It is important to securely manage this key, as exposure could compromise the security of your system.
+                            - Note:
+                                - If using symmetric encryption (e.g., HS256), the same secretOrKey must be used for both signing and verifying the token.
+                                - If using asymmetric encryption (e.g., RS256), the secretOrKey should be the public key, while the private key is used to sign the token.
+                                - It is important to securely manage this key, as exposure could compromise the security of your system.
+                            
                         </details>
 
                     - <details>
@@ -296,13 +297,13 @@
                                 };
                             ```
 
-                            > [!NOTE] <br>
-                            > 1. If secretOrKeyProvider is provided, it overrides the static secretOrKey option.<br>
-                            > 2. Useful in scenarios where the key might change per request or per user, such as:
-                            >    - Multi-tenant applications where each tenant has a different key.
-                            >    - Using different keys for different users or services.
-                            > 3. If the key cannot be determined (e.g., a database lookup fails), call done(err) to signal an error.
-                            > 4. When using asymmetric encryption (e.g., RS256), the secretOrKeyProvider would return the public key for verification.
+                            - Note:
+                                1. If secretOrKeyProvider is provided, it overrides the static secretOrKey option
+                                2. Useful in scenarios where the key might change per request or per user, such as:
+                                    - Multi-tenant applications where each tenant has a different key.
+                                    - Using different keys for different users or services.
+                                3. If the key cannot be determined (e.g., a database lookup fails), call done(err) to signal an error.
+                                4. When using asymmetric encryption (e.g., RS256), the secretOrKeyProvider would return the public key for verification.
 
                             - Example for multi-tenant application:
                                 ```js
@@ -493,8 +494,8 @@
                             5. `aud`: The **audience** for which the token is intended. This is a standard claim indicating the recipient(s) of the token. 
                             6. `nbf`: **Not Before** - The time before which the token should not be considered valid.
                             7. `jti`: **JWT ID** - A unique identifier for the token, which can be used to prevent replay attacks.
-                            > [!NOTE] <br>
-                            > we can also have any custom claims. eg: roles, name.
+
+                            > **Note** : we can also have any custom claims. eg: roles, name.
                         - Example:
                             ```js
                             //setting claims in some other file
