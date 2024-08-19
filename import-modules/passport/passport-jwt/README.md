@@ -2,10 +2,16 @@
 
 ## Table of Contents
 
-1. [Overview](#features-and-usage) 
-2. [Features and Usage](#features-and-usage)
-3. [Authentication](#authenticating-jwt-after-strategy-configuration)
-4. [Passing Jwt Token](#sending-jwt-from-client-to-server)
+1. [Overview](#overview)
+2. [Features and Usage](#features-and-usage)  
+   2.1. [Installation and Import](#installation-and-import)
+   2.1. [Configuration](#Configuration)
+3. [Authentication](#authentication)
+4. [Passing JWT Token](#passing-jwt-token)
+
+---
+
+Does this table look good, or would you like me to expand on it further?
 
 ## Overview
 
@@ -16,12 +22,14 @@
 ## Features and Usage
 
 1.  Installation and Import
+<a id="installation-and-import"></a>
     - Install: `npm install passport-jwt`
     - Import: `const { Strategy, ExtractJwt } = require("passport-jwt");`
       - _passport-jwt is a class with 2 properties - Strategy and ExtractJwt_
       - _Strategy is a class with 2 parameters passed to its contructor_
       - _ExtractJwt is an object with various sub properties_
 2.  Configuration
+<a id="Configuration"></a>
 
     - Basic Structure:
 
@@ -677,7 +685,7 @@
                     </details>
         
 
-    3.  Full Structure (for deafult strategy):
+3.  Full Structure (for deafult strategy):
         - Default Strategy:
             ```javascript
             const { Strategy, ExtractJwt } = require("passport-jwt");
@@ -1346,6 +1354,7 @@
 
     })
     ```
+
 ## Sending jwt from client to server
 1. <details>
     <summary>
@@ -1544,3 +1553,4 @@
     }
     ```
     </details>
+
