@@ -100,7 +100,7 @@
                     ```
                 - Properties:
 
-                    - <details>
+                    1. <details>
                             <summary>
                             <code>jwtFromRequest</code> - (function) To specify method of Jwt extraction
                             </summary>
@@ -115,7 +115,7 @@
 
                         - All options (Properties of ExtractJwt):
 
-                        - <details>
+                        1. <details>
                             <summary>
                             <code>ExtractJwt.fromAuthHeaderAsBearerToken()</code>
                             </summary>
@@ -130,13 +130,13 @@
 
                             </details>
 
-                        - <details>
+                        2. <details>
                             <summary>
-                            <code>ExtractJwt.fromHeader(headerName)</code>
+                            <code>ExtractJwt.fromHeader(header_name)</code>
                             </summary>
 
                             - **Usage**: Extracts the JWT from a custom header in the request.
-                            - **Input parameter**: headerName (string) - The name of the custom header containing the JWT.
+                            - **Input parameter**: header_name (string) - The name of the custom header containing the JWT.
                             - **Example**:
 
                             ```js
@@ -146,13 +146,13 @@
                             </details>
 
 
-                        - <details>
+                        3. <details>
                             <summary>
-                            <code>ExtractJwt.fromBodyField(fieldName)</code>
+                            <code>ExtractJwt.fromBodyField(field_name)</code>
                             </summary>
 
                             - **Usage**:  Extracts the JWT from a specific field in the request body (typically used in form submissions or JSON payloads).
-                            - **Input parameter**: fieldName (string) - The name of the field in the request body that contains the JWT.
+                            - **Input parameter**: field_name (string) - The name of the field in the request body that contains the JWT.
                             - **Example**:
 
                             ```js
@@ -161,13 +161,13 @@
 
                             </details>
 
-                        - <details>
+                        4. <details>
                             <summary>
-                            <code>ExtractJwt.fromUrlQueryParameter(parameterName)</code>
+                            <code>ExtractJwt.fromUrlQueryParameter(param_name)</code>
                             </summary>
 
                             - **Usage**:  Extracts the JWT from a URL query parameter.
-                            - **Input parameter**: parameterName (string) - The name of the query parameter in the URL that contains the JWT.
+                            - **Input parameter**: param_name (string) - The name of the query parameter in the URL that contains the JWT.
                             - **Example**:
 
                             ```js
@@ -175,7 +175,7 @@
                             ```
                             </details>
                         
-                        - <details>
+                        5. <details>
                             <summary>
                             <code>fromAuthHeaderWithScheme(auth_scheme) </code>
                             </summary>
@@ -189,7 +189,7 @@
                                 ```
                             </details>
 
-                        - <details>
+                        6. <details>
                             <summary>
                             <code>fromExtractors([array of extractor functions]) </code>
                             </summary>
@@ -211,7 +211,7 @@
                                 ```
                             </details>
                         
-                        - <details>
+                        7. <details>
                             <summary>
                             <code>Custom Extractors</code>
                             </summary>
@@ -245,7 +245,7 @@
 
                         </details>
 
-                    - <details>
+                    2. <details>
                         <summary>
                             <code>secretOrKey</code> - (string or buffer) Secret key to verify JWT
                         </summary>
@@ -268,13 +268,14 @@
                                     secretOrKey: fs.readFileSync('./path/to/public.key', 'utf8')
                                 };
                                 ```
-                            > [!NOTE] <br>
-                            > If using symmetric encryption (e.g., HS256), the same secretOrKey must be used for both signing and verifying the token. <br>
-                            > If using asymmetric encryption (e.g., RS256), the secretOrKey should be the public key, while the private key is used to sign the token. <br>
-                            > It is important to securely manage this key, as exposure could compromise the security of your system.
+                            - Note:
+                                - If using symmetric encryption (e.g., HS256), the same secretOrKey must be used for both signing and verifying the token.
+                                - If using asymmetric encryption (e.g., RS256), the secretOrKey should be the public key, while the private key is used to sign the token.
+                                - It is important to securely manage this key, as exposure could compromise the security of your system.
+                            
                         </details>
 
-                    - <details>
+                    3. <details>
                         <summary>
                             <code>secretOrKeyProvider</code> - (function) [optional] Function to get secretOrKey from anywhere
                         </summary>
@@ -284,7 +285,9 @@
                         - Parameters:
                             - `request`: The original HTTP request object.
                             - `rawJwtToken`: The raw JWT token extractedfrom the request.
-                            - `done`: Callback function to return the key. The first parameter of done is an error (if any), and the second is the secret or public key.
+                            - `done`: A function to return the key, with the parameters:
+                                - `err`
+                                - `secretOrKey` (string or buffer)
                         - Example:
                             ```js
                                 const opts = {
@@ -296,13 +299,13 @@
                                 };
                             ```
 
-                            > [!NOTE] <br>
-                            > 1. If secretOrKeyProvider is provided, it overrides the static secretOrKey option.<br>
-                            > 2. Useful in scenarios where the key might change per request or per user, such as:
-                            >    - Multi-tenant applications where each tenant has a different key.
-                            >    - Using different keys for different users or services.
-                            > 3. If the key cannot be determined (e.g., a database lookup fails), call done(err) to signal an error.
-                            > 4. When using asymmetric encryption (e.g., RS256), the secretOrKeyProvider would return the public key for verification.
+                            - Note:
+                                1. If secretOrKeyProvider is provided, it overrides the static secretOrKey option
+                                2. Useful in scenarios where the key might change per request or per user, such as:
+                                    - Multi-tenant applications where each tenant has a different key.
+                                    - Using different keys for different users or services.
+                                3. If the key cannot be determined (e.g., a database lookup fails), call done(err) to signal an error.
+                                4. When using asymmetric encryption (e.g., RS256), the secretOrKeyProvider would return the public key for verification.
 
                             - Example for multi-tenant application:
                                 ```js
@@ -319,7 +322,7 @@
                                 - Dynamic environments where the key cannot be determined statically and must be retrieved or computed based on the incoming request.
                         </details>
 
-                    - <details>
+                    4. <details>
                             <summary>
                             <code>issuer</code> - (string or array) [optional]  Verifies the issuer (iss) claim of the token.
                             </summary>
@@ -344,7 +347,7 @@
                                 - **Third-Party Tokens**: If you're working with tokens issued by third parties (e.g., OAuth providers or external identity systems), you would set issuer to the known trusted issuer.
                         </details>
 
-                    - <details>
+                    5. <details>
                         <summary>
                         <code>algorithms</code> - (array) [optional] List of allowed algorithms for token verification, e.g., ['HS256', 'RS256'].
                         </summary>
@@ -364,7 +367,7 @@
                             ```
                         </details>
 
-                    - <details>
+                    6. <details>
                         <summary>
                         <code>audience</code> - (string or array) [optional] To specify the recipients of Jwt
                         </summary>
@@ -383,7 +386,7 @@
                             ```
                         </details>
 
-                    - <details>
+                    7. <details>
                             <summary>
                             <code>ignoreExpiration</code> - (boolean) [optional] Whether to ignore the token's expiration time during verification.
                             </summary>
@@ -406,7 +409,7 @@
                                 ```
                         </details>
 
-                    - <details>
+                    8. <details>
                         <summary>
                         <code>passReqToCallback</code> - (boolean) [optional] Whether to pass the request object to the verification callback.
                         </summary>
@@ -433,18 +436,81 @@
                             ```
                         </details>
                     
-                    - <details>
+                    9. <details>
                         <summary>
-                        <code>jsonWebTokenOptions </code> - (object) [optional] To pass options to customise token verification
+                        <code>jsonWebTokenOptions </code> - (object) [optional + deprecated] To pass options to customise token verification
                         </summary>
 
                         - **Purpose**: To pass options directly to the underlying jsonwebtoken.verify() and customise token verification.
-                        - **Properties**: 
-                            - `clockTolerance`: (integer) Helps with clock skew issues.
-                            - `maxAge`: (string) Limits how old a token can be.
-                            - `algorithms`: (array) Specifies allowed signing algorithms.
-                            - `ignoreNotBefore`: (boolean) Ignores the nbf claim if true.
-                            - `ignoreExpiration`: (boolean) Ignores the exp claim if true.
+                        - **Deprecated**: Though deprecated, still allows you to pass audience / issuer / algorithms / ignoreExpiration on the options 
+                        - **Properties**:
+                            - <details><summary><code>algorithms</code>: (array) Specifies allowed signing algorithms.</summary>
+
+                                - Specifies which algorithms are allowed for verifying the JWT.
+                                - eg: `algorithms: ['HS256']`
+                                </details>
+                            - <details><summary><code>audience</code>: (string | RegExp | array) Specifies the expected audience of the JWT.</summary>
+
+                                -  Specifies the expected audience of the JWT (who the token is intended for). It can be a string, regex, or array of strings/regexes.
+                                - eg: `audience: 'your-app-client-id'`
+                                </details>
+                            - <details><summary><code>clockTimestamp</code>: (integer) Sets a fixed time for token validation.</summary>
+
+                                - The time in seconds since the epoch to use as the current time when verifying the JWT.
+                                ```js 
+                                clockTimestamp: Math.floor(Date.now() / 1000) // current time in seconds
+                                ```
+                                </details>
+                            - <details><summary><code>clockTolerance</code>: (integer) Helps with clock skew issues.</summary>
+
+                                - Specifies the allowed clock skew (in seconds) when verifying the exp and nbf claims (useful when different servers have slightly unsynchronized clocks).
+                                - eg: `clockTolerance: 5`
+                                </details>
+                            - <details><summary><code>complete</code>: (boolean) Returns `{ payload, header, signature }` if true.</summary>
+
+                                -  If true, returns an object with the decoded { payload, header, signature } instead of just the payload.
+                                - eg: `complete: true`
+                                </details>
+                            - <details><summary><code>issuer</code>: (string | array) Specifies the expected issuer of the JWT.</summary>
+
+                                - Specifies the expected issuer of the JWT (the entity that issued the token). Can be a string or an array of strings.
+                                - eg: `issuer: 'auth.your-app.com'`
+                                </details>
+                            - <details><summary><code>ignoreExpiration</code>: (boolean) Ignores the `exp` claim if true.</summary>
+
+                                -  If true, ignores the exp claim during verification (useful in development, but not recommended in production).
+                                - eg: `ignoreExpiration: true`
+                                </details>
+                            - <details><summary><code>ignoreNotBefore</code>: (boolean) Ignores the `nbf` claim if true.</summary>
+
+                                - If true, ignores the nbf (Not Before) claim when verifying the token.
+                                - eg: `ignoreNotBefore: true`
+                                </details>
+                            - <details><summary><code>jwtid</code>: (string) Validates the token ID (jti) claim.</summary>
+
+                                 - The jti (JWT ID) claim specifies a unique identifier for the token to prevent replay attacks.
+                                 - eg: `jwtid: 'unique-jwt-id-12345'`
+                                </details>
+                            - <details><summary><code>nonce</code>: (string) Checks the `nonce` claim (used in OpenID Connect).</summary>
+
+                                -  Used to check the nonce claim in OpenID Connect to prevent replay attacks. The nonce is a string used to associate a client session with an ID token.
+                                - eg: `nonce: 'nonce-value-generated-at-auth-time'`
+                                </details>
+                            - <details><summary><code>subject</code>: (string) Specifies the expected `sub` (Subject) claim.</summary>
+
+                                 - Specifies the expected sub (Subject) claim of the JWT, which typically identifies the principal (user) of the token.
+                                 - eg: `subject: 'user-id-12345'`
+                                </details>
+                            - <details><summary><code>maxAge</code>: (string | number) Limits how old a token can be.</summary>
+
+                                -  Specifies the maximum allowable age (in seconds or a time string) for the JWT since its iat (Issued At) claim. Used to reject old tokens.
+                                - eg: `maxAge: '24h'`
+                                </details>
+                            - <details><summary><code>allowInvalidAsymmetricKeyTypes</code>: (boolean) Allows invalid asymmetric key types if true.</summary>
+
+                                - When set to true, allows invalid asymmetric key types during verification (not recommended unless necessary).
+                                - eg: `allowInvalidAsymmetricKeyTypes: true`
+                                </details>
                         - Examples:
                             ```js
                             const opts = {
@@ -468,7 +534,6 @@
                             }));
                             ```
                         </details>
-
                 </details>
             
                 <details>
@@ -480,7 +545,7 @@
                 - **Parameters**: 
                     - <details>
                         <summary>
-                        <code>jwtPayload</code> - (object) Payload for verify callback
+                        <code>payload</code> - (object) Payload for verify callback
                         </summary>
 
                         - **Purpose**: It is the decoded JWT payload, which contains the claims from the token (e.g., user ID, roles). 
@@ -493,8 +558,8 @@
                             5. `aud`: The **audience** for which the token is intended. This is a standard claim indicating the recipient(s) of the token. 
                             6. `nbf`: **Not Before** - The time before which the token should not be considered valid.
                             7. `jti`: **JWT ID** - A unique identifier for the token, which can be used to prevent replay attacks.
-                            > [!NOTE] <br>
-                            > we can also have any custom claims. eg: roles, name.
+
+                            > **Note** : we can also have any custom claims. eg: roles, name.
                         - Example:
                             ```js
                             //setting claims in some other file
@@ -530,7 +595,6 @@
                         <summary>
                         <code>done</code> - (fucntion) To indicate the result of the verification.
                         </summary>
-                        </details>
 
                         - **Purpose**: To indicate the result of the verification.
                         - **Parameters**:
@@ -557,19 +621,36 @@
                                 });
                             }));
                             ```
-                - Example:
-                    ```js
-                    const verify = (jwtPayload, done) => {
-                        // jwtPayload contains the decoded JWT payload
-                        User.findById(jwtPayload.sub, (err, user) => {
-                            if (err) return done(err, false); // Error during user lookup
-                            if (user) return done(null, user); // User found, authentication successful
-                            return done(null, false); // User not found, authentication failed
-                        });
-                    }
+                          </details>
+                
+                        - <details>
+                            <summary>
+                            <code>req</code> [conditional]
+                            </summary>
 
-                    passport.use(new JwtStrategy(opts, verify));
-                    ```
+                            - Only when inside opts, passReqToCallback is true
+                            ```js
+                            const opts = {passReqToCallback: true}
+
+                            const verify = (req, payload, done)=>{
+                                // handle payload data
+                            }
+                            ```
+                            </details>
+
+                    - Example:
+                        ```js
+                        const verify = (jwtPayload, done) => {
+                            // jwtPayload contains the decoded JWT payload
+                            User.findById(jwtPayload.sub, (err, user) => {
+                                if (err) return done(err, false); // Error during user lookup
+                                if (user) return done(null, user); // User found, authentication successful
+                                return done(null, false); // User not found, authentication failed
+                            });
+                        }
+
+                        passport.use(new JwtStrategy(opts, verify));
+                        ```
                  </details>
 
             - Example:
@@ -577,6 +658,23 @@
                 const JwtStrategy = new Startegy(opts, verify)
                 passport.use(JwtStrategy);
                 ```
+            - Strategy is of 2 tyes:
+                - <details><summary>With req</summary>
+
+                    - paasing opts with true for passReqToCallback enables us to use `req` in verify callbak
+                    ```js
+                    const opts = { passReqToCallback:true }
+
+                    const verify = (req, payload, done)=>{
+
+                    }
+                    ```
+                    </details> 
+                - <details><summary>Without req</summary>
+                    ```js
+                    opts = { passReqToCallback:false }
+                    ```
+                    </details>
         
 
     3.  Full Structure (for deafult strategy):
@@ -652,190 +750,602 @@
 
 
 ## Authenticating jwt after strategy configuration
-- The call function to call the strategy configured above is `passport.authenticate()`
-- `passport.authenticate()` is a passport middleware. It has been [customised internally](https://github.com/mikenicholson/passport-jwt/blob/master/lib/strategy.js#L90) to authenticate jwt via passport-jwt package.
-- It is set as an express middleware in order to use req, res, and
-- Parameters:
+- In the latest version, for authenticating using *passport-jwt* configured strategy, we need to use 2 extra methods from *passport* package and 1 method from *express-session* package:
     - <details>
         <summary>
-            <code>strategy</code>: (string or array)
+        <code>passport.authenticate()</code> from passport
         </summary>
 
-        - **Purpose**: To point to the strategies named during configuration.
-        - **Example**: jwt, my-jwt, [jwt, my-jwt], etc
-    </details>
+        - `passport.authenticate()` is a passport middleware. It has been [customised internally](https://github.com/mikenicholson/passport-jwt/blob/master/lib/strategy.js#L90) to authenticate jwt via passport-jwt package.
+        - 3 paramters:
+            - strategy: (string|array)
+            - options
+            - callback [optional]
+        - <details>
+            <summary>It is wrapped inside a wrapper as an express middleware to access req, res and next. Without the wrapper it won't pass on to the next function.
+            </summary>
 
+            ```js
+            app.use((req, res, next)=>{
+                passport.authenticate('jwt')(req, res, next)
+            })
+            ```
+            </details>
+        - <details>
+            <summary>
+            In older versions it would itself be placed as a middleware, but not anymore
+            </summary>
+
+            ```js
+            app.use(passport.authenticate('jwt'))
+            ```
+            </details>
         
+        - Parameters:
+            - <details>
+                <summary>
+                    <code>strategy</code>: (string or array)
+                </summary>
+
+                - **Purpose**: To point to the strategies named during configuration.
+                - **Example**: jwt, my-jwt, [jwt, my-jwt], etc
+                </details>
+
+            - <details>
+                <summary>
+                    <code>options</code>: (object) [optional]
+                </summary>
+
+                - **Purpose**: Options to control the behavior of the authentication middleware. 
+                - It controls the behaviour at individual route/request level in comparison to opts options which controls behaviour at global/strategy level.
+                - If there are conflicting options between opts and authenticateOptions, then authenticateOptions will override for that particular route.
+                - **Properties**:
+                    <details>
+                    <summary>1. authInfo</summary>
+                    <p><strong>Description:</strong> Whether to include additional authentication information.</p>
+                    <p><strong>Default:</strong> undefined (additional info is not included).</p>
+                    <p><strong>Example:</strong></p>
+                    <pre><code>passport.authenticate('strategy', { authInfo: true });</code></pre>
+                    </details>
+
+                    <details>
+                    <summary>2. assignProperty</summary>
+                    <p><strong>Description:</strong> Assigns the object provided by the verify callback to the specified property on the <code>req</code> object.</p>
+                    <p><strong>Default:</strong> undefined (the object is assigned to <code>req.user</code>).</p>
+                    <p><strong>Example:</strong></p>
+                    <pre><code>passport.authenticate('strategy', { assignProperty: 'userAccount' });</code></pre>
+                    </details>
+
+                    <details>
+                    <summary>3. failureFlash</summary>
+                    <p><strong>Description:</strong> True to flash failure messages or a string to use as a flash message for failures.</p>
+                    <p><strong>Default:</strong> undefined (failure messages are not flashed).</p>
+                    <p><strong>Example:</strong></p>
+                    <pre><code>passport.authenticate('strategy', { failureFlash: 'Login failed' });</code></pre>
+                    </details>
+
+                    <details>
+                    <summary>4. failureMessage</summary>
+                    <p><strong>Description:</strong> True to store failure message in <code>req.session.messages</code>, or a string to use as an override message for failure.</p>
+                    <p><strong>Default:</strong> undefined (failure messages are not stored).</p>
+                    <p><strong>Example:</strong></p>
+                    <pre><code>passport.authenticate('strategy', { failureMessage: 'Login unsuccessful' });</code></pre>
+                    </details>
+
+                    <details>
+                    <summary>5. failureRedirect</summary>
+                    <p><strong>Description:</strong> URL to redirect to after a failed login attempt.</p>
+                    <p><strong>Default:</strong> undefined (no redirect occurs).</p>
+                    <p><strong>Example:</strong></p>
+                    <pre><code>passport.authenticate('strategy', { failureRedirect: '/login' });</code></pre>
+                    </details>
+
+                    <details>
+                    <summary>6. failWithError</summary>
+                    <p><strong>Description:</strong> Whether to fail with an error.</p>
+                    <p><strong>Default:</strong> undefined (does not fail with error).</p>
+                    <p><strong>Example:</strong></p>
+                    <pre><code>passport.authenticate('strategy', { failWithError: true });</code></pre>
+                    </details>
+
+                    <details>
+                    <summary>7. keepSessionInfo</summary>
+                    <p><strong>Description:</strong> Whether to keep session information.</p>
+                    <p><strong>Default:</strong> undefined (session info is not specifically retained).</p>
+                    <p><strong>Example:</strong></p>
+                    <pre><code>passport.authenticate('strategy', { keepSessionInfo: true });</code></pre>
+                    </details>
+
+                    <details>
+                    <summary>8. session</summary>
+                    <p><strong>Description:</strong> Save login state in session.</p>
+                    <p><strong>Default:</strong> true (session is used by default).</p>
+                    <p><strong>Example:</strong></p>
+                    <pre><code>passport.authenticate('strategy', { session: false });</code></pre>
+                    </details>
+
+                    <details>
+                    <summary>9. scope</summary>
+                    <p><strong>Description:</strong> Scope of access required.</p>
+                    <p><strong>Default:</strong> undefined (no scope is specified).</p>
+                    <p><strong>Example:</strong></p>
+                    <pre><code>passport.authenticate('strategy', { scope: ['read', 'write'] });</code></pre>
+                    </details>
+
+                    <details>
+                    <summary>10. successFlash</summary>
+                    <p><strong>Description:</strong> True to flash success messages or a string to use as a flash message for success.</p>
+                    <p><strong>Default:</strong> undefined (success messages are not flashed).</p>
+                    <p><strong>Example:</strong></p>
+                    <pre><code>passport.authenticate('strategy', { successFlash: 'Login successful' });</code></pre>
+                    </details>
+
+                    <details>
+                    <summary>11. successMessage</summary>
+                    <p><strong>Description:</strong> True to store success message in <code>req.session.messages</code>, or a string to use as an override message for success.</p>
+                    <p><strong>Default:</strong> undefined (success messages are not stored).</p>
+                    <p><strong>Example:</strong></p>
+                    <pre><code>passport.authenticate('strategy', { successMessage: 'Welcome back!' });</code></pre>
+                    </details>
+
+                    <details>
+                    <summary>12. successRedirect</summary>
+                    <p><strong>Description:</strong> URL to redirect to after a successful login.</p>
+                    <p><strong>Default:</strong> undefined (no redirect occurs).</p>
+                    <p><strong>Example:</strong></p>
+                    <pre><code>passport.authenticate('strategy', { successRedirect: '/dashboard' });</code></pre>
+                    </details>
+
+                    <details>
+                    <summary>13. successReturnToOrRedirect</summary>
+                    <p><strong>Description:</strong> URL to redirect to or return to after a successful login.</p>
+                    <p><strong>Default:</strong> undefined (no redirect or return occurs).</p>
+                    <p><strong>Example:</strong></p>
+                    <pre><code>passport.authenticate('strategy', { successReturnToOrRedirect: '/profile' });</code></pre>
+                    </details>
+
+                    <details>
+                    <summary>14. state</summary>
+                    <p><strong>Description:</strong> State parameter for the request.</p>
+                    <p><strong>Default:</strong> undefined (no state is set).</p>
+                    <p><strong>Example:</strong></p>
+                    <pre><code>passport.authenticate('strategy', { state: 'xyz' });</code></pre>
+                    </details>
+
+                    <details>
+                    <summary>15. pauseStream</summary>
+                    <p><strong>Description:</strong> Pause the request stream before deserializing the user object from the session.</p>
+                    <p><strong>Default:</strong> false (stream is not paused).</p>
+                    <p><strong>Example:</strong></p>
+                    <pre><code>passport.authenticate('strategy', { pauseStream: true });</code></pre>
+                    </details>
+
+                    <details>
+                    <summary>16. userProperty</summary>
+                    <p><strong>Description:</strong> Property on <code>req</code> that will be set to the authenticated user object.</p>
+                    <p><strong>Default:</strong> 'user' (authenticated user is set to <code>req.user</code>).</p>
+                    <p><strong>Example:</strong></p>
+                    <pre><code>passport.authenticate('strategy', { userProperty: 'currentUser' });</code></pre>
+                    </details>
+
+                    <details>
+                    <summary>17. passReqToCallback</summary>
+                    <p><strong>Description:</strong> Whether to pass the request object to the callback.</p>
+                    <p><strong>Default:</strong> undefined (request object is not passed to the callback).</p>
+                    <p><strong>Overrides:</strong> Overrides passReqToCallback set in opts of strategy configuration</p>
+                    <p><strong>Example:</strong></p>
+                    <pre><code>passport.authenticate('strategy', { passReqToCallback: true });</code></pre>
+                    </details>
+
+                    <details>
+                    <summary>18. prompt</summary>
+                    <p><strong>Description:</strong> Prompt parameter for the request.</p>
+                    <p><strong>Default:</strong> undefined (no prompt is set).</p>
+                    <p><strong>Example:</strong></p>
+                    <pre><code>passport.authenticate('strategy', { prompt: 'login' });</code></pre>
+                    </details>
+
+                </details>
+
+
+            - <details>
+                <summary>
+                    <code>callback</code>: (function) [optional]
+                </summary>
+
+                - **Purpose**: Handles the result of the authentication process and provides feedback or further actions based on the outcome.
+
+                - **Parameters**:
+                    1. <details>
+                        <summary>
+                            <code>err</code>: (Error or <code>null</code>)
+                        </summary>
+
+                        - **Description**: Contains any error that occurred during the authentication process.
+                        - **Type**: err | false
+                        - **Example**: An error object if something went wrong, otherwise `null`.
+                        </details>
+
+                    2. <details>
+                        <summary>
+                            <code>user</code>: (object | string | Array)
+                        </summary>
+
+                        - **Description**: The authenticated user object if authentication was successful, or `false` if no user was authenticated.
+                        - **Type**: User | false | null
+                        - **Example**: The user data retrieved from the database if authentication is successful.
+                        </details>
+
+                    3. <details>
+                        <summary>
+                            <code>info</code>: (Object or <code>false</code>)
+                        </summary>
+
+                        - **Description**: Contains additional information or error messages about the authentication process. This can include details about why authentication failed.
+                        - **Type**: object | string | Array
+                        - **Example**: An object with a `message` property if authentication fails, or `false` if no additional information is available.
+                        </details>
+
+                    4. <details>
+                        <summary>
+                            <code>status</code>: (number | Array)
+                        </summary>
+
+                        - **Description**: The HTTP status code representing the result of the authentication attempt.
+                        - **Type**: number | Array (HTTP status code)
+                        - **Example**: `401` for unauthorized access, `200` for successful authentication.
+                        </details>
+                </details>
+
+
+
+
+        - Examples:
+            ```js
+            //default strategy without optional parameters
+            app.post("/profile", (req, res, next) => {
+                passport.authenticate("jwt")(req, res, next)
+            });
+            ```
+            <details>
+                <summary>
+                more examples
+                </summary>
+
+                ```js
+                //custom strategy without optional parameters
+                app.post("/profile", (req, res, next) => {
+                    passport.authenticate("my-jwt")(req, res, next)
+                });
+                ```
+                ```js
+                //default strategy with optional parameters
+                app.post("/profile", (req, res, next) => {
+                    passport.authenticate("jwt", { session: false }, function(err, user, info, status) {
+                        if (err) {
+                            return res
+                                    .status(500)
+                                    .json({ message: 'An error occurred', error: err });
+                        }
+
+                        if (!user) {
+                            return res
+                                    .status(401)
+                                    .json({ message: 'Unauthorized', info: info });
+                        }
+
+                        //in case of callback we need to set req.user=user
+                        req.user=user
+
+                        res.send(status).json(user.profile);
+                    })(req, res, next)
+                });
+                ```
+                </details>
+        </details>
     - <details>
         <summary>
-            <code>options</code>: (object) [optional]
+        <code>passport.serializeUser()</code> from passport
         </summary>
 
-        - **Purpose**: Options to control the behavior of the authentication middleware.
-        - **Properties**:
-            1. <details>
-                <summary>
-                    <code>session</code>: (Boolean)
-                </summary>
+        - We need passport.serializeUser() during the process of logIn which happens inside passport.authenticate()
+        - <details>
+            <summary>Input parameter: <code>callback function</code>
+            </summary>
 
-                - **Description**: Whether to use sessions. Typically set to false for JWT strategies.
-                - **Default**: true
+            - <details><summary>input parameters of cb fn: <code>user</code>, <code>done</code></summary>
+
+                - `user`: The user object returned from the authentication process.
+                - <details><summary><code>done</code>: A callback function that you call after serializing the user, which takes two parameters: <code>err</code>, <code>id</code></summary>
+
+                    - `err`: Any error that occurred during serialization.
+                    - `id`: The user ID or any unique identifier that will be stored in the session.
+                    ```js
+                    passport.serializeUser((user, done)=>{
+                        done(err, id)
+                    });
+                    ```
+                    </details>
+
+                ```js
+                passport.serializeUser((user, done)=>{});
+                ```
                 </details>
 
-            2. <details>
-                <summary>
-                    <code>failureRedirect</code>: (String)
-                </summary>
+            ```js
+            passport.serializeUser(callback);
+            ```
 
-                - **Description**: URL to redirect to if authentication fails.
-                - **Default**: undefined
-                </details>
+            </details>
 
-            3. <details>
-                <summary>
-                    <code>failureFlash</code>: (Boolean or String)
-                </summary>
-
-                - **Description**: Flash message to display if authentication fails.
-                - **Default**: undefined
-                </details>
-
-            4. <details>
-                <summary>
-                    <code>successRedirect</code>: (String)
-                </summary>
-
-                - **Description**: URL to redirect to upon successful authentication.
-                - **Default**: undefined
-                </details>
-
-            5. <details>
-                <summary>
-                    <code>successMessage</code>: (String)
-                </summary>
-
-                - **Description**: Message to send upon successful authentication.
-                - **Default**: undefined
-                </details>
-
-            6. <details>
-                <summary>
-                    <code>failureMessage</code>: (String)
-                </summary>
-
-                - **Description**: Message to send upon failed authentication.
-                - **Default**: undefined
-                </details>
-
-            7. <details>
-                <summary>
-                    <code>scope</code>: (Array)
-                </summary>
-
-                - **Description**: Specifies required scopes for OAuth-based strategies.
-                - **Default**: undefined
-                </details>
-
-            8. <details>
-                <summary>
-                    <code>passReqToCallback</code>: (Boolean)
-                </summary>
-
-                - **Description**: Whether to pass the request object to the verify callback function.
-                - **Default**: false
-                </details>
-    </details>
-
-
+        ```js
+        // structure of serialiseUser
+        passport.serializeUser((user, done) => {
+            done(null, user.id);
+        });
+        //err can be null or err
+        //user can be false, user, user.id, or anything related to user
+        ```
+        </details>
     - <details>
         <summary>
-            <code>callback</code>: (function) [optional]
+        <code>session()</code> from express-session
         </summary>
 
-        - **Purpose**: Handles the result of the authentication process and provides feedback or further actions based on the outcome.
+        - session() is also necssary to logIn using passport.authenticate()
+        - Parameter: `sessionOptions` (object)
+        - So structure is `session(sessionOptions)
+        - ```js
+            //structure of session
+            const express = require("express");
+             const session = require("express-session");
 
-        - **Parameters**:
-            1. <details>
-                <summary>
-                    <code>err</code>: (Error or <code>null</code>)
-                </summary>
+             const app = express()
 
-                - **Description**: Contains any error that occurred during the authentication process.
-                - **Type**: `Error` or `null`
-                - **Example**: An error object if something went wrong, otherwise `null`.
+             app.use(session({
+                    secret: process.env.SESSION_SECRET,
+                resave: false,
+                    saveUninitialized: false,
+             }))
+            ```
+                
+        - Session option keys:
+            <details>
+            <summary><strong>1. secret</strong></summary>
+            <ul>
+                <li><strong>Type:</strong> string | array</li>
+                <li><strong>Default:</strong> N/A</li>
+                <li><strong>Description:</strong> String(s) used to sign the session ID cookie.</li>
+                <li><strong>Example:</strong> <code>secret: 'mySecret'</code></li>
+            </ul>
+            </details>
+
+            <details>
+            <summary><strong>2. genid(req)</strong></summary>
+            <ul>
+                <li><strong>Type:</strong> function [(req: express.Request) => string]</li>
+                <li><strong>Default:</strong> Uses uid-safe library to generate a unique session ID.</li>
+                <li><strong>Description:</strong> Function to generate session IDs.</li>
+                <li><strong>Example:</strong> <code>genid: () => 'customID'</code></li>
+            </ul>
+            </details>
+
+            <details>
+            <summary><strong>3. name</strong></summary>
+            <ul>
+                <li><strong>Type:</strong> string </li>
+                <li><strong>Default:</strong> 'connect.sid'</li>
+                <li><strong>Description:</strong> Name of the session ID cookie.</li>
+                <li><strong>Example:</strong> <code>name: 'session_id'</code></li>
+            </ul>
+            </details>
+
+            <details>
+            <summary><strong>4. store</strong></summary>
+            <ul>
+                <li><strong>Type:</strong> Store </li>
+                <li><strong>Default:</strong> MemoryStore (in-memory session store)</li>
+                <li><strong>Description:</strong> Specifies session store instance.</li>
+                <li><strong>Example:</strong> <code>store: new RedisStore()</code></li>
+            </ul>
+            </details>
+
+            <details>
+            <summary><strong>5. cookie</strong></summary>
+            <ul>
+                <li><strong>Type:</strong> object </li>
+                <li><strong>Default:</strong> N/A</li>
+                <li><strong>Description:</strong> Options for the session cookie (e.g., maxAge, secure).</li>
+                <li><strong>CookieOptions:</strong> 
+                 <details>
+                    <summary><strong>1. maxAge</strong></summary>
+                    <ul>
+                        <li><strong>Type:</strong> number </li>
+                        <li><strong>Default:</strong> N/A</li>
+                        <li><strong>Description:</strong> Specifies the maximum age of the cookie in milliseconds.</li>
+                        <li><strong>Example:</strong> <code>maxAge: 3600000</code> (1 hour)</li>
+                    </ul>
+                    </details>
+
+            <details>
+                <summary><strong>2. partitioned</strong></summary>
+                <ul>
+                    <li><strong>Type:</strong> boolean </li>
+                    <li><strong>Default:</strong> false</li>
+                    <li><strong>Description:</strong> Specifies the `Partitioned` attribute for the cookie. Not fully standardized yet.</li>
+                    <li><strong>Example:</strong> <code>partitioned: true</code></li>
+                </ul>
                 </details>
 
-            2. <details>
-                <summary>
-                    <code>user</code>: (User object or <code>false</code>)
-                </summary>
-
-                - **Description**: The authenticated user object if authentication was successful, or `false` if no user was authenticated.
-                - **Type**: User object or `false`
-                - **Example**: The user data retrieved from the database if authentication is successful.
+            <details>
+                <summary><strong>3. priority</strong></summary>
+                <ul>
+                    <li><strong>Type:</strong> "low" | "medium" | "high" </li>
+                    <li><strong>Default:</strong> "medium"</li>
+                    <li><strong>Description:</strong> Specifies the `Priority` attribute of the cookie (low, medium, or high).</li>
+                    <li><strong>Example:</strong> <code>priority: 'high'</code></li>
+                </ul>
                 </details>
 
-            3. <details>
-                <summary>
-                    <code>info</code>: (Object or <code>false</code>)
-                </summary>
-
-                - **Description**: Contains additional information or error messages about the authentication process. This can include details about why authentication failed.
-                - **Type**: Object or `false`
-                - **Example**: An object with a `message` property if authentication fails, or `false` if no additional information is available.
+            <details>
+                <summary><strong>4. signed</strong></summary>
+                <ul>
+                    <li><strong>Type:</strong> boolean </li>
+                    <li><strong>Default:</strong> false</li>
+                    <li><strong>Description:</strong> Specifies whether the cookie is signed with the secret.</li>
+                    <li><strong>Example:</strong> <code>signed: true</code></li>
+                </ul>
                 </details>
 
-            4. <details>
-                <summary>
-                    <code>status</code>: (HTTP Status Code)
-                </summary>
-
-                - **Description**: The HTTP status code representing the result of the authentication attempt.
-                - **Type**: Number (HTTP status code)
-                - **Example**: `401` for unauthorized access, `200` for successful authentication.
+            <details>
+                <summary><strong>5. expires</strong></summary>
+                <ul>
+                    <li><strong>Type:</strong> Date | null </li>
+                    <li><strong>Default:</strong> No expiration set (non-persistent cookie).</li>
+                    <li><strong>Description:</strong> Specifies the expiration date for the cookie.</li>
+                    <li><strong>Example:</strong> <code>expires: new Date(Date.now() + 3600000)</code></li>
+                </ul>
                 </details>
-    </details>
 
+            <details>
+                <summary><strong>6. httpOnly</strong></summary>
+                <ul>
+                    <li><strong>Type:</strong> boolean </li>
+                    <li><strong>Default:</strong> true</li>
+                    <li><strong>Description:</strong> Specifies whether the cookie is HTTP-only, preventing access from client-side JavaScript.</li>
+                    <li><strong>Example:</strong> <code>httpOnly: false</code></li>
+                </ul>
+                </details>
 
+            <details>
+                <summary><strong>7. path</strong></summary>
+                <ul>
+                    <li><strong>Type:</strong> string </li>
+                    <li><strong>Default:</strong> '/'</li>
+                    <li><strong>Description:</strong> Specifies the path for which the cookie is valid.</li>
+                    <li><strong>Example:</strong> <code>path: '/admin'</code></li>
+                </ul>
+                </details>
 
+            <details>
+                <summary><strong>8. domain</strong></summary>
+                <ul>
+                    <li><strong>Type:</strong> string </li>
+                    <li><strong>Default:</strong> No domain set.</li>
+                    <li><strong>Description:</strong> Specifies the domain for which the cookie is valid.</li>
+                    <li><strong>Example:</strong> <code>domain: 'example.com'</code></li>
+                </ul>
+                </details>
 
-- Examples:
+            <details>
+                <summary><strong>9. secure</strong></summary>
+                <ul>
+                    <li><strong>Type:</strong> boolean | "auto" </li>
+                    <li><strong>Default:</strong> false</li>
+                    <li><strong>Description:</strong> Specifies whether the cookie is only sent over HTTPS.</li>
+                    <li><strong>Example:</strong> <code>secure: true</code></li>
+                </ul>
+                </details>
+
+            <details>
+                <summary><strong>10. encode</strong></summary>
+                <ul>
+                    <li><strong>Type:</strong> (val: string) => string </li>
+                    <li><strong>Default:</strong> Default encoder for cookie values.</li>
+                    <li><strong>Description:</strong> Specifies a custom encoding function for the cookie value.</li>
+                    <li><strong>Example:</strong> <code>encode: encodeURIComponent</code></li>
+                </ul>
+                </details>
+
+            <details>
+                <summary><strong>11. sameSite</strong></summary>
+                <ul>
+                    <li><strong>Type:</strong> boolean | "lax" | "strict" | "none" </li>
+                    <li><strong>Default:</strong> false</li>
+                    <li><strong>Description:</strong> Specifies the `SameSite` attribute for cross-site cookie control (strict, lax, or none).</li>
+                    <li><strong>Example:</strong> <code>sameSite: 'strict'</code></li>
+                </ul>
+                </details>
+                
+            </li>
+                <li><strong>Example:</strong> <code>cookie: { maxAge: 60000 }</code></li>
+            </ul>
+           
+
+            </details>
+
+            <details>
+            <summary><strong>6. rolling</strong></summary>
+            <ul>
+                <li><strong>Type:</strong> boolean </li>
+                <li><strong>Default:</strong> false</li>
+                <li><strong>Description:</strong> Resets session expiration on every response.</li>
+                <li><strong>Example:</strong> <code>rolling: true</code></li>
+            </ul>
+            </details>
+
+            <details>
+            <summary><strong>7. resave</strong></summary>
+            <ul>
+                <li><strong>Type:</strong> boolean </li>
+                <li><strong>Default:</strong> true (deprecated)</li>
+                <li><strong>Description:</strong> Forces session to be saved on every request, even if unmodified.</li>
+                <li><strong>Example:</strong> <code>resave: false</code></li>
+            </ul>
+            </details>
+
+            <details>
+            <summary><strong>8. proxy</strong></summary>
+            <ul>
+                <li><strong>Type:</strong> boolean </li>
+                <li><strong>Default:</strong> undefined</li>
+                <li><strong>Description:</strong> Trust reverse proxy when setting secure cookies.</li>
+                <li><strong>Example:</strong> <code>proxy: true</code></li>
+            </ul>
+            </details>
+
+            <details>
+            <summary><strong>9. saveUninitialized</strong></summary>
+            <ul>
+                <li><strong>Type:</strong> boolean </li>
+                <li><strong>Default:</strong> true (deprecated)</li>
+                <li><strong>Description:</strong> Saves uninitialized sessions. Useful for login sessions.</li>
+                <li><strong>Example:</strong> <code>saveUninitialized: false</code></li>
+            </ul>
+            </details>
+
+            <details>
+            <summary><strong>10. unset</strong></summary>
+            <ul>
+                <li><strong>Type:</strong> "destroy" | "keep" </li>
+                <li><strong>Default:</strong> 'keep'</li>
+                <li><strong>Description:</strong> Controls behavior when session is deleted.</li>
+                <li><strong>Example:</strong> <code>unset: 'destroy'</code></li>
+            </ul>
+            </details>
+
+            </details>
+
+- Complete structure for authentication:
     ```js
-    //default strategy without optional parameters
-    app.post("/profile", (req, res, next) => {
-        passport.authenticate("jwt")(req, res, next)
-    });
+    const express = require('express');
+    const session = require("express-session");
+    const passport = require("passport");
+
+    const app = express()
+
+    app.use(session({ //to be called on top
+        secret: process.env.SESSION_SECRET,
+    }))
+
+    app.use((req, res, next)=>{ //can be called anywhere
+        passport.authenticate('jwt')(req, res, next)
+    })
+
+    passport.serializeUser(()=>{
+
+    })
     ```
-     ```js
-    //custom strategy without optional parameters
-    app.post("/profile", (req, res, next) => {
-        passport.authenticate("my-jwt")(req, res, next)
-    });
-    ```
-    ```js
-    //default strategy with optional parameters
-    app.post("/profile", (req, res, next) => {
-        passport.authenticate("jwt", { session: false }, function(err, user, info) {
-            if (err) {
-                return res
-                        .status(500)
-                        .json({ message: 'An error occurred', error: err });
-            }
-
-            if (!user) {
-                return res
-                        .status(401)
-                        .json({ message: 'Unauthorized', info: info });
-            }
-
-            //in case of callback we need to set req.user=user
-            req.user=user
-
-            res.json(user.profile);
-        })(req, res, next)
-    });
-    ```
-
 ## Sending jwt from client to server
 1. <details>
     <summary>
