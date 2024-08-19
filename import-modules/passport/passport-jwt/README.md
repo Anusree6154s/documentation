@@ -6,12 +6,18 @@
 2. [Features and Usage](#features-and-usage)  
    - [Installation and Import](#installation-and-import)
    - [Configuration](#Configuration)
+        - [Basic Code Structure](#basic)
+        - [Parts of Code in detail](#Parts)
+            - [Imports](Imports)
+            - [`passport.use(name[optional], strategy)`](#passport)
+            - [`new Startegy(options, verifyCallback)`](#Strategy)
+   - [Full Code Structure (seperated into modules)](#full-structure)
 3. [Authentication](#authentication)
-4. [Passing JWT Token](#passing-jwt-token)
+    - [With session support (w/o callback)](#With)
+    - [Without session support (w/ callback)](#Without)
+4. [Methods to pass JWT Token](#passing-jwt-token)
 
----
 
-Does this table look good, or would you like me to expand on it further?
 
 ## Overview
 
@@ -34,6 +40,7 @@ Does this table look good, or would you like me to expand on it further?
 
 
     - Basic Structure:
+<a id="basic"></a>
 
       ```javascript
       const JwtStrategy = require("passport-jwt").Strategy;
@@ -65,11 +72,14 @@ Does this table look good, or would you like me to expand on it further?
       ```
 
     - Parts of the configuration:
+<a id="Parts"></a>
 
       1. Imports:
+<a id="Imports"></a>
          - `const {Strategy,ExtractJwt} = require("passport-jwt")`
          - `const passport = require("passport");`
       2. passport.use() method to register strategy (2 ways):
+<a id="passport"></a>
          <details>
              <summary>
              <code>passport.use(Strategy)</code> - Default Strategy
@@ -88,6 +98,7 @@ Does this table look good, or would you like me to expand on it further?
          - Allows you to refer to the strategy by the name _jwt_ later in the *passport* method `passport.authenticate('name')`.
          </details>
       3. Strategy (has 2 parameters):
+<a id="Strategy"></a>
             - Has two parameters: `opts` and `verify`
             
             - Parameters:
@@ -689,6 +700,7 @@ Does this table look good, or would you like me to expand on it further?
 
 
 3.  Full Structure (for deafult strategy):
+<a id="full-structure"></a>
     - Default Strategy:
         ```javascript
             const { Strategy, ExtractJwt } = require("passport-jwt");
@@ -770,6 +782,7 @@ Does this table look good, or would you like me to expand on it further?
     - Without session support (with callback), we dont need any extra methods. But we would need to set `req.user` to user explicitly by us.
 
 1. Without session support (**with callback**)
+<a id="Without"></a>
     - in the [internal code](https://github.com/jaredhanson/passport/blob/217018dbc46dcd4118dd6f2c60c8d97010c587f8/lib/middleware/authenticate.js#L221), if passport.authenticate gets a callback, it doesnt call any other internal function. It just returns that callback with user and err, to handle by ourself.
     ```js
     // Options for JWT strategy, including extractor function and secret key
@@ -826,6 +839,7 @@ Does this table look good, or would you like me to expand on it further?
     ```
 
 2. With session support (**without callback**)
+<a id="With"></a>
     - When with callback, internalluy, passport passes many checks and process including 
         - needing a session
         - needing to use passport.serializeUser atleast once with a callback containing user.id/user 
