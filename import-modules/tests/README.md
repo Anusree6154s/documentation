@@ -4,7 +4,7 @@
 
 
 ## Table of Contents
-1. [Overview](#-overview)
+1. [Overview](#overview)
 2. [Test Frameworks](##2-test-frameworks)
 3. [Pros and Cons of each with additional frameworks](#3-pros-and-cons-of-each-with-additional-frameworks)
    
