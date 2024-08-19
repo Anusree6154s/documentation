@@ -4,8 +4,8 @@
 
 1. [Overview](#overview)
 2. [Features and Usage](#features-and-usage)  
-   2.1. [Installation and Import](#installation-and-import)
-   2.1. [Configuration](#Configuration)
+   - [Installation and Import](#installation-and-import)
+   - [Configuration](#Configuration)
 3. [Authentication](#authentication)
 4. [Passing JWT Token](#passing-jwt-token)
 
@@ -30,6 +30,7 @@ Does this table look good, or would you like me to expand on it further?
       - _ExtractJwt is an object with various sub properties_
 2.  Configuration
 <a id="Configuration"></a>
+
 
     - Basic Structure:
 
@@ -686,8 +687,8 @@ Does this table look good, or would you like me to expand on it further?
         
 
 3.  Full Structure (for deafult strategy):
-        - Default Strategy:
-            ```javascript
+    - Default Strategy:
+        ```javascript
             const { Strategy, ExtractJwt } = require("passport-jwt");
             const passport = require("passport"); //to use for passport.use()
 
@@ -720,10 +721,10 @@ Does this table look good, or would you like me to expand on it further?
 
             //authenticating default jwt-strategy
             passport.authenticate('jwt')
-            ```
+        ```
 
-        - Named Strategy:
-            ```javascript
+    - Named Strategy:
+        ```javascript
             const { Strategy, ExtractJwt } = require("passport-jwt");
             const passport = require("passport"); 
 
@@ -753,607 +754,671 @@ Does this table look good, or would you like me to expand on it further?
 
             //authenticating named jwt-strategy
             passport.authenticate('my-jwt')
-            ```
+        ```
 
 
 
 ## Authenticating jwt after strategy configuration
-- In the latest version, for authenticating using *passport-jwt* configured strategy, we need to use 2 extra methods from *passport* package and 1 method from *express-session* package:
-    - <details>
-        <summary>
-        <code>passport.authenticate()</code> from passport
-        </summary>
 
-        - `passport.authenticate()` is a passport middleware. It has been [customised internally](https://github.com/mikenicholson/passport-jwt/blob/master/lib/strategy.js#L90) to authenticate jwt via passport-jwt package.
-        - 3 paramters:
-            - strategy: (string|array)
-            - options
-            - callback [optional]
+- Ways: 
+    - As of understood till date, passport jwt can be authenticated in 2ways: 
+        - With session support (**without callback**)
+        - Without session support (**with callback**)
+    - With session support (without callback), one would need to many extar methods like `passport.serializeUser`, `session()`, etc. We would not have to specifically set `req.user` to user. Passport would do it internally for us.
+    - Without session support (with callback), we dont need any extra methods. But we would need to set `req.user` to user explicitly by us.
+
+1. Without session support (**with callback**)
+    ```js
+    // Options for JWT strategy, including extractor function and secret key
+    const optsJwt = {
+        jwtFromRequest: cookieExtractor,
+        secretOrKey: constant.secretKey
+    }
+    // Function to verify JWT token and retrieve user information
+    const verifyJwt = async function (jwt_payload, done) {
+        if (!jwt_payload.id) return done(null, false);
+
+        try {
+            let user = await User.findOne({ _id: jwt_payload.id });
+
+            if (user) return done(null, santizeUser(user));
+            else return done(null, false);
+
+        } catch (error) {
+            return done(err, false);
+        }
+    }
+
+    // Options for Local strategy, specifying the field for username
+    const optsLocal = { usernameField: "email" }
+    // Function to verify local credentials and handle authentication
+    const verifyLocal = async function (email, password, done) {
+        try {
+            const user = await User.findOne({ email: email }).exec();
+
+            if (!user) {
+                return done(null, false, { message: "No such user email" });
+            }
+
+            crytpoJwt(user, password, done)
+
+        } catch (error) {
+            return done(error);
+        }
+    }
+
+    // Initialize Passport with JWT strategy
+    passport.use("jwt",new JwtStrategy(optsJwt, verifyJwt););
+
+    // Middleware to authenticate requests using JWT strategy
+    app.use((req, res, next) => {
+        passport.authenticate("jwt", (err, user, info) => {
+            if (err || !user)
+                return next(new ApiError(httpStatus.UNAUTHORIZED, "Please authenticate"))
+
+            req.user = user;
+            next()
+        })(req, res, next)
+    })
+    ```
+
+2. With session support (**without callback**)
+    - In the latest version, for authenticating using *passport-jwt* configured strategy, we need to use 2 extra methods from *passport* package and 1 method from *express-session* package:
         - <details>
-            <summary>It is wrapped inside a wrapper as an express middleware to access req, res and next. Without the wrapper it won't pass on to the next function.
+            <summary>
+            <code>passport.authenticate()</code> from passport
             </summary>
 
-            ```js
-            app.use((req, res, next)=>{
-                passport.authenticate('jwt')(req, res, next)
-            })
-            ```
+            - `passport.authenticate()` is a passport middleware. It has been [customised internally](https://github.com/mikenicholson/passport-jwt/blob/master/lib/strategy.js#L90) to authenticate jwt via passport-jwt package.
+            - 3 paramters:
+                - strategy: (string|array)
+                - options
+                - callback [optional]
+            - <details>
+                <summary>It is wrapped inside a wrapper as an express middleware to access req, res and next. Without the wrapper it won't pass on to the next function.
+                </summary>
+
+                ```js
+                app.use((req, res, next)=>{
+                    passport.authenticate('jwt')(req, res, next)
+                })
+                ```
+                </details>
+            - <details>
+                <summary>
+                In older versions it would itself be placed as a middleware, but not anymore
+                </summary>
+
+                ```js
+                app.use(passport.authenticate('jwt'))
+                ```
+                </details>
+            
+            - Parameters:
+                - <details>
+                    <summary>
+                        <code>strategy</code>: (string or array)
+                    </summary>
+
+                    - **Purpose**: To point to the strategies named during configuration.
+                    - **Example**: jwt, my-jwt, [jwt, my-jwt], etc
+                    </details>
+
+                - <details>
+                    <summary>
+                        <code>options</code>: (object) [optional]
+                    </summary>
+
+                    - **Purpose**: Options to control the behavior of the authentication middleware. 
+                    - It controls the behaviour at individual route/request level in comparison to opts options which controls behaviour at global/strategy level.
+                    - If there are conflicting options between opts and authenticateOptions, then authenticateOptions will override for that particular route.
+                    - **Properties**:
+                        <details>
+                        <summary>1. authInfo</summary>
+                        <p><strong>Description:</strong> Whether to include additional authentication information.</p>
+                        <p><strong>Default:</strong> undefined (additional info is not included).</p>
+                        <p><strong>Example:</strong></p>
+                        <pre><code>passport.authenticate('strategy', { authInfo: true });</code></pre>
+                        </details>
+
+                        <details>
+                        <summary>2. assignProperty</summary>
+                        <p><strong>Description:</strong> Assigns the object provided by the verify callback to the specified property on the <code>req</code> object.</p>
+                        <p><strong>Default:</strong> undefined (the object is assigned to <code>req.user</code>).</p>
+                        <p><strong>Example:</strong></p>
+                        <pre><code>passport.authenticate('strategy', { assignProperty: 'userAccount' });</code></pre>
+                        </details>
+
+                        <details>
+                        <summary>3. failureFlash</summary>
+                        <p><strong>Description:</strong> True to flash failure messages or a string to use as a flash message for failures.</p>
+                        <p><strong>Default:</strong> undefined (failure messages are not flashed).</p>
+                        <p><strong>Example:</strong></p>
+                        <pre><code>passport.authenticate('strategy', { failureFlash: 'Login failed' });</code></pre>
+                        </details>
+
+                        <details>
+                        <summary>4. failureMessage</summary>
+                        <p><strong>Description:</strong> True to store failure message in <code>req.session.messages</code>, or a string to use as an override message for failure.</p>
+                        <p><strong>Default:</strong> undefined (failure messages are not stored).</p>
+                        <p><strong>Example:</strong></p>
+                        <pre><code>passport.authenticate('strategy', { failureMessage: 'Login unsuccessful' });</code></pre>
+                        </details>
+
+                        <details>
+                        <summary>5. failureRedirect</summary>
+                        <p><strong>Description:</strong> URL to redirect to after a failed login attempt.</p>
+                        <p><strong>Default:</strong> undefined (no redirect occurs).</p>
+                        <p><strong>Example:</strong></p>
+                        <pre><code>passport.authenticate('strategy', { failureRedirect: '/login' });</code></pre>
+                        </details>
+
+                        <details>
+                        <summary>6. failWithError</summary>
+                        <p><strong>Description:</strong> Whether to fail with an error.</p>
+                        <p><strong>Default:</strong> undefined (does not fail with error).</p>
+                        <p><strong>Example:</strong></p>
+                        <pre><code>passport.authenticate('strategy', { failWithError: true });</code></pre>
+                        </details>
+
+                        <details>
+                        <summary>7. keepSessionInfo</summary>
+                        <p><strong>Description:</strong> Whether to keep session information.</p>
+                        <p><strong>Default:</strong> undefined (session info is not specifically retained).</p>
+                        <p><strong>Example:</strong></p>
+                        <pre><code>passport.authenticate('strategy', { keepSessionInfo: true });</code></pre>
+                        </details>
+
+                        <details>
+                        <summary>8. session</summary>
+                        <p><strong>Description:</strong> Save login state in session.</p>
+                        <p><strong>Default:</strong> true (session is used by default).</p>
+                        <p><strong>Example:</strong></p>
+                        <pre><code>passport.authenticate('strategy', { session: false });</code></pre>
+                        </details>
+
+                        <details>
+                        <summary>9. scope</summary>
+                        <p><strong>Description:</strong> Scope of access required.</p>
+                        <p><strong>Default:</strong> undefined (no scope is specified).</p>
+                        <p><strong>Example:</strong></p>
+                        <pre><code>passport.authenticate('strategy', { scope: ['read', 'write'] });</code></pre>
+                        </details>
+
+                        <details>
+                        <summary>10. successFlash</summary>
+                        <p><strong>Description:</strong> True to flash success messages or a string to use as a flash message for success.</p>
+                        <p><strong>Default:</strong> undefined (success messages are not flashed).</p>
+                        <p><strong>Example:</strong></p>
+                        <pre><code>passport.authenticate('strategy', { successFlash: 'Login successful' });</code></pre>
+                        </details>
+
+                        <details>
+                        <summary>11. successMessage</summary>
+                        <p><strong>Description:</strong> True to store success message in <code>req.session.messages</code>, or a string to use as an override message for success.</p>
+                        <p><strong>Default:</strong> undefined (success messages are not stored).</p>
+                        <p><strong>Example:</strong></p>
+                        <pre><code>passport.authenticate('strategy', { successMessage: 'Welcome back!' });</code></pre>
+                        </details>
+
+                        <details>
+                        <summary>12. successRedirect</summary>
+                        <p><strong>Description:</strong> URL to redirect to after a successful login.</p>
+                        <p><strong>Default:</strong> undefined (no redirect occurs).</p>
+                        <p><strong>Example:</strong></p>
+                        <pre><code>passport.authenticate('strategy', { successRedirect: '/dashboard' });</code></pre>
+                        </details>
+
+                        <details>
+                        <summary>13. successReturnToOrRedirect</summary>
+                        <p><strong>Description:</strong> URL to redirect to or return to after a successful login.</p>
+                        <p><strong>Default:</strong> undefined (no redirect or return occurs).</p>
+                        <p><strong>Example:</strong></p>
+                        <pre><code>passport.authenticate('strategy', { successReturnToOrRedirect: '/profile' });</code></pre>
+                        </details>
+
+                        <details>
+                        <summary>14. state</summary>
+                        <p><strong>Description:</strong> State parameter for the request.</p>
+                        <p><strong>Default:</strong> undefined (no state is set).</p>
+                        <p><strong>Example:</strong></p>
+                        <pre><code>passport.authenticate('strategy', { state: 'xyz' });</code></pre>
+                        </details>
+
+                        <details>
+                        <summary>15. pauseStream</summary>
+                        <p><strong>Description:</strong> Pause the request stream before deserializing the user object from the session.</p>
+                        <p><strong>Default:</strong> false (stream is not paused).</p>
+                        <p><strong>Example:</strong></p>
+                        <pre><code>passport.authenticate('strategy', { pauseStream: true });</code></pre>
+                        </details>
+
+                        <details>
+                        <summary>16. userProperty</summary>
+                        <p><strong>Description:</strong> Property on <code>req</code> that will be set to the authenticated user object.</p>
+                        <p><strong>Default:</strong> 'user' (authenticated user is set to <code>req.user</code>).</p>
+                        <p><strong>Example:</strong></p>
+                        <pre><code>passport.authenticate('strategy', { userProperty: 'currentUser' });</code></pre>
+                        </details>
+
+                        <details>
+                        <summary>17. passReqToCallback</summary>
+                        <p><strong>Description:</strong> Whether to pass the request object to the callback.</p>
+                        <p><strong>Default:</strong> undefined (request object is not passed to the callback).</p>
+                        <p><strong>Overrides:</strong> Overrides passReqToCallback set in opts of strategy configuration</p>
+                        <p><strong>Example:</strong></p>
+                        <pre><code>passport.authenticate('strategy', { passReqToCallback: true });</code></pre>
+                        </details>
+
+                        <details>
+                        <summary>18. prompt</summary>
+                        <p><strong>Description:</strong> Prompt parameter for the request.</p>
+                        <p><strong>Default:</strong> undefined (no prompt is set).</p>
+                        <p><strong>Example:</strong></p>
+                        <pre><code>passport.authenticate('strategy', { prompt: 'login' });</code></pre>
+                        </details>
+
+                    </details>
+
+
+                - <details>
+                    <summary>
+                        <code>callback</code>: (function) [optional]
+                    </summary>
+
+                    - **Purpose**: Handles the result of the authentication process and provides feedback or further actions based on the outcome.
+
+                    - **Parameters**:
+                        1. <details>
+                            <summary>
+                                <code>err</code>: (Error or <code>null</code>)
+                            </summary>
+
+                            - **Description**: Contains any error that occurred during the authentication process.
+                            - **Type**: err | false
+                            - **Example**: An error object if something went wrong, otherwise `null`.
+                            </details>
+
+                        2. <details>
+                            <summary>
+                                <code>user</code>: (object | string | Array)
+                            </summary>
+
+                            - **Description**: The authenticated user object if authentication was successful, or `false` if no user was authenticated.
+                            - **Type**: User | false | null
+                            - **Example**: The user data retrieved from the database if authentication is successful.
+                            </details>
+
+                        3. <details>
+                            <summary>
+                                <code>info</code>: (Object or <code>false</code>)
+                            </summary>
+
+                            - **Description**: Contains additional information or error messages about the authentication process. This can include details about why authentication failed.
+                            - **Type**: object | string | Array
+                            - **Example**: An object with a `message` property if authentication fails, or `false` if no additional information is available.
+                            </details>
+
+                        4. <details>
+                            <summary>
+                                <code>status</code>: (number | Array)
+                            </summary>
+
+                            - **Description**: The HTTP status code representing the result of the authentication attempt.
+                            - **Type**: number | Array (HTTP status code)
+                            - **Example**: `401` for unauthorized access, `200` for successful authentication.
+                            </details>
+                    </details>
+
+
+
+
+            - Examples:
+                ```js
+                //default strategy without optional parameters
+                app.post("/profile", (req, res, next) => {
+                    passport.authenticate("jwt")(req, res, next)
+                });
+                ```
+                <details>
+                    <summary>
+                    more examples
+                    </summary>
+
+                    ```js
+                    //custom strategy without optional parameters
+                    app.post("/profile", (req, res, next) => {
+                        passport.authenticate("my-jwt")(req, res, next)
+                    });
+                    ```
+                    ```js
+                    //default strategy with optional parameters
+                    app.post("/profile", (req, res, next) => {
+                        passport.authenticate("jwt", { session: false }, function(err, user, info, status) {
+                            if (err) {
+                                return res
+                                        .status(500)
+                                        .json({ message: 'An error occurred', error: err });
+                            }
+
+                            if (!user) {
+                                return res
+                                        .status(401)
+                                        .json({ message: 'Unauthorized', info: info });
+                            }
+
+                            //in case of callback we need to set req.user=user
+                            req.user=user
+
+                            res.send(status).json(user.profile);
+                        })(req, res, next)
+                    });
+                    ```
+                    </details>
             </details>
         - <details>
             <summary>
-            In older versions it would itself be placed as a middleware, but not anymore
+            <code>passport.serializeUser()</code> from passport
             </summary>
 
-            ```js
-            app.use(passport.authenticate('jwt'))
-            ```
-            </details>
-        
-        - Parameters:
+            - We need passport.serializeUser() during the process of logIn which happens inside passport.authenticate()
             - <details>
-                <summary>
-                    <code>strategy</code>: (string or array)
+                <summary>Input parameter: <code>callback function</code>
                 </summary>
 
-                - **Purpose**: To point to the strategies named during configuration.
-                - **Example**: jwt, my-jwt, [jwt, my-jwt], etc
-                </details>
+                - <details><summary>input parameters of cb fn: <code>user</code>, <code>done</code></summary>
 
-            - <details>
-                <summary>
-                    <code>options</code>: (object) [optional]
-                </summary>
+                    - `user`: The user object returned from the authentication process.
+                    - <details><summary><code>done</code>: A callback function that you call after serializing the user, which takes two parameters: <code>err</code>, <code>id</code></summary>
 
-                - **Purpose**: Options to control the behavior of the authentication middleware. 
-                - It controls the behaviour at individual route/request level in comparison to opts options which controls behaviour at global/strategy level.
-                - If there are conflicting options between opts and authenticateOptions, then authenticateOptions will override for that particular route.
-                - **Properties**:
-                    <details>
-                    <summary>1. authInfo</summary>
-                    <p><strong>Description:</strong> Whether to include additional authentication information.</p>
-                    <p><strong>Default:</strong> undefined (additional info is not included).</p>
-                    <p><strong>Example:</strong></p>
-                    <pre><code>passport.authenticate('strategy', { authInfo: true });</code></pre>
-                    </details>
-
-                    <details>
-                    <summary>2. assignProperty</summary>
-                    <p><strong>Description:</strong> Assigns the object provided by the verify callback to the specified property on the <code>req</code> object.</p>
-                    <p><strong>Default:</strong> undefined (the object is assigned to <code>req.user</code>).</p>
-                    <p><strong>Example:</strong></p>
-                    <pre><code>passport.authenticate('strategy', { assignProperty: 'userAccount' });</code></pre>
-                    </details>
-
-                    <details>
-                    <summary>3. failureFlash</summary>
-                    <p><strong>Description:</strong> True to flash failure messages or a string to use as a flash message for failures.</p>
-                    <p><strong>Default:</strong> undefined (failure messages are not flashed).</p>
-                    <p><strong>Example:</strong></p>
-                    <pre><code>passport.authenticate('strategy', { failureFlash: 'Login failed' });</code></pre>
-                    </details>
-
-                    <details>
-                    <summary>4. failureMessage</summary>
-                    <p><strong>Description:</strong> True to store failure message in <code>req.session.messages</code>, or a string to use as an override message for failure.</p>
-                    <p><strong>Default:</strong> undefined (failure messages are not stored).</p>
-                    <p><strong>Example:</strong></p>
-                    <pre><code>passport.authenticate('strategy', { failureMessage: 'Login unsuccessful' });</code></pre>
-                    </details>
-
-                    <details>
-                    <summary>5. failureRedirect</summary>
-                    <p><strong>Description:</strong> URL to redirect to after a failed login attempt.</p>
-                    <p><strong>Default:</strong> undefined (no redirect occurs).</p>
-                    <p><strong>Example:</strong></p>
-                    <pre><code>passport.authenticate('strategy', { failureRedirect: '/login' });</code></pre>
-                    </details>
-
-                    <details>
-                    <summary>6. failWithError</summary>
-                    <p><strong>Description:</strong> Whether to fail with an error.</p>
-                    <p><strong>Default:</strong> undefined (does not fail with error).</p>
-                    <p><strong>Example:</strong></p>
-                    <pre><code>passport.authenticate('strategy', { failWithError: true });</code></pre>
-                    </details>
-
-                    <details>
-                    <summary>7. keepSessionInfo</summary>
-                    <p><strong>Description:</strong> Whether to keep session information.</p>
-                    <p><strong>Default:</strong> undefined (session info is not specifically retained).</p>
-                    <p><strong>Example:</strong></p>
-                    <pre><code>passport.authenticate('strategy', { keepSessionInfo: true });</code></pre>
-                    </details>
-
-                    <details>
-                    <summary>8. session</summary>
-                    <p><strong>Description:</strong> Save login state in session.</p>
-                    <p><strong>Default:</strong> true (session is used by default).</p>
-                    <p><strong>Example:</strong></p>
-                    <pre><code>passport.authenticate('strategy', { session: false });</code></pre>
-                    </details>
-
-                    <details>
-                    <summary>9. scope</summary>
-                    <p><strong>Description:</strong> Scope of access required.</p>
-                    <p><strong>Default:</strong> undefined (no scope is specified).</p>
-                    <p><strong>Example:</strong></p>
-                    <pre><code>passport.authenticate('strategy', { scope: ['read', 'write'] });</code></pre>
-                    </details>
-
-                    <details>
-                    <summary>10. successFlash</summary>
-                    <p><strong>Description:</strong> True to flash success messages or a string to use as a flash message for success.</p>
-                    <p><strong>Default:</strong> undefined (success messages are not flashed).</p>
-                    <p><strong>Example:</strong></p>
-                    <pre><code>passport.authenticate('strategy', { successFlash: 'Login successful' });</code></pre>
-                    </details>
-
-                    <details>
-                    <summary>11. successMessage</summary>
-                    <p><strong>Description:</strong> True to store success message in <code>req.session.messages</code>, or a string to use as an override message for success.</p>
-                    <p><strong>Default:</strong> undefined (success messages are not stored).</p>
-                    <p><strong>Example:</strong></p>
-                    <pre><code>passport.authenticate('strategy', { successMessage: 'Welcome back!' });</code></pre>
-                    </details>
-
-                    <details>
-                    <summary>12. successRedirect</summary>
-                    <p><strong>Description:</strong> URL to redirect to after a successful login.</p>
-                    <p><strong>Default:</strong> undefined (no redirect occurs).</p>
-                    <p><strong>Example:</strong></p>
-                    <pre><code>passport.authenticate('strategy', { successRedirect: '/dashboard' });</code></pre>
-                    </details>
-
-                    <details>
-                    <summary>13. successReturnToOrRedirect</summary>
-                    <p><strong>Description:</strong> URL to redirect to or return to after a successful login.</p>
-                    <p><strong>Default:</strong> undefined (no redirect or return occurs).</p>
-                    <p><strong>Example:</strong></p>
-                    <pre><code>passport.authenticate('strategy', { successReturnToOrRedirect: '/profile' });</code></pre>
-                    </details>
-
-                    <details>
-                    <summary>14. state</summary>
-                    <p><strong>Description:</strong> State parameter for the request.</p>
-                    <p><strong>Default:</strong> undefined (no state is set).</p>
-                    <p><strong>Example:</strong></p>
-                    <pre><code>passport.authenticate('strategy', { state: 'xyz' });</code></pre>
-                    </details>
-
-                    <details>
-                    <summary>15. pauseStream</summary>
-                    <p><strong>Description:</strong> Pause the request stream before deserializing the user object from the session.</p>
-                    <p><strong>Default:</strong> false (stream is not paused).</p>
-                    <p><strong>Example:</strong></p>
-                    <pre><code>passport.authenticate('strategy', { pauseStream: true });</code></pre>
-                    </details>
-
-                    <details>
-                    <summary>16. userProperty</summary>
-                    <p><strong>Description:</strong> Property on <code>req</code> that will be set to the authenticated user object.</p>
-                    <p><strong>Default:</strong> 'user' (authenticated user is set to <code>req.user</code>).</p>
-                    <p><strong>Example:</strong></p>
-                    <pre><code>passport.authenticate('strategy', { userProperty: 'currentUser' });</code></pre>
-                    </details>
-
-                    <details>
-                    <summary>17. passReqToCallback</summary>
-                    <p><strong>Description:</strong> Whether to pass the request object to the callback.</p>
-                    <p><strong>Default:</strong> undefined (request object is not passed to the callback).</p>
-                    <p><strong>Overrides:</strong> Overrides passReqToCallback set in opts of strategy configuration</p>
-                    <p><strong>Example:</strong></p>
-                    <pre><code>passport.authenticate('strategy', { passReqToCallback: true });</code></pre>
-                    </details>
-
-                    <details>
-                    <summary>18. prompt</summary>
-                    <p><strong>Description:</strong> Prompt parameter for the request.</p>
-                    <p><strong>Default:</strong> undefined (no prompt is set).</p>
-                    <p><strong>Example:</strong></p>
-                    <pre><code>passport.authenticate('strategy', { prompt: 'login' });</code></pre>
-                    </details>
-
-                </details>
-
-
-            - <details>
-                <summary>
-                    <code>callback</code>: (function) [optional]
-                </summary>
-
-                - **Purpose**: Handles the result of the authentication process and provides feedback or further actions based on the outcome.
-
-                - **Parameters**:
-                    1. <details>
-                        <summary>
-                            <code>err</code>: (Error or <code>null</code>)
-                        </summary>
-
-                        - **Description**: Contains any error that occurred during the authentication process.
-                        - **Type**: err | false
-                        - **Example**: An error object if something went wrong, otherwise `null`.
+                        - `err`: Any error that occurred during serialization.
+                        - `id`: The user ID or any unique identifier that will be stored in the session.
+                        ```js
+                        passport.serializeUser((user, done)=>{
+                            done(err, id)
+                        });
+                        ```
                         </details>
 
-                    2. <details>
-                        <summary>
-                            <code>user</code>: (object | string | Array)
-                        </summary>
-
-                        - **Description**: The authenticated user object if authentication was successful, or `false` if no user was authenticated.
-                        - **Type**: User | false | null
-                        - **Example**: The user data retrieved from the database if authentication is successful.
-                        </details>
-
-                    3. <details>
-                        <summary>
-                            <code>info</code>: (Object or <code>false</code>)
-                        </summary>
-
-                        - **Description**: Contains additional information or error messages about the authentication process. This can include details about why authentication failed.
-                        - **Type**: object | string | Array
-                        - **Example**: An object with a `message` property if authentication fails, or `false` if no additional information is available.
-                        </details>
-
-                    4. <details>
-                        <summary>
-                            <code>status</code>: (number | Array)
-                        </summary>
-
-                        - **Description**: The HTTP status code representing the result of the authentication attempt.
-                        - **Type**: number | Array (HTTP status code)
-                        - **Example**: `401` for unauthorized access, `200` for successful authentication.
-                        </details>
-                </details>
-
-
-
-
-        - Examples:
-            ```js
-            //default strategy without optional parameters
-            app.post("/profile", (req, res, next) => {
-                passport.authenticate("jwt")(req, res, next)
-            });
-            ```
-            <details>
-                <summary>
-                more examples
-                </summary>
-
-                ```js
-                //custom strategy without optional parameters
-                app.post("/profile", (req, res, next) => {
-                    passport.authenticate("my-jwt")(req, res, next)
-                });
-                ```
-                ```js
-                //default strategy with optional parameters
-                app.post("/profile", (req, res, next) => {
-                    passport.authenticate("jwt", { session: false }, function(err, user, info, status) {
-                        if (err) {
-                            return res
-                                    .status(500)
-                                    .json({ message: 'An error occurred', error: err });
-                        }
-
-                        if (!user) {
-                            return res
-                                    .status(401)
-                                    .json({ message: 'Unauthorized', info: info });
-                        }
-
-                        //in case of callback we need to set req.user=user
-                        req.user=user
-
-                        res.send(status).json(user.profile);
-                    })(req, res, next)
-                });
-                ```
-                </details>
-        </details>
-    - <details>
-        <summary>
-        <code>passport.serializeUser()</code> from passport
-        </summary>
-
-        - We need passport.serializeUser() during the process of logIn which happens inside passport.authenticate()
-        - <details>
-            <summary>Input parameter: <code>callback function</code>
-            </summary>
-
-            - <details><summary>input parameters of cb fn: <code>user</code>, <code>done</code></summary>
-
-                - `user`: The user object returned from the authentication process.
-                - <details><summary><code>done</code>: A callback function that you call after serializing the user, which takes two parameters: <code>err</code>, <code>id</code></summary>
-
-                    - `err`: Any error that occurred during serialization.
-                    - `id`: The user ID or any unique identifier that will be stored in the session.
                     ```js
-                    passport.serializeUser((user, done)=>{
-                        done(err, id)
-                    });
+                    passport.serializeUser((user, done)=>{});
                     ```
                     </details>
 
                 ```js
-                passport.serializeUser((user, done)=>{});
+                passport.serializeUser(callback);
                 ```
+
                 </details>
 
             ```js
-            passport.serializeUser(callback);
+            // structure of serialiseUser
+            passport.serializeUser((user, done) => {
+                done(null, user.id);
+            });
+            //err can be null or err
+            //user can be false, user, user.id, or anything related to user
             ```
-
             </details>
+        - <details>
+            <summary>
+            <code>session()</code> from express-session
+            </summary>
 
-        ```js
-        // structure of serialiseUser
-        passport.serializeUser((user, done) => {
-            done(null, user.id);
-        });
-        //err can be null or err
-        //user can be false, user, user.id, or anything related to user
-        ```
-        </details>
-    - <details>
-        <summary>
-        <code>session()</code> from express-session
-        </summary>
+            - session() is also necssary to logIn using passport.authenticate()
+            - Parameter: `sessionOptions` (object)
+            - So structure is `session(sessionOptions)
+            - ```js
+                //structure of session
+                const express = require("express");
+                const session = require("express-session");
 
-        - session() is also necssary to logIn using passport.authenticate()
-        - Parameter: `sessionOptions` (object)
-        - So structure is `session(sessionOptions)
-        - ```js
-            //structure of session
-            const express = require("express");
-             const session = require("express-session");
+                const app = express()
 
-             const app = express()
+                app.use(session({
+                        secret: process.env.SESSION_SECRET,
+                    resave: false,
+                        saveUninitialized: false,
+                }))
+                ```
+                    
+            - Session option keys:
+                <details>
+                <summary><strong>1. secret</strong></summary>
+                <ul>
+                    <li><strong>Type:</strong> string | array</li>
+                    <li><strong>Default:</strong> N/A</li>
+                    <li><strong>Description:</strong> String(s) used to sign the session ID cookie.</li>
+                    <li><strong>Example:</strong> <code>secret: 'mySecret'</code></li>
+                </ul>
+                </details>
 
-             app.use(session({
-                    secret: process.env.SESSION_SECRET,
-                resave: false,
-                    saveUninitialized: false,
-             }))
-            ```
-                
-        - Session option keys:
-            <details>
-            <summary><strong>1. secret</strong></summary>
-            <ul>
-                <li><strong>Type:</strong> string | array</li>
-                <li><strong>Default:</strong> N/A</li>
-                <li><strong>Description:</strong> String(s) used to sign the session ID cookie.</li>
-                <li><strong>Example:</strong> <code>secret: 'mySecret'</code></li>
-            </ul>
-            </details>
+                <details>
+                <summary><strong>2. genid(req)</strong></summary>
+                <ul>
+                    <li><strong>Type:</strong> function [(req: express.Request) => string]</li>
+                    <li><strong>Default:</strong> Uses uid-safe library to generate a unique session ID.</li>
+                    <li><strong>Description:</strong> Function to generate session IDs.</li>
+                    <li><strong>Example:</strong> <code>genid: () => 'customID'</code></li>
+                </ul>
+                </details>
 
-            <details>
-            <summary><strong>2. genid(req)</strong></summary>
-            <ul>
-                <li><strong>Type:</strong> function [(req: express.Request) => string]</li>
-                <li><strong>Default:</strong> Uses uid-safe library to generate a unique session ID.</li>
-                <li><strong>Description:</strong> Function to generate session IDs.</li>
-                <li><strong>Example:</strong> <code>genid: () => 'customID'</code></li>
-            </ul>
-            </details>
+                <details>
+                <summary><strong>3. name</strong></summary>
+                <ul>
+                    <li><strong>Type:</strong> string </li>
+                    <li><strong>Default:</strong> 'connect.sid'</li>
+                    <li><strong>Description:</strong> Name of the session ID cookie.</li>
+                    <li><strong>Example:</strong> <code>name: 'session_id'</code></li>
+                </ul>
+                </details>
 
-            <details>
-            <summary><strong>3. name</strong></summary>
-            <ul>
-                <li><strong>Type:</strong> string </li>
-                <li><strong>Default:</strong> 'connect.sid'</li>
-                <li><strong>Description:</strong> Name of the session ID cookie.</li>
-                <li><strong>Example:</strong> <code>name: 'session_id'</code></li>
-            </ul>
-            </details>
+                <details>
+                <summary><strong>4. store</strong></summary>
+                <ul>
+                    <li><strong>Type:</strong> Store </li>
+                    <li><strong>Default:</strong> MemoryStore (in-memory session store)</li>
+                    <li><strong>Description:</strong> Specifies session store instance.</li>
+                    <li><strong>Example:</strong> <code>store: new RedisStore()</code></li>
+                </ul>
+                </details>
 
-            <details>
-            <summary><strong>4. store</strong></summary>
-            <ul>
-                <li><strong>Type:</strong> Store </li>
-                <li><strong>Default:</strong> MemoryStore (in-memory session store)</li>
-                <li><strong>Description:</strong> Specifies session store instance.</li>
-                <li><strong>Example:</strong> <code>store: new RedisStore()</code></li>
-            </ul>
-            </details>
+                <details>
+                <summary><strong>5. cookie</strong></summary>
+                <ul>
+                    <li><strong>Type:</strong> object </li>
+                    <li><strong>Default:</strong> N/A</li>
+                    <li><strong>Description:</strong> Options for the session cookie (e.g., maxAge, secure).</li>
+                    <li><strong>CookieOptions:</strong> 
+                    <details>
+                        <summary><strong>1. maxAge</strong></summary>
+                        <ul>
+                            <li><strong>Type:</strong> number </li>
+                            <li><strong>Default:</strong> N/A</li>
+                            <li><strong>Description:</strong> Specifies the maximum age of the cookie in milliseconds.</li>
+                            <li><strong>Example:</strong> <code>maxAge: 3600000</code> (1 hour)</li>
+                        </ul>
+                        </details>
 
-            <details>
-            <summary><strong>5. cookie</strong></summary>
-            <ul>
-                <li><strong>Type:</strong> object </li>
-                <li><strong>Default:</strong> N/A</li>
-                <li><strong>Description:</strong> Options for the session cookie (e.g., maxAge, secure).</li>
-                <li><strong>CookieOptions:</strong> 
-                 <details>
-                    <summary><strong>1. maxAge</strong></summary>
+                <details>
+                    <summary><strong>2. partitioned</strong></summary>
                     <ul>
-                        <li><strong>Type:</strong> number </li>
-                        <li><strong>Default:</strong> N/A</li>
-                        <li><strong>Description:</strong> Specifies the maximum age of the cookie in milliseconds.</li>
-                        <li><strong>Example:</strong> <code>maxAge: 3600000</code> (1 hour)</li>
+                        <li><strong>Type:</strong> boolean </li>
+                        <li><strong>Default:</strong> false</li>
+                        <li><strong>Description:</strong> Specifies the `Partitioned` attribute for the cookie. Not fully standardized yet.</li>
+                        <li><strong>Example:</strong> <code>partitioned: true</code></li>
                     </ul>
                     </details>
 
-            <details>
-                <summary><strong>2. partitioned</strong></summary>
+                <details>
+                    <summary><strong>3. priority</strong></summary>
+                    <ul>
+                        <li><strong>Type:</strong> "low" | "medium" | "high" </li>
+                        <li><strong>Default:</strong> "medium"</li>
+                        <li><strong>Description:</strong> Specifies the `Priority` attribute of the cookie (low, medium, or high).</li>
+                        <li><strong>Example:</strong> <code>priority: 'high'</code></li>
+                    </ul>
+                    </details>
+
+                <details>
+                    <summary><strong>4. signed</strong></summary>
+                    <ul>
+                        <li><strong>Type:</strong> boolean </li>
+                        <li><strong>Default:</strong> false</li>
+                        <li><strong>Description:</strong> Specifies whether the cookie is signed with the secret.</li>
+                        <li><strong>Example:</strong> <code>signed: true</code></li>
+                    </ul>
+                    </details>
+
+                <details>
+                    <summary><strong>5. expires</strong></summary>
+                    <ul>
+                        <li><strong>Type:</strong> Date | null </li>
+                        <li><strong>Default:</strong> No expiration set (non-persistent cookie).</li>
+                        <li><strong>Description:</strong> Specifies the expiration date for the cookie.</li>
+                        <li><strong>Example:</strong> <code>expires: new Date(Date.now() + 3600000)</code></li>
+                    </ul>
+                    </details>
+
+                <details>
+                    <summary><strong>6. httpOnly</strong></summary>
+                    <ul>
+                        <li><strong>Type:</strong> boolean </li>
+                        <li><strong>Default:</strong> true</li>
+                        <li><strong>Description:</strong> Specifies whether the cookie is HTTP-only, preventing access from client-side JavaScript.</li>
+                        <li><strong>Example:</strong> <code>httpOnly: false</code></li>
+                    </ul>
+                    </details>
+
+                <details>
+                    <summary><strong>7. path</strong></summary>
+                    <ul>
+                        <li><strong>Type:</strong> string </li>
+                        <li><strong>Default:</strong> '/'</li>
+                        <li><strong>Description:</strong> Specifies the path for which the cookie is valid.</li>
+                        <li><strong>Example:</strong> <code>path: '/admin'</code></li>
+                    </ul>
+                    </details>
+
+                <details>
+                    <summary><strong>8. domain</strong></summary>
+                    <ul>
+                        <li><strong>Type:</strong> string </li>
+                        <li><strong>Default:</strong> No domain set.</li>
+                        <li><strong>Description:</strong> Specifies the domain for which the cookie is valid.</li>
+                        <li><strong>Example:</strong> <code>domain: 'example.com'</code></li>
+                    </ul>
+                    </details>
+
+                <details>
+                    <summary><strong>9. secure</strong></summary>
+                    <ul>
+                        <li><strong>Type:</strong> boolean | "auto" </li>
+                        <li><strong>Default:</strong> false</li>
+                        <li><strong>Description:</strong> Specifies whether the cookie is only sent over HTTPS.</li>
+                        <li><strong>Example:</strong> <code>secure: true</code></li>
+                    </ul>
+                    </details>
+
+                <details>
+                    <summary><strong>10. encode</strong></summary>
+                    <ul>
+                        <li><strong>Type:</strong> (val: string) => string </li>
+                        <li><strong>Default:</strong> Default encoder for cookie values.</li>
+                        <li><strong>Description:</strong> Specifies a custom encoding function for the cookie value.</li>
+                        <li><strong>Example:</strong> <code>encode: encodeURIComponent</code></li>
+                    </ul>
+                    </details>
+
+                <details>
+                    <summary><strong>11. sameSite</strong></summary>
+                    <ul>
+                        <li><strong>Type:</strong> boolean | "lax" | "strict" | "none" </li>
+                        <li><strong>Default:</strong> false</li>
+                        <li><strong>Description:</strong> Specifies the `SameSite` attribute for cross-site cookie control (strict, lax, or none).</li>
+                        <li><strong>Example:</strong> <code>sameSite: 'strict'</code></li>
+                    </ul>
+                    </details>
+                    
+                </li>
+                    <li><strong>Example:</strong> <code>cookie: { maxAge: 60000 }</code></li>
+                </ul>
+            
+
+                </details>
+
+                <details>
+                <summary><strong>6. rolling</strong></summary>
                 <ul>
                     <li><strong>Type:</strong> boolean </li>
                     <li><strong>Default:</strong> false</li>
-                    <li><strong>Description:</strong> Specifies the `Partitioned` attribute for the cookie. Not fully standardized yet.</li>
-                    <li><strong>Example:</strong> <code>partitioned: true</code></li>
+                    <li><strong>Description:</strong> Resets session expiration on every response.</li>
+                    <li><strong>Example:</strong> <code>rolling: true</code></li>
                 </ul>
                 </details>
 
-            <details>
-                <summary><strong>3. priority</strong></summary>
-                <ul>
-                    <li><strong>Type:</strong> "low" | "medium" | "high" </li>
-                    <li><strong>Default:</strong> "medium"</li>
-                    <li><strong>Description:</strong> Specifies the `Priority` attribute of the cookie (low, medium, or high).</li>
-                    <li><strong>Example:</strong> <code>priority: 'high'</code></li>
-                </ul>
-                </details>
-
-            <details>
-                <summary><strong>4. signed</strong></summary>
+                <details>
+                <summary><strong>7. resave</strong></summary>
                 <ul>
                     <li><strong>Type:</strong> boolean </li>
-                    <li><strong>Default:</strong> false</li>
-                    <li><strong>Description:</strong> Specifies whether the cookie is signed with the secret.</li>
-                    <li><strong>Example:</strong> <code>signed: true</code></li>
+                    <li><strong>Default:</strong> true (deprecated)</li>
+                    <li><strong>Description:</strong> Forces session to be saved on every request, even if unmodified.</li>
+                    <li><strong>Example:</strong> <code>resave: false</code></li>
                 </ul>
                 </details>
 
-            <details>
-                <summary><strong>5. expires</strong></summary>
-                <ul>
-                    <li><strong>Type:</strong> Date | null </li>
-                    <li><strong>Default:</strong> No expiration set (non-persistent cookie).</li>
-                    <li><strong>Description:</strong> Specifies the expiration date for the cookie.</li>
-                    <li><strong>Example:</strong> <code>expires: new Date(Date.now() + 3600000)</code></li>
-                </ul>
-                </details>
-
-            <details>
-                <summary><strong>6. httpOnly</strong></summary>
+                <details>
+                <summary><strong>8. proxy</strong></summary>
                 <ul>
                     <li><strong>Type:</strong> boolean </li>
-                    <li><strong>Default:</strong> true</li>
-                    <li><strong>Description:</strong> Specifies whether the cookie is HTTP-only, preventing access from client-side JavaScript.</li>
-                    <li><strong>Example:</strong> <code>httpOnly: false</code></li>
+                    <li><strong>Default:</strong> undefined</li>
+                    <li><strong>Description:</strong> Trust reverse proxy when setting secure cookies.</li>
+                    <li><strong>Example:</strong> <code>proxy: true</code></li>
                 </ul>
                 </details>
 
-            <details>
-                <summary><strong>7. path</strong></summary>
+                <details>
+                <summary><strong>9. saveUninitialized</strong></summary>
                 <ul>
-                    <li><strong>Type:</strong> string </li>
-                    <li><strong>Default:</strong> '/'</li>
-                    <li><strong>Description:</strong> Specifies the path for which the cookie is valid.</li>
-                    <li><strong>Example:</strong> <code>path: '/admin'</code></li>
+                    <li><strong>Type:</strong> boolean </li>
+                    <li><strong>Default:</strong> true (deprecated)</li>
+                    <li><strong>Description:</strong> Saves uninitialized sessions. Useful for login sessions.</li>
+                    <li><strong>Example:</strong> <code>saveUninitialized: false</code></li>
                 </ul>
                 </details>
 
-            <details>
-                <summary><strong>8. domain</strong></summary>
+                <details>
+                <summary><strong>10. unset</strong></summary>
                 <ul>
-                    <li><strong>Type:</strong> string </li>
-                    <li><strong>Default:</strong> No domain set.</li>
-                    <li><strong>Description:</strong> Specifies the domain for which the cookie is valid.</li>
-                    <li><strong>Example:</strong> <code>domain: 'example.com'</code></li>
+                    <li><strong>Type:</strong> "destroy" | "keep" </li>
+                    <li><strong>Default:</strong> 'keep'</li>
+                    <li><strong>Description:</strong> Controls behavior when session is deleted.</li>
+                    <li><strong>Example:</strong> <code>unset: 'destroy'</code></li>
                 </ul>
                 </details>
 
-            <details>
-                <summary><strong>9. secure</strong></summary>
-                <ul>
-                    <li><strong>Type:</strong> boolean | "auto" </li>
-                    <li><strong>Default:</strong> false</li>
-                    <li><strong>Description:</strong> Specifies whether the cookie is only sent over HTTPS.</li>
-                    <li><strong>Example:</strong> <code>secure: true</code></li>
-                </ul>
                 </details>
 
-            <details>
-                <summary><strong>10. encode</strong></summary>
-                <ul>
-                    <li><strong>Type:</strong> (val: string) => string </li>
-                    <li><strong>Default:</strong> Default encoder for cookie values.</li>
-                    <li><strong>Description:</strong> Specifies a custom encoding function for the cookie value.</li>
-                    <li><strong>Example:</strong> <code>encode: encodeURIComponent</code></li>
-                </ul>
-                </details>
+    - Complete structure for authentication:
+        ```js
+        const express = require('express');
+        const session = require("express-session");
+        const passport = require("passport");
 
-            <details>
-                <summary><strong>11. sameSite</strong></summary>
-                <ul>
-                    <li><strong>Type:</strong> boolean | "lax" | "strict" | "none" </li>
-                    <li><strong>Default:</strong> false</li>
-                    <li><strong>Description:</strong> Specifies the `SameSite` attribute for cross-site cookie control (strict, lax, or none).</li>
-                    <li><strong>Example:</strong> <code>sameSite: 'strict'</code></li>
-                </ul>
-                </details>
-                
-            </li>
-                <li><strong>Example:</strong> <code>cookie: { maxAge: 60000 }</code></li>
-            </ul>
-           
+        const app = express()
 
-            </details>
+        app.use(session({ //to be called on top
+            secret: process.env.SESSION_SECRET,
+        }))
 
-            <details>
-            <summary><strong>6. rolling</strong></summary>
-            <ul>
-                <li><strong>Type:</strong> boolean </li>
-                <li><strong>Default:</strong> false</li>
-                <li><strong>Description:</strong> Resets session expiration on every response.</li>
-                <li><strong>Example:</strong> <code>rolling: true</code></li>
-            </ul>
-            </details>
+        app.use((req, res, next)=>{ //can be called anywhere
+            passport.authenticate('jwt')(req, res, next)
+        })
 
-            <details>
-            <summary><strong>7. resave</strong></summary>
-            <ul>
-                <li><strong>Type:</strong> boolean </li>
-                <li><strong>Default:</strong> true (deprecated)</li>
-                <li><strong>Description:</strong> Forces session to be saved on every request, even if unmodified.</li>
-                <li><strong>Example:</strong> <code>resave: false</code></li>
-            </ul>
-            </details>
+        passport.serializeUser(()=>{
 
-            <details>
-            <summary><strong>8. proxy</strong></summary>
-            <ul>
-                <li><strong>Type:</strong> boolean </li>
-                <li><strong>Default:</strong> undefined</li>
-                <li><strong>Description:</strong> Trust reverse proxy when setting secure cookies.</li>
-                <li><strong>Example:</strong> <code>proxy: true</code></li>
-            </ul>
-            </details>
-
-            <details>
-            <summary><strong>9. saveUninitialized</strong></summary>
-            <ul>
-                <li><strong>Type:</strong> boolean </li>
-                <li><strong>Default:</strong> true (deprecated)</li>
-                <li><strong>Description:</strong> Saves uninitialized sessions. Useful for login sessions.</li>
-                <li><strong>Example:</strong> <code>saveUninitialized: false</code></li>
-            </ul>
-            </details>
-
-            <details>
-            <summary><strong>10. unset</strong></summary>
-            <ul>
-                <li><strong>Type:</strong> "destroy" | "keep" </li>
-                <li><strong>Default:</strong> 'keep'</li>
-                <li><strong>Description:</strong> Controls behavior when session is deleted.</li>
-                <li><strong>Example:</strong> <code>unset: 'destroy'</code></li>
-            </ul>
-            </details>
-
-            </details>
-
-- Complete structure for authentication:
-    ```js
-    const express = require('express');
-    const session = require("express-session");
-    const passport = require("passport");
-
-    const app = express()
-
-    app.use(session({ //to be called on top
-        secret: process.env.SESSION_SECRET,
-    }))
-
-    app.use((req, res, next)=>{ //can be called anywhere
-        passport.authenticate('jwt')(req, res, next)
-    })
-
-    passport.serializeUser(()=>{
-
-    })
-    ```
+        })
+        ```
 
 ## Sending jwt from client to server
 1. <details>
