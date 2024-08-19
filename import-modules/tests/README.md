@@ -227,7 +227,7 @@ By evaluating these factors, you can choose a test framework that best suits you
 
 <br>
 
-## Pros and Cons of each with additional frameworks
+## 3. Pros and Cons of each with additional frameworks
 Here's an expanded overview of popular test frameworks, including their pros and cons, along with additional commonly used test frameworks:
 
 ### 1. **Jest**
