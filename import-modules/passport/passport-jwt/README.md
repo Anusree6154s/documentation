@@ -28,6 +28,7 @@ Does this table look good, or would you like me to expand on it further?
       - _passport-jwt is a class with 2 properties - Strategy and ExtractJwt_
       - _Strategy is a class with 2 parameters passed to its contructor_
       - _ExtractJwt is an object with various sub properties_
+
 2.  Configuration
 <a id="Configuration"></a>
 
@@ -686,6 +687,7 @@ Does this table look good, or would you like me to expand on it further?
                     </details>
         
 
+
 3.  Full Structure (for deafult strategy):
     - Default Strategy:
         ```javascript
@@ -768,6 +770,7 @@ Does this table look good, or would you like me to expand on it further?
     - Without session support (with callback), we dont need any extra methods. But we would need to set `req.user` to user explicitly by us.
 
 1. Without session support (**with callback**)
+    - in the [internal code](https://github.com/jaredhanson/passport/blob/217018dbc46dcd4118dd6f2c60c8d97010c587f8/lib/middleware/authenticate.js#L221), if passport.authenticate gets a callback, it doesnt call any other internal function. It just returns that callback with user and err, to handle by ourself.
     ```js
     // Options for JWT strategy, including extractor function and secret key
     const optsJwt = {
@@ -823,6 +826,9 @@ Does this table look good, or would you like me to expand on it further?
     ```
 
 2. With session support (**without callback**)
+    - When with callback, internalluy, passport passes many checks and process including 
+        - needing a session
+        - needing to use passport.serializeUser atleast once with a callback containing user.id/user 
     - In the latest version, for authenticating using *passport-jwt* configured strategy, we need to use 2 extra methods from *passport* package and 1 method from *express-session* package:
         - <details>
             <summary>
