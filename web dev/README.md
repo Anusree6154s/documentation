@@ -17,3 +17,8 @@
 ### Websites to practise
 1. Beginner practise html+css: [Frontendmentor](https://www.frontendmentor.io/)
 2. higher level css practise: [Css Battle](https://cssbattle.dev/)
+
+## Web Dev ideas to practise from youtube
+1. React:
+   - Hospital slot booking app
+   - 
