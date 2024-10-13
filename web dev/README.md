@@ -22,4 +22,10 @@
 ### Web Dev ideas to practise from youtube
 1. React:
    - Hospital slot booking app
-   - 
+  
+## React
+### Things to remember while starting a react app
+- `npx create-react-app`
+- use `tailwind` for css
+- search for libraries. dont make things from scratch.
+- divide code into componenets.
