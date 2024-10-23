@@ -7,13 +7,19 @@ Following are the api documentation tools that helps you create api docs in pret
   3. Postman: Free but bland UI
 
 - #### Common Docs
-  - swagger(openapi) specification docs: https://swagger.io/specification/
-  - example swagger(openapi) yaml code: https://github.com/Redocly/redoc/blob/main/demo/openapi-3-1.yaml
-  - example swagger(openapi) json code: https://github.com/Redocly/redoc/blob/main/demo/big-openapi.json
-  - exmaple website github: https://github.com/Redocly/redoc/blob/main/demo/museum.yaml
-  - example website: https://redocly.github.io/redoc/
-  - my own repo: https://github.com/Anusree6154s/qkart-backend-2
-- #### Redoc
+  - ##### Redoc and Swagger
+    - swagger(openapi) specification docs: https://swagger.io/specification/
+    - example swagger(openapi) yaml code: https://github.com/Redocly/redoc/blob/main/demo/openapi-3-1.yaml
+    - example swagger(openapi) json code: https://github.com/Redocly/redoc/blob/main/demo/big-openapi.json
+    - exmaple website github: https://github.com/Redocly/redoc/blob/main/demo/museum.yaml
+    - example website: https://redocly.github.io/redoc/
+    - my own repo: https://github.com/Anusree6154s/qkart-backend-2
+  - ##### Postman
+    - example api doc: https://www.postman.com/lunar-module-geoscientist-23775876/xflix-backend-api/collection/6wogu2r/xflix?action=share&creator=33572999
+    - above example is intuitive. follow it for other postman docs
+      
+- #### How to create documentaion right from the server
+  - ##### Redoc
 
     <details>
       <summary>
@@ -83,8 +89,8 @@ Following are the api documentation tools that helps you create api docs in pret
 
     </details>
 
-- #### Swagger
-  - ##### using npm package
+- ##### Swagger
+  - ###### using npm package
      - in app.js
        ```js
        const express = require("express");
@@ -102,7 +108,7 @@ Following are the api documentation tools that helps you create api docs in pret
        ```
       - in swagger.json or openapi.json, write content referring to previous docs
       - Api documentation will be live on url `http://localhost:8082/docs`     
-  - ##### using cdn: dont know yet
+  - ###### using cdn: dont know yet
 
 > [!NOTE]
 > **Tips while using redocly**<br>
