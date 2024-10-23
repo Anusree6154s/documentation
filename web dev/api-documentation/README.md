@@ -12,6 +12,7 @@ Following are the api documentation tools that helps you create api docs in pret
   - example swagger(openapi) json code: https://github.com/Redocly/redoc/blob/main/demo/big-openapi.json
   - exmaple website github: https://github.com/Redocly/redoc/blob/main/demo/museum.yaml
   - example website: https://redocly.github.io/redoc/
+  - my own repo: https://github.com/Anusree6154s/qkart-backend-2
 - #### Redoc
 
     <details>
@@ -102,6 +103,12 @@ Following are the api documentation tools that helps you create api docs in pret
       - in swagger.json or openapi.json, write content referring to previous docs
       - Api documentation will be live on url `http://localhost:8082/docs`     
   - ##### using cdn: dont know yet
+
+> [!NOTE]
+> **Tips while using redocly**<br>
+> 1. **authorization error**: add that url into res.header in app.js<br>
+> 2. **error adding logo**: add logo to your own repo, create a route for it, place that routed url in img src<br>
+> refer my own docs for eg: https://github.com/Anusree6154s/qkart-backend-2<br>
  
   ---
   
