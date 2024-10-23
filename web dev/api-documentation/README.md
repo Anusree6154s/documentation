@@ -10,6 +10,7 @@ Following are the api documentation tools that helps you create api docs in pret
   - swagger(openapi) specification docs: https://swagger.io/specification/
   - example swagger(openapi) yaml code: https://github.com/Redocly/redoc/blob/main/demo/openapi-3-1.yaml
   - example swagger(openapi) json code: https://github.com/Redocly/redoc/blob/main/demo/big-openapi.json
+  - exmaple website github: https://github.com/Redocly/redoc/blob/main/demo/museum.yaml
   - example website: https://redocly.github.io/redoc/
 - #### Redoc
 
