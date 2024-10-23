@@ -198,3 +198,5 @@ Bonus point (those items are optional):
       - Or a demo of adding products to the cart:
       - ![Demo GIF](path/to/demo.mp4)
 
+> [!NOTE]
+> can take demo and deployemnt urls to the top instead of bottom, just below the title for quicker access
