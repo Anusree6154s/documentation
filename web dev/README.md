@@ -2,7 +2,9 @@
 ### Websites for help
 1. Handrawn icons/images
    - [unDraw](https://undraw.co/)
-   - [storyset](https://storyset.com/)
+   - [storyset](https://storyset.com/) - Already drawn line drawings
+   - [humaaans](https://www.humaaans.com/) - Mix-&-match illustrations of people with a design library
+   - [openpeeps](https://www.openpeeps.com/) - Mix-&-match illustrations of people with a design library
 3. svg/icons
    - [svgrepo](https://www.svgrepo.com/)
    - [iconscout](https://iconscout.com/)
