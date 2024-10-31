@@ -26,7 +26,7 @@ def generate_toc(root_dir='.', indent=0):
 def update_readme_with_toc():
     toc = generate_toc()
     toc_section_header = "\n## Table of Contents\n"
-     readme_file = "README.md"
+    readme_file = "README.md"
     
     # Check if README.md exists
     if os.path.exists(readme_file):
