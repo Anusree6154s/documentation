@@ -1,9 +1,6 @@
 
 ## Table of Contents
-- [.](.)
-  - [generate_toc.py](./generate_toc.py)
-  - [package.json](./package.json)
-  - [package-lock.json](./package-lock.json)
+
 - [import-modules](import-modules)
   - [README.md](import-modules/README.md)
   - [passport](import-modules/passport)
