@@ -15,7 +15,7 @@
 3. [Authentication](#authentication)
     - [With session support (w/o callback)](#With)
     - [Without session support (w/ callback)](#Without)
-4. [Methods to pass JWT Token](#passing-jwt-token)
+4. [Methods to pass JWT Token](#passing-jwt-token) 
 
 
 
