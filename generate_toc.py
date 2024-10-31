@@ -26,25 +26,32 @@ def generate_toc(root_dir='.', indent=0):
 def update_readme_with_toc():
     toc = generate_toc()
     toc_section_header = "\n## Table of Contents\n"
-    readme_file = "README.md"
+     readme_file = "README.md"
     
-    # Read the current README content
-    with open("README.md", "r") as readme:
-        content = readme.readlines()
+    # Check if README.md exists
+    if os.path.exists(readme_file):
+        # Read the current README content
+        with open(readme_file, "r") as readme:
+            content = readme.readlines()
 
-    # Find the position of the existing ToC
-    for index, line in enumerate(content):
-        if line.startswith("## Table of Contents"):
-            # Replace existing ToC
-            content = content[:index] + [toc_section_header + toc] + content[index + 2:]  # 2 lines to skip the old ToC
-            break
+        # Find the position of the existing ToC
+        for index, line in enumerate(content):
+            if line.startswith("## Table of Contents"):
+                # Replace existing ToC
+                content = content[:index] + [toc_section_header + toc] + content[index + 2:]  # 2 lines to skip the old ToC
+                break
+        else:
+            # If no existing ToC is found, append it to the end
+            content.append(toc_section_header + toc)
+
+        # Write the updated content back to README.md
+        with open(readme_file, "w") as readme:
+            readme.writelines(content)
     else:
-        # If no existing ToC is found, append it to the end
-        content.append(toc_section_header + toc)
+        # Create README.md and write the Table of Contents to it
+        with open(readme_file, "w") as readme:
+            readme.write(toc_section_header + toc)
 
-    # Write the updated content back to README.md
-    with open("README.md", "w") as readme:
-        readme.writelines(content)
 
 # Update the README with the new ToC
 update_readme_with_toc()
