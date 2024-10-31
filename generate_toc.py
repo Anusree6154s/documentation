@@ -2,19 +2,17 @@ import os
 
 def generate_toc(root_dir='.', indent=0):
     toc = ""
-    item_count = 1  # Initialize the item counter for numbering
     for root, dirs, files in os.walk(root_dir):
         # Exclude hidden directories and .github
-        if any(part.startswith('.') for part in root.split(os.sep)) or '.github' in root:
+        if '/.' in root or '.github' in root:
             continue
 
         # Calculate relative path and indentation
         relative_path = os.path.relpath(root, root_dir)
         indent_level = '  ' * (relative_path.count(os.sep) + indent)
-
-        # Add directory link with numbering
-        toc += f"{indent_level}{item_count}. [{os.path.basename(root)}]({relative_path})\n"
-        item_count += 1  # Increment the counter for the next item
+        
+        # Add directory link
+        toc += f"{indent_level}- [{os.path.basename(root)}]({relative_path})\n"
         
         # Add files in the directory
         for file in files:
