@@ -4,7 +4,7 @@ def generate_toc(root_dir='.', indent=0):
     toc = ""
     for root, dirs, files in os.walk(root_dir):
         # Exclude hidden directories but include all nested directories
-        if '/.' in root:
+        if '/.' or '.github' in root:
             continue
 
         # Calculate relative path and indentation
