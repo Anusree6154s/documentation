@@ -1,8 +1,8 @@
 
 
 
+
 ## Table of Contents
-- [.](.)
   - [generate_toc.py](./generate_toc.py)
   - [package.json](./package.json)
   - [package-lock.json](./package-lock.json)
