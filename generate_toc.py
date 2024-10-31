@@ -1,4 +1,4 @@
-import os
+import os 
 
 def generate_toc(root_dir='.', indent=0):
     toc = ""
