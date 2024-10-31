@@ -36,3 +36,5 @@ jobs:
           else
             echo "No changes in README.md"
           fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
