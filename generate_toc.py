@@ -26,6 +26,7 @@ def generate_toc(root_dir='.', indent=0):
 def update_readme_with_toc():
     toc = generate_toc()
     toc_section_header = "\n## Table of Contents\n"
+    readme_file = "README.md"
     
     # Read the current README content
     with open("README.md", "r") as readme:
