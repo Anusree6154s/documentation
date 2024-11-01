@@ -7,4 +7,5 @@
 1. [Almost All topics for interview - Coding Interview University](https://github.com/jwasham/coding-interview-university?tab=readme-ov-file)
 2. Striver's Cheat sheet
 3. [JS Questions 1](https://drive.google.com/file/d/1zI6nIaVLEs3GMf8cGFL4Ak35KewOviDO/view?usp=sharing)
-4. [React Questions 1](https://drive.google.com/file/d/1_sLI6JfiK0iStPeuZDWZYGRW2yj_Y9Rc/view?usp=sharing)
+4. [JS Questions - Coder dost](https://github.com/Anusree6154s/tutorials/tree/main/Web%20Dev%20-%20Coder%20Dost#3-javascript)
+5. [React Questions 1](https://drive.google.com/file/d/1_sLI6JfiK0iStPeuZDWZYGRW2yj_Y9Rc/view?usp=sharing)
