@@ -16,3 +16,4 @@
 
 ## Git commit practices (pulling, pushing in new branch, squash etc)
 - https://trunkbaseddevelopment.com/
+- https://profy.dev/ - website to practise git and agile
