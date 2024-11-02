@@ -13,3 +13,6 @@
     - to use either `commitizen-cli` or `npx commitizen-cli (to skip first step)`
     - then follow terminal guidelines
 - #### vscode extension: not developed yet
+
+## Git commit practices (pulling, pushing in new branch, squash etc)
+- https://trunkbaseddevelopment.com/
