@@ -1,1 +1,25 @@
+# Site settings
+title:  Website
+description: > 
+  This is, built using Jekyll's minima theme and hosted on GitHub Pages.
+baseurl: "" # Leave empty unless the site is hosted in a subdirectory
+url: "https://anusree6154s.github.io/documentation/" # Replace with your GitHub Pages URL
+
+# Minima theme settings
 theme: minima
+paginate: 5 # Number of posts per page
+
+# Author details (optional)
+author:
+  name: Your Name
+  email: your-email@example.com
+
+# Social links (optional)
+social_links:
+  twitter: your_twitter_handle
+  github: your_github_username
+
+# Build settings
+markdown: kramdown
+plugins:
+  - jekyll-feed
