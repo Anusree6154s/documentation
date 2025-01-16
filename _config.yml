@@ -1,27 +1,25 @@
 # Site settings
 title: My Awesome Website
-description: > 
+description: >
   This is my personal website, built using Jekyll's minima theme and hosted on GitHub Pages.
 url: "https://yourusername.github.io" # Replace with your GitHub Pages URL
-
 # Minima theme settings
 theme: minima
 paginate: 5 # Number of posts per page
 
 # Author details (optional)
 author: Anusree Anilkumar
+name: nameeee
 email: bla@gmail.com
 
-# Social links (optional)
+# # Social links (optional)
+# social_links:
+#   twitter: your_twitter_handle
+#   github: your_github_username
+
 social_links:
-  twitter: your_twitter_handle
-  github: your_github_username
-
-minima:
-  social_links:
-    - { platform: github,  user_url: "https://github.com/jekyll/jekyll" }
-    - { platform: twitter, user_url: "https://twitter.com/jekyllrb" }
-
+  - { platform: github, user_url: "https://github.com/jekyll/jekyll" }
+  - { platform: twitter, user_url: "https://twitter.com/jekyllrb" }
 # # Build settings
 # markdown: kramdown
 # plugins:
