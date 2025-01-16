@@ -10,7 +10,7 @@ header_pages:
 
 
 # Site settings
-title: My Awesome Website
+title: My Awesome 
 description: >
   This is my personal website, built using Jekyll's minima theme and hosted on GitHub Pages.
 
@@ -20,7 +20,7 @@ theme: minima
 paginate: 5 # Number of posts per page
 
 # Author details (optional)
-author: Anusree Anilkumar
+# author: Anusree Anilkumar
 name: nameeee
 email: bla@gmail.com
 
