@@ -57,10 +57,40 @@ plugins:
 #   - vendor/gems/
 #   - vendor/ruby/
 
-include: ["_extras/banner.md"]
+# include: ["_extras/banner.md"]
 
-# theme-specific settings
-test_theme:
-  skin: aero              # aero / chrome / dark / neon
-  date_format: "%b -d %Y" # any format supported by strftime
-  header_links: true      # generate header links automatically
+# # theme-specific settings
+# test_theme:
+#   skin: aero              # aero / chrome / dark / neon
+#   date_format: "%b -d %Y" # any format supported by strftime
+#   header_links: true      # generate header links automatically
+
+author: "Jorge Sanz"
+
+
+base_url: /gh-pages-minima-starter
+repository: jsanz/gh-pages-minima-starter
+
+# Minima social links
+linkedin_username: jsanz
+rss: rss
+
+# Minima: show excerpts in the frontpage
+show_excerpts: true
+
+minima:
+  date_format: "%Y-%m-%d"
+
+# Minima: custom header links
+header_pages:
+  - import-modules/passport/passport-jwt/README.md
+  - interview-study-materials/README.md
+
+
+# exclude: 
+#     - .gitignore
+#     - docker-compose.yml
+#     - Gemfile
+#     - Gemfile.lock
+#     - LICENSE
+#     - README.md
