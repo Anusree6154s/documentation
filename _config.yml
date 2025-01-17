@@ -23,7 +23,7 @@ email: anilkumaranusree113@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
   I'm learning to build web apps using the MERN stack, Next.js, and TypeScript. I love tinkering with new tech and sharing what I learn along the way.
   This is my little corner where I jot down anything that I find difficult in my tech journey. I hope you find this space useful!
-baseurl: "" # the subpath of your site, e.g. /blog
+baseurl: "/documentation" # the subpath of your site, e.g. /blog
 url: "https://Anusree6154s.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 repository: Anusree6154s/documentation
 twitter_username: anu6154s
