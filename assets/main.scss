@@ -33,7 +33,7 @@ body {
 }
 
 .site-title {
-  color: #fdbd56 !important;
+  color: #ffc15e !important;
   font-weight: bold !important;
   font-stretch: expanded;
   font-size: xx-large;
@@ -45,7 +45,7 @@ body {
 }
 
 .site-footer {
-  background: #fdbd56 !important;
+  background: #FFCB77 !important;
   background-size: cover !important;
   border: 0px !important;
   color: #000000 !important;
@@ -86,7 +86,7 @@ body {
 }
 
 .post-link {
-  color: #fdbd56 !important;
+  color: #ffc15e !important;
   font-size: xx-large;
 }
 
@@ -133,7 +133,7 @@ pre,
 @media (max-width: 800px) {
   .site-footer {
     // background-color: #fdbd56 !important;
-    background: url("./imgs/body-bg.svg"), linear-gradient(#fdbd56, #fdbd56) !important;
+    background: url("./imgs/body-bg.svg"), linear-gradient(#FFCB77, #FFCB77) !important;
     background-size: cover !important;
     background-repeat: no-repeat !important;
     background-position-x: right !important;
