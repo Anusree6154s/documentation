@@ -19,7 +19,7 @@ linkedin_username: jsanz
 rss: rss
 
 # Build settings
-theme: minima
+theme: jekyll-theme-minimal
 # plugins:
 # - jekyll-feed
 
@@ -30,15 +30,15 @@ minima:
   date_format: "%Y-%m-%d"
 
 # Minima: custom header links
-header_pages:
-  - import-modules/passport/passport-jwt/README.md
-  - interview-study-materials/README.md
+# header_pages:
+#   - import-modules/passport/passport-jwt/README.md
+#   - interview-study-materials/README.md
 
 collections:
   web-dev:
     output: true
     permalink: "/web-dev/:path/" # Customize the URL structure if needed
-    
+
 # Include from processing
 include:
   - web-dev/
