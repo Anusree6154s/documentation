@@ -1,3 +1,7 @@
+---
+layout: post
+---
+
 # Concepts related to React-Node Web App
 
 <br>

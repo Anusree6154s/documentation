@@ -1,59 +1,86 @@
-# ref: https://github.com/jekyll/jekyll/blob/master/lib/site_template/_config.yml
-# https://opensource.com/article/21/11/jekyll-config-files
-# https://nainagurung.medium.com/publish-github-pages-using-jekyll-369a8e2800b7
+# Welcome to Jekyll!
+#
+# This config file is meant for settings that affect your whole blog, values
+# which you are expected to set up once and rarely edit after that. If you find
+# yourself editing this file very often, consider using Jekyll's data files
+# feature for the data you need to update frequently.
+#
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
 
-title: Your awesome title
-author: Jorge Sanz
-email: your-email@example.com
-description: >-
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
-# baseurl: "" # the subpath of your site, e.g. /blog
-# url: "" # the base hostname & protocol for your site, e.g. http://example.com
+# Site settings
+# These are used to personalize your new site. If you look in the HTML files,
+# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
+# You can create any custom variable you would like, and they will be accessible
+# in the templates via {{ site.myvariable }}.
 
-# Minima social links
-twitter_username: jekyllrb
-github_username: jekyll
-linkedin_username: jsanz
+# references:
+# https://pages.github.com/themes/
+# https://github.com/jsanz/gh-pages-minima-starter
+title: Blog & Docs
+author: Anusree Anilkumar
+email: anilkumaranusree113@gmail.com
+description: >- # this means to ignore newlines until "baseurl:"
+  I'm learning to build web apps using the MERN stack, Next.js, and TypeScript. I love tinkering with new tech and sharing what I learn along the way.
+  This is my little corner where I jot down anything that I find difficult in my tech journey. I hope you find this space useful!
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "" # the base hostname & protocol for your site, e.g. http://example.com
+repository: Anusree6154s/documentation
+twitter_username: anu6154s
+github_username: Anusree6154s
+linkedin_username: anusreeanilkumar1
+# dribbble_username: jekyll
+# facebook_username: jekyll
+# flickr_username: jekyll
+# instagram_username: jekyll
+# pinterest_username: jekyll
+# youtube_username: jekyll
+# googleplus_username: +jekyll
 rss: rss
 
-# Build settings
-theme: jekyll-theme-minimal
-# plugins:
-# - jekyll-feed
+# mastodon:
+#  - username: jekyll
+#    instance: example.com
+#  - username: jekyll2
+#    instance: example.com
 
-# Minima: show excerpts in the frontpage
-show_excerpts: true
+
+show_excerpts: true # Minima: show excerpts in the frontpage
+markdown: kramdown # Build settings
+theme: minima
+highlighter: rouge
+plugins:
+  - jekyll-feed
+  - jekyll-remote-theme
 
 minima:
-  date_format: "%Y-%m-%d"
+  date_format: "%d %b %Y"
 
 # Minima: custom header links
-# header_pages:
-#   - import-modules/passport/passport-jwt/README.md
-#   - interview-study-materials/README.md
+header_pages:
+  - _pages/home-page.md
+  - _pages/table-of-contents.md
 
-collections:
-  web-dev:
-    output: true
-    permalink: "/web-dev/:path/" # Customize the URL structure if needed
+#to build large sites as the pages are accessed. not altogether in the beginning
+# Exclude from processing.
+incremental: true
 
-destination: web-dev
-
-# Include from processing
-include:
-  - web-dev/
-
-# Exclude from processing
-# exclude:
-#   - .jekyll-cache/
-#   - gemfiles/
-#   - Gemfile
-#   - Gemfile.lock
-#   - node_modules/
+# to override the default setting.
+exclude:
+  - my-site
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+# - node_modules
+# - minima
 #   - vendor/bundle/
 #   - vendor/cache/
 #   - vendor/gems/
 #   - vendor/ruby/
 
+include:
+  - _pages
+
+# to add comment section with help of disqus app
+disqus:
+    shortname: anusree-anilkumar-blog

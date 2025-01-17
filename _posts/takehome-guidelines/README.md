@@ -1,3 +1,6 @@
+---
+layout: post
+---
 
 Take home coding challenge
 ==========================

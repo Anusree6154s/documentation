@@ -1,9 +1,4 @@
----
-permalink: /
-layout: home
-title: readme first
-list_title: First readme
----
+
 
 ### Table of contents
 

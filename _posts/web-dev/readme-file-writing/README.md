@@ -1,4 +1,7 @@
 
+---
+layout: post
+---
 
 
 ## Comprehensive Guide to Writing README Files
