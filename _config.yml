@@ -68,8 +68,6 @@ plugins:
 author: "Jorge Sanz"
 
 
-base_url: /gh-pages-minima-starter
-repository: jsanz/gh-pages-minima-starter
 
 # Minima social links
 linkedin_username: jsanz
