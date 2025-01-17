@@ -2,6 +2,7 @@
 title: "Api Documentaion Post Title"
 date: 2020-03-18
 layout: post
+permalink: /web-dev/1
 ---
 
 ## Api Documentaion Tools

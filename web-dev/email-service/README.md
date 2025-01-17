@@ -2,6 +2,7 @@
 title: "Email Service Post Title"
 date: 2020-10-18
 layout: post
+permalink: /web-dev/2
 ---
 
 ### From Frontend
