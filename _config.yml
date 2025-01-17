@@ -1,28 +1,26 @@
-
 # ref: https://github.com/jekyll/jekyll/blob/master/lib/site_template/_config.yml
-updateDocsComment: >
-  Thanks for opening this pull request! The maintainers of this repository would appreciate it if you would update some of our documentation based on your changes.
+# updateDocsComment: >
+#   Thanks for opening this pull request! The maintainers of this repository would appreciate it if you would update some of our documentation based on your changes.
 
-updateDocsWhiteList:
-  - bug
-  - fix
-  - Backport
-  - dev
-  - Update
-  - WIP
-  - chore
+# updateDocsWhiteList:
+#   - bug
+#   - fix
+#   - Backport
+#   - dev
+#   - Update
+#   - WIP
+#   - chore
 
-updateDocsTargetFiles:
-  - README
-  - docs/
+# updateDocsTargetFiles:
+#   - README
+#   - docs/
 
-blank_issues_enabled: true
-contact_links:
-  - name: Jekyll Community Forum
-    url: https://talk.jekyllrb.com/
-    about: Please ask and answer questions here.
+# blank_issues_enabled: true
+# contact_links:
+#   - name: Jekyll Community Forum
+#     url: https://talk.jekyllrb.com/
+#     about: Please ask and answer questions here.
 
----
 version: 4.3.4
 name: Jekyll • Simple, blog-aware, static sites
 description: Transform your plain text into static websites and blogs
@@ -47,37 +45,37 @@ collections:
     permalink: "/:collection/:path/"
     output: true
 defaults:
-- scope:
-    path: _docs
-    type: docs
-  values:
-    layout: docs
-- scope:
-    path: _posts
-    type: posts
-  values:
-    layout: news_item
-- scope:
-    path: _tutorials
-    type: tutorials
-  values:
-    layout: tutorials
-- scope:
-    path: ''
-  values:
-    image: "/img/jekyll-og.png"
+  - scope:
+      path: _docs
+      type: docs
+    values:
+      layout: docs
+  - scope:
+      path: _posts
+      type: posts
+    values:
+      layout: news_item
+  - scope:
+      path: _tutorials
+      type: tutorials
+    values:
+      layout: tutorials
+  - scope:
+      path: ""
+    values:
+      image: "/img/jekyll-og.png"
 future: true
 plugins:
-- jekyll-avatar
-- jekyll-feed
-- jekyll-mentions
-- jekyll-redirect-from
-- jekyll-seo-tag
-- jekyll-sitemap
-- jemoji
+  - jekyll-avatar
+  - jekyll-feed
+  - jekyll-mentions
+  - jekyll-redirect-from
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jemoji
 feed:
   categories:
-  - release
+    - release
 kramdown:
   syntax_highlighter_opts:
     default_lang: plaintext
@@ -85,9 +83,8 @@ sass:
   style: compressed
 strict_front_matter: true
 exclude:
-- icomoon-selection.json
-- readme.md
-
+  - icomoon-selection.json
+  - readme.md
 # Welcome to Jekyll!
 #
 # This config file is meant for settings that affect your whole blog, values
