@@ -2,7 +2,6 @@
 # https://opensource.com/article/21/11/jekyll-config-files
 # https://nainagurung.medium.com/publish-github-pages-using-jekyll-369a8e2800b7
 
-logo: https://draculatheme.com/static/icons/pack-1/045-dracula.svg
 title: Your awesome title
 author: Jorge Sanz
 email: your-email@example.com
@@ -34,6 +33,12 @@ minima:
 header_pages:
   - import-modules/passport/passport-jwt/README.md
   - interview-study-materials/README.md
+
+collections:
+  web-dev:
+    output: true
+    permalink: "/web-dev/:path/" # Customize the URL structure if needed
+    
 # Include from processing
 include:
   - web-dev/
