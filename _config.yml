@@ -39,6 +39,8 @@ collections:
     output: true
     permalink: "/web-dev/:path/" # Customize the URL structure if needed
 
+destination: web-dev
+
 # Include from processing
 include:
   - web-dev/
