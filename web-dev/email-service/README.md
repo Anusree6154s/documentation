@@ -1,3 +1,9 @@
+---
+title: "Email Service Post Title"
+date: 2020-10-18
+layout: post
+---
+
 ### From Frontend
 1. EmailJS: https://github.com/emailjs-com/emailjs-sdk
 

@@ -1,4 +1,6 @@
 # ref: https://github.com/jekyll/jekyll/blob/master/lib/site_template/_config.yml
+# https://opensource.com/article/21/11/jekyll-config-files
+# https://nainagurung.medium.com/publish-github-pages-using-jekyll-369a8e2800b7
 
 
 title: Your awesome title
