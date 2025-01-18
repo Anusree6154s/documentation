@@ -23,5 +23,7 @@ jobs:
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_branch: main # Ensure the output is pushed to `main`
+        publish_branch: gh-pages # Ensure the output is pushed to `gh-pages`
         publish_dir: ./_site # Specify the directory containing the built site
+
+# GitHub Pages has a restriction preventing you from deploying to the same branch you're pushing from (in this case, main). By default, GitHub Pages only allows you to deploy to a different branch, such as gh-pages, rather than main itself.
