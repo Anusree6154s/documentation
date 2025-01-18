@@ -555,20 +555,8 @@ body {
   padding: 20px !important;
   margin: 20px !important; }
 
-.post-link {
-  color: #ff9d00 !important;
-  font-size: xx-large; }
-
 post-meta {
   color: #bebebe; }
-
-.post > a,
-.rss-subscribe > a {
-  color: #24a4ff !important; }
-
-.post > a:hover,
-.rss-subscribe > a:hover {
-  color: #4fb6ff !important; }
 
 code {
   border: 0px !important; }
