@@ -1,3 +1,10 @@
+---
+title: Git Commit Standards
+date: Oct 26, 2024
+layout: post
+excerpt: Git Commit Standards (Official)
+---
+
 git cheat sheet: https://media.licdn.com/dms/image/v2/D4D22AQFWkWeD6D4ksA/feedshare-shrink_1280/feedshare-shrink_1280/0/1729225766763?e=1732147200&v=beta&t=lRJJDZeffcMU0rbvRJi0oSef2p3xGOG9BQWXG9dhrTQ
 
 ### Example Commit Message

@@ -1,6 +1,7 @@
 ---
 layout: post
-excerpt: "A brief description 2"
+date: 18 jan 2025
+title: Typescript learners guide
 ---
 
 ## TypeScript

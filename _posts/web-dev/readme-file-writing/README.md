@@ -1,8 +1,9 @@
-
 ---
+title: Readme files writing guide
+date: Oct 26, 2024
 layout: post
+excerpt: Comprehensive Guide to Writing README Files
 ---
-
 
 ## Comprehensive Guide to Writing README Files
 

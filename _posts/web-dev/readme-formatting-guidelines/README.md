@@ -1,5 +1,8 @@
 ---
+title: Readme files formatting guide
+date: Oct 23, 2024
 layout: post
+excerpt: Comprehensive Guide to Formatting README Files
 ---
 
 ## Readme Formatting Guidelines/Rules

@@ -1,8 +1,8 @@
 ---
-title: "Email Service Post Title"
-date: 2020-10-18
+title: Email Service Guide
+date: Oct 22, 2024
 layout: post
-permalink: /web-dev/2
+excerpt: Guide to how to integrate email service with any project
 ---
 
 ### From Frontend

@@ -1,3 +1,9 @@
+---
+title: Guidelines to cleaner git commits
+date: Oct 31, 2024
+layout: post
+excerpt: Guide to how to write cleaner git commits
+---
 ## Guidelines to cleaner git commits
 
 ### Standardized documentation followed for cleaner git commits

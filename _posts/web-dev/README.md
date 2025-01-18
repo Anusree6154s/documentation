@@ -1,5 +1,8 @@
 ---
+title: Web development Css related
+date:  Aug 19, 2024
 layout: post
+excerpt: Css files and svgs to assist Css
 ---
 
 ## Css

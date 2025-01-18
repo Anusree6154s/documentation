@@ -1,3 +1,10 @@
+---
+title: Deployment Websites
+date: Sep 21, 2024
+layout: post
+excerpt: Personal pros and cons of different deployment websites
+---
+
 ### netlify:
 - using netlify-cli for cli, can do from portal too
 - only for static websites

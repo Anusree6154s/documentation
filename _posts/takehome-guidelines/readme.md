@@ -1,8 +1,8 @@
 ---
-layout: post                  # REQUIRED: Specifies the layout template to use (e.g., `post`, `page`, `default`).
-title: "Takehome Guidelines"          # REQUIRED: Title of the post or page.
-date: 2025-01-17              # REQUIRED for posts: Publish date in `YYYY-MM-DD` or full ISO format.
-excerpt: "A brief description" # OPTIONAL: Short summary shown in excerpts. Supported in most themes.
+layout: post                 
+title: Takehome Guidelines     
+date: Oct 23, 2024         
+excerpt: Take home coding challenge template and guide
 ---
 
 Take home coding challenge
