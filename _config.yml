@@ -1,54 +1,17 @@
 
-
-
-# Welcome to Jekyll!
-#
-# This config file is meant for settings that affect your whole blog, values
-# which you are expected to set up once and rarely edit after that. If you find
-# yourself editing this file very often, consider using Jekyll's data files
-# feature for the data you need to update frequently.
-#
-# For technical reasons, this file is *NOT* reloaded automatically when you use
-# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
-
-# Site settings
-# These are used to personalize your new site. If you look in the HTML files,
-# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
-# You can create any custom variable you would like, and they will be accessible
-# in the templates via {{ site.myvariable }}.
-
-# references:
-# https://pages.github.com/themes/
-# https://github.com/jsanz/gh-pages-minima-starter
 title: Blog & Docs
 author: Anusree Anilkumar
 email: anilkumaranusree113@gmail.com
-description: >- # this means to ignore newlines until "baseurl:"
-  Web dev learnings and notes
-baseurl: "/documentation" # the subpath of your site, e.g. /blog
-url: "https://Anusree6154s.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+description: Web dev learnings and notes
+baseurl: "/documentation" 
+url: "https://Anusree6154s.github.io" 
 repository: Anusree6154s/documentation
 twitter_username: anu6154s
 github_username: Anusree6154s
 linkedin_username: anusreeanilkumar1
-# dribbble_username: jekyll
-# facebook_username: jekyll
-# flickr_username: jekyll
-# instagram_username: jekyll
-# pinterest_username: jekyll
-# youtube_username: jekyll
-# googleplus_username: +jekyll
 rss: rss
 
-# mastodon:
-#  - username: jekyll
-#    instance: example.com
-#  - username: jekyll2
-#    instance: example.com
-
-
-show_excerpts: true # Minima: show excerpts in the frontpage
-# markdown: kramdown # Build settings
+show_excerpts: true
 theme: minima
 highlighter: rouge
 plugins:
@@ -57,32 +20,20 @@ plugins:
 minima:
   date_format: "%d %b %Y"
 
-# Minima: custom header links
 header_pages:
-  - _pages/home-page.md
+  - _pages/home.md
+  - _pages/about.md
   - _pages/table-of-contents.md
 
-#to build large sites as the pages are accessed. not altogether in the beginning
-# Exclude from processing.
-# incremental: true
-
-# to override the default setting.
 exclude:
   - Gemfile
   - Gemfile.lock
   - README.md
   - docs
-# - node_modules
-# - minima
-#   - vendor/bundle/
-#   - vendor/cache/
-#   - vendor/gems/
-#   - vendor/ruby/
 
 include:
   - _pages
 
-# to add comment section with help of disqus app
 disqus:
     shortname: anusree-anilkumar-blog
 
