@@ -1,4 +1,4 @@
-name: Jekyll Build and Deploy
+name: jekyll-build-deployment
 
 on:
   push:
@@ -14,7 +14,7 @@ jobs:
     - name: Setup Ruby
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: '3.0'
+        ruby-version: '3.1'
     - name: Install Dependencies
       run: bundle install
     - name: Build Jekyll Site
