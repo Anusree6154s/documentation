@@ -33,6 +33,7 @@ exclude:
 
 include:
   - _pages
+  - _layouts
 
 disqus:
     shortname: anusree-anilkumar-blog
