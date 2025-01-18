@@ -3,6 +3,7 @@ title: Email Service Guide
 date: Oct 22, 2024
 layout: post
 excerpt: Guide to how to integrate email service with any project
+permalink: email-service
 ---
 
 ### From Frontend

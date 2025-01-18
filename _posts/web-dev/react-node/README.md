@@ -3,6 +3,7 @@ title: React-Node App
 date: Aug 19, 2024
 layout: post
 excerpt: Concepts related to React-Node Web App
+permalink: react-node
 ---
 
 # Concepts related to React-Node Web App

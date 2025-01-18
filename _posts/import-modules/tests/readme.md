@@ -3,6 +3,7 @@ layout: post
 title: Tests
 date: Aug 19, 2024
 excerpt: Tests related documentation
+permalink: tests
 ---
 
 

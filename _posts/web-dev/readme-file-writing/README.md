@@ -3,6 +3,7 @@ title: Readme files writing guide
 date: Oct 26, 2024
 layout: post
 excerpt: Comprehensive Guide to Writing README Files
+permalink: readme-file-writing
 ---
 
 ## Comprehensive Guide to Writing README Files
