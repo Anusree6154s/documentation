@@ -46,12 +46,11 @@ rss: rss
 
 
 show_excerpts: true # Minima: show excerpts in the frontpage
-markdown: kramdown # Build settings
+# markdown: kramdown # Build settings
 theme: minima
 highlighter: rouge
 plugins:
   - jekyll-feed
-  - jekyll-remote-theme
 
 minima:
   date_format: "%d %b %Y"
@@ -63,7 +62,7 @@ header_pages:
 
 #to build large sites as the pages are accessed. not altogether in the beginning
 # Exclude from processing.
-incremental: true
+# incremental: true
 
 # to override the default setting.
 exclude:
@@ -81,7 +80,10 @@ exclude:
 
 include:
   - _pages
+  - _plugins
 
 # to add comment section with help of disqus app
 disqus:
     shortname: anusree-anilkumar-blog
+
+permalink: /:title/

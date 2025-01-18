@@ -1,3 +1,7 @@
+
+
+Documentation for passport JWT as I understand it.
+
 # Passport-jwt Documentaion
 
 ## Table of Contents

@@ -9,31 +9,33 @@
 html,
 body {
   font-family: "Montserrat", sans-serif;
-  color: white;
-  background-color: rgb(48, 48, 48);
+  // color: white;
+  // background-color: rgb(48, 48, 48);
 }
 
 // header
 .site-header {
-  background-color: rgb(48, 48, 48) !important;
+  // background-color: rgb(48, 48, 48) !important;
+  background-color: white !important;
   border-bottom: 1px solid gray !important;
   border-top: 0px !important;
 }
 
-.site-nav {
-  background-color: rgb(48, 48, 48);
-}
+// .site-nav {
+//   background-color: rgb(48, 48, 48);
+// }
 
-.menu-icon > svg {
-  fill: white !important;
-}
+// .menu-icon > svg {
+//   fill: white !important;
+// }
 
-.page-link {
-  color: white !important;
-}
+// .page-link {
+// color: white !important;
+// }
 
 .site-title {
-  color: #ffc15e !important;
+  // color: #ffc15e !important;
+  color: #ff9d00 !important;
   font-weight: bold !important;
   font-stretch: expanded;
   font-size: xx-large;
@@ -45,7 +47,7 @@ body {
 }
 
 .site-footer {
-  background: #FFCB77 !important;
+  background: #ffcb77 !important;
   background-size: cover !important;
   border: 0px !important;
   color: #000000 !important;
@@ -79,14 +81,15 @@ body {
 // post
 .post-list > li,
 .post {
-  color: white !important;
+  // color: white !important;
   border-radius: 10px !important;
   padding: 20px !important;
   margin: 20px !important;
 }
 
 .post-link {
-  color: #ffc15e !important;
+  // color: #ffc15e !important;
+  color: #ff9d00 !important;
   font-size: xx-large;
 }
 
@@ -105,20 +108,33 @@ post-meta {
 }
 
 code {
-  background: rgb(36, 36, 36) !important;
+  // background: rgb(36, 36, 36) !important;
   border: 0px !important;
 }
 
 .highlight,
 pre,
 .highlight > * > code {
-  background: rgb(0, 0, 0) !important;
+  // background: rgb(0, 0, 0) !important;
   border: 0px !important;
 }
 
-.post-content a {
-  color: rgb(255, 255, 255) !important;
-}
+// .post-content a {
+//   color: rgb(255, 255, 255) !important;
+// }
+
+// .page-content {
+//   h2 {
+//     font-weight: bold;
+//     // color: #1f9ac6;
+//     color: #a3a3fc;
+//   }
+//   h3 {
+//     // color: #1f9ac6;
+//     // color: #EEEEFF;
+//     color: #a3a3fc;
+//   }
+// }
 
 // media queries
 @media (min-width: 800px) {
@@ -133,7 +149,7 @@ pre,
 @media (max-width: 800px) {
   .site-footer {
     // background-color: #fdbd56 !important;
-    background: url("./imgs/body-bg.svg"), linear-gradient(#FFCB77, #FFCB77) !important;
+    background: url("./imgs/body-bg.svg"), linear-gradient(#ffcb77, #ffcb77) !important;
     background-size: cover !important;
     background-repeat: no-repeat !important;
     background-position-x: right !important;

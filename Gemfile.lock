@@ -268,14 +268,20 @@ GEM
       concurrent-ruby (~> 1.0)
     unicode-display_width (1.8.0)
     uri (1.0.2)
+    wdm (0.2.0)
     webrick (1.9.1)
 
 PLATFORMS
   x64-mingw-ucrt
 
 DEPENDENCIES
+  base64
+  bigdecimal
   github-pages
-  jekyll-remote-theme
+  jekyll
+  kramdown-parser-gfm
+  minima (~> 2.5)
+  wdm (>= 0.1.0)
 
 BUNDLED WITH
    2.6.3
