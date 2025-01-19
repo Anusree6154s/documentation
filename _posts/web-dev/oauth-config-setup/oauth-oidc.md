@@ -1,5 +1,5 @@
 ---
-date: 19 Jan 2025
+date: Jan 9, 2025
 layout: post
 permalink: oauth-oidc
 tags: [jwt, oauth2, typescript, nextjs, oidc, passwordless-authentication]
