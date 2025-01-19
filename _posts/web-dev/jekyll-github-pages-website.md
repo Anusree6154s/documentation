@@ -3,6 +3,7 @@ date: 18 Jan 2025
 layout: post
 permalink: jekyll-github-pages-website
 tags: [jekyll, ruby, scss, markdown]
+excerpt: This is my personal guide related to all about making github pages with and without jekyll.
 ---
 
 This is my personal guide related to all about making github pages with and without jekyll.

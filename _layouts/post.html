@@ -2,6 +2,13 @@
 layout: default
 ---
 <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  
+  {% if page.parent_post %}
+  {% assign parent_post = site.posts | where: "permalink", page.parent_post | first %}
+  <div class="parent-link">
+    This post is part of <a href="{{ site.baseurl }}{{ parent_post.url }}">{{ parent_post.title }}</a>.
+  </div>
+  {% endif %}
 
   <header class="post-header">
     <h1 class="post-title p-name" itemprop="name headline">{{ page.title | escape }}</h1>
@@ -24,12 +31,7 @@ layout: default
   </header>
 
   
-{% if page.parent_post %}
-{% assign parent_post = site.posts | where: "permalink", page.parent_post | first %}
-<div class="parent-link">
-  This post is part of <a href="{{ site.baseurl }}{{ parent_post.url }}">{{ parent_post.title }}</a>.
-</div>
-{% endif %}
+
 
   <div class="post-content e-content" itemprop="articleBody">
     {{ content }}
