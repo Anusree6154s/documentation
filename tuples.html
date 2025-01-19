@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Tuples and how it differs from Arrays | Blog &amp; Docs</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="Tuples and how it differs from Arrays" />
+<meta name="author" content="Anusree Anilkumar" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="More about tuples, and difference between tuples and arrays" />
+<meta property="og:description" content="More about tuples, and difference between tuples and arrays" />
+<link rel="canonical" href="https://anusree6154s.github.io/documentation/tuples" />
+<meta property="og:url" content="https://anusree6154s.github.io/documentation/tuples" />
+<meta property="og:site_name" content="Blog &amp; Docs" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-01-19T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Tuples and how it differs from Arrays" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Anusree Anilkumar"},"dateModified":"2025-01-19T00:00:00+00:00","datePublished":"2025-01-19T00:00:00+00:00","description":"More about tuples, and difference between tuples and arrays","headline":"Tuples and how it differs from Arrays","mainEntityOfPage":{"@type":"WebPage","@id":"https://anusree6154s.github.io/documentation/tuples"},"url":"https://anusree6154s.github.io/documentation/tuples"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/documentation/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://anusree6154s.github.io/documentation/feed.xml" title="Blog &amp; Docs" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/documentation/">Blog &amp; Docs</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/documentation/about">About Me</a><a class="page-link" href="/documentation/table-of-contents">Table of Contents</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  
+  
+  
+  <div class="parent-link">
+    This post is part of <a href="/documentation/typescript-learners-guide">Typescript learners guide</a>.
+  </div>
+  
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Tuples and how it differs from Arrays</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2025-01-19T00:00:00+00:00" itemprop="datePublished">19 Jan 2025
+      </time></p>
+      <p><span  class="tag-badge">
+            typescript
+        </span><span  class="tag-badge">
+            tuples
+        </span></span>
+</p>
+  </header>
+
+  
+
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h3 id="table-of-contents"><strong>Table of Contents</strong></h3>
+<ol>
+  <li><a href="#1-what-is-tuple">What is Tuple</a></li>
+  <li><a href="#2-key-characteristics-of-tuples">Key Characteristics of Tuples</a></li>
+  <li><a href="#3-optional-and-rest-elements-in-tuples">Optional and Rest Elements in Tuples</a></li>
+  <li><a href="#4-tuples-with-named-types-or-objects">Tuples with Named Types or Objects</a></li>
+  <li><a href="#5-destructuring-tuples">Destructuring Tuples</a></li>
+  <li><a href="#6-readonly-tuples">Readonly Tuples</a></li>
+  <li><a href="#7-using-tuples-with-functions">Using Tuples with Functions</a></li>
+  <li><a href="#8-differences-between-arrays-and-tuples">Differences Between Arrays and Tuples</a>
+<br /></li>
+</ol>
+
+<h3 id="1-what-is-tuple">1. <strong>What is Tuple</strong></h3>
+
+<p>A <strong>tuple</strong> is a special type of array in TypeScript where the number of elements and their types are fixed. Unlike regular arrays, where all elements must be of the same type, a tuple can contain elements of different types, and the number of elements is fixed when the tuple is created.</p>
+
+<h4 id="syntax-for-tuples"><strong>Syntax for Tuples</strong></h4>
+
+<p>A tuple is defined using square brackets <code class="language-plaintext highlighter-rouge">[]</code>, with types specified for each element. The order of the types in the tuple corresponds to the order of the elements in the tuple.</p>
+
+<p>Example:</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">tuple</span><span class="p">:</span> <span class="p">[</span><span class="kr">string</span><span class="p">,</span> <span class="kr">number</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="dl">"</span><span class="s2">Alice</span><span class="dl">"</span><span class="p">,</span> <span class="mi">30</span><span class="p">];</span>
+</code></pre></div></div>
+
+<ul>
+  <li>The first element is a <code class="language-plaintext highlighter-rouge">string</code>, and the second element is a <code class="language-plaintext highlighter-rouge">number</code>.</li>
+  <li>The tuple can only contain exactly two elements, and the types must match exactly: the first element must always be a <code class="language-plaintext highlighter-rouge">string</code>, and the second must always be a <code class="language-plaintext highlighter-rouge">number</code>.</li>
+</ul>
+
+<p><br /></p>
+
+<h3 id="2-key-characteristics-of-tuples">2. <strong>Key Characteristics of Tuples</strong></h3>
+
+<ul>
+  <li><strong>Fixed Size</strong>: The size of a tuple is fixed. You cannot add or remove elements without causing a type error.</li>
+</ul>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">tuple</span><span class="p">:</span> <span class="p">[</span><span class="kr">string</span><span class="p">,</span> <span class="kr">number</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="dl">"</span><span class="s2">Alice</span><span class="dl">"</span><span class="p">,</span> <span class="mi">30</span><span class="p">];</span>
+<span class="nx">tuple</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span> <span class="c1">// Error: Tuple type '[string, number]' of length '2' has no element at index '2'.</span>
+</code></pre></div></div>
+
+<ul>
+  <li><strong>Mixed Types</strong>: Each element in a tuple can be of a different type.</li>
+</ul>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">user</span><span class="p">:</span> <span class="p">[</span><span class="kr">string</span><span class="p">,</span> <span class="kr">number</span><span class="p">,</span> <span class="nx">boolean</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="dl">"</span><span class="s2">Alice</span><span class="dl">"</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="kc">true</span><span class="p">];</span>
+</code></pre></div></div>
+
+<p>Here, the tuple has three elements:</p>
+
+<ul>
+  <li>The first is a <code class="language-plaintext highlighter-rouge">string</code>.</li>
+  <li>The second is a <code class="language-plaintext highlighter-rouge">number</code>.</li>
+  <li>
+    <p>The third is a <code class="language-plaintext highlighter-rouge">boolean</code>.</p>
+  </li>
+  <li><strong>Accessing Elements</strong>: You can access the elements of a tuple using their index, just like arrays.</li>
+</ul>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">user</span><span class="p">:</span> <span class="p">[</span><span class="kr">string</span><span class="p">,</span> <span class="kr">number</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="dl">"</span><span class="s2">Alice</span><span class="dl">"</span><span class="p">,</span> <span class="mi">30</span><span class="p">];</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">user</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span> <span class="c1">// Output: "Alice"</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">user</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span> <span class="c1">// Output: 30</span>
+</code></pre></div></div>
+
+<p>TypeScript will enforce the correct types when you access the elements, ensuring that the type of the value at the specified index matches the type in the tuple’s definition.</p>
+
+<p><br /></p>
+
+<h3 id="3-optional-and-rest-elements-in-tuples">3. <strong>Optional and Rest Elements in Tuples</strong></h3>
+
+<p>Tuples in TypeScript can also support <strong>optional elements</strong> (using <code class="language-plaintext highlighter-rouge">?</code>) and <strong>rest elements</strong> (using <code class="language-plaintext highlighter-rouge">...</code>), allowing for more flexibility when defining the tuple’s structure.</p>
+
+<h4 id="optional-elements"><strong>Optional Elements</strong></h4>
+
+<p>Optional elements in tuples can be used when an element is not always required. This is done by adding a <code class="language-plaintext highlighter-rouge">?</code> after the element’s type.</p>
+
+<p>Example:</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">user</span><span class="p">:</span> <span class="p">[</span><span class="kr">string</span><span class="p">,</span> <span class="kr">number</span><span class="p">?,</span> <span class="nx">boolean</span><span class="p">?]</span> <span class="o">=</span> <span class="p">[</span><span class="dl">"</span><span class="s2">Alice</span><span class="dl">"</span><span class="p">];</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">user</span><span class="p">);</span> <span class="c1">// Output: ["Alice"]</span>
+<span class="nx">user</span> <span class="o">=</span> <span class="p">[</span><span class="dl">"</span><span class="s2">Bob</span><span class="dl">"</span><span class="p">,</span> <span class="mi">25</span><span class="p">];</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">user</span><span class="p">);</span> <span class="c1">// Output: ["Bob", 25]</span>
+<span class="nx">user</span> <span class="o">=</span> <span class="p">[</span><span class="dl">"</span><span class="s2">Charlie</span><span class="dl">"</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="kc">true</span><span class="p">];</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">user</span><span class="p">);</span> <span class="c1">// Output: ["Charlie", 35, true]</span>
+</code></pre></div></div>
+
+<p>In this case:</p>
+
+<ul>
+  <li>The second element (<code class="language-plaintext highlighter-rouge">number</code>) and the third element (<code class="language-plaintext highlighter-rouge">boolean</code>) are optional.</li>
+  <li>The tuple can have 1, 2, or 3 elements.</li>
+</ul>
+
+<h4 id="rest-elements"><strong>Rest Elements</strong></h4>
+
+<p>Rest elements allow you to define a tuple that can accept additional elements beyond the ones specified in the tuple’s definition. Rest elements are placed after the fixed elements and are prefixed with <code class="language-plaintext highlighter-rouge">...</code>.</p>
+
+<p>Example:</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">coordinates</span><span class="p">:</span> <span class="p">[</span><span class="kr">number</span><span class="p">,</span> <span class="kr">number</span><span class="p">,</span> <span class="p">...</span><span class="kr">number</span><span class="p">[]]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">];</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">coordinates</span><span class="p">);</span> <span class="c1">// Output: [0, 0, 1, 2, 3]</span>
+</code></pre></div></div>
+
+<p>In this example:</p>
+
+<ul>
+  <li>The tuple starts with two <code class="language-plaintext highlighter-rouge">number</code> elements (<code class="language-plaintext highlighter-rouge">[0, 0]</code>).</li>
+  <li>Then it can accept any <code class="language-plaintext highlighter-rouge">number</code> of additional number values after the first two elements.</li>
+</ul>
+
+<p><br /></p>
+
+<h3 id="4-tuples-with-named-types-or-objects">4. <strong>Tuples with Named Types or Objects</strong></h3>
+
+<p>You can also use <strong>named types</strong> or <strong>objects</strong> in a tuple. This allows you to combine the benefits of tuples and objects, making it possible to work with structured data in a more readable way.</p>
+
+<p>Example:</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">employee</span><span class="p">:</span> <span class="p">[</span><span class="kr">string</span><span class="p">,</span> <span class="kr">number</span><span class="p">,</span> <span class="p">{</span> <span class="na">role</span><span class="p">:</span> <span class="kr">string</span> <span class="p">}]</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="dl">"</span><span class="s2">Alice</span><span class="dl">"</span><span class="p">,</span>
+  <span class="mi">30</span><span class="p">,</span>
+  <span class="p">{</span> <span class="na">role</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Engineer</span><span class="dl">"</span> <span class="p">},</span>
+<span class="p">];</span>
+</code></pre></div></div>
+
+<p>In this example, the third element in the tuple is an object with a property <code class="language-plaintext highlighter-rouge">role</code> that is a <code class="language-plaintext highlighter-rouge">string</code>. This allows you to store more complex data in tuples while preserving type safety.
+<br /></p>
+
+<h3 id="5-destructuring-tuples">5. <strong>Destructuring Tuples</strong></h3>
+
+<p>TypeScript allows destructuring of tuples just like arrays, making it easy to extract values from a tuple and assign them to variables.</p>
+
+<p>Example:</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">person</span><span class="p">:</span> <span class="p">[</span><span class="kr">string</span><span class="p">,</span> <span class="kr">number</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="dl">"</span><span class="s2">John</span><span class="dl">"</span><span class="p">,</span> <span class="mi">25</span><span class="p">];</span>
+
+<span class="kd">let</span> <span class="p">[</span><span class="nx">name</span><span class="p">,</span> <span class="nx">age</span><span class="p">]</span> <span class="o">=</span> <span class="nx">person</span><span class="p">;</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span> <span class="c1">// Output: "John"</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">age</span><span class="p">);</span> <span class="c1">// Output: 25</span>
+</code></pre></div></div>
+
+<p>Here, we use array destructuring syntax to extract the <code class="language-plaintext highlighter-rouge">name</code> and <code class="language-plaintext highlighter-rouge">age</code> from the <code class="language-plaintext highlighter-rouge">person</code> tuple.
+<br /></p>
+
+<h3 id="6-readonly-tuples">6. <strong>Readonly Tuples</strong></h3>
+
+<p>If you want to prevent modification of a tuple’s elements after its creation, you can use the <code class="language-plaintext highlighter-rouge">readonly</code> modifier to create a <strong>readonly tuple</strong>. This ensures that once the tuple is created, its values cannot be changed.</p>
+
+<p>Example:</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">person</span><span class="p">:</span> <span class="k">readonly</span> <span class="p">[</span><span class="kr">string</span><span class="p">,</span> <span class="kr">number</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="dl">"</span><span class="s2">John</span><span class="dl">"</span><span class="p">,</span> <span class="mi">25</span><span class="p">];</span>
+
+<span class="nx">person</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Jane</span><span class="dl">"</span><span class="p">;</span> <span class="c1">// Error: Index signature in type 'readonly [string, number]' only permits reading.</span>
+</code></pre></div></div>
+
+<p>In this example, <code class="language-plaintext highlighter-rouge">person</code> is a readonly tuple, so trying to modify its elements will result in an error.
+<br /></p>
+
+<h3 id="7-using-tuples-with-functions">7. <strong>Using Tuples with Functions</strong></h3>
+
+<p>You can also use tuples as function return types or arguments. This is useful when a function returns multiple values of different types.</p>
+
+<p>Example:</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">getUserInfo</span><span class="p">():</span> <span class="p">[</span><span class="kr">string</span><span class="p">,</span> <span class="kr">number</span><span class="p">]</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">[</span><span class="dl">"</span><span class="s2">John</span><span class="dl">"</span><span class="p">,</span> <span class="mi">25</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="kd">let</span> <span class="p">[</span><span class="nx">name</span><span class="p">,</span> <span class="nx">age</span><span class="p">]</span> <span class="o">=</span> <span class="nx">getUserInfo</span><span class="p">();</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span> <span class="c1">// Output: "John"</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">age</span><span class="p">);</span> <span class="c1">// Output: 25</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<h3 id="8-differences-between-arrays-and-tuples">8. <strong>Differences Between Arrays and Tuples</strong></h3>
+
+<p>While both arrays and tuples can store multiple values, they differ in the following key ways:</p>
+
+<ul>
+  <li><strong>Arrays</strong> are homogeneous collections, meaning all elements are of the same type (e.g., an array of numbers, an array of strings).</li>
+  <li><strong>Tuples</strong> are heterogeneous collections, meaning the elements can be of different types, and the types are fixed and predefined.</li>
+</ul>
+
+<h4 id="example-of-an-array">Example of an Array:</h4>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">numbers</span><span class="p">:</span> <span class="kr">number</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">];</span> <span class="c1">// All elements are of type 'number'</span>
+</code></pre></div></div>
+
+<h4 id="example-of-a-tuple">Example of a Tuple:</h4>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">user</span><span class="p">:</span> <span class="p">[</span><span class="kr">string</span><span class="p">,</span> <span class="kr">number</span><span class="p">,</span> <span class="nx">boolean</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="dl">"</span><span class="s2">Alice</span><span class="dl">"</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="kc">true</span><span class="p">];</span> <span class="c1">// Different types</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<h3 id="conclusion"><strong>Conclusion</strong></h3>
+
+<ul>
+  <li><strong>Tuples</strong> are a special type of array that allows you to store values of different types in a fixed-length collection. Tuples are useful when you want to represent heterogeneous data in a fixed order.</li>
+  <li>Both <strong>arrays</strong> and <strong>tuples</strong> are essential for organizing collections of values, with arrays offering flexibility for homogeneous collections and tuples offering structure and type safety for heterogeneous collections.</li>
+</ul>
+
+<p>By using arrays and tuples effectively, you can write more robust, maintainable, and type-safe code in TypeScript.</p>
+
+  </div>
+
+  
+  <div style="margin-top: 20px;">
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = 'https://anusree6154s.github.io/documentation/tuples';
+      this.page.identifier = 'https://anusree6154s.github.io/documentation/tuples';
+    };
+
+    (function() {
+      var d = document, s = d.createElement('script');
+
+      s.src = 'https://anusree-anilkumar-blog.disqus.com/embed.js';
+
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript><a class="u-url" href="/documentation/tuples" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/documentation/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Blog &amp; Docs</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Anusree Anilkumar</li><li><a class="u-email" href="mailto:anilkumaranusree113@gmail.com">anilkumaranusree113@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/Anusree6154s"><svg class="svg-icon"><use xlink:href="/documentation/assets/minima-social-icons.svg#github"></use></svg> <span class="username">Anusree6154s</span></a></li><li><a href="https://www.linkedin.com/in/anusreeanilkumar1"><svg class="svg-icon"><use xlink:href="/documentation/assets/minima-social-icons.svg#linkedin"></use></svg> <span class="username">anusreeanilkumar1</span></a></li><li><a href="https://www.twitter.com/anu6154s"><svg class="svg-icon"><use xlink:href="/documentation/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">anu6154s</span></a></li><li><a href="/documentation/feed.xml"><svg class="svg-icon"><use xlink:href="/documentation/assets/minima-social-icons.svg#rss"></use></svg> <span>rss</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>This site is my personal documentation, made public for anyone who might find my code scribbles useful! ❤️</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

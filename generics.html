@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Generics Examples | Blog &amp; Docs</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="Generics Examples" />
+<meta name="author" content="Anusree Anilkumar" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="1. Generic Interfaces A generic interface allows you to define type-safe interfaces that work with various types. Example with Object Structures: interface Pair&lt;K, V&gt; { key: K; value: V; } const numberPair: Pair&lt;string, number&gt; = { key: &quot;age&quot;, value: 30, }; console.log(numberPair.key); // Output: age console.log(numberPair.value); // Output: 30 Example with Function Types: interface GenericFunction&lt;T&gt; { (arg: T): T; } const stringFunction: GenericFunction&lt;string&gt; = (arg) =&gt; arg.toUpperCase(); console.log(stringFunction(&quot;hello&quot;)); // Output: HELLO 2. Generic Constraints with keyof The keyof keyword allows you to constrain a generic to the keys of an object. Example: function getProperty&lt;T, K extends keyof T&gt;(obj: T, key: K): T[K] { return obj[key]; } const person = { name: &quot;Alice&quot;, age: 30 }; console.log(getProperty(person, &quot;name&quot;)); // Output: Alice console.log(getProperty(person, &quot;age&quot;)); // Output: 30 // Error: Argument of type &#39;&quot;address&quot;&#39; is not assignable to parameter of type &#39;keyof T&#39; // console.log(getProperty(person, &quot;address&quot;)); Here, K is constrained to be a key of the type T. 3. Generics with Default Types You can provide default types for generics to make them optional when the type isn’t explicitly specified. Example: class BoxWithDefault&lt;T = string&gt; { value: T; constructor(value: T) { this.value = value; } getValue(): T { return this.value; } } const defaultBox = new BoxWithDefault(&quot;Default Value&quot;); console.log(defaultBox.getValue()); // Output: Default Value const numberBox = new BoxWithDefault&lt;number&gt;(42); console.log(numberBox.getValue()); // Output: 42 4. Benefits of Generics Type Safety: Generics enforce type constraints, reducing runtime errors caused by incorrect types. Reusability: Create reusable components that work across various data types. Flexibility: Allow defining types dynamically while maintaining strong typing. Readability: Simplify complex types and make the intent of the code clear." />
+<meta property="og:description" content="1. Generic Interfaces A generic interface allows you to define type-safe interfaces that work with various types. Example with Object Structures: interface Pair&lt;K, V&gt; { key: K; value: V; } const numberPair: Pair&lt;string, number&gt; = { key: &quot;age&quot;, value: 30, }; console.log(numberPair.key); // Output: age console.log(numberPair.value); // Output: 30 Example with Function Types: interface GenericFunction&lt;T&gt; { (arg: T): T; } const stringFunction: GenericFunction&lt;string&gt; = (arg) =&gt; arg.toUpperCase(); console.log(stringFunction(&quot;hello&quot;)); // Output: HELLO 2. Generic Constraints with keyof The keyof keyword allows you to constrain a generic to the keys of an object. Example: function getProperty&lt;T, K extends keyof T&gt;(obj: T, key: K): T[K] { return obj[key]; } const person = { name: &quot;Alice&quot;, age: 30 }; console.log(getProperty(person, &quot;name&quot;)); // Output: Alice console.log(getProperty(person, &quot;age&quot;)); // Output: 30 // Error: Argument of type &#39;&quot;address&quot;&#39; is not assignable to parameter of type &#39;keyof T&#39; // console.log(getProperty(person, &quot;address&quot;)); Here, K is constrained to be a key of the type T. 3. Generics with Default Types You can provide default types for generics to make them optional when the type isn’t explicitly specified. Example: class BoxWithDefault&lt;T = string&gt; { value: T; constructor(value: T) { this.value = value; } getValue(): T { return this.value; } } const defaultBox = new BoxWithDefault(&quot;Default Value&quot;); console.log(defaultBox.getValue()); // Output: Default Value const numberBox = new BoxWithDefault&lt;number&gt;(42); console.log(numberBox.getValue()); // Output: 42 4. Benefits of Generics Type Safety: Generics enforce type constraints, reducing runtime errors caused by incorrect types. Reusability: Create reusable components that work across various data types. Flexibility: Allow defining types dynamically while maintaining strong typing. Readability: Simplify complex types and make the intent of the code clear." />
+<link rel="canonical" href="https://anusree6154s.github.io/documentation/generics" />
+<meta property="og:url" content="https://anusree6154s.github.io/documentation/generics" />
+<meta property="og:site_name" content="Blog &amp; Docs" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-01-19T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Generics Examples" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Anusree Anilkumar"},"dateModified":"2025-01-19T00:00:00+00:00","datePublished":"2025-01-19T00:00:00+00:00","description":"1. Generic Interfaces A generic interface allows you to define type-safe interfaces that work with various types. Example with Object Structures: interface Pair&lt;K, V&gt; { key: K; value: V; } const numberPair: Pair&lt;string, number&gt; = { key: &quot;age&quot;, value: 30, }; console.log(numberPair.key); // Output: age console.log(numberPair.value); // Output: 30 Example with Function Types: interface GenericFunction&lt;T&gt; { (arg: T): T; } const stringFunction: GenericFunction&lt;string&gt; = (arg) =&gt; arg.toUpperCase(); console.log(stringFunction(&quot;hello&quot;)); // Output: HELLO 2. Generic Constraints with keyof The keyof keyword allows you to constrain a generic to the keys of an object. Example: function getProperty&lt;T, K extends keyof T&gt;(obj: T, key: K): T[K] { return obj[key]; } const person = { name: &quot;Alice&quot;, age: 30 }; console.log(getProperty(person, &quot;name&quot;)); // Output: Alice console.log(getProperty(person, &quot;age&quot;)); // Output: 30 // Error: Argument of type &#39;&quot;address&quot;&#39; is not assignable to parameter of type &#39;keyof T&#39; // console.log(getProperty(person, &quot;address&quot;)); Here, K is constrained to be a key of the type T. 3. Generics with Default Types You can provide default types for generics to make them optional when the type isn’t explicitly specified. Example: class BoxWithDefault&lt;T = string&gt; { value: T; constructor(value: T) { this.value = value; } getValue(): T { return this.value; } } const defaultBox = new BoxWithDefault(&quot;Default Value&quot;); console.log(defaultBox.getValue()); // Output: Default Value const numberBox = new BoxWithDefault&lt;number&gt;(42); console.log(numberBox.getValue()); // Output: 42 4. Benefits of Generics Type Safety: Generics enforce type constraints, reducing runtime errors caused by incorrect types. Reusability: Create reusable components that work across various data types. Flexibility: Allow defining types dynamically while maintaining strong typing. Readability: Simplify complex types and make the intent of the code clear.","headline":"Generics Examples","mainEntityOfPage":{"@type":"WebPage","@id":"https://anusree6154s.github.io/documentation/generics"},"url":"https://anusree6154s.github.io/documentation/generics"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/documentation/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://anusree6154s.github.io/documentation/feed.xml" title="Blog &amp; Docs" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/documentation/">Blog &amp; Docs</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/documentation/about">About Me</a><a class="page-link" href="/documentation/table-of-contents">Table of Contents</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  
+  
+  
+  <div class="parent-link">
+    This post is part of <a href="/documentation/typescript-learners-guide">Typescript learners guide</a>.
+  </div>
+  
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Generics Examples</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2025-01-19T00:00:00+00:00" itemprop="datePublished">19 Jan 2025
+      </time></p>
+      <p><span  class="tag-badge">
+            typescript
+        </span><span  class="tag-badge">
+            generics
+        </span></span>
+</p>
+  </header>
+
+  
+
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h3 id="1-generic-interfaces"><strong>1. Generic Interfaces</strong></h3>
+
+<p>A <strong>generic interface</strong> allows you to define type-safe interfaces that work with various types.</p>
+
+<h4 id="example-with-object-structures">Example with Object Structures:</h4>
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">interface</span> <span class="nx">Pair</span><span class="o">&lt;</span><span class="nx">K</span><span class="p">,</span> <span class="nx">V</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="na">key</span><span class="p">:</span> <span class="nx">K</span><span class="p">;</span>
+  <span class="nl">value</span><span class="p">:</span> <span class="nx">V</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">numberPair</span><span class="p">:</span> <span class="nx">Pair</span><span class="o">&lt;</span><span class="kr">string</span><span class="p">,</span> <span class="kr">number</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">key</span><span class="p">:</span> <span class="dl">"</span><span class="s2">age</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">value</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">numberPair</span><span class="p">.</span><span class="nx">key</span><span class="p">);</span> <span class="c1">// Output: age</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">numberPair</span><span class="p">.</span><span class="nx">value</span><span class="p">);</span> <span class="c1">// Output: 30</span>
+</code></pre></div></div>
+
+<h4 id="example-with-function-types">Example with Function Types:</h4>
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">interface</span> <span class="nx">GenericFunction</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="p">(</span><span class="na">arg</span><span class="p">:</span> <span class="nx">T</span><span class="p">):</span> <span class="nx">T</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">stringFunction</span><span class="p">:</span> <span class="nx">GenericFunction</span><span class="o">&lt;</span><span class="kr">string</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">(</span><span class="nx">arg</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">arg</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">();</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">stringFunction</span><span class="p">(</span><span class="dl">"</span><span class="s2">hello</span><span class="dl">"</span><span class="p">));</span> <span class="c1">// Output: HELLO</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<h3 id="2-generic-constraints-with-keyof"><strong>2. Generic Constraints with <code class="language-plaintext highlighter-rouge">keyof</code></strong></h3>
+
+<p>The <code class="language-plaintext highlighter-rouge">keyof</code> keyword allows you to constrain a generic to the keys of an object.</p>
+
+<h4 id="example">Example:</h4>
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">getProperty</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">,</span> <span class="nx">K</span> <span class="kd">extends</span> <span class="kr">keyof</span> <span class="nx">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">obj</span><span class="p">:</span> <span class="nx">T</span><span class="p">,</span> <span class="nx">key</span><span class="p">:</span> <span class="nx">K</span><span class="p">):</span> <span class="nx">T</span><span class="p">[</span><span class="nx">K</span><span class="p">]</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">obj</span><span class="p">[</span><span class="nx">key</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">person</span> <span class="o">=</span> <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Alice</span><span class="dl">"</span><span class="p">,</span> <span class="na">age</span><span class="p">:</span> <span class="mi">30</span> <span class="p">};</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">getProperty</span><span class="p">(</span><span class="nx">person</span><span class="p">,</span> <span class="dl">"</span><span class="s2">name</span><span class="dl">"</span><span class="p">));</span> <span class="c1">// Output: Alice</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">getProperty</span><span class="p">(</span><span class="nx">person</span><span class="p">,</span> <span class="dl">"</span><span class="s2">age</span><span class="dl">"</span><span class="p">));</span>  <span class="c1">// Output: 30</span>
+
+<span class="c1">// Error: Argument of type '"address"' is not assignable to parameter of type 'keyof T'</span>
+<span class="c1">// console.log(getProperty(person, "address"));</span>
+</code></pre></div></div>
+
+<p>Here, <code class="language-plaintext highlighter-rouge">K</code> is constrained to be a key of the type <code class="language-plaintext highlighter-rouge">T</code>.</p>
+
+<p><br /></p>
+
+<h3 id="3-generics-with-default-types"><strong>3. Generics with Default Types</strong></h3>
+
+<p>You can provide <strong>default types</strong> for generics to make them optional when the type isn’t explicitly specified.</p>
+
+<h4 id="example-1">Example:</h4>
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">BoxWithDefault</span><span class="o">&lt;</span><span class="nx">T</span> <span class="o">=</span> <span class="kr">string</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="na">value</span><span class="p">:</span> <span class="nx">T</span><span class="p">;</span>
+  <span class="kd">constructor</span><span class="p">(</span><span class="na">value</span><span class="p">:</span> <span class="nx">T</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="nx">getValue</span><span class="p">():</span> <span class="nx">T</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">defaultBox</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BoxWithDefault</span><span class="p">(</span><span class="dl">"</span><span class="s2">Default Value</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">defaultBox</span><span class="p">.</span><span class="nx">getValue</span><span class="p">());</span> <span class="c1">// Output: Default Value</span>
+
+<span class="kd">const</span> <span class="nx">numberBox</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BoxWithDefault</span><span class="o">&lt;</span><span class="kr">number</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">42</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">numberBox</span><span class="p">.</span><span class="nx">getValue</span><span class="p">());</span> <span class="c1">// Output: 42</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<h3 id="4-benefits-of-generics"><strong>4. Benefits of Generics</strong></h3>
+
+<ol>
+  <li><strong>Type Safety:</strong> Generics enforce type constraints, reducing runtime errors caused by incorrect types.</li>
+  <li><strong>Reusability:</strong> Create reusable components that work across various data types.</li>
+  <li><strong>Flexibility:</strong> Allow defining types dynamically while maintaining strong typing.</li>
+  <li><strong>Readability:</strong> Simplify complex types and make the intent of the code clear.</li>
+</ol>
+
+
+  </div>
+
+  
+  <div style="margin-top: 20px;">
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = 'https://anusree6154s.github.io/documentation/generics';
+      this.page.identifier = 'https://anusree6154s.github.io/documentation/generics';
+    };
+
+    (function() {
+      var d = document, s = d.createElement('script');
+
+      s.src = 'https://anusree-anilkumar-blog.disqus.com/embed.js';
+
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript><a class="u-url" href="/documentation/generics" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/documentation/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Blog &amp; Docs</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Anusree Anilkumar</li><li><a class="u-email" href="mailto:anilkumaranusree113@gmail.com">anilkumaranusree113@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/Anusree6154s"><svg class="svg-icon"><use xlink:href="/documentation/assets/minima-social-icons.svg#github"></use></svg> <span class="username">Anusree6154s</span></a></li><li><a href="https://www.linkedin.com/in/anusreeanilkumar1"><svg class="svg-icon"><use xlink:href="/documentation/assets/minima-social-icons.svg#linkedin"></use></svg> <span class="username">anusreeanilkumar1</span></a></li><li><a href="https://www.twitter.com/anu6154s"><svg class="svg-icon"><use xlink:href="/documentation/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">anu6154s</span></a></li><li><a href="/documentation/feed.xml"><svg class="svg-icon"><use xlink:href="/documentation/assets/minima-social-icons.svg#rss"></use></svg> <span>rss</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>This site is my personal documentation, made public for anyone who might find my code scribbles useful! ❤️</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

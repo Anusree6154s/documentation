@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>More about Decorators in Typescript | Blog &amp; Docs</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="More about Decorators in Typescript" />
+<meta name="author" content="Anusree Anilkumar" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Decorators in TypeScript Decorators are a powerful feature in TypeScript that allows you to annotate and modify classes, methods, properties, and parameters at runtime. They provide a clean way to apply reusable behaviors or metadata to your code. Decorators are particularly useful in frameworks like Angular, where they are extensively used for dependency injection and metadata annotation. 1. What Are Decorators? A decorator is a special kind of declaration attached to a class, method, accessor, property, or parameter. Decorators are defined using the @ symbol followed by a function. Decorator Syntax @decorator class MyClass {} 2. Enabling Decorators Decorators are an experimental feature in TypeScript and must be explicitly enabled in the tsconfig.json: { &quot;experimentalDecorators&quot;: true } 3. Types of Decorators TypeScript provides several types of decorators: Decorator Type Targeted Element Class Decorator Classes Method Decorator Methods Accessor Decorator Getters and setters Property Decorator Properties Parameter Decorator Function or constructor parameters 4. Class Decorators A class decorator applies to a class declaration. It can modify or replace the class definition. Example 1: Logging Class Creation function logClass(target: Function) { console.log(`${target.name} class is being created!`); } @logClass class MyClass {} const instance = new MyClass(); // Logs: MyClass class is being created! Example 2: Adding Static Properties function addTimestamp(target: Function) { target.prototype.timestamp = Date.now(); } @addTimestamp class MyClass {} const instance = new MyClass(); console.log((instance as any).timestamp); // Logs the timestamp 5. Method Decorators A method decorator is applied to a method of a class. It can modify the method or add functionality. Example: Logging Method Calls function logMethod( target: any, propertyKey: string, descriptor: PropertyDescriptor ) { const originalMethod = descriptor.value; descriptor.value = function (...args: any[]) { console.log(`Calling ${propertyKey} with arguments:`, args); return originalMethod.apply(this, args); }; } class MyClass { @logMethod sayHello(name: string) { console.log(`Hello, ${name}!`); } } const instance = new MyClass(); instance.sayHello(&quot;Alice&quot;); // Logs: // Calling sayHello with arguments: [ &#39;Alice&#39; ] // Hello, Alice! 6. Property Decorators A property decorator applies to class properties. It allows you to attach metadata or modify how the property is used. Example: Marking Required Properties function required(target: any, propertyKey: string) { console.log(`Property &quot;${propertyKey}&quot; is required.`); } class MyClass { @required name!: string; } // Logs: Property &quot;name&quot; is required. 7. Accessor Decorators Accessor decorators are used on getters and setters of properties. Example: Validating Property Access function logAccess( target: any, propertyKey: string, descriptor: PropertyDescriptor ) { const originalGet = descriptor.get; descriptor.get = function () { console.log(`Accessing property &quot;${propertyKey}&quot;`); return originalGet?.apply(this); }; } class MyClass { private _value = 42; @logAccess get value() { return this._value; } } const instance = new MyClass(); console.log(instance.value); // Logs: // Accessing property &quot;value&quot; // 42 8. Parameter Decorators A parameter decorator applies to the parameters of a method or constructor. It’s often used for dependency injection or metadata collection. Example: Logging Parameter Metadata function logParameter( target: any, propertyKey: string, parameterIndex: number ) { console.log( `Parameter at index ${parameterIndex} in method &quot;${propertyKey}&quot; is being logged.` ); } class MyClass { greet(@logParameter name: string) { console.log(`Hello, ${name}`); } } const instance = new MyClass(); instance.greet(&quot;Alice&quot;); // Logs: // Parameter at index 0 in method &quot;greet&quot; is being logged. // Hello, Alice 9. Composing Multiple Decorators You can stack multiple decorators on a single element. Decorators are applied in reverse order (bottom to top). function first(target: any, propertyKey: string) { console.log(&quot;First decorator&quot;); } function second(target: any, propertyKey: string) { console.log(&quot;Second decorator&quot;); } class MyClass { @first @second method() {} } // Logs: // Second decorator // First decorator 10. Practical Use Cases for Decorators Dependency Injection: Used in frameworks like Angular for injecting dependencies into classes. Logging: Automatically log class instantiation, method calls, or property accesses. Validation: Mark required properties or validate method arguments. Metadata: Attach additional metadata to classes or members, useful for libraries like reflect-metadata. Summary of All Topics Feature Description Example Class Decorator Modifies or replaces class definitions. @logClass Method Decorator Enhances or overrides method behavior. @logMethod Property Decorator Adds metadata or modifies properties. @required Accessor Decorator Applies to getters or setters to log or modify access behavior. @logAccess Parameter Decorator Logs or injects data into parameters. @logParameter Indexed Access Types Retrieves the type of a property dynamically. type Name = Person[&quot;name&quot;]; Template Literal Types Constructs string types dynamically. type API = \${&quot;GET&quot; | &quot;POST&quot;} /${&quot;users&quot;}\ Utility Types Built-in types for manipulating types (Partial, Readonly, Pick, Omit). type PartialPerson = Partial&lt;Person&gt;; Conditional Types Constructs types conditionally based on logic (extends ? :). type IsString&lt;T&gt; = T extends string ? true : false; Mapped Types Creates new types by transforming existing ones (readonly, optional). type Readonly&lt;T&gt; = { readonly [K in keyof T]: T[K] }; Keyof and Lookup Types Dynamically access object keys and properties. type Key = keyof Person; Generics Enables reusable, flexible code for any type. function identity&lt;T&gt;(arg: T): T; Modules Allows splitting code into separate files for better organization (import/export). import { greet } from &quot;./file&quot;;" />
+<meta property="og:description" content="Decorators in TypeScript Decorators are a powerful feature in TypeScript that allows you to annotate and modify classes, methods, properties, and parameters at runtime. They provide a clean way to apply reusable behaviors or metadata to your code. Decorators are particularly useful in frameworks like Angular, where they are extensively used for dependency injection and metadata annotation. 1. What Are Decorators? A decorator is a special kind of declaration attached to a class, method, accessor, property, or parameter. Decorators are defined using the @ symbol followed by a function. Decorator Syntax @decorator class MyClass {} 2. Enabling Decorators Decorators are an experimental feature in TypeScript and must be explicitly enabled in the tsconfig.json: { &quot;experimentalDecorators&quot;: true } 3. Types of Decorators TypeScript provides several types of decorators: Decorator Type Targeted Element Class Decorator Classes Method Decorator Methods Accessor Decorator Getters and setters Property Decorator Properties Parameter Decorator Function or constructor parameters 4. Class Decorators A class decorator applies to a class declaration. It can modify or replace the class definition. Example 1: Logging Class Creation function logClass(target: Function) { console.log(`${target.name} class is being created!`); } @logClass class MyClass {} const instance = new MyClass(); // Logs: MyClass class is being created! Example 2: Adding Static Properties function addTimestamp(target: Function) { target.prototype.timestamp = Date.now(); } @addTimestamp class MyClass {} const instance = new MyClass(); console.log((instance as any).timestamp); // Logs the timestamp 5. Method Decorators A method decorator is applied to a method of a class. It can modify the method or add functionality. Example: Logging Method Calls function logMethod( target: any, propertyKey: string, descriptor: PropertyDescriptor ) { const originalMethod = descriptor.value; descriptor.value = function (...args: any[]) { console.log(`Calling ${propertyKey} with arguments:`, args); return originalMethod.apply(this, args); }; } class MyClass { @logMethod sayHello(name: string) { console.log(`Hello, ${name}!`); } } const instance = new MyClass(); instance.sayHello(&quot;Alice&quot;); // Logs: // Calling sayHello with arguments: [ &#39;Alice&#39; ] // Hello, Alice! 6. Property Decorators A property decorator applies to class properties. It allows you to attach metadata or modify how the property is used. Example: Marking Required Properties function required(target: any, propertyKey: string) { console.log(`Property &quot;${propertyKey}&quot; is required.`); } class MyClass { @required name!: string; } // Logs: Property &quot;name&quot; is required. 7. Accessor Decorators Accessor decorators are used on getters and setters of properties. Example: Validating Property Access function logAccess( target: any, propertyKey: string, descriptor: PropertyDescriptor ) { const originalGet = descriptor.get; descriptor.get = function () { console.log(`Accessing property &quot;${propertyKey}&quot;`); return originalGet?.apply(this); }; } class MyClass { private _value = 42; @logAccess get value() { return this._value; } } const instance = new MyClass(); console.log(instance.value); // Logs: // Accessing property &quot;value&quot; // 42 8. Parameter Decorators A parameter decorator applies to the parameters of a method or constructor. It’s often used for dependency injection or metadata collection. Example: Logging Parameter Metadata function logParameter( target: any, propertyKey: string, parameterIndex: number ) { console.log( `Parameter at index ${parameterIndex} in method &quot;${propertyKey}&quot; is being logged.` ); } class MyClass { greet(@logParameter name: string) { console.log(`Hello, ${name}`); } } const instance = new MyClass(); instance.greet(&quot;Alice&quot;); // Logs: // Parameter at index 0 in method &quot;greet&quot; is being logged. // Hello, Alice 9. Composing Multiple Decorators You can stack multiple decorators on a single element. Decorators are applied in reverse order (bottom to top). function first(target: any, propertyKey: string) { console.log(&quot;First decorator&quot;); } function second(target: any, propertyKey: string) { console.log(&quot;Second decorator&quot;); } class MyClass { @first @second method() {} } // Logs: // Second decorator // First decorator 10. Practical Use Cases for Decorators Dependency Injection: Used in frameworks like Angular for injecting dependencies into classes. Logging: Automatically log class instantiation, method calls, or property accesses. Validation: Mark required properties or validate method arguments. Metadata: Attach additional metadata to classes or members, useful for libraries like reflect-metadata. Summary of All Topics Feature Description Example Class Decorator Modifies or replaces class definitions. @logClass Method Decorator Enhances or overrides method behavior. @logMethod Property Decorator Adds metadata or modifies properties. @required Accessor Decorator Applies to getters or setters to log or modify access behavior. @logAccess Parameter Decorator Logs or injects data into parameters. @logParameter Indexed Access Types Retrieves the type of a property dynamically. type Name = Person[&quot;name&quot;]; Template Literal Types Constructs string types dynamically. type API = \${&quot;GET&quot; | &quot;POST&quot;} /${&quot;users&quot;}\ Utility Types Built-in types for manipulating types (Partial, Readonly, Pick, Omit). type PartialPerson = Partial&lt;Person&gt;; Conditional Types Constructs types conditionally based on logic (extends ? :). type IsString&lt;T&gt; = T extends string ? true : false; Mapped Types Creates new types by transforming existing ones (readonly, optional). type Readonly&lt;T&gt; = { readonly [K in keyof T]: T[K] }; Keyof and Lookup Types Dynamically access object keys and properties. type Key = keyof Person; Generics Enables reusable, flexible code for any type. function identity&lt;T&gt;(arg: T): T; Modules Allows splitting code into separate files for better organization (import/export). import { greet } from &quot;./file&quot;;" />
+<link rel="canonical" href="https://anusree6154s.github.io/documentation/decorators" />
+<meta property="og:url" content="https://anusree6154s.github.io/documentation/decorators" />
+<meta property="og:site_name" content="Blog &amp; Docs" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-01-19T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="More about Decorators in Typescript" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Anusree Anilkumar"},"dateModified":"2025-01-19T00:00:00+00:00","datePublished":"2025-01-19T00:00:00+00:00","description":"Decorators in TypeScript Decorators are a powerful feature in TypeScript that allows you to annotate and modify classes, methods, properties, and parameters at runtime. They provide a clean way to apply reusable behaviors or metadata to your code. Decorators are particularly useful in frameworks like Angular, where they are extensively used for dependency injection and metadata annotation. 1. What Are Decorators? A decorator is a special kind of declaration attached to a class, method, accessor, property, or parameter. Decorators are defined using the @ symbol followed by a function. Decorator Syntax @decorator class MyClass {} 2. Enabling Decorators Decorators are an experimental feature in TypeScript and must be explicitly enabled in the tsconfig.json: { &quot;experimentalDecorators&quot;: true } 3. Types of Decorators TypeScript provides several types of decorators: Decorator Type Targeted Element Class Decorator Classes Method Decorator Methods Accessor Decorator Getters and setters Property Decorator Properties Parameter Decorator Function or constructor parameters 4. Class Decorators A class decorator applies to a class declaration. It can modify or replace the class definition. Example 1: Logging Class Creation function logClass(target: Function) { console.log(`${target.name} class is being created!`); } @logClass class MyClass {} const instance = new MyClass(); // Logs: MyClass class is being created! Example 2: Adding Static Properties function addTimestamp(target: Function) { target.prototype.timestamp = Date.now(); } @addTimestamp class MyClass {} const instance = new MyClass(); console.log((instance as any).timestamp); // Logs the timestamp 5. Method Decorators A method decorator is applied to a method of a class. It can modify the method or add functionality. Example: Logging Method Calls function logMethod( target: any, propertyKey: string, descriptor: PropertyDescriptor ) { const originalMethod = descriptor.value; descriptor.value = function (...args: any[]) { console.log(`Calling ${propertyKey} with arguments:`, args); return originalMethod.apply(this, args); }; } class MyClass { @logMethod sayHello(name: string) { console.log(`Hello, ${name}!`); } } const instance = new MyClass(); instance.sayHello(&quot;Alice&quot;); // Logs: // Calling sayHello with arguments: [ &#39;Alice&#39; ] // Hello, Alice! 6. Property Decorators A property decorator applies to class properties. It allows you to attach metadata or modify how the property is used. Example: Marking Required Properties function required(target: any, propertyKey: string) { console.log(`Property &quot;${propertyKey}&quot; is required.`); } class MyClass { @required name!: string; } // Logs: Property &quot;name&quot; is required. 7. Accessor Decorators Accessor decorators are used on getters and setters of properties. Example: Validating Property Access function logAccess( target: any, propertyKey: string, descriptor: PropertyDescriptor ) { const originalGet = descriptor.get; descriptor.get = function () { console.log(`Accessing property &quot;${propertyKey}&quot;`); return originalGet?.apply(this); }; } class MyClass { private _value = 42; @logAccess get value() { return this._value; } } const instance = new MyClass(); console.log(instance.value); // Logs: // Accessing property &quot;value&quot; // 42 8. Parameter Decorators A parameter decorator applies to the parameters of a method or constructor. It’s often used for dependency injection or metadata collection. Example: Logging Parameter Metadata function logParameter( target: any, propertyKey: string, parameterIndex: number ) { console.log( `Parameter at index ${parameterIndex} in method &quot;${propertyKey}&quot; is being logged.` ); } class MyClass { greet(@logParameter name: string) { console.log(`Hello, ${name}`); } } const instance = new MyClass(); instance.greet(&quot;Alice&quot;); // Logs: // Parameter at index 0 in method &quot;greet&quot; is being logged. // Hello, Alice 9. Composing Multiple Decorators You can stack multiple decorators on a single element. Decorators are applied in reverse order (bottom to top). function first(target: any, propertyKey: string) { console.log(&quot;First decorator&quot;); } function second(target: any, propertyKey: string) { console.log(&quot;Second decorator&quot;); } class MyClass { @first @second method() {} } // Logs: // Second decorator // First decorator 10. Practical Use Cases for Decorators Dependency Injection: Used in frameworks like Angular for injecting dependencies into classes. Logging: Automatically log class instantiation, method calls, or property accesses. Validation: Mark required properties or validate method arguments. Metadata: Attach additional metadata to classes or members, useful for libraries like reflect-metadata. Summary of All Topics Feature Description Example Class Decorator Modifies or replaces class definitions. @logClass Method Decorator Enhances or overrides method behavior. @logMethod Property Decorator Adds metadata or modifies properties. @required Accessor Decorator Applies to getters or setters to log or modify access behavior. @logAccess Parameter Decorator Logs or injects data into parameters. @logParameter Indexed Access Types Retrieves the type of a property dynamically. type Name = Person[&quot;name&quot;]; Template Literal Types Constructs string types dynamically. type API = \\${&quot;GET&quot; | &quot;POST&quot;} /${&quot;users&quot;}\\ Utility Types Built-in types for manipulating types (Partial, Readonly, Pick, Omit). type PartialPerson = Partial&lt;Person&gt;; Conditional Types Constructs types conditionally based on logic (extends ? :). type IsString&lt;T&gt; = T extends string ? true : false; Mapped Types Creates new types by transforming existing ones (readonly, optional). type Readonly&lt;T&gt; = { readonly [K in keyof T]: T[K] }; Keyof and Lookup Types Dynamically access object keys and properties. type Key = keyof Person; Generics Enables reusable, flexible code for any type. function identity&lt;T&gt;(arg: T): T; Modules Allows splitting code into separate files for better organization (import/export). import { greet } from &quot;./file&quot;;","headline":"More about Decorators in Typescript","mainEntityOfPage":{"@type":"WebPage","@id":"https://anusree6154s.github.io/documentation/decorators"},"url":"https://anusree6154s.github.io/documentation/decorators"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/documentation/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://anusree6154s.github.io/documentation/feed.xml" title="Blog &amp; Docs" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/documentation/">Blog &amp; Docs</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/documentation/about">About Me</a><a class="page-link" href="/documentation/table-of-contents">Table of Contents</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  
+  
+  
+  <div class="parent-link">
+    This post is part of <a href="/documentation/typescript-learners-guide">Typescript learners guide</a>.
+  </div>
+  
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">More about Decorators in Typescript</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2025-01-19T00:00:00+00:00" itemprop="datePublished">19 Jan 2025
+      </time></p>
+      <p><span  class="tag-badge">
+            typescript
+        </span><span  class="tag-badge">
+            decorators
+        </span></span>
+</p>
+  </header>
+
+  
+
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h3 id="decorators-in-typescript"><strong>Decorators in TypeScript</strong></h3>
+
+<p>Decorators are a powerful feature in TypeScript that allows you to <strong>annotate and modify classes, methods, properties, and parameters</strong> at runtime. They provide a clean way to apply reusable behaviors or metadata to your code. Decorators are particularly useful in frameworks like Angular, where they are extensively used for dependency injection and metadata annotation.</p>
+
+<p><br /></p>
+
+<h3 id="1-what-are-decorators"><strong>1. What Are Decorators?</strong></h3>
+
+<p>A <strong>decorator</strong> is a special kind of declaration attached to a class, method, accessor, property, or parameter. Decorators are defined using the <strong><code class="language-plaintext highlighter-rouge">@</code></strong> symbol followed by a function.</p>
+
+<h4 id="decorator-syntax">Decorator Syntax</h4>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">@</span><span class="nd">decorator</span>
+<span class="kd">class</span> <span class="nx">MyClass</span> <span class="p">{}</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h3 id="2-enabling-decorators"><strong>2. Enabling Decorators</strong></h3>
+
+<p>Decorators are an experimental feature in TypeScript and must be explicitly enabled in the <code class="language-plaintext highlighter-rouge">tsconfig.json</code>:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"experimentalDecorators"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p><br /></p>
+
+<h3 id="3-types-of-decorators"><strong>3. Types of Decorators</strong></h3>
+
+<p>TypeScript provides several types of decorators:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Decorator Type</th>
+      <th>Targeted Element</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Class Decorator</strong></td>
+      <td>Classes</td>
+    </tr>
+    <tr>
+      <td><strong>Method Decorator</strong></td>
+      <td>Methods</td>
+    </tr>
+    <tr>
+      <td><strong>Accessor Decorator</strong></td>
+      <td>Getters and setters</td>
+    </tr>
+    <tr>
+      <td><strong>Property Decorator</strong></td>
+      <td>Properties</td>
+    </tr>
+    <tr>
+      <td><strong>Parameter Decorator</strong></td>
+      <td>Function or constructor parameters</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><br /></p>
+
+<h3 id="4-class-decorators"><strong>4. Class Decorators</strong></h3>
+
+<p>A class decorator applies to a class declaration. It can modify or replace the class definition.</p>
+
+<h4 id="example-1-logging-class-creation">Example 1: Logging Class Creation</h4>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">logClass</span><span class="p">(</span><span class="nx">target</span><span class="p">:</span> <span class="nb">Function</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">target</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="s2"> class is being created!`</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="p">@</span><span class="nd">logClass</span>
+<span class="kd">class</span> <span class="nx">MyClass</span> <span class="p">{}</span>
+
+<span class="kd">const</span> <span class="nx">instance</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyClass</span><span class="p">();</span> <span class="c1">// Logs: MyClass class is being created!</span>
+</code></pre></div></div>
+
+<h4 id="example-2-adding-static-properties">Example 2: Adding Static Properties</h4>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">addTimestamp</span><span class="p">(</span><span class="nx">target</span><span class="p">:</span> <span class="nb">Function</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">target</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">timestamp</span> <span class="o">=</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="p">@</span><span class="nd">addTimestamp</span>
+<span class="kd">class</span> <span class="nx">MyClass</span> <span class="p">{}</span>
+
+<span class="kd">const</span> <span class="nx">instance</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyClass</span><span class="p">();</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">((</span><span class="nx">instance</span> <span class="k">as</span> <span class="kr">any</span><span class="p">).</span><span class="nx">timestamp</span><span class="p">);</span> <span class="c1">// Logs the timestamp</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h3 id="5-method-decorators"><strong>5. Method Decorators</strong></h3>
+
+<p>A method decorator is applied to a method of a class. It can modify the method or add functionality.</p>
+
+<h4 id="example-logging-method-calls">Example: Logging Method Calls</h4>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">logMethod</span><span class="p">(</span>
+  <span class="nx">target</span><span class="p">:</span> <span class="kr">any</span><span class="p">,</span>
+  <span class="nx">propertyKey</span><span class="p">:</span> <span class="kr">string</span><span class="p">,</span>
+  <span class="nx">descriptor</span><span class="p">:</span> <span class="nx">PropertyDescriptor</span>
+<span class="p">)</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">originalMethod</span> <span class="o">=</span> <span class="nx">descriptor</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
+  <span class="nx">descriptor</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(...</span><span class="nx">args</span><span class="p">:</span> <span class="kr">any</span><span class="p">[])</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`Calling </span><span class="p">${</span><span class="nx">propertyKey</span><span class="p">}</span><span class="s2"> with arguments:`</span><span class="p">,</span> <span class="nx">args</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">originalMethod</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">args</span><span class="p">);</span>
+  <span class="p">};</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nx">MyClass</span> <span class="p">{</span>
+  <span class="p">@</span><span class="nd">logMethod</span>
+  <span class="nx">sayHello</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`Hello, </span><span class="p">${</span><span class="nx">name</span><span class="p">}</span><span class="s2">!`</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">instance</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyClass</span><span class="p">();</span>
+<span class="nx">instance</span><span class="p">.</span><span class="nx">sayHello</span><span class="p">(</span><span class="dl">"</span><span class="s2">Alice</span><span class="dl">"</span><span class="p">);</span>
+<span class="c1">// Logs:</span>
+<span class="c1">// Calling sayHello with arguments: [ 'Alice' ]</span>
+<span class="c1">// Hello, Alice!</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h3 id="6-property-decorators"><strong>6. Property Decorators</strong></h3>
+
+<p>A property decorator applies to class properties. It allows you to attach metadata or modify how the property is used.</p>
+
+<h4 id="example-marking-required-properties">Example: Marking Required Properties</h4>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">required</span><span class="p">(</span><span class="nx">target</span><span class="p">:</span> <span class="kr">any</span><span class="p">,</span> <span class="nx">propertyKey</span><span class="p">:</span> <span class="kr">string</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`Property "</span><span class="p">${</span><span class="nx">propertyKey</span><span class="p">}</span><span class="s2">" is required.`</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nx">MyClass</span> <span class="p">{</span>
+  <span class="p">@</span><span class="nd">required</span>
+  <span class="nx">name</span><span class="o">!</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">// Logs: Property "name" is required.</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h3 id="7-accessor-decorators"><strong>7. Accessor Decorators</strong></h3>
+
+<p>Accessor decorators are used on getters and setters of properties.</p>
+
+<h4 id="example-validating-property-access">Example: Validating Property Access</h4>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">logAccess</span><span class="p">(</span>
+  <span class="nx">target</span><span class="p">:</span> <span class="kr">any</span><span class="p">,</span>
+  <span class="nx">propertyKey</span><span class="p">:</span> <span class="kr">string</span><span class="p">,</span>
+  <span class="nx">descriptor</span><span class="p">:</span> <span class="nx">PropertyDescriptor</span>
+<span class="p">)</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">originalGet</span> <span class="o">=</span> <span class="nx">descriptor</span><span class="p">.</span><span class="kd">get</span><span class="p">;</span>
+  <span class="nx">descriptor</span><span class="p">.</span><span class="kd">get</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`Accessing property "</span><span class="p">${</span><span class="nx">propertyKey</span><span class="p">}</span><span class="s2">"`</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">originalGet</span><span class="p">?.</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+  <span class="p">};</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nx">MyClass</span> <span class="p">{</span>
+  <span class="k">private</span> <span class="nx">_value</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
+
+  <span class="p">@</span><span class="nd">logAccess</span>
+  <span class="kd">get</span> <span class="nx">value</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">_value</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">instance</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyClass</span><span class="p">();</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">instance</span><span class="p">.</span><span class="nx">value</span><span class="p">);</span>
+<span class="c1">// Logs:</span>
+<span class="c1">// Accessing property "value"</span>
+<span class="c1">// 42</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h3 id="8-parameter-decorators"><strong>8. Parameter Decorators</strong></h3>
+
+<p>A parameter decorator applies to the parameters of a method or constructor. It’s often used for dependency injection or metadata collection.</p>
+
+<h4 id="example-logging-parameter-metadata">Example: Logging Parameter Metadata</h4>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">logParameter</span><span class="p">(</span>
+  <span class="nx">target</span><span class="p">:</span> <span class="kr">any</span><span class="p">,</span>
+  <span class="nx">propertyKey</span><span class="p">:</span> <span class="kr">string</span><span class="p">,</span>
+  <span class="nx">parameterIndex</span><span class="p">:</span> <span class="kr">number</span>
+<span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span>
+    <span class="s2">`Parameter at index </span><span class="p">${</span><span class="nx">parameterIndex</span><span class="p">}</span><span class="s2"> in method "</span><span class="p">${</span><span class="nx">propertyKey</span><span class="p">}</span><span class="s2">" is being logged.`</span>
+  <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nx">MyClass</span> <span class="p">{</span>
+  <span class="nx">greet</span><span class="p">(@</span><span class="nd">logParameter</span> <span class="nx">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`Hello, </span><span class="p">${</span><span class="nx">name</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">instance</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyClass</span><span class="p">();</span>
+<span class="nx">instance</span><span class="p">.</span><span class="nx">greet</span><span class="p">(</span><span class="dl">"</span><span class="s2">Alice</span><span class="dl">"</span><span class="p">);</span>
+<span class="c1">// Logs:</span>
+<span class="c1">// Parameter at index 0 in method "greet" is being logged.</span>
+<span class="c1">// Hello, Alice</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h3 id="9-composing-multiple-decorators"><strong>9. Composing Multiple Decorators</strong></h3>
+
+<p>You can stack multiple decorators on a single element. Decorators are applied in <strong>reverse order</strong> (bottom to top).</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">first</span><span class="p">(</span><span class="nx">target</span><span class="p">:</span> <span class="kr">any</span><span class="p">,</span> <span class="nx">propertyKey</span><span class="p">:</span> <span class="kr">string</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">First decorator</span><span class="dl">"</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">second</span><span class="p">(</span><span class="nx">target</span><span class="p">:</span> <span class="kr">any</span><span class="p">,</span> <span class="nx">propertyKey</span><span class="p">:</span> <span class="kr">string</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Second decorator</span><span class="dl">"</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nx">MyClass</span> <span class="p">{</span>
+  <span class="p">@</span><span class="nd">first</span>
+  <span class="p">@</span><span class="nd">second</span>
+  <span class="nx">method</span><span class="p">()</span> <span class="p">{}</span>
+<span class="p">}</span>
+<span class="c1">// Logs:</span>
+<span class="c1">// Second decorator</span>
+<span class="c1">// First decorator</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h3 id="10-practical-use-cases-for-decorators"><strong>10. Practical Use Cases for Decorators</strong></h3>
+
+<ul>
+  <li><strong>Dependency Injection</strong>: Used in frameworks like Angular for injecting dependencies into classes.</li>
+  <li><strong>Logging</strong>: Automatically log class instantiation, method calls, or property accesses.</li>
+  <li><strong>Validation</strong>: Mark required properties or validate method arguments.</li>
+  <li><strong>Metadata</strong>: Attach additional metadata to classes or members, useful for libraries like <code class="language-plaintext highlighter-rouge">reflect-metadata</code>.</li>
+</ul>
+
+<h2><br /></h2>
+
+<h3 id="summary-of-all-topics"><strong>Summary of All Topics</strong></h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Feature</th>
+      <th>Description</th>
+      <th>Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Class Decorator</strong></td>
+      <td>Modifies or replaces class definitions.</td>
+      <td><code class="language-plaintext highlighter-rouge">@logClass</code></td>
+    </tr>
+    <tr>
+      <td><strong>Method Decorator</strong></td>
+      <td>Enhances or overrides method behavior.</td>
+      <td><code class="language-plaintext highlighter-rouge">@logMethod</code></td>
+    </tr>
+    <tr>
+      <td><strong>Property Decorator</strong></td>
+      <td>Adds metadata or modifies properties.</td>
+      <td><code class="language-plaintext highlighter-rouge">@required</code></td>
+    </tr>
+    <tr>
+      <td><strong>Accessor Decorator</strong></td>
+      <td>Applies to getters or setters to log or modify access behavior.</td>
+      <td><code class="language-plaintext highlighter-rouge">@logAccess</code></td>
+    </tr>
+    <tr>
+      <td><strong>Parameter Decorator</strong></td>
+      <td>Logs or injects data into parameters.</td>
+      <td><code class="language-plaintext highlighter-rouge">@logParameter</code></td>
+    </tr>
+    <tr>
+      <td><strong>Indexed Access Types</strong></td>
+      <td>Retrieves the type of a property dynamically.</td>
+      <td><code class="language-plaintext highlighter-rouge">type Name = Person["name"];</code></td>
+    </tr>
+    <tr>
+      <td><strong>Template Literal Types</strong></td>
+      <td>Constructs string types dynamically.</td>
+      <td><code class="language-plaintext highlighter-rouge">type API = \${"GET" | "POST"} /${"users"}\</code></td>
+    </tr>
+    <tr>
+      <td><strong>Utility Types</strong></td>
+      <td>Built-in types for manipulating types (<code class="language-plaintext highlighter-rouge">Partial</code>, <code class="language-plaintext highlighter-rouge">Readonly</code>, <code class="language-plaintext highlighter-rouge">Pick</code>, <code class="language-plaintext highlighter-rouge">Omit</code>).</td>
+      <td><code class="language-plaintext highlighter-rouge">type PartialPerson = Partial&lt;Person&gt;;</code></td>
+    </tr>
+    <tr>
+      <td><strong>Conditional Types</strong></td>
+      <td>Constructs types conditionally based on logic (<code class="language-plaintext highlighter-rouge">extends ? :</code>).</td>
+      <td><code class="language-plaintext highlighter-rouge">type IsString&lt;T&gt; = T extends string ? true : false;</code></td>
+    </tr>
+    <tr>
+      <td><strong>Mapped Types</strong></td>
+      <td>Creates new types by transforming existing ones (<code class="language-plaintext highlighter-rouge">readonly</code>, <code class="language-plaintext highlighter-rouge">optional</code>).</td>
+      <td><code class="language-plaintext highlighter-rouge">type Readonly&lt;T&gt; = { readonly [K in keyof T]: T[K] };</code></td>
+    </tr>
+    <tr>
+      <td><strong>Keyof and Lookup Types</strong></td>
+      <td>Dynamically access object keys and properties.</td>
+      <td><code class="language-plaintext highlighter-rouge">type Key = keyof Person;</code></td>
+    </tr>
+    <tr>
+      <td><strong>Generics</strong></td>
+      <td>Enables reusable, flexible code for any type.</td>
+      <td><code class="language-plaintext highlighter-rouge">function identity&lt;T&gt;(arg: T): T;</code></td>
+    </tr>
+    <tr>
+      <td><strong>Modules</strong></td>
+      <td>Allows splitting code into separate files for better organization (<code class="language-plaintext highlighter-rouge">import/export</code>).</td>
+      <td><code class="language-plaintext highlighter-rouge">import { greet } from "./file";</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+
+  </div>
+
+  
+  <div style="margin-top: 20px;">
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = 'https://anusree6154s.github.io/documentation/decorators';
+      this.page.identifier = 'https://anusree6154s.github.io/documentation/decorators';
+    };
+
+    (function() {
+      var d = document, s = d.createElement('script');
+
+      s.src = 'https://anusree-anilkumar-blog.disqus.com/embed.js';
+
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript><a class="u-url" href="/documentation/decorators" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/documentation/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Blog &amp; Docs</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Anusree Anilkumar</li><li><a class="u-email" href="mailto:anilkumaranusree113@gmail.com">anilkumaranusree113@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/Anusree6154s"><svg class="svg-icon"><use xlink:href="/documentation/assets/minima-social-icons.svg#github"></use></svg> <span class="username">Anusree6154s</span></a></li><li><a href="https://www.linkedin.com/in/anusreeanilkumar1"><svg class="svg-icon"><use xlink:href="/documentation/assets/minima-social-icons.svg#linkedin"></use></svg> <span class="username">anusreeanilkumar1</span></a></li><li><a href="https://www.twitter.com/anu6154s"><svg class="svg-icon"><use xlink:href="/documentation/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">anu6154s</span></a></li><li><a href="/documentation/feed.xml"><svg class="svg-icon"><use xlink:href="/documentation/assets/minima-social-icons.svg#rss"></use></svg> <span>rss</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>This site is my personal documentation, made public for anyone who might find my code scribbles useful! ❤️</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

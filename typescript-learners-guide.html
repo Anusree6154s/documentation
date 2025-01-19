@@ -39,6 +39,8 @@
 <main class="page-content" aria-label="Content">
       <div class="wrapper">
         <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  
+  
 
   <header class="post-header">
     <h1 class="post-title p-name" itemprop="name headline">Typescript learners guide</h1>
@@ -60,7 +62,7 @@
 <p><br />
 <br /></p>
 
-<h3 id="table-of-contents"><ins>Table of Contents</ins></h3>
+<h2 id="table-of-contents"><ins>Table of Contents</ins></h2>
 
 <ul>
   <li><a href="#basic-typescript-concepts">Basic</a>
@@ -85,18 +87,17 @@
       <li><a href="#2-type-guards">Type Guards</a></li>
       <li><a href="#3-discriminated-unions">Discriminated Unions</a></li>
       <li><a href="#4-keyof-and-lookup-types">Keyof and Lookup Types</a></li>
-      <li><a href="#5-indexed-access-types">Indexed Access Types</a></li>
-      <li><a href="#6-template-literal-types">Template Literal Types</a></li>
-      <li><a href="#7-decorators">Decorators</a></li>
-      <li><a href="#8-declaration-merging">Declaration Merging</a></li>
-      <li><a href="#9-namespace">Namespace</a></li>
-      <li><a href="#10-type-manipulation">Type Manipulation</a></li>
-      <li><a href="#11-module-augmentation">Module Augmentation</a></li>
-      <li><a href="#12-strict-type-checking">Strict Type Checking</a></li>
-      <li><a href="#13-advanced-generics">Advanced Generics</a></li>
-      <li><a href="#14-dynamic-import-types">Dynamic Import Types</a></li>
-      <li><a href="#15-compiler-configuration">Compiler Configuration</a></li>
-      <li><a href="#16-advanced-decorator-usage">Advanced Decorator Usage</a></li>
+      <li><a href="#5-template-literal-types">Template Literal Types</a></li>
+      <li><a href="#6-decorators">Decorators</a></li>
+      <li><a href="#7-declaration-merging">Declaration Merging</a></li>
+      <li><a href="#8-namespace">Namespace</a></li>
+      <li><a href="#9-type-manipulation">Type Manipulation</a></li>
+      <li><a href="#10-module-augmentation">Module Augmentation</a></li>
+      <li><a href="#11-strict-type-checking">Strict Type Checking</a></li>
+      <li><a href="#12-advanced-generics">Advanced Generics</a></li>
+      <li><a href="#13-dynamic-import-types">Dynamic Import Types</a></li>
+      <li><a href="#14-compiler-configuration">Compiler Configuration</a></li>
+      <li><a href="#15-advanced-decorator-usage">Advanced Decorator Usage</a></li>
     </ol>
   </li>
 </ul>
@@ -104,20 +105,22 @@
 <p><br />
 <br /></p>
 
-<h3 id="basic-typescript-concepts"><ins>Basic Typescript Concepts</ins></h3>
+<h2 id="basic-typescript-concepts"><ins>Basic Typescript Concepts</ins></h2>
 
-<h4 id="1-basic-types">1. <strong>Basic Types</strong></h4>
+<h3 id="1-basic-types">1. <strong>Basic Types</strong></h3>
 
 <p>TypeScript provides a set of basic types for handling data:</p>
 
-<h5 id="string-number-boolean"><code class="language-plaintext highlighter-rouge">string</code>, <code class="language-plaintext highlighter-rouge">number</code>, <code class="language-plaintext highlighter-rouge">boolean</code></h5>
+<h4 id="string-number-boolean"><strong><code class="language-plaintext highlighter-rouge">string</code>, <code class="language-plaintext highlighter-rouge">number</code>, <code class="language-plaintext highlighter-rouge">boolean</code></strong></h4>
 
 <div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">name</span><span class="p">:</span> <span class="kr">string</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Alice</span><span class="dl">"</span><span class="p">;</span>
 <span class="kd">let</span> <span class="nx">age</span><span class="p">:</span> <span class="kr">number</span> <span class="o">=</span> <span class="mi">30</span><span class="p">;</span>
 <span class="kd">let</span> <span class="nx">isActive</span><span class="p">:</span> <span class="nx">boolean</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
 </code></pre></div></div>
 
-<h5 id="null-undefined-void"><code class="language-plaintext highlighter-rouge">null</code>, <code class="language-plaintext highlighter-rouge">undefined</code>, <code class="language-plaintext highlighter-rouge">void</code></h5>
+<p><br /></p>
+
+<h4 id="null-undefined-void"><strong><code class="language-plaintext highlighter-rouge">null</code>, <code class="language-plaintext highlighter-rouge">undefined</code>, <code class="language-plaintext highlighter-rouge">void</code></strong></h4>
 
 <ul>
   <li><code class="language-plaintext highlighter-rouge">null</code> and <code class="language-plaintext highlighter-rouge">undefined</code> represent absence of value.</li>
@@ -132,7 +135,7 @@
 <span class="p">}</span>
 </code></pre></div></div>
 
-<h5 id="any-unknown"><code class="language-plaintext highlighter-rouge">any</code>, <code class="language-plaintext highlighter-rouge">unknown</code></h5>
+<h4 id="any-unknown"><strong><code class="language-plaintext highlighter-rouge">any</code>, <code class="language-plaintext highlighter-rouge">unknown</code></strong></h4>
 
 <ul>
   <li><code class="language-plaintext highlighter-rouge">any</code> allows any type and essentially disables type checking.</li>
@@ -148,7 +151,7 @@
 <span class="p">}</span>
 </code></pre></div></div>
 
-<h5 id="never"><code class="language-plaintext highlighter-rouge">never</code></h5>
+<h4 id="never"><strong><code class="language-plaintext highlighter-rouge">never</code></strong></h4>
 
 <p><code class="language-plaintext highlighter-rouge">never</code> is used for functions that never return a value, like functions that throw exceptions or enter infinite loops.</p>
 
@@ -157,7 +160,9 @@
 <span class="p">}</span>
 </code></pre></div></div>
 
-<h4 id="2-type-annotations">2. <strong>Type Annotations</strong></h4>
+<p><br /></p>
+
+<h3 id="2-type-annotations">2. <strong>Type Annotations</strong></h3>
 
 <p>Type annotations specify the type of variables, function parameters, and return values explicitly.</p>
 
@@ -168,9 +173,15 @@
 <span class="p">}</span>
 </code></pre></div></div>
 
-<h4 id="3-interfaces">3. <strong>Interfaces</strong></h4>
+<p><br /></p>
 
-<p>An interface defines the structure of an object, specifying its properties and methods.</p>
+<h3 id="3-interfaces">3. <strong>Interfaces</strong></h3>
+
+<p>An interface defines the structure of an object by specifying its properties and methods. However, interfaces are not limited to describing objects. They can also define function types, arrays, hybrid types, and even work with generics.</p>
+
+<h4 id="defining-object-structures">Defining Object Structures</h4>
+
+<p>The most common use case for interfaces is to describe the shape of an object, including its properties and methods.</p>
 
 <div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">interface</span> <span class="nx">Person</span> <span class="p">{</span>
   <span class="nl">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
@@ -187,7 +198,11 @@
 <span class="p">};</span>
 </code></pre></div></div>
 
-<h4 id="4-classes">4. <strong>Classes</strong></h4>
+<h4 id="for-other-use-cases-visit-here"><strong>For other use cases visit <a href="interfaces-usecases">here</a></strong></h4>
+
+<p><br /></p>
+
+<h3 id="4-classes">4. <strong>Classes</strong></h3>
 
 <p>Classes allow you to define blueprints for objects, including properties and methods.</p>
 
@@ -216,7 +231,7 @@
 <span class="nx">dog</span><span class="p">.</span><span class="nx">speak</span><span class="p">();</span> <span class="c1">// Buddy barks</span>
 </code></pre></div></div>
 
-<h5 id="access-modifiers">Access Modifiers</h5>
+<h4 id="access-modifiers">Access Modifiers</h4>
 
 <ul>
   <li><code class="language-plaintext highlighter-rouge">public</code>: Can be accessed from anywhere (default).</li>
@@ -239,11 +254,13 @@
 <span class="p">}</span>
 </code></pre></div></div>
 
-<h4 id="5-enums">5. <strong>Enums</strong></h4>
+<p><br /></p>
+
+<h3 id="5-enums">5. <strong>Enums</strong></h3>
 
 <p>Enums define named constant values. TypeScript supports numeric and string enums.</p>
 
-<h5 id="numeric-enum">Numeric Enum:</h5>
+<h4 id="numeric-enum">Numeric Enum:</h4>
 
 <div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">enum</span> <span class="nx">Direction</span> <span class="p">{</span>
   <span class="nx">Up</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
@@ -255,7 +272,7 @@
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">Direction</span><span class="p">.</span><span class="nx">Up</span><span class="p">);</span> <span class="c1">// 1</span>
 </code></pre></div></div>
 
-<h5 id="string-enum">String Enum:</h5>
+<h4 id="string-enum">String Enum:</h4>
 
 <div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">enum</span> <span class="nx">Status</span> <span class="p">{</span>
   <span class="nx">Pending</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">PENDING</span><span class="dl">"</span><span class="p">,</span>
@@ -266,18 +283,20 @@
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">Status</span><span class="p">.</span><span class="nx">Pending</span><span class="p">);</span> <span class="c1">// "PENDING"</span>
 </code></pre></div></div>
 
-<h4 id="6-functions">6. <strong>Functions</strong></h4>
+<p><br /></p>
+
+<h3 id="6-functions">6. <strong>Functions</strong></h3>
 
 <p>TypeScript allows specifying types for function parameters and return values. It also supports optional, default, and rest parameters.</p>
 
-<h5 id="parameter-types-and-return-types">Parameter Types and Return Types</h5>
+<h4 id="parameter-types-and-return-types">Parameter Types and Return Types</h4>
 
 <div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">add</span><span class="p">(</span><span class="nx">a</span><span class="p">:</span> <span class="kr">number</span><span class="p">,</span> <span class="nx">b</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="kr">number</span> <span class="p">{</span>
   <span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
-<h5 id="optional-parameters-">Optional Parameters (<code class="language-plaintext highlighter-rouge">?</code>)</h5>
+<h4 id="optional-parameters-">Optional Parameters (<code class="language-plaintext highlighter-rouge">?</code>)</h4>
 
 <div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">greet</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">,</span> <span class="nx">age</span><span class="p">?:</span> <span class="kr">number</span><span class="p">):</span> <span class="kr">string</span> <span class="p">{</span>
   <span class="k">return</span> <span class="nx">age</span> <span class="p">?</span> <span class="s2">`</span><span class="p">${</span><span class="nx">name</span><span class="p">}</span><span class="s2"> is </span><span class="p">${</span><span class="nx">age</span><span class="p">}</span><span class="s2"> years old`</span> <span class="p">:</span> <span class="s2">`</span><span class="p">${</span><span class="nx">name</span><span class="p">}</span><span class="s2">`</span><span class="p">;</span>
@@ -287,14 +306,14 @@
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">greet</span><span class="p">(</span><span class="dl">"</span><span class="s2">Bob</span><span class="dl">"</span><span class="p">,</span> <span class="mi">30</span><span class="p">));</span> <span class="c1">// Bob is 30 years old</span>
 </code></pre></div></div>
 
-<h5 id="default-parameters">Default Parameters</h5>
+<h4 id="default-parameters">Default Parameters</h4>
 
 <div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">greet</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">,</span> <span class="nx">age</span><span class="p">:</span> <span class="kr">number</span> <span class="o">=</span> <span class="mi">25</span><span class="p">):</span> <span class="kr">string</span> <span class="p">{</span>
   <span class="k">return</span> <span class="s2">`</span><span class="p">${</span><span class="nx">name</span><span class="p">}</span><span class="s2"> is </span><span class="p">${</span><span class="nx">age</span><span class="p">}</span><span class="s2"> years old`</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
-<h5 id="rest-parameters-args">Rest Parameters (<code class="language-plaintext highlighter-rouge">...args</code>)</h5>
+<h4 id="rest-parameters-args">Rest Parameters (<code class="language-plaintext highlighter-rouge">...args</code>)</h4>
 
 <div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">sum</span><span class="p">(...</span><span class="nx">numbers</span><span class="p">:</span> <span class="kr">number</span><span class="p">[]):</span> <span class="kr">number</span> <span class="p">{</span>
   <span class="k">return</span> <span class="nx">numbers</span><span class="p">.</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">acc</span><span class="p">,</span> <span class="nx">num</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">acc</span> <span class="o">+</span> <span class="nx">num</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
@@ -303,9 +322,11 @@
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">));</span> <span class="c1">// 10</span>
 </code></pre></div></div>
 
-<h4 id="7-arrays-and-tuples">7. <strong>Arrays and Tuples</strong></h4>
+<p><br /></p>
 
-<h5 id="typed-arrays">Typed Arrays</h5>
+<h3 id="7-arrays-and-tuples">7. <strong>Arrays and Tuples</strong></h3>
+
+<h4 id="typed-arrays">Typed Arrays</h4>
 
 <p>Arrays can be strongly typed.</p>
 
@@ -313,16 +334,20 @@
 <span class="kd">let</span> <span class="nx">strings</span><span class="p">:</span> <span class="nb">Array</span><span class="o">&lt;</span><span class="kr">string</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">[</span><span class="dl">"</span><span class="s2">a</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">b</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">c</span><span class="dl">"</span><span class="p">];</span>
 </code></pre></div></div>
 
-<h5 id="tuples">Tuples</h5>
+<h4 id="tuples">Tuples</h4>
 
 <p>Tuples are arrays with fixed sizes and types for each element.</p>
 
 <div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">tuple</span><span class="p">:</span> <span class="p">[</span><span class="kr">string</span><span class="p">,</span> <span class="kr">number</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="dl">"</span><span class="s2">Alice</span><span class="dl">"</span><span class="p">,</span> <span class="mi">30</span><span class="p">];</span>
 </code></pre></div></div>
 
-<h4 id="8-union-and-intersection-types">8. <strong>Union and Intersection Types</strong></h4>
+<p><strong>More about tuples, and difference between tuples and arrays <a href="tuples">here</a></strong></p>
 
-<h5 id="union-types-">Union Types (<code class="language-plaintext highlighter-rouge">|</code>)</h5>
+<p><br /></p>
+
+<h3 id="8-union-and-intersection-types">8. <strong>Union and Intersection Types</strong></h3>
+
+<h4 id="union-types-">Union Types (<code class="language-plaintext highlighter-rouge">|</code>)</h4>
 
 <p>A variable can hold multiple types.</p>
 
@@ -334,7 +359,7 @@
 <span class="nx">print</span><span class="p">(</span><span class="mi">42</span><span class="p">);</span>
 </code></pre></div></div>
 
-<h5 id="intersection-types-">Intersection Types (<code class="language-plaintext highlighter-rouge">&amp;</code>)</h5>
+<h4 id="intersection-types-">Intersection Types (<code class="language-plaintext highlighter-rouge">&amp;</code>)</h4>
 
 <p>Combining multiple types into one.</p>
 
@@ -358,7 +383,9 @@
 <span class="p">};</span>
 </code></pre></div></div>
 
-<h4 id="9-type-aliases">9. <strong>Type Aliases</strong></h4>
+<p><br /></p>
+
+<h3 id="9-type-aliases">9. <strong>Type Aliases</strong></h3>
 
 <p>Type aliases allow creating custom types that can be reused across the codebase.</p>
 
@@ -372,7 +399,11 @@
 <span class="nx">getUser</span><span class="p">(</span><span class="dl">"</span><span class="s2">abc123</span><span class="dl">"</span><span class="p">);</span>
 </code></pre></div></div>
 
-<h4 id="10-generics">10. <strong>Generics</strong></h4>
+<p><strong>More about type aliases <a href="type-aliases">here</a></strong></p>
+
+<p><br /></p>
+
+<h3 id="10-generics">10. <strong>Generics</strong></h3>
 
 <p>Generics allow writing functions, classes, and interfaces that work with any data type, providing more flexibility and reusability.</p>
 
@@ -387,7 +418,7 @@
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">numberOutput</span><span class="p">);</span> <span class="c1">// 100</span>
 </code></pre></div></div>
 
-<h5 id="generic-classes">Generic Classes</h5>
+<h4 id="generic-classes">Generic Classes</h4>
 
 <div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">Box</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="p">{</span>
   <span class="na">value</span><span class="p">:</span> <span class="nx">T</span><span class="p">;</span>
@@ -404,7 +435,11 @@
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">stringBox</span><span class="p">.</span><span class="nx">getValue</span><span class="p">());</span> <span class="c1">// Hello</span>
 </code></pre></div></div>
 
-<h4 id="11-modules">11. <strong>Modules</strong></h4>
+<p><strong>More of generic types and examples <a href="generics">here</a></strong></p>
+
+<p><br /></p>
+
+<h3 id="11-modules">11. <strong>Modules</strong></h3>
 
 <p>Modules allow code to be split into separate files, which can be imported/exported.</p>
 
@@ -419,7 +454,11 @@
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">greet</span><span class="p">(</span><span class="dl">"</span><span class="s2">Alice</span><span class="dl">"</span><span class="p">));</span> <span class="c1">// Hello, Alice</span>
 </code></pre></div></div>
 
-<h4 id="12-type-inference">12. <strong>Type Inference</strong></h4>
+<p><strong>More about modules <a href="modules">here</a></strong></p>
+
+<p><br /></p>
+
+<h3 id="12-type-inference">12. <strong>Type Inference</strong></h3>
 
 <p>TypeScript automatically infers the type of a variable when the type is not explicitly declared.</p>
 
@@ -434,15 +473,16 @@
 <span class="kd">let</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">multiply</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>
 </code></pre></div></div>
 
-<p>Sure! Below is an elaboration on the <strong>Advanced TypeScript</strong> topics you mentioned, along with examples to illustrate each concept.</p>
+<p><strong>More about inferences <a href="inferences">here</a></strong></p>
 
 <p><br />
 <br /></p>
 
-<h3 id="advanced-typescript-concepts"><ins>Advanced Typescript Concepts</ins></h3>
-<h4 id="1-advanced-types">1. <strong>Advanced Types</strong></h4>
+<h2 id="advanced-typescript-concepts"><ins>Advanced Typescript Concepts</ins></h2>
 
-<h5 id="mapped-types"><strong>Mapped Types</strong></h5>
+<h3 id="1-advanced-types">1. <strong>Advanced Types</strong></h3>
+
+<h4 id="mapped-types"><strong>Mapped Types</strong></h4>
 
 <p>Mapped types allow you to create a new type based on an existing one by transforming its properties. You can modify the properties or their types.</p>
 
@@ -461,7 +501,23 @@
 <span class="c1">// person.name = 'Bob'; // Error: cannot assign to 'name' because it is a read-only property.</span>
 </code></pre></div></div>
 
-<h5 id="conditional-types"><strong>Conditional Types</strong></h5>
+<p>Here, in <code class="language-plaintext highlighter-rouge">type Readonly&lt;T&gt; = { readonly [K in keyof T]: T[K] };</code></p>
+
+<ul>
+  <li><strong><code class="language-plaintext highlighter-rouge">Readonly&lt;T&gt;</code></strong>: This is a <strong>type alias</strong> that accepts a generic type parameter <code class="language-plaintext highlighter-rouge">T</code>. This means that <code class="language-plaintext highlighter-rouge">T</code> can be any type (such as an object, interface, etc.).</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">{ readonly [K in keyof T]: T[K] }</code></strong>: This is a <strong>mapped type</strong> that iterates over all the keys of type <code class="language-plaintext highlighter-rouge">T</code> and makes each of them <code class="language-plaintext highlighter-rouge">readonly</code>. Let’s break it down further:
+    <ul>
+      <li><strong><code class="language-plaintext highlighter-rouge">keyof T</code></strong>: This expression gets all the keys (property names) of type <code class="language-plaintext highlighter-rouge">T</code> as a <strong>union</strong> of string literals. For example, if <code class="language-plaintext highlighter-rouge">T</code> is <code class="language-plaintext highlighter-rouge">{ name: string; age: number; }</code>, then <code class="language-plaintext highlighter-rouge">keyof T</code> would be <code class="language-plaintext highlighter-rouge">"name" | "age"</code>.</li>
+      <li><strong><code class="language-plaintext highlighter-rouge">[K in keyof T]</code></strong>: This is the syntax for a <strong>mapped type</strong> that iterates over each key <code class="language-plaintext highlighter-rouge">K</code> in <code class="language-plaintext highlighter-rouge">keyof T</code>. Essentially, <code class="language-plaintext highlighter-rouge">K</code> will take each key of <code class="language-plaintext highlighter-rouge">T</code> one by one.</li>
+      <li><strong><code class="language-plaintext highlighter-rouge">T[K]</code></strong>: This accesses the type of the property <code class="language-plaintext highlighter-rouge">K</code> in type <code class="language-plaintext highlighter-rouge">T</code>. For example, if <code class="language-plaintext highlighter-rouge">T</code> is <code class="language-plaintext highlighter-rouge">{ name: string; age: number; }</code>, then <code class="language-plaintext highlighter-rouge">T["name"]</code> would be <code class="language-plaintext highlighter-rouge">string</code> and <code class="language-plaintext highlighter-rouge">T["age"]</code> would be <code class="language-plaintext highlighter-rouge">number</code>.</li>
+    </ul>
+  </li>
+  <li><strong><code class="language-plaintext highlighter-rouge">readonly [K in keyof T]: T[K]</code></strong>: The <code class="language-plaintext highlighter-rouge">readonly</code> modifier makes each property of type <code class="language-plaintext highlighter-rouge">T</code> <strong>immutable</strong>. This means that once a property is assigned a value, it cannot be changed. So, the final result is that for every property <code class="language-plaintext highlighter-rouge">K</code> in type <code class="language-plaintext highlighter-rouge">T</code>, the property is transformed into a <code class="language-plaintext highlighter-rouge">readonly</code> version.</li>
+</ul>
+
+<p><strong>More about mapped types <a href="mapped-types">here</a></strong></p>
+
+<h4 id="conditional-types"><strong>Conditional Types</strong></h4>
 
 <p>Conditional types use the <code class="language-plaintext highlighter-rouge">extends</code> keyword to define conditional logic based on the type of a variable.</p>
 
@@ -473,7 +529,9 @@
 <span class="kd">type</span> <span class="nx">Test2</span> <span class="o">=</span> <span class="nx">IsString</span><span class="o">&lt;</span><span class="kr">number</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// false</span>
 </code></pre></div></div>
 
-<h5 id="utility-types"><strong>Utility Types</strong></h5>
+<p><strong>More about conditional types <a href="conditional-types">here</a></strong></p>
+
+<h4 id="utility-types"><strong>Utility Types</strong></h4>
 
 <p>TypeScript provides several built-in utility types that help manipulate types.</p>
 
@@ -497,11 +555,13 @@
 <span class="kd">type</span> <span class="nx">WithoutAddress</span> <span class="o">=</span> <span class="nx">Omit</span><span class="o">&lt;</span><span class="nx">Person</span><span class="p">,</span> <span class="dl">"</span><span class="s2">address</span><span class="dl">"</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// `address` is omitted</span>
 </code></pre></div></div>
 
-<h4 id="2-type-guards">2. <strong>Type Guards</strong></h4>
+<p><br /></p>
+
+<h3 id="2-type-guards">2. <strong>Type Guards</strong></h3>
 
 <p>Type guards help narrow the type within a conditional block using <code class="language-plaintext highlighter-rouge">x is Type</code> syntax or built-in checks.</p>
 
-<h5 id="custom-type-guard">Custom Type Guard</h5>
+<h4 id="custom-type-guard">Custom Type Guard</h4>
 
 <p>You can create your own type guards to narrow types based on logic.</p>
 
@@ -516,7 +576,7 @@
 <span class="p">}</span>
 </code></pre></div></div>
 
-<h5 id="instanceof-and-typeof"><code class="language-plaintext highlighter-rouge">instanceof</code> and <code class="language-plaintext highlighter-rouge">typeof</code></h5>
+<h4 id="instanceof-and-typeof"><code class="language-plaintext highlighter-rouge">instanceof</code> and <code class="language-plaintext highlighter-rouge">typeof</code></h4>
 
 <p><code class="language-plaintext highlighter-rouge">instanceof</code> and <code class="language-plaintext highlighter-rouge">typeof</code> are used for runtime type checks.</p>
 
@@ -538,7 +598,9 @@
 <span class="p">}</span>
 </code></pre></div></div>
 
-<h4 id="3-discriminated-unions">3. <strong>Discriminated Unions</strong></h4>
+<p><br /></p>
+
+<h3 id="3-discriminated-unions">3. <strong>Discriminated Unions</strong></h3>
 
 <p>Discriminated unions allow for union types that include a tag (discriminant) to help narrow down types.</p>
 
@@ -557,42 +619,71 @@
 <span class="p">}</span>
 </code></pre></div></div>
 
-<h4 id="4-keyof-and-lookup-types">4. <strong>Keyof and Lookup Types</strong></h4>
+<p><strong>More about Discriminated Unions <a href="discriminated-unions">here</a></strong></p>
 
-<p><code class="language-plaintext highlighter-rouge">keyof</code> and lookup types allow you to dynamically access the keys and values of a type.</p>
+<p><br /></p>
 
-<h5 id="keyof-operator"><code class="language-plaintext highlighter-rouge">keyof</code> Operator</h5>
+<h3 id="4-keyof-and-lookup-types">4. <strong>Keyof and Lookup Types</strong></h3>
 
-<p>Get the keys of an object type as a union of string literals.</p>
+<p><code class="language-plaintext highlighter-rouge">keyof</code> and <strong>lookup types</strong> allow you to dynamically access the keys and values of a type.</p>
 
-<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">interface</span> <span class="nx">Person</span> <span class="p">{</span>
+<h4 id="keyof-operator"><code class="language-plaintext highlighter-rouge">keyof</code> Operator</h4>
+
+<p>The <code class="language-plaintext highlighter-rouge">keyof</code> operator creates a union of string literal types representing the keys of an object type.
+Get the keys of an object type as a union of string literals.</p>
+
+<ul>
+  <li>
+    <p>Definition:</p>
+
+    <div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">keyof</span> <span class="nx">T</span>
+</code></pre></div>    </div>
+
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">T</code>: An object type.</li>
+      <li><strong>Result</strong>: A union of string literal types representing all keys of <code class="language-plaintext highlighter-rouge">T</code></li>
+    </ul>
+  </li>
+  <li>
+    <p>Example:</p>
+
+    <div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">interface</span> <span class="nx">Person</span> <span class="p">{</span>
   <span class="nl">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
   <span class="nl">age</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span>
 <span class="p">}</span>
 
 <span class="kd">type</span> <span class="nx">Key</span> <span class="o">=</span> <span class="kr">keyof</span> <span class="nx">Person</span><span class="p">;</span> <span class="c1">// "name" | "age"</span>
-</code></pre></div></div>
+</code></pre></div>    </div>
+  </li>
+</ul>
 
-<h5 id="lookup-types">Lookup Types</h5>
+<h4 id="lookup-types">Lookup Types</h4>
 
-<p>Access the value of a specific property dynamically.</p>
+<p><strong>Lookup types</strong> also called as <strong>Indexed Access Types</strong> let you access the type of a specific property dynamically using bracket notation (<code class="language-plaintext highlighter-rouge">T[K]</code>).Access the value of a specific property dynamically.</p>
 
-<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">type</span> <span class="nx">Value</span> <span class="o">=</span> <span class="nx">Person</span><span class="p">[</span><span class="dl">"</span><span class="s2">name</span><span class="dl">"</span><span class="p">];</span> <span class="c1">// string</span>
-</code></pre></div></div>
-
-<h4 id="5-indexed-access-types">5. <strong>Indexed Access Types</strong></h4>
-
-<p>Indexed access types allow you to retrieve the type of a property of an object type.</p>
-
-<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">interface</span> <span class="nx">Person</span> <span class="p">{</span>
+<ul>
+  <li>Definition:
+    <div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">T</span><span class="p">[</span><span class="nx">K</span><span class="p">];</span>
+</code></pre></div>    </div>
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">T</code>: An object type.</li>
+      <li><code class="language-plaintext highlighter-rouge">K</code>: A key in <code class="language-plaintext highlighter-rouge">T</code> (must be assignable to <code class="language-plaintext highlighter-rouge">keyof T</code>).</li>
+      <li><strong>Result</strong>: The type of the property <code class="language-plaintext highlighter-rouge">K</code> in <code class="language-plaintext highlighter-rouge">T</code>.</li>
+    </ul>
+  </li>
+  <li>Example:
+    <div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">interface</span> <span class="nx">Person</span> <span class="p">{</span>
   <span class="nl">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
   <span class="nl">age</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span>
 <span class="p">}</span>
+<span class="kd">type</span> <span class="nx">Value</span> <span class="o">=</span> <span class="nx">Person</span><span class="p">[</span><span class="dl">"</span><span class="s2">name</span><span class="dl">"</span><span class="p">];</span> <span class="c1">// string</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
 
-<span class="kd">type</span> <span class="nx">NameType</span> <span class="o">=</span> <span class="nx">Person</span><span class="p">[</span><span class="dl">"</span><span class="s2">name</span><span class="dl">"</span><span class="p">];</span> <span class="c1">// string</span>
-</code></pre></div></div>
+<p><br /></p>
 
-<h4 id="6-template-literal-types">6. <strong>Template Literal Types</strong></h4>
+<h3 id="5-template-literal-types">5. <strong>Template Literal Types</strong></h3>
 
 <p>Template literal types allow you to construct types by combining string literals, creating dynamic string types.</p>
 
@@ -602,29 +693,47 @@
 <span class="c1">// const invalidGreeting: Greeting = "Hi, Alice!";  // Error: doesn't match `Hello, ${string}!`</span>
 </code></pre></div></div>
 
-<h4 id="7-decorators">7. <strong>Decorators</strong></h4>
+<p><br /></p>
 
-<p>Decorators are an experimental feature that allows you to modify the behavior of classes, methods, or properties.</p>
+<h3 id="6-decorators">6. <strong>Decorators</strong></h3>
 
-<p>Example: A simple class decorator that logs class creation.</p>
+<p>Decorators are an experimental feature that allows you to modify the behavior of classes, methods, or properties. Decorators are defined using the <code class="language-plaintext highlighter-rouge">@</code> symbol followed by a function.</p>
 
-<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">logClass</span><span class="p">(</span><span class="nx">target</span><span class="p">:</span> <span class="nb">Function</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">target</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="s2"> class is being created!`</span><span class="p">);</span>
-<span class="p">}</span>
-
-<span class="p">@</span><span class="nd">logClass</span>
+<ul>
+  <li>Decorator Syntax:
+    <div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">@</span><span class="nd">decorator</span>
 <span class="kd">class</span> <span class="nx">MyClass</span> <span class="p">{}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Example: A simple class decorator that logs class creation.</p>
 
-<span class="kd">const</span> <span class="nx">instance</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyClass</span><span class="p">();</span> <span class="c1">// Logs: MyClass class is being created!</span>
-</code></pre></div></div>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>```typescript
+function logClass(target: Function) {
+console.log(`${target.name} class is being created!`);
+}
 
-<h4 id="8-declaration-merging">8. <strong>Declaration Merging</strong></h4>
+@logClass
+class MyClass {}
+
+const instance = new MyClass(); // Logs: MyClass class is being created!
+```
+</code></pre></div>    </div>
+
+    <p><strong>More about decorators <a href="decorators">here</a></strong>
+<br /></p>
+  </li>
+</ul>
+
+<h3 id="7-declaration-merging">7. <strong>Declaration Merging</strong></h3>
 
 <p>Declaration merging occurs when multiple declarations of the same type or interface are combined into one.</p>
 
-<p>Example:</p>
+<ul>
+  <li>
+    <p>Example:</p>
 
-<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">interface</span> <span class="nx">Person</span> <span class="p">{</span>
+    <div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">interface</span> <span class="nx">Person</span> <span class="p">{</span>
   <span class="nl">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
 <span class="p">}</span>
 
@@ -636,9 +745,15 @@
   <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Alice</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">age</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
 <span class="p">};</span> <span class="c1">// Declaration of `Person` is merged</span>
-</code></pre></div></div>
+</code></pre></div>    </div>
+  </li>
+</ul>
 
-<h4 id="9-namespace">9. <strong>Namespace</strong></h4>
+<p><strong>More about Declaration Merging <a href="declaration-merging">here</a></strong></p>
+
+<p><br /></p>
+
+<h3 id="8-namespace">8. <strong>Namespace</strong></h3>
 
 <p>Namespaces are used to organize code into logical groups (legacy feature but still used in some scenarios).</p>
 
@@ -656,9 +771,13 @@
 <span class="kd">const</span> <span class="nx">square</span><span class="p">:</span> <span class="nx">Shapes</span><span class="p">.</span><span class="nx">Square</span> <span class="o">=</span> <span class="p">{</span> <span class="na">sideLength</span><span class="p">:</span> <span class="mi">10</span> <span class="p">};</span>
 </code></pre></div></div>
 
-<h4 id="10-type-manipulation">10. <strong>Type Manipulation</strong></h4>
+<p><strong>More about Namespace <a href="namespace">here</a></strong></p>
 
-<p>Advanced type manipulation allows you to infer types using <code class="language-plaintext highlighter-rouge">infer</code> and perform conditional type transformations.</p>
+<p><br /></p>
+
+<h3 id="9-type-manipulation">9. <strong>Type Manipulation</strong></h3>
+
+<p>Advanced type manipulation allows you to infer types using <code class="language-plaintext highlighter-rouge">infer</code> and perform conditional type transformations. The <code class="language-plaintext highlighter-rouge">infer</code> keyword allows you to <strong>extract</strong> a type from a more complex type within conditional types</p>
 
 <div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">type</span> <span class="nx">ReturnType</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nx">T</span> <span class="kd">extends</span> <span class="p">(...</span><span class="nx">args</span><span class="p">:</span> <span class="kr">any</span><span class="p">[])</span> <span class="o">=&gt;</span> <span class="nx">infer</span> <span class="nx">R</span> <span class="p">?</span> <span class="nx">R</span> <span class="p">:</span> <span class="nx">never</span><span class="p">;</span>
 
@@ -667,23 +786,57 @@
 <span class="kd">type</span> <span class="nx">Result</span> <span class="o">=</span> <span class="nx">ReturnType</span><span class="o">&lt;</span><span class="nx">MyFunction</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// string</span>
 </code></pre></div></div>
 
-<h4 id="11-module-augmentation">11. <strong>Module Augmentation</strong></h4>
+<p>Here, <code class="language-plaintext highlighter-rouge">ReturnType&lt;T&gt;</code> is a conditional type that:</p>
+
+<ul>
+  <li>Checks if <code class="language-plaintext highlighter-rouge">T</code> is a function (denoted by (<code class="language-plaintext highlighter-rouge">...args: any[]) =&gt;</code>).</li>
+  <li>If <code class="language-plaintext highlighter-rouge">T</code> is a function, it <strong>infers</strong> the return type of that function and assigns it to <code class="language-plaintext highlighter-rouge">R</code>.</li>
+  <li>If <code class="language-plaintext highlighter-rouge">T</code> is not a function, it returns <code class="language-plaintext highlighter-rouge">never</code> (meaning an invalid type).</li>
+</ul>
+
+<p><strong>More about Type Manipulation <a href="type-manipulation">here</a></strong></p>
+
+<p><br /></p>
+
+<h3 id="10-module-augmentation">10. <strong>Module Augmentation</strong></h3>
 
 <p>Module augmentation allows you to extend or modify existing modules, adding new functionality.</p>
 
 <p>Example: Augmenting a module to add new properties to an existing interface.</p>
 
 <div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Augmenting a global module or third-party library</span>
+<span class="c1">// express.d.ts (this can be a separate declaration file or inside your main code)</span>
 <span class="kr">declare</span> <span class="kr">module</span> <span class="dl">"</span><span class="s2">express</span><span class="dl">"</span> <span class="p">{</span>
   <span class="kr">interface</span> <span class="nx">Request</span> <span class="p">{</span>
     <span class="nl">user</span><span class="p">?:</span> <span class="kr">string</span><span class="p">;</span>
   <span class="p">}</span>
 <span class="p">}</span>
-
-<span class="c1">// Now you can access `user` property on `Request`</span>
 </code></pre></div></div>
 
-<h4 id="12-strict-type-checking">12. <strong>Strict Type Checking</strong></h4>
+<p>Now you can edit/access <code class="language-plaintext highlighter-rouge">user</code> property on <code class="language-plaintext highlighter-rouge">Request</code>:</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">express</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">express</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">();</span>
+
+<span class="c1">// Middleware to add a user to the request</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">((</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">req</span><span class="p">.</span><span class="nx">user</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Alice</span><span class="dl">"</span><span class="p">;</span> <span class="c1">// Adding a `user` property to the Request object</span>
+  <span class="nx">next</span><span class="p">();</span>
+<span class="p">});</span>
+
+<span class="c1">// Route handler that accesses the augmented `user` property</span>
+<span class="nx">app</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">"</span><span class="s2">/</span><span class="dl">"</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">user</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s2">`Hello, </span><span class="p">${</span><span class="nx">req</span><span class="p">.</span><span class="nx">user</span><span class="p">}</span><span class="s2">!`</span><span class="p">);</span> <span class="c1">// TypeScript recognizes `req.user` due to augmentation</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="dl">"</span><span class="s2">Hello, guest!</span><span class="dl">"</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</code></pre></div></div>
+<p><strong>More about module augmentation <a href="module-augmentation">here</a></strong></p>
+
+<h3 id="11-strict-type-checking">11. <strong>Strict Type Checking</strong></h3>
 
 <p>Enable strict type checking options to enforce safer coding practices.</p>
 
@@ -700,9 +853,11 @@
 
 <p><code class="language-plaintext highlighter-rouge">strictNullChecks</code> ensures that <code class="language-plaintext highlighter-rouge">null</code> and <code class="language-plaintext highlighter-rouge">undefined</code> are not assignable to other types by default. <code class="language-plaintext highlighter-rouge">noImplicitAny</code> disallows variables from being implicitly typed as <code class="language-plaintext highlighter-rouge">any</code>.</p>
 
-<h4 id="13-advanced-generics">13. <strong>Advanced Generics</strong></h4>
+<p><br /></p>
 
-<h5 id="generic-constraints-t-extends-u">Generic Constraints (<code class="language-plaintext highlighter-rouge">T extends U</code>)</h5>
+<h3 id="12-advanced-generics">12. <strong>Advanced Generics</strong></h3>
+
+<h4 id="generic-constraints-t-extends-u">Generic Constraints (<code class="language-plaintext highlighter-rouge">T extends U</code>)</h4>
 
 <p>Restrict the types that can be used with generics.</p>
 
@@ -714,7 +869,7 @@
 <span class="c1">// echo(123);  // Error: Argument of type 'number' is not assignable to parameter of type 'string'.</span>
 </code></pre></div></div>
 
-<h5 id="default-generic-parameters">Default Generic Parameters</h5>
+<h4 id="default-generic-parameters">Default Generic Parameters</h4>
 
 <p>You can set default types for generics.</p>
 
@@ -726,28 +881,42 @@
 <span class="nx">identity</span><span class="p">(</span><span class="mi">42</span><span class="p">);</span> <span class="c1">// number</span>
 </code></pre></div></div>
 
-<h5 id="recursive-generics">Recursive Generics</h5>
+<h4 id="recursive-generics">Recursive Generics</h4>
 
 <p>Generics can be recursive, allowing more complex types.</p>
 
+<p>The type <code class="language-plaintext highlighter-rouge">List&lt;T&gt;</code> is defined in such a way that it can refer to itself. That is, it can be an array of <code class="language-plaintext highlighter-rouge">List&lt;T&gt;</code>, or a single value of type <code class="language-plaintext highlighter-rouge">T</code>. This allows the type to represent a list that can contain other lists, and so on, creating a <strong>recursive structure</strong>.</p>
+
 <div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">type</span> <span class="nx">List</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nx">T</span> <span class="o">|</span> <span class="nx">List</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">[];</span>
 
-<span class="kd">const</span> <span class="nx">stringList</span><span class="p">:</span> <span class="nx">List</span><span class="o">&lt;</span><span class="kr">string</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">[</span><span class="dl">"</span><span class="s2">Alice</span><span class="dl">"</span><span class="p">,</span> <span class="p">[</span><span class="dl">"</span><span class="s2">Bob</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Charlie</span><span class="dl">"</span><span class="p">]];</span>
+<span class="c1">// Example with numbers</span>
+<span class="kd">let</span> <span class="nx">listOfNumbers</span><span class="p">:</span> <span class="nx">List</span><span class="o">&lt;</span><span class="kr">number</span><span class="o">&gt;</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span> <span class="c1">// Single number (T)</span>
+<span class="kd">let</span> <span class="nx">nestedListOfNumbers</span><span class="p">:</span> <span class="nx">List</span><span class="o">&lt;</span><span class="kr">number</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">[</span><span class="mi">42</span><span class="p">,</span> <span class="p">[</span><span class="mi">42</span><span class="p">,</span> <span class="mi">100</span><span class="p">],</span> <span class="mi">57</span><span class="p">];</span> <span class="c1">// Array of numbers and nested arrays</span>
 </code></pre></div></div>
 
-<h4 id="14-dynamic-import-types">14. <strong>Dynamic Import Types</strong></h4>
+<p><br /></p>
+
+<h3 id="13-dynamic-import-types">13. <strong>Dynamic Import Types</strong></h3>
 
 <p>Using <code class="language-plaintext highlighter-rouge">import()</code> syntax to dynamically load modules at runtime.</p>
 
-<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">type</span> <span class="nx">Module</span> <span class="o">=</span> <span class="k">typeof</span> <span class="k">import</span><span class="p">(</span><span class="dl">"</span><span class="s2">./module</span><span class="dl">"</span><span class="p">);</span>
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// This defines the type of the module (its exports).</span>
+<span class="kd">type</span> <span class="nx">Module</span> <span class="o">=</span> <span class="k">typeof</span> <span class="k">import</span><span class="p">(</span><span class="dl">"</span><span class="s2">./module</span><span class="dl">"</span><span class="p">);</span>
 
+<span class="c1">// The async function dynamically loads the module at runtime.</span>
 <span class="k">async</span> <span class="kd">function</span> <span class="nx">loadModule</span><span class="p">()</span> <span class="p">{</span>
   <span class="kd">const</span> <span class="kr">module</span> <span class="o">=</span> <span class="k">await</span> <span class="k">import</span><span class="p">(</span><span class="dl">"</span><span class="s2">./module</span><span class="dl">"</span><span class="p">);</span>
-  <span class="kr">module</span><span class="p">.</span><span class="nx">someFunction</span><span class="p">();</span> <span class="c1">// Access the dynamically imported function</span>
+
+  <span class="c1">// The 'module' is dynamically loaded and now you can access its exports.</span>
+  <span class="kr">module</span><span class="p">.</span><span class="nx">someFunction</span><span class="p">();</span>
+
+  <span class="c1">// You can also use the `Module` type to type-check the `module` variable.</span>
+  <span class="kd">let</span> <span class="nx">myModule</span><span class="p">:</span> <span class="nx">Module</span> <span class="o">=</span> <span class="kr">module</span><span class="p">;</span> <span class="c1">// Ensure the module matches the defined type</span>
+  <span class="nx">myModule</span><span class="p">.</span><span class="nx">someFunction</span><span class="p">();</span> <span class="c1">// Now TypeScript will type-check it</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
-<h4 id="15-compiler-configuration">15. <strong>Compiler Configuration</strong></h4>
+<h3 id="14-compiler-configuration">14. <strong>Compiler Configuration</strong></h3>
 
 <p><code class="language-plaintext highlighter-rouge">tsconfig.json</code> is the configuration file for TypeScript. It lets you set compiler options, such as module resolution, strict settings, and more.</p>
 
@@ -763,7 +932,9 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
-<h4 id="16-advanced-decorator-usage">16. <strong>Advanced Decorator Usage</strong></h4>
+<p><br /></p>
+
+<h3 id="15-advanced-decorator-usage">15. <strong>Advanced Decorator Usage</strong></h3>
 
 <p>For frameworks like Angular, decorators play an essential role in metadata reflection. This enables functionality such as dependency injection.</p>
 
@@ -774,10 +945,13 @@
 <span class="p">}</span>
 
 <span class="p">@</span><span class="nd">Injectable</span>
-<span class="kd">class</span> <span class="nx">MyService</span> <span class="p">{}</span>
+<span class="kd">class</span> <span class="nx">MyService</span> <span class="p">{}</span> <span class="c1">// Injectable: MyService</span>
 </code></pre></div></div>
 
-<h5 id="key-use-cases-for-advanced-topics"><strong>Key Use Cases for Advanced Topics</strong></h5>
+<p><strong>More about Advanced Decorator <a href="advanced-decorator">here</a></strong>
+<br /></p>
+
+<h3 id="key-use-cases-for-advanced-topics"><strong>Key Use Cases for Advanced Topics</strong></h3>
 
 <p>Advanced TypeScript concepts often come into play when building:</p>
 
@@ -792,6 +966,42 @@
 
   
   <div style="margin-top: 20px;">
+  
+    <h2>Related Posts:</h2>
+    <ul>
+      
+        <li><a href="/documentation/type-manipulation">More about Type Manipulation</a></li>
+      
+        <li><a href="/documentation/type-aliases">More about Type Aliases</a></li>
+      
+        <li><a href="/documentation/tuples">Tuples and how it differs from Arrays</a></li>
+      
+        <li><a href="/documentation/namespace">More about Namespaces in Typescript</a></li>
+      
+        <li><a href="/documentation/modules">More about Modules in Typescript</a></li>
+      
+        <li><a href="/documentation/module-augmentation">More about Module Augmentation</a></li>
+      
+        <li><a href="/documentation/mapped-types">More about Mapped Types</a></li>
+      
+        <li><a href="/documentation/interfaces-usecases">Typescript Interfaces Usecases</a></li>
+      
+        <li><a href="/documentation/inferences">More about Inferences in Typescript</a></li>
+      
+        <li><a href="/documentation/generics">Generics Examples</a></li>
+      
+        <li><a href="/documentation/discriminated-unions">More about Discriminated Unions</a></li>
+      
+        <li><a href="/documentation/decorators">More about Decorators in Typescript</a></li>
+      
+        <li><a href="/documentation/declaration-merging">More about Declaration Merging</a></li>
+      
+        <li><a href="/documentation/conditional-types">More about Conditional Types</a></li>
+      
+        <li><a href="/documentation/advanced-decorator">More about Advanced Decorator</a></li>
+      
+    </ul>
+  </div>
   <div id="disqus_thread"></div>
   <script>
     var disqus_config = function () {

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>More about Type Aliases | Blog &amp; Docs</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="More about Type Aliases" />
+<meta name="author" content="Anusree Anilkumar" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="1. Advanced Use Cases 1. Recursive Types: Type aliases can define recursive types, which are useful for defining data structures like trees or JSON. Example: type JSONValue = string | number | boolean | null | JSONValue[] | { [key: string]: JSONValue }; const data: JSONValue = { name: &quot;Alice&quot;, age: 30, preferences: { theme: &quot;dark&quot;, notifications: true, }, hobbies: [&quot;reading&quot;, &quot;gaming&quot;], }; Here, JSONValue is a recursive type alias that describes valid JSON values. 2. Conditional Types: Type aliases can use conditional types for more advanced use cases. Example: type IsString&lt;T&gt; = T extends string ? true : false; type Test1 = IsString&lt;string&gt;; // true type Test2 = IsString&lt;number&gt;; // false Here, IsString is a conditional type that evaluates to true if the input type T is string, and false otherwise. 2. Best Practices for Type Aliases Use Descriptive Names: Make type alias names clear and meaningful to convey their purpose. type ProductID = string; Use for Non-Object Types: Prefer type aliases when working with primitives, unions, intersections, or complex types. type Coordinate = [number, number]; Use Interfaces for Objects: When defining object shapes that might need to be extended or merged, prefer interfaces. interface User { name: string; age: number; } Avoid Overusing Aliases: Don’t alias everything—use them where they improve readability or reduce repetition." />
+<meta property="og:description" content="1. Advanced Use Cases 1. Recursive Types: Type aliases can define recursive types, which are useful for defining data structures like trees or JSON. Example: type JSONValue = string | number | boolean | null | JSONValue[] | { [key: string]: JSONValue }; const data: JSONValue = { name: &quot;Alice&quot;, age: 30, preferences: { theme: &quot;dark&quot;, notifications: true, }, hobbies: [&quot;reading&quot;, &quot;gaming&quot;], }; Here, JSONValue is a recursive type alias that describes valid JSON values. 2. Conditional Types: Type aliases can use conditional types for more advanced use cases. Example: type IsString&lt;T&gt; = T extends string ? true : false; type Test1 = IsString&lt;string&gt;; // true type Test2 = IsString&lt;number&gt;; // false Here, IsString is a conditional type that evaluates to true if the input type T is string, and false otherwise. 2. Best Practices for Type Aliases Use Descriptive Names: Make type alias names clear and meaningful to convey their purpose. type ProductID = string; Use for Non-Object Types: Prefer type aliases when working with primitives, unions, intersections, or complex types. type Coordinate = [number, number]; Use Interfaces for Objects: When defining object shapes that might need to be extended or merged, prefer interfaces. interface User { name: string; age: number; } Avoid Overusing Aliases: Don’t alias everything—use them where they improve readability or reduce repetition." />
+<link rel="canonical" href="https://anusree6154s.github.io/documentation/type-aliases" />
+<meta property="og:url" content="https://anusree6154s.github.io/documentation/type-aliases" />
+<meta property="og:site_name" content="Blog &amp; Docs" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-01-19T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="More about Type Aliases" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Anusree Anilkumar"},"dateModified":"2025-01-19T00:00:00+00:00","datePublished":"2025-01-19T00:00:00+00:00","description":"1. Advanced Use Cases 1. Recursive Types: Type aliases can define recursive types, which are useful for defining data structures like trees or JSON. Example: type JSONValue = string | number | boolean | null | JSONValue[] | { [key: string]: JSONValue }; const data: JSONValue = { name: &quot;Alice&quot;, age: 30, preferences: { theme: &quot;dark&quot;, notifications: true, }, hobbies: [&quot;reading&quot;, &quot;gaming&quot;], }; Here, JSONValue is a recursive type alias that describes valid JSON values. 2. Conditional Types: Type aliases can use conditional types for more advanced use cases. Example: type IsString&lt;T&gt; = T extends string ? true : false; type Test1 = IsString&lt;string&gt;; // true type Test2 = IsString&lt;number&gt;; // false Here, IsString is a conditional type that evaluates to true if the input type T is string, and false otherwise. 2. Best Practices for Type Aliases Use Descriptive Names: Make type alias names clear and meaningful to convey their purpose. type ProductID = string; Use for Non-Object Types: Prefer type aliases when working with primitives, unions, intersections, or complex types. type Coordinate = [number, number]; Use Interfaces for Objects: When defining object shapes that might need to be extended or merged, prefer interfaces. interface User { name: string; age: number; } Avoid Overusing Aliases: Don’t alias everything—use them where they improve readability or reduce repetition.","headline":"More about Type Aliases","mainEntityOfPage":{"@type":"WebPage","@id":"https://anusree6154s.github.io/documentation/type-aliases"},"url":"https://anusree6154s.github.io/documentation/type-aliases"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/documentation/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://anusree6154s.github.io/documentation/feed.xml" title="Blog &amp; Docs" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/documentation/">Blog &amp; Docs</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/documentation/about">About Me</a><a class="page-link" href="/documentation/table-of-contents">Table of Contents</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  
+  
+  
+  <div class="parent-link">
+    This post is part of <a href="/documentation/typescript-learners-guide">Typescript learners guide</a>.
+  </div>
+  
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">More about Type Aliases</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2025-01-19T00:00:00+00:00" itemprop="datePublished">19 Jan 2025
+      </time></p>
+      <p><span  class="tag-badge">
+            typescript
+        </span><span  class="tag-badge">
+            type aliases
+        </span></span>
+</p>
+  </header>
+
+  
+
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h3 id="1-advanced-use-cases">1. <strong>Advanced Use Cases</strong></h3>
+
+<h4 id="1-recursive-types">1. Recursive Types:</h4>
+<p>Type aliases can define recursive types, which are useful for defining data structures like trees or JSON.</p>
+
+<p>Example:</p>
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">type</span> <span class="nx">JSONValue</span> <span class="o">=</span> <span class="kr">string</span> <span class="o">|</span> <span class="kr">number</span> <span class="o">|</span> <span class="nx">boolean</span> <span class="o">|</span> <span class="kc">null</span> <span class="o">|</span> <span class="nx">JSONValue</span><span class="p">[]</span> <span class="o">|</span> <span class="p">{</span> <span class="p">[</span><span class="na">key</span><span class="p">:</span> <span class="kr">string</span><span class="p">]:</span> <span class="nx">JSONValue</span> <span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">data</span><span class="p">:</span> <span class="nx">JSONValue</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Alice</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">age</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+  <span class="na">preferences</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">theme</span><span class="p">:</span> <span class="dl">"</span><span class="s2">dark</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">notifications</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">hobbies</span><span class="p">:</span> <span class="p">[</span><span class="dl">"</span><span class="s2">reading</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">gaming</span><span class="dl">"</span><span class="p">],</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>Here, <code class="language-plaintext highlighter-rouge">JSONValue</code> is a recursive type alias that describes valid JSON values.</p>
+
+<h4 id="2-conditional-types">2. Conditional Types:</h4>
+<p>Type aliases can use <strong>conditional types</strong> for more advanced use cases.</p>
+
+<p>Example:</p>
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">type</span> <span class="nx">IsString</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nx">T</span> <span class="kd">extends</span> <span class="kr">string</span> <span class="p">?</span> <span class="kc">true</span> <span class="p">:</span> <span class="kc">false</span><span class="p">;</span>
+
+<span class="kd">type</span> <span class="nx">Test1</span> <span class="o">=</span> <span class="nx">IsString</span><span class="o">&lt;</span><span class="kr">string</span><span class="o">&gt;</span><span class="p">;</span>  <span class="c1">// true</span>
+<span class="kd">type</span> <span class="nx">Test2</span> <span class="o">=</span> <span class="nx">IsString</span><span class="o">&lt;</span><span class="kr">number</span><span class="o">&gt;</span><span class="p">;</span>  <span class="c1">// false</span>
+</code></pre></div></div>
+
+<p>Here, <code class="language-plaintext highlighter-rouge">IsString</code> is a conditional type that evaluates to <code class="language-plaintext highlighter-rouge">true</code> if the input type <code class="language-plaintext highlighter-rouge">T</code> is <code class="language-plaintext highlighter-rouge">string</code>, and <code class="language-plaintext highlighter-rouge">false</code> otherwise.</p>
+
+<p><br />
+<br /></p>
+
+<h3 id="2-best-practices-for-type-aliases">2. <strong>Best Practices for Type Aliases</strong></h3>
+
+<ol>
+  <li><strong>Use Descriptive Names:</strong> Make type alias names clear and meaningful to convey their purpose.
+    <div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">type</span> <span class="nx">ProductID</span> <span class="o">=</span> <span class="kr">string</span><span class="p">;</span>
+</code></pre></div>    </div>
+  </li>
+  <li><strong>Use for Non-Object Types:</strong> Prefer type aliases when working with primitives, unions, intersections, or complex types.
+    <div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">type</span> <span class="nx">Coordinate</span> <span class="o">=</span> <span class="p">[</span><span class="kr">number</span><span class="p">,</span> <span class="kr">number</span><span class="p">];</span>
+</code></pre></div>    </div>
+  </li>
+  <li><strong>Use Interfaces for Objects:</strong> When defining object shapes that might need to be extended or merged, prefer interfaces.
+    <div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">interface</span> <span class="nx">User</span> <span class="p">{</span>
+  <span class="nl">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">age</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li><strong>Avoid Overusing Aliases:</strong> Don’t alias everything—use them where they improve readability or reduce repetition.</li>
+</ol>
+
+
+  </div>
+
+  
+  <div style="margin-top: 20px;">
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = 'https://anusree6154s.github.io/documentation/type-aliases';
+      this.page.identifier = 'https://anusree6154s.github.io/documentation/type-aliases';
+    };
+
+    (function() {
+      var d = document, s = d.createElement('script');
+
+      s.src = 'https://anusree-anilkumar-blog.disqus.com/embed.js';
+
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript><a class="u-url" href="/documentation/type-aliases" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/documentation/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Blog &amp; Docs</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Anusree Anilkumar</li><li><a class="u-email" href="mailto:anilkumaranusree113@gmail.com">anilkumaranusree113@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/Anusree6154s"><svg class="svg-icon"><use xlink:href="/documentation/assets/minima-social-icons.svg#github"></use></svg> <span class="username">Anusree6154s</span></a></li><li><a href="https://www.linkedin.com/in/anusreeanilkumar1"><svg class="svg-icon"><use xlink:href="/documentation/assets/minima-social-icons.svg#linkedin"></use></svg> <span class="username">anusreeanilkumar1</span></a></li><li><a href="https://www.twitter.com/anu6154s"><svg class="svg-icon"><use xlink:href="/documentation/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">anu6154s</span></a></li><li><a href="/documentation/feed.xml"><svg class="svg-icon"><use xlink:href="/documentation/assets/minima-social-icons.svg#rss"></use></svg> <span>rss</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>This site is my personal documentation, made public for anyone who might find my code scribbles useful! ❤️</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

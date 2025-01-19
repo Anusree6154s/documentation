@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>More about Mapped Types | Blog &amp; Docs</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="More about Mapped Types" />
+<meta name="author" content="Anusree Anilkumar" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Mapped Types in TypeScript Mapped types are a powerful feature in TypeScript that allow you to create new types by transforming the properties of existing types. They are especially useful for modifying the shape or behavior of types dynamically, enabling more flexible and reusable code. 1. Syntax of Mapped Types The basic syntax for creating a mapped type is: type NewType&lt;T&gt; = { [Key in keyof T]: TransformedType }; keyof T: Extracts all keys from the type T as a union of string or symbol literal types. [Key in keyof T]: Iterates over each key in the type T. T[Key]: Accesses the type of the value corresponding to the key Key in T. Modifiers (readonly, ?): Used to adjust the properties (e.g., making them readonly or optional). 2. Examples of Mapped Types 2.1 Readonly Type Transforms all properties of an object into readonly properties, preventing them from being reassigned. type Readonly&lt;T&gt; = { readonly [Key in keyof T]: T[Key] }; interface Person { name: string; age: number; } type ReadonlyPerson = Readonly&lt;Person&gt;; const person: ReadonlyPerson = { name: &quot;Alice&quot;, age: 30 }; // person.name = &quot;Bob&quot;; // Error: cannot assign to &#39;name&#39; because it is a read-only property. 2.2 Partial Type Makes all properties of an object optional. type Partial&lt;T&gt; = { [Key in keyof T]?: T[Key] }; interface Person { name: string; age: number; } type PartialPerson = Partial&lt;Person&gt;; const person: PartialPerson = { name: &quot;Alice&quot; }; // `age` is optional 2.3 Required Type Makes all properties of an object required. type Required&lt;T&gt; = { [Key in keyof T]-?: T[Key] }; interface Person { name?: string; age?: number; } type RequiredPerson = Required&lt;Person&gt;; const person: RequiredPerson = { name: &quot;Alice&quot;, age: 30 }; // All properties are required 2.4 Record Type Creates an object type where keys are specified and values have a uniform type. type Record&lt;K extends keyof any, T&gt; = { [Key in K]: T }; type Roles = &quot;admin&quot; | &quot;user&quot; | &quot;guest&quot;; type Permissions = Record&lt;Roles, string&gt;; const permissions: Permissions = { admin: &quot;all&quot;, user: &quot;read-only&quot;, guest: &quot;none&quot;, }; 2.5 Pick Type Extracts a subset of properties from an object. type Pick&lt;T, K extends keyof T&gt; = { [Key in K]: T[Key] }; interface Person { name: string; age: number; address: string; } type NameAndAge = Pick&lt;Person, &quot;name&quot; | &quot;age&quot;&gt;; const person: NameAndAge = { name: &quot;Alice&quot;, age: 30 }; // Only name and age are allowed 2.6 Omit Type Removes specific properties from an object type. type Omit&lt;T, K extends keyof T&gt; = Pick&lt;T, Exclude&lt;keyof T, K&gt;&gt;; interface Person { name: string; age: number; address: string; } type WithoutAddress = Omit&lt;Person, &quot;address&quot;&gt;; const person: WithoutAddress = { name: &quot;Alice&quot;, age: 30 }; // Address is omitted 3. Key Modifiers in Mapped Types 3.1 readonly Modifier Applies the readonly modifier to all properties, making them immutable. type Readonly&lt;T&gt; = { readonly [Key in keyof T]: T[Key] }; 3.2 ? Modifier Applies the optional (?) modifier to all properties. type Partial&lt;T&gt; = { [Key in keyof T]?: T[Key] }; 3.3 -? Modifier Removes the optional modifier from all properties. type Required&lt;T&gt; = { [Key in keyof T]-?: T[Key] }; 3.4 -readonly Modifier Removes the readonly modifier from all properties. type Mutable&lt;T&gt; = { -readonly [Key in keyof T]: T[Key] }; 4. Combining Mapped Types with Utility Types Mapped types can be combined with other TypeScript features like utility types, union types, and conditional types. 4.1 Combining with Union Types You can use mapped types to iterate over a union of keys. type OptionsFlags&lt;T&gt; = { [Key in keyof T]: boolean }; interface Features { darkMode: () =&gt; void; newUser: () =&gt; void; } type FeatureFlags = OptionsFlags&lt;Features&gt;; const flags: FeatureFlags = { darkMode: true, newUser: false }; 4.2 Using Conditional Types You can conditionally modify the properties of a mapped type. type Nullable&lt;T&gt; = { [Key in keyof T]: T[Key] | null }; interface User { id: number; name: string; } type NullableUser = Nullable&lt;User&gt;; const user: NullableUser = { id: null, name: &quot;Alice&quot; }; // Properties can be null 5. Advanced Use Cases 5.1 Deep Readonly Make all properties of an object (and its nested objects) readonly. type DeepReadonly&lt;T&gt; = { readonly [Key in keyof T]: T[Key] extends object ? DeepReadonly&lt;T[Key]&gt; : T[Key]; }; interface NestedObject { level1: { level2: { value: string; }; }; } const obj: DeepReadonly&lt;NestedObject&gt; = { level1: { level2: { value: &quot;Hello&quot;, }, }, }; // obj.level1.level2.value = &quot;New Value&quot;; // Error 5.2 Filtering Keys Extract keys from an object based on their types. type FilterKeys&lt;T, U&gt; = { [Key in keyof T]: T[Key] extends U ? Key : never }[keyof T]; interface Example { name: string; age: number; isActive: boolean; } type StringKeys = FilterKeys&lt;Example, string&gt;; // &quot;name&quot; 6. How Mapped Types Relate to Other Topics Mapped types build upon foundational TypeScript concepts: Generics: Mapped types often use generics to create reusable type transformations. Type Inference: TypeScript infers types within mapped types to ensure transformations are type-safe. Union and Intersection Types: Mapped types frequently operate on unions or intersecting types to create flexible transformations. Conclusion Mapped types are a cornerstone of TypeScript’s type system, enabling developers to create dynamic, reusable, and type-safe transformations. By leveraging features like key modifiers, utility types, and conditional types, you can write more expressive and maintainable code tailored to your application’s needs. They provide the flexibility to adapt types without losing TypeScript’s static type-checking benefits." />
+<meta property="og:description" content="Mapped Types in TypeScript Mapped types are a powerful feature in TypeScript that allow you to create new types by transforming the properties of existing types. They are especially useful for modifying the shape or behavior of types dynamically, enabling more flexible and reusable code. 1. Syntax of Mapped Types The basic syntax for creating a mapped type is: type NewType&lt;T&gt; = { [Key in keyof T]: TransformedType }; keyof T: Extracts all keys from the type T as a union of string or symbol literal types. [Key in keyof T]: Iterates over each key in the type T. T[Key]: Accesses the type of the value corresponding to the key Key in T. Modifiers (readonly, ?): Used to adjust the properties (e.g., making them readonly or optional). 2. Examples of Mapped Types 2.1 Readonly Type Transforms all properties of an object into readonly properties, preventing them from being reassigned. type Readonly&lt;T&gt; = { readonly [Key in keyof T]: T[Key] }; interface Person { name: string; age: number; } type ReadonlyPerson = Readonly&lt;Person&gt;; const person: ReadonlyPerson = { name: &quot;Alice&quot;, age: 30 }; // person.name = &quot;Bob&quot;; // Error: cannot assign to &#39;name&#39; because it is a read-only property. 2.2 Partial Type Makes all properties of an object optional. type Partial&lt;T&gt; = { [Key in keyof T]?: T[Key] }; interface Person { name: string; age: number; } type PartialPerson = Partial&lt;Person&gt;; const person: PartialPerson = { name: &quot;Alice&quot; }; // `age` is optional 2.3 Required Type Makes all properties of an object required. type Required&lt;T&gt; = { [Key in keyof T]-?: T[Key] }; interface Person { name?: string; age?: number; } type RequiredPerson = Required&lt;Person&gt;; const person: RequiredPerson = { name: &quot;Alice&quot;, age: 30 }; // All properties are required 2.4 Record Type Creates an object type where keys are specified and values have a uniform type. type Record&lt;K extends keyof any, T&gt; = { [Key in K]: T }; type Roles = &quot;admin&quot; | &quot;user&quot; | &quot;guest&quot;; type Permissions = Record&lt;Roles, string&gt;; const permissions: Permissions = { admin: &quot;all&quot;, user: &quot;read-only&quot;, guest: &quot;none&quot;, }; 2.5 Pick Type Extracts a subset of properties from an object. type Pick&lt;T, K extends keyof T&gt; = { [Key in K]: T[Key] }; interface Person { name: string; age: number; address: string; } type NameAndAge = Pick&lt;Person, &quot;name&quot; | &quot;age&quot;&gt;; const person: NameAndAge = { name: &quot;Alice&quot;, age: 30 }; // Only name and age are allowed 2.6 Omit Type Removes specific properties from an object type. type Omit&lt;T, K extends keyof T&gt; = Pick&lt;T, Exclude&lt;keyof T, K&gt;&gt;; interface Person { name: string; age: number; address: string; } type WithoutAddress = Omit&lt;Person, &quot;address&quot;&gt;; const person: WithoutAddress = { name: &quot;Alice&quot;, age: 30 }; // Address is omitted 3. Key Modifiers in Mapped Types 3.1 readonly Modifier Applies the readonly modifier to all properties, making them immutable. type Readonly&lt;T&gt; = { readonly [Key in keyof T]: T[Key] }; 3.2 ? Modifier Applies the optional (?) modifier to all properties. type Partial&lt;T&gt; = { [Key in keyof T]?: T[Key] }; 3.3 -? Modifier Removes the optional modifier from all properties. type Required&lt;T&gt; = { [Key in keyof T]-?: T[Key] }; 3.4 -readonly Modifier Removes the readonly modifier from all properties. type Mutable&lt;T&gt; = { -readonly [Key in keyof T]: T[Key] }; 4. Combining Mapped Types with Utility Types Mapped types can be combined with other TypeScript features like utility types, union types, and conditional types. 4.1 Combining with Union Types You can use mapped types to iterate over a union of keys. type OptionsFlags&lt;T&gt; = { [Key in keyof T]: boolean }; interface Features { darkMode: () =&gt; void; newUser: () =&gt; void; } type FeatureFlags = OptionsFlags&lt;Features&gt;; const flags: FeatureFlags = { darkMode: true, newUser: false }; 4.2 Using Conditional Types You can conditionally modify the properties of a mapped type. type Nullable&lt;T&gt; = { [Key in keyof T]: T[Key] | null }; interface User { id: number; name: string; } type NullableUser = Nullable&lt;User&gt;; const user: NullableUser = { id: null, name: &quot;Alice&quot; }; // Properties can be null 5. Advanced Use Cases 5.1 Deep Readonly Make all properties of an object (and its nested objects) readonly. type DeepReadonly&lt;T&gt; = { readonly [Key in keyof T]: T[Key] extends object ? DeepReadonly&lt;T[Key]&gt; : T[Key]; }; interface NestedObject { level1: { level2: { value: string; }; }; } const obj: DeepReadonly&lt;NestedObject&gt; = { level1: { level2: { value: &quot;Hello&quot;, }, }, }; // obj.level1.level2.value = &quot;New Value&quot;; // Error 5.2 Filtering Keys Extract keys from an object based on their types. type FilterKeys&lt;T, U&gt; = { [Key in keyof T]: T[Key] extends U ? Key : never }[keyof T]; interface Example { name: string; age: number; isActive: boolean; } type StringKeys = FilterKeys&lt;Example, string&gt;; // &quot;name&quot; 6. How Mapped Types Relate to Other Topics Mapped types build upon foundational TypeScript concepts: Generics: Mapped types often use generics to create reusable type transformations. Type Inference: TypeScript infers types within mapped types to ensure transformations are type-safe. Union and Intersection Types: Mapped types frequently operate on unions or intersecting types to create flexible transformations. Conclusion Mapped types are a cornerstone of TypeScript’s type system, enabling developers to create dynamic, reusable, and type-safe transformations. By leveraging features like key modifiers, utility types, and conditional types, you can write more expressive and maintainable code tailored to your application’s needs. They provide the flexibility to adapt types without losing TypeScript’s static type-checking benefits." />
+<link rel="canonical" href="https://anusree6154s.github.io/documentation/mapped-types" />
+<meta property="og:url" content="https://anusree6154s.github.io/documentation/mapped-types" />
+<meta property="og:site_name" content="Blog &amp; Docs" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-01-19T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="More about Mapped Types" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Anusree Anilkumar"},"dateModified":"2025-01-19T00:00:00+00:00","datePublished":"2025-01-19T00:00:00+00:00","description":"Mapped Types in TypeScript Mapped types are a powerful feature in TypeScript that allow you to create new types by transforming the properties of existing types. They are especially useful for modifying the shape or behavior of types dynamically, enabling more flexible and reusable code. 1. Syntax of Mapped Types The basic syntax for creating a mapped type is: type NewType&lt;T&gt; = { [Key in keyof T]: TransformedType }; keyof T: Extracts all keys from the type T as a union of string or symbol literal types. [Key in keyof T]: Iterates over each key in the type T. T[Key]: Accesses the type of the value corresponding to the key Key in T. Modifiers (readonly, ?): Used to adjust the properties (e.g., making them readonly or optional). 2. Examples of Mapped Types 2.1 Readonly Type Transforms all properties of an object into readonly properties, preventing them from being reassigned. type Readonly&lt;T&gt; = { readonly [Key in keyof T]: T[Key] }; interface Person { name: string; age: number; } type ReadonlyPerson = Readonly&lt;Person&gt;; const person: ReadonlyPerson = { name: &quot;Alice&quot;, age: 30 }; // person.name = &quot;Bob&quot;; // Error: cannot assign to &#39;name&#39; because it is a read-only property. 2.2 Partial Type Makes all properties of an object optional. type Partial&lt;T&gt; = { [Key in keyof T]?: T[Key] }; interface Person { name: string; age: number; } type PartialPerson = Partial&lt;Person&gt;; const person: PartialPerson = { name: &quot;Alice&quot; }; // `age` is optional 2.3 Required Type Makes all properties of an object required. type Required&lt;T&gt; = { [Key in keyof T]-?: T[Key] }; interface Person { name?: string; age?: number; } type RequiredPerson = Required&lt;Person&gt;; const person: RequiredPerson = { name: &quot;Alice&quot;, age: 30 }; // All properties are required 2.4 Record Type Creates an object type where keys are specified and values have a uniform type. type Record&lt;K extends keyof any, T&gt; = { [Key in K]: T }; type Roles = &quot;admin&quot; | &quot;user&quot; | &quot;guest&quot;; type Permissions = Record&lt;Roles, string&gt;; const permissions: Permissions = { admin: &quot;all&quot;, user: &quot;read-only&quot;, guest: &quot;none&quot;, }; 2.5 Pick Type Extracts a subset of properties from an object. type Pick&lt;T, K extends keyof T&gt; = { [Key in K]: T[Key] }; interface Person { name: string; age: number; address: string; } type NameAndAge = Pick&lt;Person, &quot;name&quot; | &quot;age&quot;&gt;; const person: NameAndAge = { name: &quot;Alice&quot;, age: 30 }; // Only name and age are allowed 2.6 Omit Type Removes specific properties from an object type. type Omit&lt;T, K extends keyof T&gt; = Pick&lt;T, Exclude&lt;keyof T, K&gt;&gt;; interface Person { name: string; age: number; address: string; } type WithoutAddress = Omit&lt;Person, &quot;address&quot;&gt;; const person: WithoutAddress = { name: &quot;Alice&quot;, age: 30 }; // Address is omitted 3. Key Modifiers in Mapped Types 3.1 readonly Modifier Applies the readonly modifier to all properties, making them immutable. type Readonly&lt;T&gt; = { readonly [Key in keyof T]: T[Key] }; 3.2 ? Modifier Applies the optional (?) modifier to all properties. type Partial&lt;T&gt; = { [Key in keyof T]?: T[Key] }; 3.3 -? Modifier Removes the optional modifier from all properties. type Required&lt;T&gt; = { [Key in keyof T]-?: T[Key] }; 3.4 -readonly Modifier Removes the readonly modifier from all properties. type Mutable&lt;T&gt; = { -readonly [Key in keyof T]: T[Key] }; 4. Combining Mapped Types with Utility Types Mapped types can be combined with other TypeScript features like utility types, union types, and conditional types. 4.1 Combining with Union Types You can use mapped types to iterate over a union of keys. type OptionsFlags&lt;T&gt; = { [Key in keyof T]: boolean }; interface Features { darkMode: () =&gt; void; newUser: () =&gt; void; } type FeatureFlags = OptionsFlags&lt;Features&gt;; const flags: FeatureFlags = { darkMode: true, newUser: false }; 4.2 Using Conditional Types You can conditionally modify the properties of a mapped type. type Nullable&lt;T&gt; = { [Key in keyof T]: T[Key] | null }; interface User { id: number; name: string; } type NullableUser = Nullable&lt;User&gt;; const user: NullableUser = { id: null, name: &quot;Alice&quot; }; // Properties can be null 5. Advanced Use Cases 5.1 Deep Readonly Make all properties of an object (and its nested objects) readonly. type DeepReadonly&lt;T&gt; = { readonly [Key in keyof T]: T[Key] extends object ? DeepReadonly&lt;T[Key]&gt; : T[Key]; }; interface NestedObject { level1: { level2: { value: string; }; }; } const obj: DeepReadonly&lt;NestedObject&gt; = { level1: { level2: { value: &quot;Hello&quot;, }, }, }; // obj.level1.level2.value = &quot;New Value&quot;; // Error 5.2 Filtering Keys Extract keys from an object based on their types. type FilterKeys&lt;T, U&gt; = { [Key in keyof T]: T[Key] extends U ? Key : never }[keyof T]; interface Example { name: string; age: number; isActive: boolean; } type StringKeys = FilterKeys&lt;Example, string&gt;; // &quot;name&quot; 6. How Mapped Types Relate to Other Topics Mapped types build upon foundational TypeScript concepts: Generics: Mapped types often use generics to create reusable type transformations. Type Inference: TypeScript infers types within mapped types to ensure transformations are type-safe. Union and Intersection Types: Mapped types frequently operate on unions or intersecting types to create flexible transformations. Conclusion Mapped types are a cornerstone of TypeScript’s type system, enabling developers to create dynamic, reusable, and type-safe transformations. By leveraging features like key modifiers, utility types, and conditional types, you can write more expressive and maintainable code tailored to your application’s needs. They provide the flexibility to adapt types without losing TypeScript’s static type-checking benefits.","headline":"More about Mapped Types","mainEntityOfPage":{"@type":"WebPage","@id":"https://anusree6154s.github.io/documentation/mapped-types"},"url":"https://anusree6154s.github.io/documentation/mapped-types"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/documentation/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://anusree6154s.github.io/documentation/feed.xml" title="Blog &amp; Docs" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/documentation/">Blog &amp; Docs</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/documentation/about">About Me</a><a class="page-link" href="/documentation/table-of-contents">Table of Contents</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  
+  
+  
+  <div class="parent-link">
+    This post is part of <a href="/documentation/typescript-learners-guide">Typescript learners guide</a>.
+  </div>
+  
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">More about Mapped Types</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2025-01-19T00:00:00+00:00" itemprop="datePublished">19 Jan 2025
+      </time></p>
+      <p><span  class="tag-badge">
+            typescript
+        </span><span  class="tag-badge">
+            mapped types
+        </span></span>
+</p>
+  </header>
+
+  
+
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h3 id="mapped-types-in-typescript"><strong>Mapped Types in TypeScript</strong></h3>
+
+<p>Mapped types are a powerful feature in TypeScript that allow you to create new types by transforming the properties of existing types. They are especially useful for modifying the shape or behavior of types dynamically, enabling more flexible and reusable code.</p>
+
+<p><br /></p>
+
+<h3 id="1-syntax-of-mapped-types"><strong>1. Syntax of Mapped Types</strong></h3>
+
+<p>The basic syntax for creating a mapped type is:</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">type</span> <span class="nx">NewType</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span> <span class="p">[</span><span class="nx">Key</span> <span class="k">in</span> <span class="kr">keyof</span> <span class="nx">T</span><span class="p">]:</span> <span class="nx">TransformedType</span> <span class="p">};</span>
+</code></pre></div></div>
+
+<ul>
+  <li><strong><code class="language-plaintext highlighter-rouge">keyof T</code></strong>: Extracts all keys from the type <code class="language-plaintext highlighter-rouge">T</code> as a union of string or symbol literal types.</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">[Key in keyof T]</code></strong>: Iterates over each key in the type <code class="language-plaintext highlighter-rouge">T</code>.</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">T[Key]</code></strong>: Accesses the type of the value corresponding to the key <code class="language-plaintext highlighter-rouge">Key</code> in <code class="language-plaintext highlighter-rouge">T</code>.</li>
+  <li><strong>Modifiers</strong> (<code class="language-plaintext highlighter-rouge">readonly</code>, <code class="language-plaintext highlighter-rouge">?</code>): Used to adjust the properties (e.g., making them <code class="language-plaintext highlighter-rouge">readonly</code> or optional).</li>
+</ul>
+
+<p><br /></p>
+
+<h3 id="2-examples-of-mapped-types"><strong>2. Examples of Mapped Types</strong></h3>
+
+<h4 id="21-readonly-type"><strong>2.1 Readonly Type</strong></h4>
+
+<p>Transforms all properties of an object into <code class="language-plaintext highlighter-rouge">readonly</code> properties, preventing them from being reassigned.</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">type</span> <span class="nb">Readonly</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span> <span class="k">readonly</span> <span class="p">[</span><span class="nx">Key</span> <span class="k">in</span> <span class="kr">keyof</span> <span class="nx">T</span><span class="p">]:</span> <span class="nx">T</span><span class="p">[</span><span class="nx">Key</span><span class="p">]</span> <span class="p">};</span>
+
+<span class="kr">interface</span> <span class="nx">Person</span> <span class="p">{</span>
+  <span class="nl">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">age</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">ReadonlyPerson</span> <span class="o">=</span> <span class="nb">Readonly</span><span class="o">&lt;</span><span class="nx">Person</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">person</span><span class="p">:</span> <span class="nx">ReadonlyPerson</span> <span class="o">=</span> <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Alice</span><span class="dl">"</span><span class="p">,</span> <span class="na">age</span><span class="p">:</span> <span class="mi">30</span> <span class="p">};</span>
+<span class="c1">// person.name = "Bob"; // Error: cannot assign to 'name' because it is a read-only property.</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h4 id="22-partial-type"><strong>2.2 Partial Type</strong></h4>
+
+<p>Makes all properties of an object optional.</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">type</span> <span class="nb">Partial</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span> <span class="p">[</span><span class="nx">Key</span> <span class="k">in</span> <span class="kr">keyof</span> <span class="nx">T</span><span class="p">]?:</span> <span class="nx">T</span><span class="p">[</span><span class="nx">Key</span><span class="p">]</span> <span class="p">};</span>
+
+<span class="kr">interface</span> <span class="nx">Person</span> <span class="p">{</span>
+  <span class="nl">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">age</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">PartialPerson</span> <span class="o">=</span> <span class="nb">Partial</span><span class="o">&lt;</span><span class="nx">Person</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">person</span><span class="p">:</span> <span class="nx">PartialPerson</span> <span class="o">=</span> <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Alice</span><span class="dl">"</span> <span class="p">};</span> <span class="c1">// `age` is optional</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h4 id="23-required-type"><strong>2.3 Required Type</strong></h4>
+
+<p>Makes all properties of an object required.</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">type</span> <span class="nx">Required</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span> <span class="p">[</span><span class="nx">Key</span> <span class="k">in</span> <span class="kr">keyof</span> <span class="nx">T</span><span class="p">]</span><span class="o">-</span><span class="p">?:</span> <span class="nx">T</span><span class="p">[</span><span class="nx">Key</span><span class="p">]</span> <span class="p">};</span>
+
+<span class="kr">interface</span> <span class="nx">Person</span> <span class="p">{</span>
+  <span class="nl">name</span><span class="p">?:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">age</span><span class="p">?:</span> <span class="kr">number</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">RequiredPerson</span> <span class="o">=</span> <span class="nx">Required</span><span class="o">&lt;</span><span class="nx">Person</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">person</span><span class="p">:</span> <span class="nx">RequiredPerson</span> <span class="o">=</span> <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Alice</span><span class="dl">"</span><span class="p">,</span> <span class="na">age</span><span class="p">:</span> <span class="mi">30</span> <span class="p">};</span> <span class="c1">// All properties are required</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h4 id="24-record-type"><strong>2.4 Record Type</strong></h4>
+
+<p>Creates an object type where keys are specified and values have a uniform type.</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">type</span> <span class="nb">Record</span><span class="o">&lt;</span><span class="nx">K</span> <span class="kd">extends</span> <span class="kr">keyof</span> <span class="kr">any</span><span class="p">,</span> <span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span> <span class="p">[</span><span class="nx">Key</span> <span class="k">in</span> <span class="nx">K</span><span class="p">]:</span> <span class="nx">T</span> <span class="p">};</span>
+
+<span class="kd">type</span> <span class="nx">Roles</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">admin</span><span class="dl">"</span> <span class="o">|</span> <span class="dl">"</span><span class="s2">user</span><span class="dl">"</span> <span class="o">|</span> <span class="dl">"</span><span class="s2">guest</span><span class="dl">"</span><span class="p">;</span>
+<span class="kd">type</span> <span class="nx">Permissions</span> <span class="o">=</span> <span class="nb">Record</span><span class="o">&lt;</span><span class="nx">Roles</span><span class="p">,</span> <span class="kr">string</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">permissions</span><span class="p">:</span> <span class="nx">Permissions</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">admin</span><span class="p">:</span> <span class="dl">"</span><span class="s2">all</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">user</span><span class="p">:</span> <span class="dl">"</span><span class="s2">read-only</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">guest</span><span class="p">:</span> <span class="dl">"</span><span class="s2">none</span><span class="dl">"</span><span class="p">,</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h4 id="25-pick-type"><strong>2.5 Pick Type</strong></h4>
+
+<p>Extracts a subset of properties from an object.</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">type</span> <span class="nb">Pick</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">,</span> <span class="nx">K</span> <span class="kd">extends</span> <span class="kr">keyof</span> <span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span> <span class="p">[</span><span class="nx">Key</span> <span class="k">in</span> <span class="nx">K</span><span class="p">]:</span> <span class="nx">T</span><span class="p">[</span><span class="nx">Key</span><span class="p">]</span> <span class="p">};</span>
+
+<span class="kr">interface</span> <span class="nx">Person</span> <span class="p">{</span>
+  <span class="nl">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">age</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span>
+  <span class="nl">address</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">NameAndAge</span> <span class="o">=</span> <span class="nb">Pick</span><span class="o">&lt;</span><span class="nx">Person</span><span class="p">,</span> <span class="dl">"</span><span class="s2">name</span><span class="dl">"</span> <span class="o">|</span> <span class="dl">"</span><span class="s2">age</span><span class="dl">"</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">person</span><span class="p">:</span> <span class="nx">NameAndAge</span> <span class="o">=</span> <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Alice</span><span class="dl">"</span><span class="p">,</span> <span class="na">age</span><span class="p">:</span> <span class="mi">30</span> <span class="p">};</span> <span class="c1">// Only name and age are allowed</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h4 id="26-omit-type"><strong>2.6 Omit Type</strong></h4>
+
+<p>Removes specific properties from an object type.</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">type</span> <span class="nx">Omit</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">,</span> <span class="nx">K</span> <span class="kd">extends</span> <span class="kr">keyof</span> <span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nb">Pick</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">,</span> <span class="nx">Exclude</span><span class="o">&lt;</span><span class="kr">keyof</span> <span class="nx">T</span><span class="p">,</span> <span class="nx">K</span><span class="o">&gt;&gt;</span><span class="p">;</span>
+
+<span class="kr">interface</span> <span class="nx">Person</span> <span class="p">{</span>
+  <span class="nl">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">age</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span>
+  <span class="nl">address</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">WithoutAddress</span> <span class="o">=</span> <span class="nx">Omit</span><span class="o">&lt;</span><span class="nx">Person</span><span class="p">,</span> <span class="dl">"</span><span class="s2">address</span><span class="dl">"</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">person</span><span class="p">:</span> <span class="nx">WithoutAddress</span> <span class="o">=</span> <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Alice</span><span class="dl">"</span><span class="p">,</span> <span class="na">age</span><span class="p">:</span> <span class="mi">30</span> <span class="p">};</span> <span class="c1">// Address is omitted</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h3 id="3-key-modifiers-in-mapped-types"><strong>3. Key Modifiers in Mapped Types</strong></h3>
+
+<h4 id="31-readonly-modifier"><strong>3.1 <code class="language-plaintext highlighter-rouge">readonly</code> Modifier</strong></h4>
+
+<p>Applies the <code class="language-plaintext highlighter-rouge">readonly</code> modifier to all properties, making them immutable.</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">type</span> <span class="nb">Readonly</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span> <span class="k">readonly</span> <span class="p">[</span><span class="nx">Key</span> <span class="k">in</span> <span class="kr">keyof</span> <span class="nx">T</span><span class="p">]:</span> <span class="nx">T</span><span class="p">[</span><span class="nx">Key</span><span class="p">]</span> <span class="p">};</span>
+</code></pre></div></div>
+
+<h4 id="32--modifier"><strong>3.2 <code class="language-plaintext highlighter-rouge">?</code> Modifier</strong></h4>
+
+<p>Applies the optional (<code class="language-plaintext highlighter-rouge">?</code>) modifier to all properties.</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">type</span> <span class="nb">Partial</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span> <span class="p">[</span><span class="nx">Key</span> <span class="k">in</span> <span class="kr">keyof</span> <span class="nx">T</span><span class="p">]?:</span> <span class="nx">T</span><span class="p">[</span><span class="nx">Key</span><span class="p">]</span> <span class="p">};</span>
+</code></pre></div></div>
+
+<h4 id="33---modifier"><strong>3.3 <code class="language-plaintext highlighter-rouge">-?</code> Modifier</strong></h4>
+
+<p>Removes the optional modifier from all properties.</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">type</span> <span class="nx">Required</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span> <span class="p">[</span><span class="nx">Key</span> <span class="k">in</span> <span class="kr">keyof</span> <span class="nx">T</span><span class="p">]</span><span class="o">-</span><span class="p">?:</span> <span class="nx">T</span><span class="p">[</span><span class="nx">Key</span><span class="p">]</span> <span class="p">};</span>
+</code></pre></div></div>
+
+<h4 id="34--readonly-modifier"><strong>3.4 <code class="language-plaintext highlighter-rouge">-readonly</code> Modifier</strong></h4>
+
+<p>Removes the <code class="language-plaintext highlighter-rouge">readonly</code> modifier from all properties.</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">type</span> <span class="nx">Mutable</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span> <span class="o">-</span><span class="k">readonly</span> <span class="p">[</span><span class="nx">Key</span> <span class="k">in</span> <span class="kr">keyof</span> <span class="nx">T</span><span class="p">]:</span> <span class="nx">T</span><span class="p">[</span><span class="nx">Key</span><span class="p">]</span> <span class="p">};</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h3 id="4-combining-mapped-types-with-utility-types"><strong>4. Combining Mapped Types with Utility Types</strong></h3>
+
+<p>Mapped types can be combined with other TypeScript features like <strong>utility types</strong>, <strong>union types</strong>, and <strong>conditional types</strong>.</p>
+
+<h4 id="41-combining-with-union-types"><strong>4.1 Combining with Union Types</strong></h4>
+
+<p>You can use mapped types to iterate over a union of keys.</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">type</span> <span class="nx">OptionsFlags</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span> <span class="p">[</span><span class="nx">Key</span> <span class="k">in</span> <span class="kr">keyof</span> <span class="nx">T</span><span class="p">]:</span> <span class="nx">boolean</span> <span class="p">};</span>
+
+<span class="kr">interface</span> <span class="nx">Features</span> <span class="p">{</span>
+  <span class="nl">darkMode</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span>
+  <span class="nl">newUser</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">FeatureFlags</span> <span class="o">=</span> <span class="nx">OptionsFlags</span><span class="o">&lt;</span><span class="nx">Features</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">flags</span><span class="p">:</span> <span class="nx">FeatureFlags</span> <span class="o">=</span> <span class="p">{</span> <span class="na">darkMode</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="na">newUser</span><span class="p">:</span> <span class="kc">false</span> <span class="p">};</span>
+</code></pre></div></div>
+
+<h4 id="42-using-conditional-types"><strong>4.2 Using Conditional Types</strong></h4>
+
+<p>You can conditionally modify the properties of a mapped type.</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">type</span> <span class="nx">Nullable</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span> <span class="p">[</span><span class="nx">Key</span> <span class="k">in</span> <span class="kr">keyof</span> <span class="nx">T</span><span class="p">]:</span> <span class="nx">T</span><span class="p">[</span><span class="nx">Key</span><span class="p">]</span> <span class="o">|</span> <span class="kc">null</span> <span class="p">};</span>
+
+<span class="kr">interface</span> <span class="nx">User</span> <span class="p">{</span>
+  <span class="nl">id</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span>
+  <span class="nl">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">NullableUser</span> <span class="o">=</span> <span class="nx">Nullable</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">user</span><span class="p">:</span> <span class="nx">NullableUser</span> <span class="o">=</span> <span class="p">{</span> <span class="na">id</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Alice</span><span class="dl">"</span> <span class="p">};</span> <span class="c1">// Properties can be null</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h3 id="5-advanced-use-cases"><strong>5. Advanced Use Cases</strong></h3>
+
+<h4 id="51-deep-readonly"><strong>5.1 Deep Readonly</strong></h4>
+
+<p>Make all properties of an object (and its nested objects) <code class="language-plaintext highlighter-rouge">readonly</code>.</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">type</span> <span class="nx">DeepReadonly</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="k">readonly</span> <span class="p">[</span><span class="nx">Key</span> <span class="k">in</span> <span class="kr">keyof</span> <span class="nx">T</span><span class="p">]:</span> <span class="nx">T</span><span class="p">[</span><span class="nx">Key</span><span class="p">]</span> <span class="kd">extends</span> <span class="nx">object</span> <span class="p">?</span> <span class="nx">DeepReadonly</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">[</span><span class="nx">Key</span><span class="p">]</span><span class="o">&gt;</span> <span class="p">:</span> <span class="nx">T</span><span class="p">[</span><span class="nx">Key</span><span class="p">];</span>
+<span class="p">};</span>
+
+<span class="kr">interface</span> <span class="nx">NestedObject</span> <span class="p">{</span>
+  <span class="nl">level1</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">level2</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">value</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+    <span class="p">};</span>
+  <span class="p">};</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">obj</span><span class="p">:</span> <span class="nx">DeepReadonly</span><span class="o">&lt;</span><span class="nx">NestedObject</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">level1</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">level2</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">value</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Hello</span><span class="dl">"</span><span class="p">,</span>
+    <span class="p">},</span>
+  <span class="p">},</span>
+<span class="p">};</span>
+
+<span class="c1">// obj.level1.level2.value = "New Value"; // Error</span>
+</code></pre></div></div>
+
+<h4 id="52-filtering-keys"><strong>5.2 Filtering Keys</strong></h4>
+
+<p>Extract keys from an object based on their types.</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">type</span> <span class="nx">FilterKeys</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">,</span> <span class="nx">U</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span> <span class="p">[</span><span class="nx">Key</span> <span class="k">in</span> <span class="kr">keyof</span> <span class="nx">T</span><span class="p">]:</span> <span class="nx">T</span><span class="p">[</span><span class="nx">Key</span><span class="p">]</span> <span class="kd">extends</span> <span class="nx">U</span> <span class="p">?</span> <span class="nx">Key</span> <span class="p">:</span> <span class="nx">never</span> <span class="p">}[</span><span class="kr">keyof</span> <span class="nx">T</span><span class="p">];</span>
+
+<span class="kr">interface</span> <span class="nx">Example</span> <span class="p">{</span>
+  <span class="nl">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">age</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span>
+  <span class="nl">isActive</span><span class="p">:</span> <span class="nx">boolean</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">StringKeys</span> <span class="o">=</span> <span class="nx">FilterKeys</span><span class="o">&lt;</span><span class="nx">Example</span><span class="p">,</span> <span class="kr">string</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// "name"</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h3 id="6-how-mapped-types-relate-to-other-topics"><strong>6. How Mapped Types Relate to Other Topics</strong></h3>
+
+<p>Mapped types build upon foundational TypeScript concepts:</p>
+
+<ol>
+  <li><strong>Generics</strong>: Mapped types often use generics to create reusable type transformations.</li>
+  <li><strong>Type Inference</strong>: TypeScript infers types within mapped types to ensure transformations are type-safe.</li>
+  <li><strong>Union and Intersection Types</strong>: Mapped types frequently operate on unions or intersecting types to create flexible transformations.</li>
+</ol>
+
+<p><br /></p>
+
+<h3 id="conclusion"><strong>Conclusion</strong></h3>
+
+<p>Mapped types are a cornerstone of TypeScript’s type system, enabling developers to create dynamic, reusable, and type-safe transformations. By leveraging features like key modifiers, utility types, and conditional types, you can write more expressive and maintainable code tailored to your application’s needs. They provide the flexibility to adapt types without losing TypeScript’s static type-checking benefits.</p>
+
+  </div>
+
+  
+  <div style="margin-top: 20px;">
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = 'https://anusree6154s.github.io/documentation/mapped-types';
+      this.page.identifier = 'https://anusree6154s.github.io/documentation/mapped-types';
+    };
+
+    (function() {
+      var d = document, s = d.createElement('script');
+
+      s.src = 'https://anusree-anilkumar-blog.disqus.com/embed.js';
+
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript><a class="u-url" href="/documentation/mapped-types" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/documentation/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Blog &amp; Docs</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Anusree Anilkumar</li><li><a class="u-email" href="mailto:anilkumaranusree113@gmail.com">anilkumaranusree113@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/Anusree6154s"><svg class="svg-icon"><use xlink:href="/documentation/assets/minima-social-icons.svg#github"></use></svg> <span class="username">Anusree6154s</span></a></li><li><a href="https://www.linkedin.com/in/anusreeanilkumar1"><svg class="svg-icon"><use xlink:href="/documentation/assets/minima-social-icons.svg#linkedin"></use></svg> <span class="username">anusreeanilkumar1</span></a></li><li><a href="https://www.twitter.com/anu6154s"><svg class="svg-icon"><use xlink:href="/documentation/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">anu6154s</span></a></li><li><a href="/documentation/feed.xml"><svg class="svg-icon"><use xlink:href="/documentation/assets/minima-social-icons.svg#rss"></use></svg> <span>rss</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>This site is my personal documentation, made public for anyone who might find my code scribbles useful! ❤️</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>More about Discriminated Unions | Blog &amp; Docs</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="More about Discriminated Unions" />
+<meta name="author" content="Anusree Anilkumar" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Discriminated Unions in TypeScript Discriminated unions, also known as tagged unions or algebraic data types, are a powerful feature in TypeScript. They enable you to work with union types that include a shared property (discriminant) to help narrow down specific types in a type-safe way. This makes it easier to work with complex types and ensures type safety during development. 1. What Are Discriminated Unions? A discriminated union is a union type where each variant (type in the union) has a unique literal property, often called a discriminant or tag. The discriminant property is used to determine which variant of the union is currently being used. Key Components: Union Types: A type composed of multiple possible types.You define it by using the | (pipe) symbol to combine multiple types. type Shape = | { kind: &quot;circle&quot;; radius: number } | { kind: &quot;square&quot;; sideLength: number }; Discriminant Property: A shared property that uniquely identifies each member of the union. It often uses a literal value like “circle&quot; or &quot;square&quot;. type Shape = | { kind: &quot;circle&quot;; radius: number } | { kind: &quot;square&quot;; sideLength: number }; Narrowing: TypeScript uses the discriminant to refine the type within specific branches of code. function area(shape: Shape): number { if (shape.kind === &quot;circle&quot;) { return Math.PI * shape.radius ** 2; // shape is narrowed to { kind: &quot;circle&quot;; radius: number } } else { return shape.sideLength ** 2; // shape is narrowed to { kind: &quot;square&quot;; sideLength: number } } } Explanation: Inside the if and else branches, TypeScript narrows the type based on the value of shape.kind. If shape.kind is &quot;circle&quot;, TypeScript knows it’s a circle and can access the radius property. Similarly, if shape.kind is &quot;square&quot;, TypeScript knows it’s a square and can access the sideLength property. 2. Example: Discriminated Unions Here’s an example where kind is the discriminant property: type Shape = | { kind: &quot;circle&quot;; radius: number } | { kind: &quot;square&quot;; sideLength: number } | { kind: &quot;rectangle&quot;; width: number; height: number }; function area(shape: Shape): number { switch (shape.kind) { case &quot;circle&quot;: return Math.PI * shape.radius ** 2; case &quot;square&quot;: return shape.sideLength ** 2; case &quot;rectangle&quot;: return shape.width * shape.height; default: throw new Error(&quot;Unknown shape&quot;); } } const circle: Shape = { kind: &quot;circle&quot;, radius: 10 }; console.log(area(circle)); // 314.1592653589793 3. How Discriminated Unions Work TypeScript uses control flow analysis to refine types within a block of code. When it detects a comparison or check against the discriminant property, it narrows the type automatically. Example: type Animal = | { type: &quot;dog&quot;; bark: () =&gt; void } | { type: &quot;cat&quot;; meow: () =&gt; void }; function makeSound(animal: Animal): void { if (animal.type === &quot;dog&quot;) { animal.bark(); // TypeScript knows this is a dog } else { animal.meow(); // TypeScript knows this is a cat } } 4. Benefits of Discriminated Unions Type Safety: Ensures only valid properties and methods are accessed. Readability: The discriminant property makes it easy to distinguish between types. Error Prevention: TypeScript catches missing cases in functions and ensures exhaustive checks when using switch statements. Code Clarity: Clear separation of logic for each type in the union. 5. Exhaustiveness Checking TypeScript helps ensure that all possible variants of a discriminated union are handled. If you miss a case, TypeScript can throw an error. Example: Adding a never Case function area(shape: Shape): number { switch (shape.kind) { case &quot;circle&quot;: return Math.PI * shape.radius ** 2; case &quot;square&quot;: return shape.sideLength ** 2; case &quot;rectangle&quot;: return shape.width * shape.height; default: const _exhaustiveCheck: never = shape; // TypeScript error if a new variant is added throw new Error(`Unhandled shape: ${_exhaustiveCheck}`); } } 6. Practical Use Cases Discriminated unions are widely used for scenarios where you need to handle multiple related types with unique behaviors. 6.1 State Management type State = | { status: &quot;loading&quot; } | { status: &quot;success&quot;; data: string } | { status: &quot;error&quot;; error: string }; function handleState(state: State): void { switch (state.status) { case &quot;loading&quot;: console.log(&quot;Loading...&quot;); break; case &quot;success&quot;: console.log(`Data: ${state.data}`); break; case &quot;error&quot;: console.error(`Error: ${state.error}`); break; } } 6.2 API Responses type ApiResponse = | { status: &quot;ok&quot;; data: any } | { status: &quot;error&quot;; error: string }; function handleResponse(response: ApiResponse): void { if (response.status === &quot;ok&quot;) { console.log(&quot;Data:&quot;, response.data); } else { console.error(&quot;Error:&quot;, response.error); } }" />
+<meta property="og:description" content="Discriminated Unions in TypeScript Discriminated unions, also known as tagged unions or algebraic data types, are a powerful feature in TypeScript. They enable you to work with union types that include a shared property (discriminant) to help narrow down specific types in a type-safe way. This makes it easier to work with complex types and ensures type safety during development. 1. What Are Discriminated Unions? A discriminated union is a union type where each variant (type in the union) has a unique literal property, often called a discriminant or tag. The discriminant property is used to determine which variant of the union is currently being used. Key Components: Union Types: A type composed of multiple possible types.You define it by using the | (pipe) symbol to combine multiple types. type Shape = | { kind: &quot;circle&quot;; radius: number } | { kind: &quot;square&quot;; sideLength: number }; Discriminant Property: A shared property that uniquely identifies each member of the union. It often uses a literal value like “circle&quot; or &quot;square&quot;. type Shape = | { kind: &quot;circle&quot;; radius: number } | { kind: &quot;square&quot;; sideLength: number }; Narrowing: TypeScript uses the discriminant to refine the type within specific branches of code. function area(shape: Shape): number { if (shape.kind === &quot;circle&quot;) { return Math.PI * shape.radius ** 2; // shape is narrowed to { kind: &quot;circle&quot;; radius: number } } else { return shape.sideLength ** 2; // shape is narrowed to { kind: &quot;square&quot;; sideLength: number } } } Explanation: Inside the if and else branches, TypeScript narrows the type based on the value of shape.kind. If shape.kind is &quot;circle&quot;, TypeScript knows it’s a circle and can access the radius property. Similarly, if shape.kind is &quot;square&quot;, TypeScript knows it’s a square and can access the sideLength property. 2. Example: Discriminated Unions Here’s an example where kind is the discriminant property: type Shape = | { kind: &quot;circle&quot;; radius: number } | { kind: &quot;square&quot;; sideLength: number } | { kind: &quot;rectangle&quot;; width: number; height: number }; function area(shape: Shape): number { switch (shape.kind) { case &quot;circle&quot;: return Math.PI * shape.radius ** 2; case &quot;square&quot;: return shape.sideLength ** 2; case &quot;rectangle&quot;: return shape.width * shape.height; default: throw new Error(&quot;Unknown shape&quot;); } } const circle: Shape = { kind: &quot;circle&quot;, radius: 10 }; console.log(area(circle)); // 314.1592653589793 3. How Discriminated Unions Work TypeScript uses control flow analysis to refine types within a block of code. When it detects a comparison or check against the discriminant property, it narrows the type automatically. Example: type Animal = | { type: &quot;dog&quot;; bark: () =&gt; void } | { type: &quot;cat&quot;; meow: () =&gt; void }; function makeSound(animal: Animal): void { if (animal.type === &quot;dog&quot;) { animal.bark(); // TypeScript knows this is a dog } else { animal.meow(); // TypeScript knows this is a cat } } 4. Benefits of Discriminated Unions Type Safety: Ensures only valid properties and methods are accessed. Readability: The discriminant property makes it easy to distinguish between types. Error Prevention: TypeScript catches missing cases in functions and ensures exhaustive checks when using switch statements. Code Clarity: Clear separation of logic for each type in the union. 5. Exhaustiveness Checking TypeScript helps ensure that all possible variants of a discriminated union are handled. If you miss a case, TypeScript can throw an error. Example: Adding a never Case function area(shape: Shape): number { switch (shape.kind) { case &quot;circle&quot;: return Math.PI * shape.radius ** 2; case &quot;square&quot;: return shape.sideLength ** 2; case &quot;rectangle&quot;: return shape.width * shape.height; default: const _exhaustiveCheck: never = shape; // TypeScript error if a new variant is added throw new Error(`Unhandled shape: ${_exhaustiveCheck}`); } } 6. Practical Use Cases Discriminated unions are widely used for scenarios where you need to handle multiple related types with unique behaviors. 6.1 State Management type State = | { status: &quot;loading&quot; } | { status: &quot;success&quot;; data: string } | { status: &quot;error&quot;; error: string }; function handleState(state: State): void { switch (state.status) { case &quot;loading&quot;: console.log(&quot;Loading...&quot;); break; case &quot;success&quot;: console.log(`Data: ${state.data}`); break; case &quot;error&quot;: console.error(`Error: ${state.error}`); break; } } 6.2 API Responses type ApiResponse = | { status: &quot;ok&quot;; data: any } | { status: &quot;error&quot;; error: string }; function handleResponse(response: ApiResponse): void { if (response.status === &quot;ok&quot;) { console.log(&quot;Data:&quot;, response.data); } else { console.error(&quot;Error:&quot;, response.error); } }" />
+<link rel="canonical" href="https://anusree6154s.github.io/documentation/discriminated-unions" />
+<meta property="og:url" content="https://anusree6154s.github.io/documentation/discriminated-unions" />
+<meta property="og:site_name" content="Blog &amp; Docs" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-01-19T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="More about Discriminated Unions" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Anusree Anilkumar"},"dateModified":"2025-01-19T00:00:00+00:00","datePublished":"2025-01-19T00:00:00+00:00","description":"Discriminated Unions in TypeScript Discriminated unions, also known as tagged unions or algebraic data types, are a powerful feature in TypeScript. They enable you to work with union types that include a shared property (discriminant) to help narrow down specific types in a type-safe way. This makes it easier to work with complex types and ensures type safety during development. 1. What Are Discriminated Unions? A discriminated union is a union type where each variant (type in the union) has a unique literal property, often called a discriminant or tag. The discriminant property is used to determine which variant of the union is currently being used. Key Components: Union Types: A type composed of multiple possible types.You define it by using the | (pipe) symbol to combine multiple types. type Shape = | { kind: &quot;circle&quot;; radius: number } | { kind: &quot;square&quot;; sideLength: number }; Discriminant Property: A shared property that uniquely identifies each member of the union. It often uses a literal value like “circle&quot; or &quot;square&quot;. type Shape = | { kind: &quot;circle&quot;; radius: number } | { kind: &quot;square&quot;; sideLength: number }; Narrowing: TypeScript uses the discriminant to refine the type within specific branches of code. function area(shape: Shape): number { if (shape.kind === &quot;circle&quot;) { return Math.PI * shape.radius ** 2; // shape is narrowed to { kind: &quot;circle&quot;; radius: number } } else { return shape.sideLength ** 2; // shape is narrowed to { kind: &quot;square&quot;; sideLength: number } } } Explanation: Inside the if and else branches, TypeScript narrows the type based on the value of shape.kind. If shape.kind is &quot;circle&quot;, TypeScript knows it’s a circle and can access the radius property. Similarly, if shape.kind is &quot;square&quot;, TypeScript knows it’s a square and can access the sideLength property. 2. Example: Discriminated Unions Here’s an example where kind is the discriminant property: type Shape = | { kind: &quot;circle&quot;; radius: number } | { kind: &quot;square&quot;; sideLength: number } | { kind: &quot;rectangle&quot;; width: number; height: number }; function area(shape: Shape): number { switch (shape.kind) { case &quot;circle&quot;: return Math.PI * shape.radius ** 2; case &quot;square&quot;: return shape.sideLength ** 2; case &quot;rectangle&quot;: return shape.width * shape.height; default: throw new Error(&quot;Unknown shape&quot;); } } const circle: Shape = { kind: &quot;circle&quot;, radius: 10 }; console.log(area(circle)); // 314.1592653589793 3. How Discriminated Unions Work TypeScript uses control flow analysis to refine types within a block of code. When it detects a comparison or check against the discriminant property, it narrows the type automatically. Example: type Animal = | { type: &quot;dog&quot;; bark: () =&gt; void } | { type: &quot;cat&quot;; meow: () =&gt; void }; function makeSound(animal: Animal): void { if (animal.type === &quot;dog&quot;) { animal.bark(); // TypeScript knows this is a dog } else { animal.meow(); // TypeScript knows this is a cat } } 4. Benefits of Discriminated Unions Type Safety: Ensures only valid properties and methods are accessed. Readability: The discriminant property makes it easy to distinguish between types. Error Prevention: TypeScript catches missing cases in functions and ensures exhaustive checks when using switch statements. Code Clarity: Clear separation of logic for each type in the union. 5. Exhaustiveness Checking TypeScript helps ensure that all possible variants of a discriminated union are handled. If you miss a case, TypeScript can throw an error. Example: Adding a never Case function area(shape: Shape): number { switch (shape.kind) { case &quot;circle&quot;: return Math.PI * shape.radius ** 2; case &quot;square&quot;: return shape.sideLength ** 2; case &quot;rectangle&quot;: return shape.width * shape.height; default: const _exhaustiveCheck: never = shape; // TypeScript error if a new variant is added throw new Error(`Unhandled shape: ${_exhaustiveCheck}`); } } 6. Practical Use Cases Discriminated unions are widely used for scenarios where you need to handle multiple related types with unique behaviors. 6.1 State Management type State = | { status: &quot;loading&quot; } | { status: &quot;success&quot;; data: string } | { status: &quot;error&quot;; error: string }; function handleState(state: State): void { switch (state.status) { case &quot;loading&quot;: console.log(&quot;Loading...&quot;); break; case &quot;success&quot;: console.log(`Data: ${state.data}`); break; case &quot;error&quot;: console.error(`Error: ${state.error}`); break; } } 6.2 API Responses type ApiResponse = | { status: &quot;ok&quot;; data: any } | { status: &quot;error&quot;; error: string }; function handleResponse(response: ApiResponse): void { if (response.status === &quot;ok&quot;) { console.log(&quot;Data:&quot;, response.data); } else { console.error(&quot;Error:&quot;, response.error); } }","headline":"More about Discriminated Unions","mainEntityOfPage":{"@type":"WebPage","@id":"https://anusree6154s.github.io/documentation/discriminated-unions"},"url":"https://anusree6154s.github.io/documentation/discriminated-unions"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/documentation/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://anusree6154s.github.io/documentation/feed.xml" title="Blog &amp; Docs" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/documentation/">Blog &amp; Docs</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/documentation/about">About Me</a><a class="page-link" href="/documentation/table-of-contents">Table of Contents</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  
+  
+  
+  <div class="parent-link">
+    This post is part of <a href="/documentation/typescript-learners-guide">Typescript learners guide</a>.
+  </div>
+  
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">More about Discriminated Unions</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2025-01-19T00:00:00+00:00" itemprop="datePublished">19 Jan 2025
+      </time></p>
+      <p><span  class="tag-badge">
+            typescript
+        </span><span  class="tag-badge">
+            discriminated unions
+        </span></span>
+</p>
+  </header>
+
+  
+
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h3 id="discriminated-unions-in-typescript"><strong>Discriminated Unions in TypeScript</strong></h3>
+
+<p>Discriminated unions, also known as tagged unions or algebraic data types, are a powerful feature in TypeScript. They enable you to work with union types that include a shared property (discriminant) to help narrow down specific types in a type-safe way. This makes it easier to work with complex types and ensures type safety during development.</p>
+
+<p><br /></p>
+
+<h3 id="1-what-are-discriminated-unions"><strong>1. What Are Discriminated Unions?</strong></h3>
+
+<p>A discriminated union is a <strong>union type</strong> where each variant (type in the union) has a unique literal property, often called a <strong>discriminant</strong> or <strong>tag</strong>. The discriminant property is used to determine which variant of the union is currently being used.</p>
+
+<h4 id="key-components">Key Components:</h4>
+
+<ol>
+  <li><strong>Union Types</strong>: A type composed of multiple possible types.You define it by using the <code class="language-plaintext highlighter-rouge">|</code> (pipe) symbol to combine multiple types.</li>
+</ol>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">type</span> <span class="nx">Shape</span> <span class="o">=</span>
+  <span class="o">|</span> <span class="p">{</span> <span class="na">kind</span><span class="p">:</span> <span class="dl">"</span><span class="s2">circle</span><span class="dl">"</span><span class="p">;</span> <span class="nl">radius</span><span class="p">:</span> <span class="kr">number</span> <span class="p">}</span>
+  <span class="o">|</span> <span class="p">{</span> <span class="na">kind</span><span class="p">:</span> <span class="dl">"</span><span class="s2">square</span><span class="dl">"</span><span class="p">;</span> <span class="nl">sideLength</span><span class="p">:</span> <span class="kr">number</span> <span class="p">};</span>
+</code></pre></div></div>
+
+<ol>
+  <li><strong>Discriminant Property</strong>: A shared property that uniquely identifies each member of the union. It often uses a literal value like “<code class="language-plaintext highlighter-rouge">circle"</code> or <code class="language-plaintext highlighter-rouge">"square"</code>.</li>
+</ol>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">type</span> <span class="nx">Shape</span> <span class="o">=</span>
+  <span class="o">|</span> <span class="p">{</span> <span class="na">kind</span><span class="p">:</span> <span class="dl">"</span><span class="s2">circle</span><span class="dl">"</span><span class="p">;</span> <span class="nl">radius</span><span class="p">:</span> <span class="kr">number</span> <span class="p">}</span>
+  <span class="o">|</span> <span class="p">{</span> <span class="na">kind</span><span class="p">:</span> <span class="dl">"</span><span class="s2">square</span><span class="dl">"</span><span class="p">;</span> <span class="nl">sideLength</span><span class="p">:</span> <span class="kr">number</span> <span class="p">};</span>
+</code></pre></div></div>
+
+<ol>
+  <li><strong>Narrowing</strong>: TypeScript uses the discriminant to refine the type within specific branches of code.</li>
+</ol>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">area</span><span class="p">(</span><span class="nx">shape</span><span class="p">:</span> <span class="nx">Shape</span><span class="p">):</span> <span class="kr">number</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">shape</span><span class="p">.</span><span class="nx">kind</span> <span class="o">===</span> <span class="dl">"</span><span class="s2">circle</span><span class="dl">"</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span> <span class="o">*</span> <span class="nx">shape</span><span class="p">.</span><span class="nx">radius</span> <span class="o">**</span> <span class="mi">2</span><span class="p">;</span> <span class="c1">// shape is narrowed to { kind: "circle"; radius: number }</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">shape</span><span class="p">.</span><span class="nx">sideLength</span> <span class="o">**</span> <span class="mi">2</span><span class="p">;</span> <span class="c1">// shape is narrowed to { kind: "square"; sideLength: number }</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li><strong>Explanation</strong>: Inside the <code class="language-plaintext highlighter-rouge">if</code> and <code class="language-plaintext highlighter-rouge">else</code> branches, TypeScript narrows the type based on the value of <code class="language-plaintext highlighter-rouge">shape.kind</code>. If <code class="language-plaintext highlighter-rouge">shape.kind</code> is <code class="language-plaintext highlighter-rouge">"circle"</code>, TypeScript knows it’s a circle and can access the <code class="language-plaintext highlighter-rouge">radius</code> property. Similarly, if <code class="language-plaintext highlighter-rouge">shape.kind</code> is <code class="language-plaintext highlighter-rouge">"square"</code>, TypeScript knows it’s a square and can access the <code class="language-plaintext highlighter-rouge">sideLength</code> property.</li>
+</ul>
+
+<p><br /></p>
+
+<h3 id="2-example-discriminated-unions"><strong>2. Example: Discriminated Unions</strong></h3>
+
+<p>Here’s an example where <code class="language-plaintext highlighter-rouge">kind</code> is the discriminant property:</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">type</span> <span class="nx">Shape</span> <span class="o">=</span>
+  <span class="o">|</span> <span class="p">{</span> <span class="na">kind</span><span class="p">:</span> <span class="dl">"</span><span class="s2">circle</span><span class="dl">"</span><span class="p">;</span> <span class="nl">radius</span><span class="p">:</span> <span class="kr">number</span> <span class="p">}</span>
+  <span class="o">|</span> <span class="p">{</span> <span class="na">kind</span><span class="p">:</span> <span class="dl">"</span><span class="s2">square</span><span class="dl">"</span><span class="p">;</span> <span class="nl">sideLength</span><span class="p">:</span> <span class="kr">number</span> <span class="p">}</span>
+  <span class="o">|</span> <span class="p">{</span> <span class="na">kind</span><span class="p">:</span> <span class="dl">"</span><span class="s2">rectangle</span><span class="dl">"</span><span class="p">;</span> <span class="nl">width</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span> <span class="nl">height</span><span class="p">:</span> <span class="kr">number</span> <span class="p">};</span>
+
+<span class="kd">function</span> <span class="nx">area</span><span class="p">(</span><span class="nx">shape</span><span class="p">:</span> <span class="nx">Shape</span><span class="p">):</span> <span class="kr">number</span> <span class="p">{</span>
+  <span class="k">switch</span> <span class="p">(</span><span class="nx">shape</span><span class="p">.</span><span class="nx">kind</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="dl">"</span><span class="s2">circle</span><span class="dl">"</span><span class="p">:</span>
+      <span class="k">return</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span> <span class="o">*</span> <span class="nx">shape</span><span class="p">.</span><span class="nx">radius</span> <span class="o">**</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="k">case</span> <span class="dl">"</span><span class="s2">square</span><span class="dl">"</span><span class="p">:</span>
+      <span class="k">return</span> <span class="nx">shape</span><span class="p">.</span><span class="nx">sideLength</span> <span class="o">**</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="k">case</span> <span class="dl">"</span><span class="s2">rectangle</span><span class="dl">"</span><span class="p">:</span>
+      <span class="k">return</span> <span class="nx">shape</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="nx">shape</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
+    <span class="nl">default</span><span class="p">:</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">"</span><span class="s2">Unknown shape</span><span class="dl">"</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">circle</span><span class="p">:</span> <span class="nx">Shape</span> <span class="o">=</span> <span class="p">{</span> <span class="na">kind</span><span class="p">:</span> <span class="dl">"</span><span class="s2">circle</span><span class="dl">"</span><span class="p">,</span> <span class="na">radius</span><span class="p">:</span> <span class="mi">10</span> <span class="p">};</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">area</span><span class="p">(</span><span class="nx">circle</span><span class="p">));</span> <span class="c1">// 314.1592653589793</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h3 id="3-how-discriminated-unions-work"><strong>3. How Discriminated Unions Work</strong></h3>
+
+<p>TypeScript uses <strong>control flow analysis</strong> to refine types within a block of code. When it detects a comparison or check against the discriminant property, it narrows the type automatically.</p>
+
+<h4 id="example">Example:</h4>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">type</span> <span class="nx">Animal</span> <span class="o">=</span>
+  <span class="o">|</span> <span class="p">{</span> <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">dog</span><span class="dl">"</span><span class="p">;</span> <span class="nl">bark</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">void</span> <span class="p">}</span>
+  <span class="o">|</span> <span class="p">{</span> <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">cat</span><span class="dl">"</span><span class="p">;</span> <span class="nl">meow</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">void</span> <span class="p">};</span>
+
+<span class="kd">function</span> <span class="nx">makeSound</span><span class="p">(</span><span class="nx">animal</span><span class="p">:</span> <span class="nx">Animal</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">animal</span><span class="p">.</span><span class="kd">type</span> <span class="o">===</span> <span class="dl">"</span><span class="s2">dog</span><span class="dl">"</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">animal</span><span class="p">.</span><span class="nx">bark</span><span class="p">();</span> <span class="c1">// TypeScript knows this is a dog</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nx">animal</span><span class="p">.</span><span class="nx">meow</span><span class="p">();</span> <span class="c1">// TypeScript knows this is a cat</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h3 id="4-benefits-of-discriminated-unions"><strong>4. Benefits of Discriminated Unions</strong></h3>
+
+<ol>
+  <li><strong>Type Safety</strong>: Ensures only valid properties and methods are accessed.</li>
+  <li><strong>Readability</strong>: The discriminant property makes it easy to distinguish between types.</li>
+  <li><strong>Error Prevention</strong>: TypeScript catches missing cases in functions and ensures exhaustive checks when using <code class="language-plaintext highlighter-rouge">switch</code> statements.</li>
+  <li><strong>Code Clarity</strong>: Clear separation of logic for each type in the union.</li>
+</ol>
+
+<p><br /></p>
+
+<h3 id="5-exhaustiveness-checking"><strong>5. Exhaustiveness Checking</strong></h3>
+
+<p>TypeScript helps ensure that all possible variants of a discriminated union are handled. If you miss a case, TypeScript can throw an error.</p>
+
+<h4 id="example-adding-a-never-case">Example: Adding a <code class="language-plaintext highlighter-rouge">never</code> Case</h4>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">area</span><span class="p">(</span><span class="nx">shape</span><span class="p">:</span> <span class="nx">Shape</span><span class="p">):</span> <span class="kr">number</span> <span class="p">{</span>
+  <span class="k">switch</span> <span class="p">(</span><span class="nx">shape</span><span class="p">.</span><span class="nx">kind</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="dl">"</span><span class="s2">circle</span><span class="dl">"</span><span class="p">:</span>
+      <span class="k">return</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span> <span class="o">*</span> <span class="nx">shape</span><span class="p">.</span><span class="nx">radius</span> <span class="o">**</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="k">case</span> <span class="dl">"</span><span class="s2">square</span><span class="dl">"</span><span class="p">:</span>
+      <span class="k">return</span> <span class="nx">shape</span><span class="p">.</span><span class="nx">sideLength</span> <span class="o">**</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="k">case</span> <span class="dl">"</span><span class="s2">rectangle</span><span class="dl">"</span><span class="p">:</span>
+      <span class="k">return</span> <span class="nx">shape</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="nx">shape</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
+    <span class="nl">default</span><span class="p">:</span>
+      <span class="kd">const</span> <span class="nx">_exhaustiveCheck</span><span class="p">:</span> <span class="nx">never</span> <span class="o">=</span> <span class="nx">shape</span><span class="p">;</span> <span class="c1">// TypeScript error if a new variant is added</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">`Unhandled shape: </span><span class="p">${</span><span class="nx">_exhaustiveCheck</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h3 id="6-practical-use-cases"><strong>6. Practical Use Cases</strong></h3>
+
+<p>Discriminated unions are widely used for scenarios where you need to handle multiple related types with unique behaviors.</p>
+
+<h4 id="61-state-management"><strong>6.1 State Management</strong></h4>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">type</span> <span class="nx">State</span> <span class="o">=</span>
+  <span class="o">|</span> <span class="p">{</span> <span class="na">status</span><span class="p">:</span> <span class="dl">"</span><span class="s2">loading</span><span class="dl">"</span> <span class="p">}</span>
+  <span class="o">|</span> <span class="p">{</span> <span class="na">status</span><span class="p">:</span> <span class="dl">"</span><span class="s2">success</span><span class="dl">"</span><span class="p">;</span> <span class="nl">data</span><span class="p">:</span> <span class="kr">string</span> <span class="p">}</span>
+  <span class="o">|</span> <span class="p">{</span> <span class="na">status</span><span class="p">:</span> <span class="dl">"</span><span class="s2">error</span><span class="dl">"</span><span class="p">;</span> <span class="nl">error</span><span class="p">:</span> <span class="kr">string</span> <span class="p">};</span>
+
+<span class="kd">function</span> <span class="nx">handleState</span><span class="p">(</span><span class="nx">state</span><span class="p">:</span> <span class="nx">State</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+  <span class="k">switch</span> <span class="p">(</span><span class="nx">state</span><span class="p">.</span><span class="nx">status</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="dl">"</span><span class="s2">loading</span><span class="dl">"</span><span class="p">:</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Loading...</span><span class="dl">"</span><span class="p">);</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="dl">"</span><span class="s2">success</span><span class="dl">"</span><span class="p">:</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`Data: </span><span class="p">${</span><span class="nx">state</span><span class="p">.</span><span class="nx">data</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="dl">"</span><span class="s2">error</span><span class="dl">"</span><span class="p">:</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s2">`Error: </span><span class="p">${</span><span class="nx">state</span><span class="p">.</span><span class="nx">error</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+      <span class="k">break</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h4 id="62-api-responses"><strong>6.2 API Responses</strong></h4>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">type</span> <span class="nx">ApiResponse</span> <span class="o">=</span>
+  <span class="o">|</span> <span class="p">{</span> <span class="na">status</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ok</span><span class="dl">"</span><span class="p">;</span> <span class="nl">data</span><span class="p">:</span> <span class="kr">any</span> <span class="p">}</span>
+  <span class="o">|</span> <span class="p">{</span> <span class="na">status</span><span class="p">:</span> <span class="dl">"</span><span class="s2">error</span><span class="dl">"</span><span class="p">;</span> <span class="nl">error</span><span class="p">:</span> <span class="kr">string</span> <span class="p">};</span>
+
+<span class="kd">function</span> <span class="nx">handleResponse</span><span class="p">(</span><span class="nx">response</span><span class="p">:</span> <span class="nx">ApiResponse</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="dl">"</span><span class="s2">ok</span><span class="dl">"</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Data:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">"</span><span class="s2">Error:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">response</span><span class="p">.</span><span class="nx">error</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+  </div>
+
+  
+  <div style="margin-top: 20px;">
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = 'https://anusree6154s.github.io/documentation/discriminated-unions';
+      this.page.identifier = 'https://anusree6154s.github.io/documentation/discriminated-unions';
+    };
+
+    (function() {
+      var d = document, s = d.createElement('script');
+
+      s.src = 'https://anusree-anilkumar-blog.disqus.com/embed.js';
+
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript><a class="u-url" href="/documentation/discriminated-unions" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/documentation/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Blog &amp; Docs</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Anusree Anilkumar</li><li><a class="u-email" href="mailto:anilkumaranusree113@gmail.com">anilkumaranusree113@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/Anusree6154s"><svg class="svg-icon"><use xlink:href="/documentation/assets/minima-social-icons.svg#github"></use></svg> <span class="username">Anusree6154s</span></a></li><li><a href="https://www.linkedin.com/in/anusreeanilkumar1"><svg class="svg-icon"><use xlink:href="/documentation/assets/minima-social-icons.svg#linkedin"></use></svg> <span class="username">anusreeanilkumar1</span></a></li><li><a href="https://www.twitter.com/anu6154s"><svg class="svg-icon"><use xlink:href="/documentation/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">anu6154s</span></a></li><li><a href="/documentation/feed.xml"><svg class="svg-icon"><use xlink:href="/documentation/assets/minima-social-icons.svg#rss"></use></svg> <span>rss</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>This site is my personal documentation, made public for anyone who might find my code scribbles useful! ❤️</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
