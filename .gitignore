@@ -2,3 +2,6 @@ _site/
 .dist/
 Gemfile.lock
 .sass-cache
+.jekyll-cache
+.jekyll-metadata
+vendor
