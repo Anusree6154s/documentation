@@ -3,22 +3,22 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>Guidelines to cleaner git commits | Blog &amp; Docs</title>
+<title>Gitignore Config for Certificates | Blog &amp; Docs</title>
 <meta name="generator" content="Jekyll v3.10.0" />
-<meta property="og:title" content="Guidelines to cleaner git commits" />
+<meta property="og:title" content="Gitignore Config for Certificates" />
 <meta name="author" content="Anusree Anilkumar" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Guide to how to write cleaner git commits" />
-<meta property="og:description" content="Guide to how to write cleaner git commits" />
-<link rel="canonical" href="https://anusree6154s.github.io/documentation/git-commit-guidelines" />
-<meta property="og:url" content="https://anusree6154s.github.io/documentation/git-commit-guidelines" />
+<meta name="description" content="# config specific to the language or editor you use # Ignore certificate and key files *.key *.crt *.csr *.pem *.p12 *.der *.srl # Ignore any directory containing certs or keys certs/ keys/ secrets/" />
+<meta property="og:description" content="# config specific to the language or editor you use # Ignore certificate and key files *.key *.crt *.csr *.pem *.p12 *.der *.srl # Ignore any directory containing certs or keys certs/ keys/ secrets/" />
+<link rel="canonical" href="https://anusree6154s.github.io/documentation/gitignore-commands" />
+<meta property="og:url" content="https://anusree6154s.github.io/documentation/gitignore-commands" />
 <meta property="og:site_name" content="Blog &amp; Docs" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2024-10-31T00:00:00+00:00" />
+<meta property="article:published_time" content="2025-01-19T00:00:00+00:00" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="Guidelines to cleaner git commits" />
+<meta property="twitter:title" content="Gitignore Config for Certificates" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Anusree Anilkumar"},"dateModified":"2024-10-31T00:00:00+00:00","datePublished":"2024-10-31T00:00:00+00:00","description":"Guide to how to write cleaner git commits","headline":"Guidelines to cleaner git commits","mainEntityOfPage":{"@type":"WebPage","@id":"https://anusree6154s.github.io/documentation/git-commit-guidelines"},"url":"https://anusree6154s.github.io/documentation/git-commit-guidelines"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Anusree Anilkumar"},"dateModified":"2025-01-19T00:00:00+00:00","datePublished":"2025-01-19T00:00:00+00:00","description":"# config specific to the language or editor you use # Ignore certificate and key files *.key *.crt *.csr *.pem *.p12 *.der *.srl # Ignore any directory containing certs or keys certs/ keys/ secrets/","headline":"Gitignore Config for Certificates","mainEntityOfPage":{"@type":"WebPage","@id":"https://anusree6154s.github.io/documentation/gitignore-commands"},"url":"https://anusree6154s.github.io/documentation/gitignore-commands"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/documentation/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://anusree6154s.github.io/documentation/feed.xml" title="Blog &amp; Docs" /></head>
 <body><header class="site-header" role="banner">
@@ -41,53 +41,51 @@
         <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title p-name" itemprop="name headline">Guidelines to cleaner git commits</h1>
+    <h1 class="post-title p-name" itemprop="name headline">Gitignore Config for Certificates</h1>
     <p class="post-meta">
-      <time class="dt-published" datetime="2024-10-31T00:00:00+00:00" itemprop="datePublished">31 Oct 2024
+      <time class="dt-published" datetime="2025-01-19T00:00:00+00:00" itemprop="datePublished">19 Jan 2025
       </time></p>
-      <p></span>
+      <p><span  class="tag-badge">
+            jwt
+        </span><span  class="tag-badge">
+            oauth2
+        </span><span  class="tag-badge">
+            typescript
+        </span><span  class="tag-badge">
+            nextjs
+        </span><span  class="tag-badge">
+            oidc
+        </span><span  class="tag-badge">
+            passwordless-authentication
+        </span></span>
 </p>
   </header>
 
   
 
 
+<div class="parent-link">
+  This post is part of <a href="/documentation/oauth-config-setup">OAuth Config Setup in Different Apps</a>.
+</div>
+
+
   <div class="post-content e-content" itemprop="articleBody">
-    <h2 id="guidelines-to-cleaner-git-commits">Guidelines to cleaner git commits</h2>
+    <pre><code class="language-.gitignore"># config specific to the language or editor you use
 
-<h3 id="standardized-documentation-followed-for-cleaner-git-commits">Standardized documentation followed for cleaner git commits</h3>
-<ul>
-  <li><a href="https://github.com/lppedd/idea-conventional-commit">Conventional Commit (Standard one)</a></li>
-  <li><a href="https://github.com/RomuloOliveira/commit-messages-guide?tab=readme-ov-file">Commit messages guide (Simplified one - found it useful)</a></li>
-  <li><a href="https://github.com/carloscuesta/gitmoji">Add emojis in git commits (For personal ones)</a></li>
-</ul>
+# Ignore certificate and key files
+*.key
+*.crt
+*.csr
+*.pem
+*.p12
+*.der
+*.srl
 
-<h3 id="to-integrate-git-commit-message-helper-to-vs-code">To integrate git commit message helper to vs-code</h3>
-<ul>
-  <li>
-    <h4 id="via-cli">via cli</h4>
-    <ul>
-      <li><a href="https://github.com/andostronaut/commitizen-code">commitizen-cli documentation</a></li>
-      <li>
-        <h4 id="method">Method:</h4>
-        <ul>
-          <li><code class="language-plaintext highlighter-rouge">npm i -g commitizen-cli</code> in vscode terminal</li>
-          <li>to use either <code class="language-plaintext highlighter-rouge">commitizen-cli</code> or <code class="language-plaintext highlighter-rouge">npx commitizen-cli (to skip first step)</code></li>
-          <li>then follow terminal guidelines</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-  <li>
-    <h4 id="vscode-extension-not-developed-yet">vscode extension: not developed yet</h4>
-  </li>
-</ul>
-
-<h2 id="git-commit-practices-pulling-pushing-in-new-branch-squash-etc">Git commit practices (pulling, pushing in new branch, squash etc)</h2>
-<ul>
-  <li>https://trunkbaseddevelopment.com/</li>
-  <li>https://profy.dev/ - website to practise git and agile</li>
-</ul>
+# Ignore any directory containing certs or keys
+certs/
+keys/
+secrets/
+</code></pre>
 
   </div>
 
@@ -96,8 +94,8 @@
   <div id="disqus_thread"></div>
   <script>
     var disqus_config = function () {
-      this.page.url = 'https://anusree6154s.github.io/documentation/git-commit-guidelines';
-      this.page.identifier = 'https://anusree6154s.github.io/documentation/git-commit-guidelines';
+      this.page.url = 'https://anusree6154s.github.io/documentation/gitignore-commands';
+      this.page.identifier = 'https://anusree6154s.github.io/documentation/gitignore-commands';
     };
 
     (function() {
@@ -109,7 +107,7 @@
       (d.head || d.body).appendChild(s);
     })();
   </script>
-  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript><a class="u-url" href="/documentation/git-commit-guidelines" hidden></a>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript><a class="u-url" href="/documentation/gitignore-commands" hidden></a>
 </article>
       </div>
     </main><footer class="site-footer h-card">

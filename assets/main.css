@@ -579,3 +579,19 @@ pre,
     background-repeat: no-repeat !important;
     background-position-x: right !important;
     padding: 10%; } }
+.tag-badge {
+  margin-right: 5px;
+  background-color: whitesmoke;
+  border-radius: 5px;
+  padding: 2px 5px;
+  text-align: center;
+  color: grey;
+  font-size: small; }
+
+.parent-link {
+  font-style: italic;
+  font-size: small;
+  color: gray;
+  text-align: center;
+  margin-bottom: 20px;
+  background-color: whitesmoke; }

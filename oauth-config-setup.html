@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>OAuth Config Setup in Different Apps | Blog &amp; Docs</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="OAuth Config Setup in Different Apps" />
+<meta name="author" content="Anusree Anilkumar" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="To study diff auth methods" />
+<meta property="og:description" content="To study diff auth methods" />
+<link rel="canonical" href="https://anusree6154s.github.io/documentation/oauth-config-setup" />
+<meta property="og:url" content="https://anusree6154s.github.io/documentation/oauth-config-setup" />
+<meta property="og:site_name" content="Blog &amp; Docs" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-01-19T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="OAuth Config Setup in Different Apps" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Anusree Anilkumar"},"dateModified":"2025-01-19T00:00:00+00:00","datePublished":"2025-01-19T00:00:00+00:00","description":"To study diff auth methods","headline":"OAuth Config Setup in Different Apps","mainEntityOfPage":{"@type":"WebPage","@id":"https://anusree6154s.github.io/documentation/oauth-config-setup"},"url":"https://anusree6154s.github.io/documentation/oauth-config-setup"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/documentation/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://anusree6154s.github.io/documentation/feed.xml" title="Blog &amp; Docs" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/documentation/">Blog &amp; Docs</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/documentation/about">About Me</a><a class="page-link" href="/documentation/table-of-contents">Table of Contents</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">OAuth Config Setup in Different Apps</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2025-01-19T00:00:00+00:00" itemprop="datePublished">19 Jan 2025
+      </time></p>
+      <p><span  class="tag-badge">
+            jwt
+        </span><span  class="tag-badge">
+            oauth2
+        </span><span  class="tag-badge">
+            typescript
+        </span><span  class="tag-badge">
+            nextjs
+        </span><span  class="tag-badge">
+            oidc
+        </span><span  class="tag-badge">
+            passwordless-authentication
+        </span></span>
+</p>
+  </header>
+
+  
+
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h1 id="auth-app">Auth App</h1>
+
+<p>To study diff auth methods</p>
+
+<video width="600" height="400" controls="">
+  <source src="https://github.com/user-attachments/assets/04e7f79b-77b6-4382-9507-b08ee8cdb012" type="video/mp4" />
+Your browser does not support the video tag.
+</video>
+
+<h2 id="notes">Notes</h2>
+
+<h3 id="table-of-contents">Table of Contents</h3>
+
+<ol>
+  <li>Basic Auth</li>
+  <li>OAuth based auth</li>
+  <li>JWT token based auth</li>
+  <li>Session based auth</li>
+  <li>Passwordless auth</li>
+  <li>Open ID Connect (OIDC) based auth</li>
+  <li>mTLS based auth</li>
+  <li>Deployment</li>
+  <li>Choice of Techstack</li>
+</ol>
+
+<h3 id="1-basic-auth">1. Basic Auth</h3>
+
+<ul>
+  <li>Like Bearer Auth</li>
+  <li>Using basic-auth library</li>
+  <li>often accompanied by any other form of session/token storage to maintain session expiry</li>
+</ul>
+
+<h3 id="2-oauth">2. Oauth</h3>
+
+<ul>
+  <li>uses passport-google-oauth20 etc</li>
+  <li>that uses passport session to manage sessions</li>
+  <li>passport session needs express session</li>
+  <li>
+    <p>express session can send cookies from backend to frontned (NEEDS TO BE STUDIED. NOT SURE)</p>
+
+    <ul>
+      <li>while using diff frontend andb backend hosts only if both have https</li>
+      <li>only if frontend and baclemd are on same site(using nginx proxy or setting express.static())</li>
+      <li><em>we are using express.static() method to access frontend files via backend</em> [in vanilla html]</li>
+    </ul>
+  </li>
+  <li>
+    <p>refer <a href="./oauth-oidc">this</a> for oauth apps url configurations</p>
+  </li>
+  <li><strong>Tips</strong>:
+    <ul>
+      <li>use <code class="language-plaintext highlighter-rouge">&lt;base href="http://localhost:8000"&gt;</code> in html head to avoid rewriting baseurl in html (while accessing frontend files via backend express.static()) [in case of vanilla html]</li>
+      <li>use below in nextjs avoid rewriting baseurl
+        <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">async</span> <span class="nx">rewrites</span><span class="p">()</span> <span class="p">{</span>
+<span class="k">return</span> <span class="p">[</span>
+    <span class="p">{</span>
+    <span class="na">source</span><span class="p">:</span> <span class="dl">"</span><span class="s2">/auth/:path*</span><span class="dl">"</span><span class="p">,</span> <span class="c1">// Frontend route</span>
+    <span class="na">destination</span><span class="p">:</span> <span class="dl">"</span><span class="s2">http://localhost:8000/auth/:path*</span><span class="dl">"</span><span class="p">,</span> <span class="c1">// Backend route</span>
+    <span class="p">},</span>
+<span class="p">];</span>
+<span class="p">},</span>
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="3-jwt">3. JWT</h3>
+
+<ul>
+  <li><strong>Redis</strong> is particularly well-suited for token blacklisting token during logout due to its speed, simplicity, and built-in expiration features. Redis is designed for low-latency operations because it stores data in memory. This makes it significantly faster than traditional disk-based databases like MongoDB or SQL.</li>
+  <li>created redis db using upstash</li>
+</ul>
+
+<h3 id="4-session-based">4. Session based</h3>
+
+<ul>
+  <li>Plain session based auth</li>
+  <li>It has already been used along with basic auth and oauth, but just t o study it in isolation</li>
+</ul>
+
+<h3 id="5-passwordless">5. Passwordless</h3>
+
+<ul>
+  <li>Only for signup and signin. Verfication is through traditional jwt cookies/headers</li>
+  <li>During signin we dont use password(only email). Instead would send an otp to email and verify its expiration. And then will send the token to frontend. (an extra step like 2 factor auth)</li>
+  <li>For checking auth this token is sent via headers/stored in cookies each time for every route</li>
+  <li>To set up modemailer follow the set mentioned here <a href="https://dev.to/chandrapantachhetri/sending-emails-securely-using-node-js-nodemailer-smtp-gmail-and-oauth2-g3a">https://dev.to/chandrapantachhetri/sending-emails-securely-using-node-js-nodemailer-smtp-gmail-and-oauth2-g3a </a> and code mentioned in claude ai code here <a href="./claudeai-code">claudeai-code.md</a></li>
+</ul>
+
+<h3 id="6-openid-connect">6. OpenID Connect</h3>
+
+<ul>
+  <li>We used Google as the OpenID Provider (IdP) and passport-openidconnect to help set up openid</li>
+</ul>
+
+<h3 id="7-mtls-mutual-transport-layer-security-not-implemented-completely-cause-of-minor-errors">7. mTLS (Mutual Transport Layer Security) (not implemented completely cause of minor errors)</h3>
+
+<ul>
+  <li><a href="https://github.com/edum-compassuol/mTLS-nodejs-example/blob/main/server/src/server.ts">https://github.com/edum-compassuol/mTLS-nodejs-example/blob/main/server/src/server.ts</a></li>
+  <li>Mutual TLS (mTLS) authentication involves verifying both the client and server identities using TLS certificates.</li>
+  <li>Includes 2 steps:
+    <ol>
+      <li>creating certficated for server &amp; client</li>
+      <li>logging in after verifying the certificates (session is managed by header/cookies)</li>
+    </ol>
+  </li>
+  <li>First You’ll need to create the following in a seperate folder called <code class="language-plaintext highlighter-rouge">cert</code> outside frotend or backend folder:
+    <ul>
+      <li>A CA certificate to sign client and server certificates.</li>
+      <li>A server certificate and private key.</li>
+      <li>A client certificate and private key.</li>
+    </ul>
+  </li>
+  <li>Download ssl from <a href="https://slproweb.com/products/Win32OpenSSL.html">https://slproweb.com/products/Win32OpenSSL.html</a></li>
+  <li>OpenSSL commands to create certificates in cert folder: <a href="./ssl-commands">ssl-commands.md</a></li>
+  <li><strong>remember to add the folder cert/ and all the related certificate extensions as in <a href="./gitignore-commands">gitignore-commands.md</a> to gitignore before committing</strong></li>
+  <li>If everything is configured correctly:
+    <ul>
+      <li>The server will verify the client certificate.</li>
+      <li>The client will verify the server certificate.</li>
+    </ul>
+  </li>
+  <li>Common Issues
+    <ul>
+      <li>Certificate Mismatch: Ensure the client and server - certificates are signed by the same CA.</li>
+      <li>Incorrect Paths: Double-check the file paths for the keys and certificates.</li>
+      <li>Firewall/Port Issues: Ensure port 8443 is open for communication.(convetionally use port 8443 for mTLS)</li>
+    </ul>
+  </li>
+  <li>Used in Banks (e.g., JPMorgan Chase, Goldman Sachs), Payment Processors (e.g., Stripe, PayPal, Square), Cloud Providers (e.g., AWS, Microsoft Azure, Google Cloud), etc</li>
+  <li>Working:
+    <ul>
+      <li>Browsers do not natively support mTLS directly due to security constraints. So we will use nextjs api to work with client certificates. (∴ cannot do directly within page.tsx)</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="8-deployment">8. Deployment</h3>
+
+<ul>
+  <li>Basic typescript nodejs deployment: <a href="https://youtu.be/4mqy5SjkDec?si=rFG2Wu8NYmq-8PjD">https://youtu.be/4mqy5SjkDec?si=rFG2Wu8NYmq-8PjD</a></li>
+  <li>Durig deployment, there is this whole mess. Checkout all changes I’ve made so far, all the minor fix commits to get an idea.</li>
+  <li>Express session does indeed not work with frontend and backend on diff servers.
+    <ul>
+      <li>During development it worked because the browser confused the host(localhost) of both port 8000 and 3000 as it is coming from same domain.</li>
+      <li>Added diff frontend host url as below in .env file of react to change hostname and it stopped co-operating with express-session
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">HOST</span><span class="o">=</span>frontend.local
+</code></pre></div>        </div>
+      </li>
+      <li>Therefore had to serve rthe frontend build folder from backend</li>
+    </ul>
+  </li>
+  <li>Render is horrible at building and starting the server by itself for frontend as well as backend (as I’ve seen so far).
+    <ul>
+      <li>Therefore I’m building the build files in both frontend and backend before commiting and pushing the build folders to github</li>
+      <li>In render I just start the backend server</li>
+    </ul>
+  </li>
+  <li>Rememeber for OAuth authentication always need to update the redirect urls in case you plan to host the server in any other website.
+    <ul>
+      <li>Also update the env variables accordingly</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="9-choice-of-techstack">9. Choice of Techstack</h3>
+
+<ul>
+  <li>ReactJS because of not able to use express-session
+    <ul>
+      <li>NextSJ was the first choice in order to learn the techstack. But express-session was not letting me set cookies in frontend because of cross-origin. (couldnt find a simple solution in neither stackoverflow nor gpt)</li>
+      <li>So now im serving react build files directly from server</li>
+    </ul>
+  </li>
+</ul>
+
+  </div>
+
+  
+  <div>
+  
+    <h2>Related Posts:</h2>
+    <ul>
+      
+        <li><a href="/documentation/ssl-commands">SSL Commands</a></li>
+      
+        <li><a href="/documentation/oauth-oidc">OAuth/OIDC App Configurations</a></li>
+      
+        <li><a href="/documentation/gitignore-commands">Gitignore Config for Certificates</a></li>
+      
+        <li><a href="/documentation/claudeai-code">Claude AI Code for Nodemailer</a></li>
+      
+    </ul>
+  </div>
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = 'https://anusree6154s.github.io/documentation/oauth-config-setup';
+      this.page.identifier = 'https://anusree6154s.github.io/documentation/oauth-config-setup';
+    };
+
+    (function() {
+      var d = document, s = d.createElement('script');
+
+      s.src = 'https://anusree-anilkumar-blog.disqus.com/embed.js';
+
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript><a class="u-url" href="/documentation/oauth-config-setup" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/documentation/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Blog &amp; Docs</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Anusree Anilkumar</li><li><a class="u-email" href="mailto:anilkumaranusree113@gmail.com">anilkumaranusree113@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/Anusree6154s"><svg class="svg-icon"><use xlink:href="/documentation/assets/minima-social-icons.svg#github"></use></svg> <span class="username">Anusree6154s</span></a></li><li><a href="https://www.linkedin.com/in/anusreeanilkumar1"><svg class="svg-icon"><use xlink:href="/documentation/assets/minima-social-icons.svg#linkedin"></use></svg> <span class="username">anusreeanilkumar1</span></a></li><li><a href="https://www.twitter.com/anu6154s"><svg class="svg-icon"><use xlink:href="/documentation/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">anu6154s</span></a></li><li><a href="/documentation/feed.xml"><svg class="svg-icon"><use xlink:href="/documentation/assets/minima-social-icons.svg#rss"></use></svg> <span>rss</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>This site is my personal documentation, made public for anyone who might find my code scribbles useful! ❤️</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

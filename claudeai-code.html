@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Claude AI Code for Nodemailer | Blog &amp; Docs</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="Claude AI Code for Nodemailer" />
+<meta name="author" content="Anusree Anilkumar" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="import express from &quot;express&quot;; import { google } from &quot;googleapis&quot;; import { OAuth2Client } from &quot;google-auth-library&quot;; import nodemailer from &quot;nodemailer&quot;; import Mail from &quot;nodemailer/lib/mailer&quot;; import SMTPTransport from &quot;nodemailer/lib/smtp-transport&quot;; import { google_client_id, google_client_secret, google_refresh_token, senders_gmail, } from &quot;../config/constants&quot;; const router = express.Router(); interface OTPRequest { email: string; } const createTransporter = async (): Promise&lt;nodemailer.Transporter&gt; =&gt; { try { const oauth2Client = new OAuth2Client( google_client_id, google_client_secret, &quot;https://developers.google.com/oauthplayground&quot; ); oauth2Client.setCredentials({ refresh_token: google_refresh_token, }); const accessToken = await oauth2Client.getAccessToken(); // Properly type the SMTP transport options const transportOptions: SMTPTransport.Options = { host: &#39;smtp.gmail.com&#39;, port: 465, secure: true, auth: { type: &quot;OAuth2&quot;, user: senders_gmail, clientId: google_client_id, clientSecret: google_client_secret, refreshToken: google_refresh_token, accessToken: accessToken.token || undefined, }, }; const transporter = nodemailer.createTransport(transportOptions); // Verify transporter configuration await transporter.verify(); return transporter; } catch (error) { console.error(&quot;Error creating transporter:&quot;, error); throw new Error(&quot;Failed to create email transporter&quot;); } } async function sendEmail(to: string, otp: string): Promise&lt;void&gt; { try { const transporter = await createTransporter(); const mailOptions: Mail.Options = { from: `&quot;Auth Service&quot; &lt;${senders_gmail}&gt;`, to, subject: &quot;Passwordless Authentication OTP&quot;, text: `Your OTP for authentication is: ${otp}`, html: ` &lt;h2&gt;Authentication OTP&lt;/h2&gt; &lt;p&gt;Use the following OTP to log in:&lt;/p&gt; &lt;h3 style=&quot;color: #4CAF50; font-size: 24px;&quot;&gt;${otp}&lt;/h3&gt; &lt;p&gt;This OTP will expire in 10 minutes.&lt;/p&gt; &lt;p&gt;If you didn&#39;t request this OTP, please ignore this email.&lt;/p&gt; `, }; await transporter.sendMail(mailOptions); } catch (error) { console.error(&quot;Error sending email:&quot;, error); throw new Error(&quot;Failed to send email&quot;); } } router.post(&quot;/sendOTP&quot;, async (req: express.Request&lt;{}, {}, OTPRequest&gt;, res: express.Response) =&gt; { try { const { email } = req.body; if (!email) { return res.status(400).json({ error: &quot;Email is required&quot; }); } // Validate email format const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; if (!emailRegex.test(email)) { return res.status(400).json({ error: &quot;Invalid email format&quot; }); } const otp = Math.floor(100000 + Math.random() * 900000).toString(); // Send email await sendEmail(email, otp); res.status(200).json({ success: true, message: &quot;OTP sent successfully&quot; }); } catch (error) { console.error(&quot;Error in /sendOTP:&quot;, error); res.status(500).json({ error: &quot;Failed to send OTP&quot; }); } }); export default router;" />
+<meta property="og:description" content="import express from &quot;express&quot;; import { google } from &quot;googleapis&quot;; import { OAuth2Client } from &quot;google-auth-library&quot;; import nodemailer from &quot;nodemailer&quot;; import Mail from &quot;nodemailer/lib/mailer&quot;; import SMTPTransport from &quot;nodemailer/lib/smtp-transport&quot;; import { google_client_id, google_client_secret, google_refresh_token, senders_gmail, } from &quot;../config/constants&quot;; const router = express.Router(); interface OTPRequest { email: string; } const createTransporter = async (): Promise&lt;nodemailer.Transporter&gt; =&gt; { try { const oauth2Client = new OAuth2Client( google_client_id, google_client_secret, &quot;https://developers.google.com/oauthplayground&quot; ); oauth2Client.setCredentials({ refresh_token: google_refresh_token, }); const accessToken = await oauth2Client.getAccessToken(); // Properly type the SMTP transport options const transportOptions: SMTPTransport.Options = { host: &#39;smtp.gmail.com&#39;, port: 465, secure: true, auth: { type: &quot;OAuth2&quot;, user: senders_gmail, clientId: google_client_id, clientSecret: google_client_secret, refreshToken: google_refresh_token, accessToken: accessToken.token || undefined, }, }; const transporter = nodemailer.createTransport(transportOptions); // Verify transporter configuration await transporter.verify(); return transporter; } catch (error) { console.error(&quot;Error creating transporter:&quot;, error); throw new Error(&quot;Failed to create email transporter&quot;); } } async function sendEmail(to: string, otp: string): Promise&lt;void&gt; { try { const transporter = await createTransporter(); const mailOptions: Mail.Options = { from: `&quot;Auth Service&quot; &lt;${senders_gmail}&gt;`, to, subject: &quot;Passwordless Authentication OTP&quot;, text: `Your OTP for authentication is: ${otp}`, html: ` &lt;h2&gt;Authentication OTP&lt;/h2&gt; &lt;p&gt;Use the following OTP to log in:&lt;/p&gt; &lt;h3 style=&quot;color: #4CAF50; font-size: 24px;&quot;&gt;${otp}&lt;/h3&gt; &lt;p&gt;This OTP will expire in 10 minutes.&lt;/p&gt; &lt;p&gt;If you didn&#39;t request this OTP, please ignore this email.&lt;/p&gt; `, }; await transporter.sendMail(mailOptions); } catch (error) { console.error(&quot;Error sending email:&quot;, error); throw new Error(&quot;Failed to send email&quot;); } } router.post(&quot;/sendOTP&quot;, async (req: express.Request&lt;{}, {}, OTPRequest&gt;, res: express.Response) =&gt; { try { const { email } = req.body; if (!email) { return res.status(400).json({ error: &quot;Email is required&quot; }); } // Validate email format const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; if (!emailRegex.test(email)) { return res.status(400).json({ error: &quot;Invalid email format&quot; }); } const otp = Math.floor(100000 + Math.random() * 900000).toString(); // Send email await sendEmail(email, otp); res.status(200).json({ success: true, message: &quot;OTP sent successfully&quot; }); } catch (error) { console.error(&quot;Error in /sendOTP:&quot;, error); res.status(500).json({ error: &quot;Failed to send OTP&quot; }); } }); export default router;" />
+<link rel="canonical" href="https://anusree6154s.github.io/documentation/claudeai-code" />
+<meta property="og:url" content="https://anusree6154s.github.io/documentation/claudeai-code" />
+<meta property="og:site_name" content="Blog &amp; Docs" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-01-19T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Claude AI Code for Nodemailer" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Anusree Anilkumar"},"dateModified":"2025-01-19T00:00:00+00:00","datePublished":"2025-01-19T00:00:00+00:00","description":"import express from &quot;express&quot;; import { google } from &quot;googleapis&quot;; import { OAuth2Client } from &quot;google-auth-library&quot;; import nodemailer from &quot;nodemailer&quot;; import Mail from &quot;nodemailer/lib/mailer&quot;; import SMTPTransport from &quot;nodemailer/lib/smtp-transport&quot;; import { google_client_id, google_client_secret, google_refresh_token, senders_gmail, } from &quot;../config/constants&quot;; const router = express.Router(); interface OTPRequest { email: string; } const createTransporter = async (): Promise&lt;nodemailer.Transporter&gt; =&gt; { try { const oauth2Client = new OAuth2Client( google_client_id, google_client_secret, &quot;https://developers.google.com/oauthplayground&quot; ); oauth2Client.setCredentials({ refresh_token: google_refresh_token, }); const accessToken = await oauth2Client.getAccessToken(); // Properly type the SMTP transport options const transportOptions: SMTPTransport.Options = { host: &#39;smtp.gmail.com&#39;, port: 465, secure: true, auth: { type: &quot;OAuth2&quot;, user: senders_gmail, clientId: google_client_id, clientSecret: google_client_secret, refreshToken: google_refresh_token, accessToken: accessToken.token || undefined, }, }; const transporter = nodemailer.createTransport(transportOptions); // Verify transporter configuration await transporter.verify(); return transporter; } catch (error) { console.error(&quot;Error creating transporter:&quot;, error); throw new Error(&quot;Failed to create email transporter&quot;); } } async function sendEmail(to: string, otp: string): Promise&lt;void&gt; { try { const transporter = await createTransporter(); const mailOptions: Mail.Options = { from: `&quot;Auth Service&quot; &lt;${senders_gmail}&gt;`, to, subject: &quot;Passwordless Authentication OTP&quot;, text: `Your OTP for authentication is: ${otp}`, html: ` &lt;h2&gt;Authentication OTP&lt;/h2&gt; &lt;p&gt;Use the following OTP to log in:&lt;/p&gt; &lt;h3 style=&quot;color: #4CAF50; font-size: 24px;&quot;&gt;${otp}&lt;/h3&gt; &lt;p&gt;This OTP will expire in 10 minutes.&lt;/p&gt; &lt;p&gt;If you didn&#39;t request this OTP, please ignore this email.&lt;/p&gt; `, }; await transporter.sendMail(mailOptions); } catch (error) { console.error(&quot;Error sending email:&quot;, error); throw new Error(&quot;Failed to send email&quot;); } } router.post(&quot;/sendOTP&quot;, async (req: express.Request&lt;{}, {}, OTPRequest&gt;, res: express.Response) =&gt; { try { const { email } = req.body; if (!email) { return res.status(400).json({ error: &quot;Email is required&quot; }); } // Validate email format const emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/; if (!emailRegex.test(email)) { return res.status(400).json({ error: &quot;Invalid email format&quot; }); } const otp = Math.floor(100000 + Math.random() * 900000).toString(); // Send email await sendEmail(email, otp); res.status(200).json({ success: true, message: &quot;OTP sent successfully&quot; }); } catch (error) { console.error(&quot;Error in /sendOTP:&quot;, error); res.status(500).json({ error: &quot;Failed to send OTP&quot; }); } }); export default router;","headline":"Claude AI Code for Nodemailer","mainEntityOfPage":{"@type":"WebPage","@id":"https://anusree6154s.github.io/documentation/claudeai-code"},"url":"https://anusree6154s.github.io/documentation/claudeai-code"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/documentation/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://anusree6154s.github.io/documentation/feed.xml" title="Blog &amp; Docs" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/documentation/">Blog &amp; Docs</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/documentation/about">About Me</a><a class="page-link" href="/documentation/table-of-contents">Table of Contents</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Claude AI Code for Nodemailer</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2025-01-19T00:00:00+00:00" itemprop="datePublished">19 Jan 2025
+      </time></p>
+      <p><span  class="tag-badge">
+            jwt
+        </span><span  class="tag-badge">
+            oauth2
+        </span><span  class="tag-badge">
+            typescript
+        </span><span  class="tag-badge">
+            nextjs
+        </span><span  class="tag-badge">
+            oidc
+        </span><span  class="tag-badge">
+            passwordless-authentication
+        </span></span>
+</p>
+  </header>
+
+  
+
+
+<div class="parent-link">
+  This post is part of <a href="/documentation/oauth-config-setup">OAuth Config Setup in Different Apps</a>.
+</div>
+
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <div class="language-ts highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">express</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">express</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">google</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">googleapis</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">OAuth2Client</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">google-auth-library</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">nodemailer</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">nodemailer</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">Mail</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">nodemailer/lib/mailer</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">SMTPTransport</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">nodemailer/lib/smtp-transport</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span>
+  <span class="nx">google_client_id</span><span class="p">,</span>
+  <span class="nx">google_client_secret</span><span class="p">,</span>
+  <span class="nx">google_refresh_token</span><span class="p">,</span>
+  <span class="nx">senders_gmail</span><span class="p">,</span>
+<span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">../config/constants</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">router</span> <span class="o">=</span> <span class="nx">express</span><span class="p">.</span><span class="nx">Router</span><span class="p">();</span>
+
+<span class="kr">interface</span> <span class="nx">OTPRequest</span> <span class="p">{</span>
+  <span class="nl">email</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">createTransporter</span> <span class="o">=</span> <span class="k">async</span> <span class="p">():</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">nodemailer</span><span class="p">.</span><span class="nx">Transporter</span><span class="o">&gt;</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">try</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">oauth2Client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">OAuth2Client</span><span class="p">(</span>
+      <span class="nx">google_client_id</span><span class="p">,</span>
+      <span class="nx">google_client_secret</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">https://developers.google.com/oauthplayground</span><span class="dl">"</span>
+    <span class="p">);</span>
+
+    <span class="nx">oauth2Client</span><span class="p">.</span><span class="nx">setCredentials</span><span class="p">({</span>
+      <span class="na">refresh_token</span><span class="p">:</span> <span class="nx">google_refresh_token</span><span class="p">,</span>
+    <span class="p">});</span>
+
+    <span class="kd">const</span> <span class="nx">accessToken</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">oauth2Client</span><span class="p">.</span><span class="nx">getAccessToken</span><span class="p">();</span>
+
+    <span class="c1">// Properly type the SMTP transport options</span>
+    <span class="kd">const</span> <span class="na">transportOptions</span><span class="p">:</span> <span class="nx">SMTPTransport</span><span class="p">.</span><span class="nx">Options</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="na">host</span><span class="p">:</span> <span class="dl">'</span><span class="s1">smtp.gmail.com</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">port</span><span class="p">:</span> <span class="mi">465</span><span class="p">,</span>
+      <span class="na">secure</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+      <span class="na">auth</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">OAuth2</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">user</span><span class="p">:</span> <span class="nx">senders_gmail</span><span class="p">,</span>
+        <span class="na">clientId</span><span class="p">:</span> <span class="nx">google_client_id</span><span class="p">,</span>
+        <span class="na">clientSecret</span><span class="p">:</span> <span class="nx">google_client_secret</span><span class="p">,</span>
+        <span class="na">refreshToken</span><span class="p">:</span> <span class="nx">google_refresh_token</span><span class="p">,</span>
+        <span class="na">accessToken</span><span class="p">:</span> <span class="nx">accessToken</span><span class="p">.</span><span class="nx">token</span> <span class="o">||</span> <span class="kc">undefined</span><span class="p">,</span>
+      <span class="p">},</span>
+    <span class="p">};</span>
+
+    <span class="kd">const</span> <span class="nx">transporter</span> <span class="o">=</span> <span class="nx">nodemailer</span><span class="p">.</span><span class="nx">createTransport</span><span class="p">(</span><span class="nx">transportOptions</span><span class="p">);</span>
+
+    <span class="c1">// Verify transporter configuration</span>
+    <span class="k">await</span> <span class="nx">transporter</span><span class="p">.</span><span class="nx">verify</span><span class="p">();</span>
+    <span class="k">return</span> <span class="nx">transporter</span><span class="p">;</span>
+  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">"</span><span class="s2">Error creating transporter:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">"</span><span class="s2">Failed to create email transporter</span><span class="dl">"</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">async</span> <span class="kd">function</span> <span class="nx">sendEmail</span><span class="p">(</span><span class="nx">to</span><span class="p">:</span> <span class="kr">string</span><span class="p">,</span> <span class="nx">otp</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="k">void</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="k">try</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">transporter</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">createTransporter</span><span class="p">();</span>
+    
+    <span class="kd">const</span> <span class="na">mailOptions</span><span class="p">:</span> <span class="nx">Mail</span><span class="p">.</span><span class="nx">Options</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="na">from</span><span class="p">:</span> <span class="s2">`"Auth Service" &lt;</span><span class="p">${</span><span class="nx">senders_gmail</span><span class="p">}</span><span class="s2">&gt;`</span><span class="p">,</span>
+      <span class="nx">to</span><span class="p">,</span>
+      <span class="na">subject</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Passwordless Authentication OTP</span><span class="dl">"</span><span class="p">,</span>
+      <span class="na">text</span><span class="p">:</span> <span class="s2">`Your OTP for authentication is: </span><span class="p">${</span><span class="nx">otp</span><span class="p">}</span><span class="s2">`</span><span class="p">,</span>
+      <span class="na">html</span><span class="p">:</span> <span class="s2">`
+        &lt;h2&gt;Authentication OTP&lt;/h2&gt;
+        &lt;p&gt;Use the following OTP to log in:&lt;/p&gt;
+        &lt;h3 style="color: #4CAF50; font-size: 24px;"&gt;</span><span class="p">${</span><span class="nx">otp</span><span class="p">}</span><span class="s2">&lt;/h3&gt;
+        &lt;p&gt;This OTP will expire in 10 minutes.&lt;/p&gt;
+        &lt;p&gt;If you didn't request this OTP, please ignore this email.&lt;/p&gt;
+      `</span><span class="p">,</span>
+    <span class="p">};</span>
+
+    <span class="k">await</span> <span class="nx">transporter</span><span class="p">.</span><span class="nx">sendMail</span><span class="p">(</span><span class="nx">mailOptions</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">"</span><span class="s2">Error sending email:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">"</span><span class="s2">Failed to send email</span><span class="dl">"</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nx">router</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="dl">"</span><span class="s2">/sendOTP</span><span class="dl">"</span><span class="p">,</span> <span class="k">async</span> <span class="p">(</span><span class="nx">req</span><span class="p">:</span> <span class="nx">express</span><span class="p">.</span><span class="nx">Request</span><span class="o">&lt;</span><span class="p">{},</span> <span class="p">{},</span> <span class="nx">OTPRequest</span><span class="o">&gt;</span><span class="p">,</span> <span class="nx">res</span><span class="p">:</span> <span class="nx">express</span><span class="p">.</span><span class="nx">Response</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">try</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="p">{</span> <span class="nx">email</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">;</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">email</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">400</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span> 
+        <span class="na">error</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Email is required</span><span class="dl">"</span> 
+      <span class="p">});</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Validate email format</span>
+    <span class="kd">const</span> <span class="nx">emailRegex</span> <span class="o">=</span> <span class="sr">/^</span><span class="se">[^\s</span><span class="sr">@</span><span class="se">]</span><span class="sr">+@</span><span class="se">[^\s</span><span class="sr">@</span><span class="se">]</span><span class="sr">+</span><span class="se">\.[^\s</span><span class="sr">@</span><span class="se">]</span><span class="sr">+$/</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">emailRegex</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">email</span><span class="p">))</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">400</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span> 
+        <span class="na">error</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Invalid email format</span><span class="dl">"</span> 
+      <span class="p">});</span>
+    <span class="p">}</span>
+
+    <span class="kd">const</span> <span class="nx">otp</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="mi">100000</span> <span class="o">+</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">*</span> <span class="mi">900000</span><span class="p">).</span><span class="nx">toString</span><span class="p">();</span>
+    
+    <span class="c1">// Send email</span>
+    <span class="k">await</span> <span class="nx">sendEmail</span><span class="p">(</span><span class="nx">email</span><span class="p">,</span> <span class="nx">otp</span><span class="p">);</span>
+
+    <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">200</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span> 
+      <span class="na">success</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+      <span class="na">message</span><span class="p">:</span> <span class="dl">"</span><span class="s2">OTP sent successfully</span><span class="dl">"</span> 
+    <span class="p">});</span>
+  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">"</span><span class="s2">Error in /sendOTP:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">500</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span> 
+      <span class="na">error</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Failed to send OTP</span><span class="dl">"</span> 
+    <span class="p">});</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">router</span><span class="p">;</span>
+</code></pre></div></div>
+
+  </div>
+
+  
+  <div>
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = 'https://anusree6154s.github.io/documentation/claudeai-code';
+      this.page.identifier = 'https://anusree6154s.github.io/documentation/claudeai-code';
+    };
+
+    (function() {
+      var d = document, s = d.createElement('script');
+
+      s.src = 'https://anusree-anilkumar-blog.disqus.com/embed.js';
+
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript><a class="u-url" href="/documentation/claudeai-code" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/documentation/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Blog &amp; Docs</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Anusree Anilkumar</li><li><a class="u-email" href="mailto:anilkumaranusree113@gmail.com">anilkumaranusree113@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/Anusree6154s"><svg class="svg-icon"><use xlink:href="/documentation/assets/minima-social-icons.svg#github"></use></svg> <span class="username">Anusree6154s</span></a></li><li><a href="https://www.linkedin.com/in/anusreeanilkumar1"><svg class="svg-icon"><use xlink:href="/documentation/assets/minima-social-icons.svg#linkedin"></use></svg> <span class="username">anusreeanilkumar1</span></a></li><li><a href="https://www.twitter.com/anu6154s"><svg class="svg-icon"><use xlink:href="/documentation/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">anu6154s</span></a></li><li><a href="/documentation/feed.xml"><svg class="svg-icon"><use xlink:href="/documentation/assets/minima-social-icons.svg#rss"></use></svg> <span>rss</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>This site is my personal documentation, made public for anyone who might find my code scribbles useful! ❤️</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

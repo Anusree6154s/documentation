@@ -1,4 +1,605 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="https://anusree6154s.github.io/documentation/feed.xml" rel="self" type="application/atom+xml" /><link href="https://anusree6154s.github.io/documentation/" rel="alternate" type="text/html" /><updated>2025-01-18T15:05:48+00:00</updated><id>https://anusree6154s.github.io/documentation/feed.xml</id><title type="html">Blog &amp;amp; Docs</title><subtitle>Web dev learnings and notes</subtitle><author><name>Anusree Anilkumar</name></author><entry><title type="html">Typescript learners guide</title><link href="https://anusree6154s.github.io/documentation/typescript/" rel="alternate" type="text/html" title="Typescript learners guide" /><published>2025-01-18T00:00:00+00:00</published><updated>2025-01-18T00:00:00+00:00</updated><id>https://anusree6154s.github.io/documentation/typescript</id><content type="html" xml:base="https://anusree6154s.github.io/documentation/typescript/"><![CDATA[<h2 id="typescript">TypeScript</h2>]]></content><author><name>Anusree Anilkumar</name></author><summary type="html"><![CDATA[TypeScript]]></summary></entry><entry><title type="html">API Documentation Tools</title><link href="https://anusree6154s.github.io/documentation/api-documentaion" rel="alternate" type="text/html" title="API Documentation Tools" /><published>2024-10-31T00:00:00+00:00</published><updated>2024-10-31T00:00:00+00:00</updated><id>https://anusree6154s.github.io/documentation/readme</id><content type="html" xml:base="https://anusree6154s.github.io/documentation/api-documentaion"><![CDATA[<h2 id="api-documentaion-tools">Api Documentaion Tools</h2>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="https://anusree6154s.github.io/documentation/feed.xml" rel="self" type="application/atom+xml" /><link href="https://anusree6154s.github.io/documentation/" rel="alternate" type="text/html" /><updated>2025-01-19T05:21:20+00:00</updated><id>https://anusree6154s.github.io/documentation/feed.xml</id><title type="html">Blog &amp;amp; Docs</title><subtitle>This site is my personal documentation, made public for anyone who might find my code scribbles useful! ❤️</subtitle><author><name>Anusree Anilkumar</name></author><entry><title type="html">Claude AI Code for Nodemailer</title><link href="https://anusree6154s.github.io/documentation/claudeai-code" rel="alternate" type="text/html" title="Claude AI Code for Nodemailer" /><published>2025-01-19T00:00:00+00:00</published><updated>2025-01-19T00:00:00+00:00</updated><id>https://anusree6154s.github.io/documentation/claudeai-code</id><content type="html" xml:base="https://anusree6154s.github.io/documentation/claudeai-code"><![CDATA[<div class="language-ts highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">express</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">express</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">google</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">googleapis</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">OAuth2Client</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">google-auth-library</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">nodemailer</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">nodemailer</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">Mail</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">nodemailer/lib/mailer</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">SMTPTransport</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">nodemailer/lib/smtp-transport</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span>
+  <span class="nx">google_client_id</span><span class="p">,</span>
+  <span class="nx">google_client_secret</span><span class="p">,</span>
+  <span class="nx">google_refresh_token</span><span class="p">,</span>
+  <span class="nx">senders_gmail</span><span class="p">,</span>
+<span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">../config/constants</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">router</span> <span class="o">=</span> <span class="nx">express</span><span class="p">.</span><span class="nx">Router</span><span class="p">();</span>
+
+<span class="kr">interface</span> <span class="nx">OTPRequest</span> <span class="p">{</span>
+  <span class="nl">email</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">createTransporter</span> <span class="o">=</span> <span class="k">async</span> <span class="p">():</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">nodemailer</span><span class="p">.</span><span class="nx">Transporter</span><span class="o">&gt;</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">try</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">oauth2Client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">OAuth2Client</span><span class="p">(</span>
+      <span class="nx">google_client_id</span><span class="p">,</span>
+      <span class="nx">google_client_secret</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">https://developers.google.com/oauthplayground</span><span class="dl">"</span>
+    <span class="p">);</span>
+
+    <span class="nx">oauth2Client</span><span class="p">.</span><span class="nx">setCredentials</span><span class="p">({</span>
+      <span class="na">refresh_token</span><span class="p">:</span> <span class="nx">google_refresh_token</span><span class="p">,</span>
+    <span class="p">});</span>
+
+    <span class="kd">const</span> <span class="nx">accessToken</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">oauth2Client</span><span class="p">.</span><span class="nx">getAccessToken</span><span class="p">();</span>
+
+    <span class="c1">// Properly type the SMTP transport options</span>
+    <span class="kd">const</span> <span class="na">transportOptions</span><span class="p">:</span> <span class="nx">SMTPTransport</span><span class="p">.</span><span class="nx">Options</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="na">host</span><span class="p">:</span> <span class="dl">'</span><span class="s1">smtp.gmail.com</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">port</span><span class="p">:</span> <span class="mi">465</span><span class="p">,</span>
+      <span class="na">secure</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+      <span class="na">auth</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">OAuth2</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">user</span><span class="p">:</span> <span class="nx">senders_gmail</span><span class="p">,</span>
+        <span class="na">clientId</span><span class="p">:</span> <span class="nx">google_client_id</span><span class="p">,</span>
+        <span class="na">clientSecret</span><span class="p">:</span> <span class="nx">google_client_secret</span><span class="p">,</span>
+        <span class="na">refreshToken</span><span class="p">:</span> <span class="nx">google_refresh_token</span><span class="p">,</span>
+        <span class="na">accessToken</span><span class="p">:</span> <span class="nx">accessToken</span><span class="p">.</span><span class="nx">token</span> <span class="o">||</span> <span class="kc">undefined</span><span class="p">,</span>
+      <span class="p">},</span>
+    <span class="p">};</span>
+
+    <span class="kd">const</span> <span class="nx">transporter</span> <span class="o">=</span> <span class="nx">nodemailer</span><span class="p">.</span><span class="nx">createTransport</span><span class="p">(</span><span class="nx">transportOptions</span><span class="p">);</span>
+
+    <span class="c1">// Verify transporter configuration</span>
+    <span class="k">await</span> <span class="nx">transporter</span><span class="p">.</span><span class="nx">verify</span><span class="p">();</span>
+    <span class="k">return</span> <span class="nx">transporter</span><span class="p">;</span>
+  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">"</span><span class="s2">Error creating transporter:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">"</span><span class="s2">Failed to create email transporter</span><span class="dl">"</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">async</span> <span class="kd">function</span> <span class="nx">sendEmail</span><span class="p">(</span><span class="nx">to</span><span class="p">:</span> <span class="kr">string</span><span class="p">,</span> <span class="nx">otp</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="k">void</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="k">try</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">transporter</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">createTransporter</span><span class="p">();</span>
+    
+    <span class="kd">const</span> <span class="na">mailOptions</span><span class="p">:</span> <span class="nx">Mail</span><span class="p">.</span><span class="nx">Options</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="na">from</span><span class="p">:</span> <span class="s2">`"Auth Service" &lt;</span><span class="p">${</span><span class="nx">senders_gmail</span><span class="p">}</span><span class="s2">&gt;`</span><span class="p">,</span>
+      <span class="nx">to</span><span class="p">,</span>
+      <span class="na">subject</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Passwordless Authentication OTP</span><span class="dl">"</span><span class="p">,</span>
+      <span class="na">text</span><span class="p">:</span> <span class="s2">`Your OTP for authentication is: </span><span class="p">${</span><span class="nx">otp</span><span class="p">}</span><span class="s2">`</span><span class="p">,</span>
+      <span class="na">html</span><span class="p">:</span> <span class="s2">`
+        &lt;h2&gt;Authentication OTP&lt;/h2&gt;
+        &lt;p&gt;Use the following OTP to log in:&lt;/p&gt;
+        &lt;h3 style="color: #4CAF50; font-size: 24px;"&gt;</span><span class="p">${</span><span class="nx">otp</span><span class="p">}</span><span class="s2">&lt;/h3&gt;
+        &lt;p&gt;This OTP will expire in 10 minutes.&lt;/p&gt;
+        &lt;p&gt;If you didn't request this OTP, please ignore this email.&lt;/p&gt;
+      `</span><span class="p">,</span>
+    <span class="p">};</span>
+
+    <span class="k">await</span> <span class="nx">transporter</span><span class="p">.</span><span class="nx">sendMail</span><span class="p">(</span><span class="nx">mailOptions</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">"</span><span class="s2">Error sending email:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">"</span><span class="s2">Failed to send email</span><span class="dl">"</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nx">router</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="dl">"</span><span class="s2">/sendOTP</span><span class="dl">"</span><span class="p">,</span> <span class="k">async</span> <span class="p">(</span><span class="nx">req</span><span class="p">:</span> <span class="nx">express</span><span class="p">.</span><span class="nx">Request</span><span class="o">&lt;</span><span class="p">{},</span> <span class="p">{},</span> <span class="nx">OTPRequest</span><span class="o">&gt;</span><span class="p">,</span> <span class="nx">res</span><span class="p">:</span> <span class="nx">express</span><span class="p">.</span><span class="nx">Response</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">try</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="p">{</span> <span class="nx">email</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">;</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">email</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">400</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span> 
+        <span class="na">error</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Email is required</span><span class="dl">"</span> 
+      <span class="p">});</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Validate email format</span>
+    <span class="kd">const</span> <span class="nx">emailRegex</span> <span class="o">=</span> <span class="sr">/^</span><span class="se">[^\s</span><span class="sr">@</span><span class="se">]</span><span class="sr">+@</span><span class="se">[^\s</span><span class="sr">@</span><span class="se">]</span><span class="sr">+</span><span class="se">\.[^\s</span><span class="sr">@</span><span class="se">]</span><span class="sr">+$/</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">emailRegex</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">email</span><span class="p">))</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">400</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span> 
+        <span class="na">error</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Invalid email format</span><span class="dl">"</span> 
+      <span class="p">});</span>
+    <span class="p">}</span>
+
+    <span class="kd">const</span> <span class="nx">otp</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="mi">100000</span> <span class="o">+</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">*</span> <span class="mi">900000</span><span class="p">).</span><span class="nx">toString</span><span class="p">();</span>
+    
+    <span class="c1">// Send email</span>
+    <span class="k">await</span> <span class="nx">sendEmail</span><span class="p">(</span><span class="nx">email</span><span class="p">,</span> <span class="nx">otp</span><span class="p">);</span>
+
+    <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">200</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span> 
+      <span class="na">success</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+      <span class="na">message</span><span class="p">:</span> <span class="dl">"</span><span class="s2">OTP sent successfully</span><span class="dl">"</span> 
+    <span class="p">});</span>
+  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">"</span><span class="s2">Error in /sendOTP:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">500</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span> 
+      <span class="na">error</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Failed to send OTP</span><span class="dl">"</span> 
+    <span class="p">});</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">router</span><span class="p">;</span>
+</code></pre></div></div>]]></content><author><name>Anusree Anilkumar</name></author><category term="jwt" /><category term="oauth2" /><category term="typescript" /><category term="nextjs" /><category term="oidc" /><category term="passwordless-authentication" /><summary type="html"><![CDATA[import express from "express"; import { google } from "googleapis"; import { OAuth2Client } from "google-auth-library"; import nodemailer from "nodemailer"; import Mail from "nodemailer/lib/mailer"; import SMTPTransport from "nodemailer/lib/smtp-transport"; import { google_client_id, google_client_secret, google_refresh_token, senders_gmail, } from "../config/constants"; const router = express.Router(); interface OTPRequest { email: string; } const createTransporter = async (): Promise&lt;nodemailer.Transporter&gt; =&gt; { try { const oauth2Client = new OAuth2Client( google_client_id, google_client_secret, "https://developers.google.com/oauthplayground" ); oauth2Client.setCredentials({ refresh_token: google_refresh_token, }); const accessToken = await oauth2Client.getAccessToken(); // Properly type the SMTP transport options const transportOptions: SMTPTransport.Options = { host: 'smtp.gmail.com', port: 465, secure: true, auth: { type: "OAuth2", user: senders_gmail, clientId: google_client_id, clientSecret: google_client_secret, refreshToken: google_refresh_token, accessToken: accessToken.token || undefined, }, }; const transporter = nodemailer.createTransport(transportOptions); // Verify transporter configuration await transporter.verify(); return transporter; } catch (error) { console.error("Error creating transporter:", error); throw new Error("Failed to create email transporter"); } } async function sendEmail(to: string, otp: string): Promise&lt;void&gt; { try { const transporter = await createTransporter(); const mailOptions: Mail.Options = { from: `"Auth Service" &lt;${senders_gmail}&gt;`, to, subject: "Passwordless Authentication OTP", text: `Your OTP for authentication is: ${otp}`, html: ` &lt;h2&gt;Authentication OTP&lt;/h2&gt; &lt;p&gt;Use the following OTP to log in:&lt;/p&gt; &lt;h3 style="color: #4CAF50; font-size: 24px;"&gt;${otp}&lt;/h3&gt; &lt;p&gt;This OTP will expire in 10 minutes.&lt;/p&gt; &lt;p&gt;If you didn't request this OTP, please ignore this email.&lt;/p&gt; `, }; await transporter.sendMail(mailOptions); } catch (error) { console.error("Error sending email:", error); throw new Error("Failed to send email"); } } router.post("/sendOTP", async (req: express.Request&lt;{}, {}, OTPRequest&gt;, res: express.Response) =&gt; { try { const { email } = req.body; if (!email) { return res.status(400).json({ error: "Email is required" }); } // Validate email format const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; if (!emailRegex.test(email)) { return res.status(400).json({ error: "Invalid email format" }); } const otp = Math.floor(100000 + Math.random() * 900000).toString(); // Send email await sendEmail(email, otp); res.status(200).json({ success: true, message: "OTP sent successfully" }); } catch (error) { console.error("Error in /sendOTP:", error); res.status(500).json({ error: "Failed to send OTP" }); } }); export default router;]]></summary></entry><entry><title type="html">Gitignore Config for Certificates</title><link href="https://anusree6154s.github.io/documentation/gitignore-commands" rel="alternate" type="text/html" title="Gitignore Config for Certificates" /><published>2025-01-19T00:00:00+00:00</published><updated>2025-01-19T00:00:00+00:00</updated><id>https://anusree6154s.github.io/documentation/gitignore-commands</id><content type="html" xml:base="https://anusree6154s.github.io/documentation/gitignore-commands"><![CDATA[<pre><code class="language-.gitignore"># config specific to the language or editor you use
+
+# Ignore certificate and key files
+*.key
+*.crt
+*.csr
+*.pem
+*.p12
+*.der
+*.srl
+
+# Ignore any directory containing certs or keys
+certs/
+keys/
+secrets/
+</code></pre>]]></content><author><name>Anusree Anilkumar</name></author><category term="jwt" /><category term="oauth2" /><category term="typescript" /><category term="nextjs" /><category term="oidc" /><category term="passwordless-authentication" /><summary type="html"><![CDATA[# config specific to the language or editor you use # Ignore certificate and key files *.key *.crt *.csr *.pem *.p12 *.der *.srl # Ignore any directory containing certs or keys certs/ keys/ secrets/]]></summary></entry><entry><title type="html">OAuth/OIDC App Configurations</title><link href="https://anusree6154s.github.io/documentation/oauth-oidc" rel="alternate" type="text/html" title="OAuth/OIDC App Configurations" /><published>2025-01-19T00:00:00+00:00</published><updated>2025-01-19T00:00:00+00:00</updated><id>https://anusree6154s.github.io/documentation/oauth-oidc</id><content type="html" xml:base="https://anusree6154s.github.io/documentation/oauth-oidc"><![CDATA[<h1 id="oauthoidc-app-configurations">OAuth/OIDC App Configurations</h1>
+
+<h3 id="table-of-contents">Table of Contents</h3>
+<ol>
+  <li><a href="#oauth-configuration">OAuth config</a>
+    <ol>
+      <li><a href="#google-oauth">Google</a></li>
+      <li><a href="#facebook">Facebook</a></li>
+      <li><a href="#twitter">Twitter</a></li>
+      <li><a href="#github">Github</a></li>
+    </ol>
+  </li>
+  <li><a href="#oidc-configuration">OIDC config</a>
+    <ol>
+      <li><a href="#google-oidc">Google</a></li>
+    </ol>
+  </li>
+</ol>
+
+<h2 id="oauth-configuration">OAuth Configuration</h2>
+
+<h3 id="google-oauth">Google OAuth</h3>
+<ol>
+  <li>visit https://console.cloud.google.com/
+    <ul>
+      <li><img width="400" alt="image" src="https://github.com/user-attachments/assets/f4118bef-c176-47af-9dfe-1d70f8672e2f" /></li>
+    </ul>
+  </li>
+  <li>add project/choose project
+    <ul>
+      <li>add project
+        <ul>
+          <li><img width="300" alt="image" src="https://github.com/user-attachments/assets/5bdb6739-ad8f-4986-b13e-b882ddcc19a5" /></li>
+          <li><img width="400" alt="image" src="https://github.com/user-attachments/assets/3e3741c1-a5ae-4fd7-a93e-5d8b5a1dc878" /></li>
+          <li><img width="400" alt="image" src="https://github.com/user-attachments/assets/6c3f61ca-55f3-49bb-8123-5c70caaecbb3" /></li>
+          <li>fill oauth consent screen. keep setting same in all. just change names wherever neccessary. fill those place that are filled
+            <ul>
+              <li><img width="300" alt="image" src="https://github.com/user-attachments/assets/92473ec7-6e6c-40e0-a094-9ed377d260d1" /></li>
+              <li><img width="400" alt="image" src="https://github.com/user-attachments/assets/cb4d8375-c38a-4ee8-bcca-312678d37d26" /></li>
+              <li><img width="400" alt="image" src="https://github.com/user-attachments/assets/c7653316-4e71-412c-a029-bec9c0fc12f2" /></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>or choose project</li>
+      <li><img width="400" alt="image" src="https://github.com/user-attachments/assets/999366b0-f8fb-4fec-995b-2aad27529eee" /></li>
+    </ul>
+  </li>
+  <li>add credentials
+    <ul>
+      <li><img width="200" alt="image" src="https://github.com/user-attachments/assets/acf3044d-2c89-41e9-b2b2-b223ee0e0602" /></li>
+      <li><img width="400" alt="image" src="https://github.com/user-attachments/assets/acbe9869-2959-4847-b10d-d6fd2506f34b" /></li>
+      <li>getting google api key for apps like nodemailer
+        <ul>
+          <li><img width="400" alt="image" src="https://github.com/user-attachments/assets/48996fca-30f0-4f64-a6df-36d934e57517" /></li>
+          <li><img width="400" alt="image" src="https://github.com/user-attachments/assets/a6a7037f-3b20-4191-a319-5ce0b408ebe1" /></li>
+        </ul>
+      </li>
+      <li>getting google cient id and secret for oauth
+        <ul>
+          <li><img width="500" alt="image" src="https://github.com/user-attachments/assets/d6aa41a8-a35d-46a2-8f0e-98dff4632fab" /></li>
+          <li><img width="500" alt="image" src="https://github.com/user-attachments/assets/ee9a6e10-18cd-4364-9c67-4d7817aa606b" /></li>
+          <li><img width="500" alt="image" src="https://github.com/user-attachments/assets/ae7f9b61-8621-4b15-acb4-feffba10d8d5" /></li>
+          <li><img width="300" alt="image" src="https://github.com/user-attachments/assets/9d355a62-decf-4fef-b312-f17e2ab23f52" /></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>adding redirect uris and source url (needs to be changed each time you change hostname or create a new deployment url)
+    <ul>
+      <li><img width="400" alt="image" src="https://github.com/user-attachments/assets/ed9bde68-6c83-4ca7-b319-ee38574acdd1" /></li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="facebook">Facebook</h3>
+<ol>
+  <li>visit facebook developer portal https://developers.facebook.com/
+    <ul>
+      <li><img width="600" alt="image" src="https://github.com/user-attachments/assets/1f69d3c0-2494-41b2-aac1-cee03118cacc" /></li>
+    </ul>
+  </li>
+  <li>create a new app/choose existing app
+    <ul>
+      <li>create new app</li>
+      <li><img width="600" alt="image" src="https://github.com/user-attachments/assets/c53caf90-f6a3-4de1-8e75-f93001b1d383" /></li>
+      <li><img width="400" alt="image" src="https://github.com/user-attachments/assets/5067b56f-d3ca-4d12-9459-63bdf4d569fc" /></li>
+      <li><img width="600" alt="image" src="https://github.com/user-attachments/assets/edc41216-1066-4ffc-9b71-2267b9e3a3e7" /></li>
+      <li><img width="400" alt="image" src="https://github.com/user-attachments/assets/25cca23d-a911-492c-bf9c-3f745ac076ab" /></li>
+      <li><img width="432" alt="image" src="https://github.com/user-attachments/assets/0f878b3d-02ba-4ba4-886a-fa99fea6b024" /></li>
+      <li><img width="430" alt="image" src="https://github.com/user-attachments/assets/29d2c4b8-34fe-46be-906f-0ed3cf450124" /></li>
+      <li><img width="212" alt="image" src="https://github.com/user-attachments/assets/c12339ef-5b45-4ba1-83b3-89734779f878" />
+    - NOT COMPLETED BECAUSE I DONT KNO WHY BUT APP IS WORKING NO MATTER WHAT CHANGE I MAKE</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="twitter">Twitter</h3>
+
+<ul>
+  <li><img width="600" alt="image" src="https://github.com/user-attachments/assets/596f9791-9eae-483f-9a14-9bc49391d99f" /></li>
+  <li><img width="400" alt="image" src="https://github.com/user-attachments/assets/0c4c1cbe-4f9f-41ab-9a96-970c0dc387df" /></li>
+  <li><img width="400" alt="image" src="https://github.com/user-attachments/assets/5ce047e0-42f1-4f88-af39-293615133007" /></li>
+  <li><img width="300" alt="image" src="https://github.com/user-attachments/assets/d84544ad-4eab-4504-9f75-848b0170487d" /></li>
+  <li><img width="300" alt="image" src="https://github.com/user-attachments/assets/67e867dd-327f-428c-8557-d19a1bb80a11" /></li>
+  <li><img width="600" alt="image" src="https://github.com/user-attachments/assets/983f6cd8-4c62-405c-95c7-cb478324fc02" /></li>
+  <li><img width="300" alt="image" src="https://github.com/user-attachments/assets/431f9c14-5afd-4220-8949-6646ae36d287" /></li>
+  <li><img width="300" alt="image" src="https://github.com/user-attachments/assets/db41f022-39e3-465d-9d2b-edbeb8c95f0a" /></li>
+  <li><img width="400" alt="image" src="https://github.com/user-attachments/assets/05e79721-938d-4de5-b447-4b7bdeb3257f" /></li>
+  <li><img width="400" alt="image" src="https://github.com/user-attachments/assets/7fbe7571-a483-45c3-bf0c-1a3cc85e21f8" /></li>
+</ul>
+
+<h3 id="github">Github</h3>
+<ul>
+  <li><img width="300" alt="image" src="https://github.com/user-attachments/assets/c495dd2f-a80c-43c3-a068-9b78ebe820cc" /></li>
+  <li><img width="200" alt="image" src="https://github.com/user-attachments/assets/33f8a77d-2ff0-47ff-bec8-eade05ce381c" /></li>
+  <li><img width="200" alt="image" src="https://github.com/user-attachments/assets/d0a9920d-1cfc-4679-b5ce-80b9ec03e991" /></li>
+  <li><img width="200" alt="image" src="https://github.com/user-attachments/assets/f9e08de4-3ad5-49ff-91be-8a1f95f77d4f" /></li>
+  <li><img width="600" alt="image" src="https://github.com/user-attachments/assets/793ca42d-bef2-4e83-a504-cdedabbdc925" /></li>
+  <li><img width="300" alt="image" src="https://github.com/user-attachments/assets/27169d01-91f2-4416-b8a5-221248a19d1e" /></li>
+  <li><img width="600" alt="image" src="https://github.com/user-attachments/assets/28e7561b-7f06-4901-877b-dc1efe4ab58d" /></li>
+  <li><img width="600" alt="image" src="https://github.com/user-attachments/assets/ccfc0e2f-3246-4ef2-bdd1-8a28cc6b196d" /></li>
+</ul>
+
+<h2 id="oidc-configuration">OIDC Configuration</h2>
+<h3 id="google-oidc">Google OIDC</h3>
+<ul>
+  <li>follow all same steps as in <a href="#goggle-oauth">google oauth</a>, except the last step - just callback url is different
+    <ul>
+      <li><img width="400" alt="image" src="https://github.com/user-attachments/assets/1cbf5d6d-dc88-4aab-9a82-61e10ed305e6" /></li>
+    </ul>
+  </li>
+</ul>]]></content><author><name>Anusree Anilkumar</name></author><category term="jwt" /><category term="oauth2" /><category term="typescript" /><category term="nextjs" /><category term="oidc" /><category term="passwordless-authentication" /><summary type="html"><![CDATA[OAuth/OIDC App Configurations Table of Contents OAuth config Google Facebook Twitter Github OIDC config Google OAuth Configuration Google OAuth visit https://console.cloud.google.com/ add project/choose project add project fill oauth consent screen. keep setting same in all. just change names wherever neccessary. fill those place that are filled or choose project add credentials getting google api key for apps like nodemailer getting google cient id and secret for oauth adding redirect uris and source url (needs to be changed each time you change hostname or create a new deployment url) Facebook visit facebook developer portal https://developers.facebook.com/ create a new app/choose existing app create new app - NOT COMPLETED BECAUSE I DONT KNO WHY BUT APP IS WORKING NO MATTER WHAT CHANGE I MAKE Twitter Github OIDC Configuration Google OIDC follow all same steps as in google oauth, except the last step - just callback url is different]]></summary></entry><entry><title type="html">OAuth Config Setup in Different Apps</title><link href="https://anusree6154s.github.io/documentation/oauth-config-setup" rel="alternate" type="text/html" title="OAuth Config Setup in Different Apps" /><published>2025-01-19T00:00:00+00:00</published><updated>2025-01-19T00:00:00+00:00</updated><id>https://anusree6154s.github.io/documentation/readme</id><content type="html" xml:base="https://anusree6154s.github.io/documentation/oauth-config-setup"><![CDATA[<h1 id="auth-app">Auth App</h1>
+
+<p>To study diff auth methods</p>
+
+<video width="600" height="400" controls="">
+  <source src="https://github.com/user-attachments/assets/04e7f79b-77b6-4382-9507-b08ee8cdb012" type="video/mp4" />
+Your browser does not support the video tag.
+</video>
+
+<h2 id="notes">Notes</h2>
+
+<h3 id="table-of-contents">Table of Contents</h3>
+
+<ol>
+  <li>Basic Auth</li>
+  <li>OAuth based auth</li>
+  <li>JWT token based auth</li>
+  <li>Session based auth</li>
+  <li>Passwordless auth</li>
+  <li>Open ID Connect (OIDC) based auth</li>
+  <li>mTLS based auth</li>
+  <li>Deployment</li>
+  <li>Choice of Techstack</li>
+</ol>
+
+<h3 id="1-basic-auth">1. Basic Auth</h3>
+
+<ul>
+  <li>Like Bearer Auth</li>
+  <li>Using basic-auth library</li>
+  <li>often accompanied by any other form of session/token storage to maintain session expiry</li>
+</ul>
+
+<h3 id="2-oauth">2. Oauth</h3>
+
+<ul>
+  <li>uses passport-google-oauth20 etc</li>
+  <li>that uses passport session to manage sessions</li>
+  <li>passport session needs express session</li>
+  <li>
+    <p>express session can send cookies from backend to frontned (NEEDS TO BE STUDIED. NOT SURE)</p>
+
+    <ul>
+      <li>while using diff frontend andb backend hosts only if both have https</li>
+      <li>only if frontend and baclemd are on same site(using nginx proxy or setting express.static())</li>
+      <li><em>we are using express.static() method to access frontend files via backend</em> [in vanilla html]</li>
+    </ul>
+  </li>
+  <li>
+    <p>refer <a href="./oauth-oidc">this</a> for oauth apps url configurations</p>
+  </li>
+  <li><strong>Tips</strong>:
+    <ul>
+      <li>use <code class="language-plaintext highlighter-rouge">&lt;base href="http://localhost:8000"&gt;</code> in html head to avoid rewriting baseurl in html (while accessing frontend files via backend express.static()) [in case of vanilla html]</li>
+      <li>use below in nextjs avoid rewriting baseurl
+        <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">async</span> <span class="nx">rewrites</span><span class="p">()</span> <span class="p">{</span>
+<span class="k">return</span> <span class="p">[</span>
+    <span class="p">{</span>
+    <span class="na">source</span><span class="p">:</span> <span class="dl">"</span><span class="s2">/auth/:path*</span><span class="dl">"</span><span class="p">,</span> <span class="c1">// Frontend route</span>
+    <span class="na">destination</span><span class="p">:</span> <span class="dl">"</span><span class="s2">http://localhost:8000/auth/:path*</span><span class="dl">"</span><span class="p">,</span> <span class="c1">// Backend route</span>
+    <span class="p">},</span>
+<span class="p">];</span>
+<span class="p">},</span>
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="3-jwt">3. JWT</h3>
+
+<ul>
+  <li><strong>Redis</strong> is particularly well-suited for token blacklisting token during logout due to its speed, simplicity, and built-in expiration features. Redis is designed for low-latency operations because it stores data in memory. This makes it significantly faster than traditional disk-based databases like MongoDB or SQL.</li>
+  <li>created redis db using upstash</li>
+</ul>
+
+<h3 id="4-session-based">4. Session based</h3>
+
+<ul>
+  <li>Plain session based auth</li>
+  <li>It has already been used along with basic auth and oauth, but just t o study it in isolation</li>
+</ul>
+
+<h3 id="5-passwordless">5. Passwordless</h3>
+
+<ul>
+  <li>Only for signup and signin. Verfication is through traditional jwt cookies/headers</li>
+  <li>During signin we dont use password(only email). Instead would send an otp to email and verify its expiration. And then will send the token to frontend. (an extra step like 2 factor auth)</li>
+  <li>For checking auth this token is sent via headers/stored in cookies each time for every route</li>
+  <li>To set up modemailer follow the set mentioned here <a href="https://dev.to/chandrapantachhetri/sending-emails-securely-using-node-js-nodemailer-smtp-gmail-and-oauth2-g3a">https://dev.to/chandrapantachhetri/sending-emails-securely-using-node-js-nodemailer-smtp-gmail-and-oauth2-g3a </a> and code mentioned in claude ai code here <a href="./claudeai-code">claudeai-code.md</a></li>
+</ul>
+
+<h3 id="6-openid-connect">6. OpenID Connect</h3>
+
+<ul>
+  <li>We used Google as the OpenID Provider (IdP) and passport-openidconnect to help set up openid</li>
+</ul>
+
+<h3 id="7-mtls-mutual-transport-layer-security-not-implemented-completely-cause-of-minor-errors">7. mTLS (Mutual Transport Layer Security) (not implemented completely cause of minor errors)</h3>
+
+<ul>
+  <li><a href="https://github.com/edum-compassuol/mTLS-nodejs-example/blob/main/server/src/server.ts">https://github.com/edum-compassuol/mTLS-nodejs-example/blob/main/server/src/server.ts</a></li>
+  <li>Mutual TLS (mTLS) authentication involves verifying both the client and server identities using TLS certificates.</li>
+  <li>Includes 2 steps:
+    <ol>
+      <li>creating certficated for server &amp; client</li>
+      <li>logging in after verifying the certificates (session is managed by header/cookies)</li>
+    </ol>
+  </li>
+  <li>First You’ll need to create the following in a seperate folder called <code class="language-plaintext highlighter-rouge">cert</code> outside frotend or backend folder:
+    <ul>
+      <li>A CA certificate to sign client and server certificates.</li>
+      <li>A server certificate and private key.</li>
+      <li>A client certificate and private key.</li>
+    </ul>
+  </li>
+  <li>Download ssl from <a href="https://slproweb.com/products/Win32OpenSSL.html">https://slproweb.com/products/Win32OpenSSL.html</a></li>
+  <li>OpenSSL commands to create certificates in cert folder: <a href="./ssl-commands">ssl-commands.md</a></li>
+  <li><strong>remember to add the folder cert/ and all the related certificate extensions as in <a href="./gitignore-commands">gitignore-commands.md</a> to gitignore before committing</strong></li>
+  <li>If everything is configured correctly:
+    <ul>
+      <li>The server will verify the client certificate.</li>
+      <li>The client will verify the server certificate.</li>
+    </ul>
+  </li>
+  <li>Common Issues
+    <ul>
+      <li>Certificate Mismatch: Ensure the client and server - certificates are signed by the same CA.</li>
+      <li>Incorrect Paths: Double-check the file paths for the keys and certificates.</li>
+      <li>Firewall/Port Issues: Ensure port 8443 is open for communication.(convetionally use port 8443 for mTLS)</li>
+    </ul>
+  </li>
+  <li>Used in Banks (e.g., JPMorgan Chase, Goldman Sachs), Payment Processors (e.g., Stripe, PayPal, Square), Cloud Providers (e.g., AWS, Microsoft Azure, Google Cloud), etc</li>
+  <li>Working:
+    <ul>
+      <li>Browsers do not natively support mTLS directly due to security constraints. So we will use nextjs api to work with client certificates. (∴ cannot do directly within page.tsx)</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="8-deployment">8. Deployment</h3>
+
+<ul>
+  <li>Basic typescript nodejs deployment: <a href="https://youtu.be/4mqy5SjkDec?si=rFG2Wu8NYmq-8PjD">https://youtu.be/4mqy5SjkDec?si=rFG2Wu8NYmq-8PjD</a></li>
+  <li>Durig deployment, there is this whole mess. Checkout all changes I’ve made so far, all the minor fix commits to get an idea.</li>
+  <li>Express session does indeed not work with frontend and backend on diff servers.
+    <ul>
+      <li>During development it worked because the browser confused the host(localhost) of both port 8000 and 3000 as it is coming from same domain.</li>
+      <li>Added diff frontend host url as below in .env file of react to change hostname and it stopped co-operating with express-session
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">HOST</span><span class="o">=</span>frontend.local
+</code></pre></div>        </div>
+      </li>
+      <li>Therefore had to serve rthe frontend build folder from backend</li>
+    </ul>
+  </li>
+  <li>Render is horrible at building and starting the server by itself for frontend as well as backend (as I’ve seen so far).
+    <ul>
+      <li>Therefore I’m building the build files in both frontend and backend before commiting and pushing the build folders to github</li>
+      <li>In render I just start the backend server</li>
+    </ul>
+  </li>
+  <li>Rememeber for OAuth authentication always need to update the redirect urls in case you plan to host the server in any other website.
+    <ul>
+      <li>Also update the env variables accordingly</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="9-choice-of-techstack">9. Choice of Techstack</h3>
+
+<ul>
+  <li>ReactJS because of not able to use express-session
+    <ul>
+      <li>NextSJ was the first choice in order to learn the techstack. But express-session was not letting me set cookies in frontend because of cross-origin. (couldnt find a simple solution in neither stackoverflow nor gpt)</li>
+      <li>So now im serving react build files directly from server</li>
+    </ul>
+  </li>
+</ul>]]></content><author><name>Anusree Anilkumar</name></author><category term="jwt" /><category term="oauth2" /><category term="typescript" /><category term="nextjs" /><category term="oidc" /><category term="passwordless-authentication" /><summary type="html"><![CDATA[To study diff auth methods]]></summary></entry><entry><title type="html">SSL Commands</title><link href="https://anusree6154s.github.io/documentation/ssl-commands" rel="alternate" type="text/html" title="SSL Commands" /><published>2025-01-19T00:00:00+00:00</published><updated>2025-01-19T00:00:00+00:00</updated><id>https://anusree6154s.github.io/documentation/ssl-commands</id><content type="html" xml:base="https://anusree6154s.github.io/documentation/ssl-commands"><![CDATA[<p>Generate a CA certificate:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>openssl genrsa <span class="nt">-out</span> ca.key 2048
+openssl req <span class="nt">-x509</span> <span class="nt">-new</span> <span class="nt">-nodes</span> <span class="nt">-key</span> ca.key <span class="nt">-sha256</span> <span class="nt">-days</span> 365 <span class="nt">-out</span> ca.crt
+</code></pre></div></div>
+
+<p>Generate a server certificate:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>openssl genrsa <span class="nt">-out</span> server.key 2048
+openssl req <span class="nt">-new</span> <span class="nt">-key</span> server.key <span class="nt">-out</span> server.csr
+openssl x509 <span class="nt">-req</span> <span class="nt">-in</span> server.csr <span class="nt">-CA</span> ca.crt <span class="nt">-CAkey</span> ca.key <span class="nt">-CAcreateserial</span> <span class="nt">-out</span> server.crt <span class="nt">-days</span> 365 <span class="nt">-sha256</span>
+</code></pre></div></div>
+
+<p>Generate a client certificate:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>openssl genrsa <span class="nt">-out</span> client.key 2048
+openssl req <span class="nt">-new</span> <span class="nt">-key</span> client.key <span class="nt">-out</span> client.csr
+openssl x509 <span class="nt">-req</span> <span class="nt">-in</span> client.csr <span class="nt">-CA</span> ca.crt <span class="nt">-CAkey</span> ca.key <span class="nt">-CAcreateserial</span> <span class="nt">-out</span> client.crt
+</code></pre></div></div>]]></content><author><name>Anusree Anilkumar</name></author><category term="jwt" /><category term="oauth2" /><category term="typescript" /><category term="nextjs" /><category term="oidc" /><category term="passwordless-authentication" /><summary type="html"><![CDATA[Generate a CA certificate: openssl genrsa -out ca.key 2048 openssl req -x509 -new -nodes -key ca.key -sha256 -days 365 -out ca.crt Generate a server certificate: openssl genrsa -out server.key 2048 openssl req -new -key server.key -out server.csr openssl x509 -req -in server.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out server.crt -days 365 -sha256 Generate a client certificate: openssl genrsa -out client.key 2048 openssl req -new -key client.key -out client.csr openssl x509 -req -in client.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out client.crt]]></summary></entry><entry><title type="html">Typescript learners guide</title><link href="https://anusree6154s.github.io/documentation/typescript/" rel="alternate" type="text/html" title="Typescript learners guide" /><published>2025-01-18T00:00:00+00:00</published><updated>2025-01-18T00:00:00+00:00</updated><id>https://anusree6154s.github.io/documentation/typescript</id><content type="html" xml:base="https://anusree6154s.github.io/documentation/typescript/"><![CDATA[<h2 id="typescript">TypeScript</h2>]]></content><author><name>Anusree Anilkumar</name></author><summary type="html"><![CDATA[TypeScript]]></summary></entry><entry><title type="html">Jekyll Github Pages Website</title><link href="https://anusree6154s.github.io/documentation/jekyll-github-pages-website" rel="alternate" type="text/html" title="Jekyll Github Pages Website" /><published>2025-01-18T00:00:00+00:00</published><updated>2025-01-18T00:00:00+00:00</updated><id>https://anusree6154s.github.io/documentation/jekyll-github-pages-website</id><content type="html" xml:base="https://anusree6154s.github.io/documentation/jekyll-github-pages-website"><![CDATA[<p>This is my personal guide related to all about making github pages with and without jekyll.</p>
+
+<h3 id="1-github-pages-website-without-jekyll--only-markdown-files">1. Github pages website (without jekyll + only markdown files)</h3>
+
+<ul>
+  <li><strong>Reference Repo</strong>: <a href="https://github.com/Anusree6154s/github-pages-website-demo-1">this</a></li>
+  <li><strong>Reference Website:</strong> <a href="https://anusree6154s.github.io/github-pages-website-demo-1/">this</a></li>
+  <li>It contains no themes, no extra github pages features, etc. Just the simplest form of github pages website.</li>
+  <li><strong>Process:</strong>
+    <ol>
+      <li>Initialise a repo</li>
+      <li>Add a readme and any other markdown files that you want to put.</li>
+      <li>Go to settings tab of repo, pages sections, these choose main branch and root directory. In sometime the website url will apear in the current page (just reload after a while)</li>
+    </ol>
+  </li>
+  <li><strong>Features:</strong>
+    <ol>
+      <li>Allows normal features of markdown files: links, markdown syntax etc</li>
+      <li>No themes, automatic navbar, etc</li>
+    </ol>
+  </li>
+</ul>
+
+<h3 id="2-github-pages-website-with-jekyll-theme--only-markdown-files">2. Github pages website (with jekyll theme + only markdown files)</h3>
+
+<ul>
+  <li><strong>Reference Repo:</strong> <a href="https://github.com/Anusree6154s/github-pages-website-demo-2">this</a></li>
+  <li><strong>Reference Website:</strong> <a href="https://anusree6154s.github.io/github-pages-website-demo-2/">this</a></li>
+  <li><strong>Process:</strong>
+    <ol>
+      <li>Steps 1 to 3 same as <a href="#1-github-pages-website-without-jekyll-only-markdown-files">above</a></li>
+      <li>Add a _config.yml file which contains a theme <a href="https://pages.github.com/themes/">supported by github</a> and other configuration respective to that theme provide its repo.</li>
+    </ol>
+  </li>
+  <li><strong>Features:</strong>
+    <ol>
+      <li>Allows normal features of markdown files: links, markdown syntax etc</li>
+      <li>Github supported themes and any features respective to that theme alone (no custom configurations outside of what that theme can provide)</li>
+    </ol>
+  </li>
+</ul>
+
+<h3 id="3-autogenerated-github-pages-website--with-jekyll-theme--markdown--html-files">3. Autogenerated Github pages website ( with jekyll theme + markdown + html files)</h3>
+
+<ul>
+  <li><strong>Reference Repo:</strong> <a href="https://github.com/Anusree6154s/github-pages-website-demo-3">this</a></li>
+  <li><strong>Reference Website:</strong> <a href="https://anusree6154s.github.io/github-pages-website-demo-3/">this</a></li>
+  <li><strong>Pre-requisites:</strong>
+    <ul>
+      <li>Ruby installed (For windows - https://rubyinstaller.org/downloads/), the one with devkit</li>
+      <li>Jekyll and bundler installed - <code class="language-plaintext highlighter-rouge">gem install jekyll bundler</code></li>
+    </ul>
+  </li>
+  <li><strong>Process:</strong>
+    <ul>
+      <li>Creating webpage: run <code class="language-plaintext highlighter-rouge">jekyll new my-site</code></li>
+      <li>Running webpage locally: run <code class="language-plaintext highlighter-rouge">bundle exec jekyll serve</code></li>
+      <li>Running webpage with github: push to repo and setup github pages via settings (as point 3 in <a href="#1-github-pages-website-without-jekyll-only-markdown-files">here</a>)</li>
+    </ul>
+  </li>
+  <li><strong>Features:</strong>
+    <ol>
+      <li>Neccessary markdown and html files, Gemfile with predefined gems, _config.yml with preset configurations and theme.</li>
+      <li>Just have to add more markdown files into _posts folder to add more posts to the website. Everything else is autogenerated</li>
+    </ol>
+  </li>
+</ul>
+
+<h3 id="4-github-pages-website-from-scratch-with-jekyll---markdown--html-files--github-pages-workflows">4. Github pages website from scratch (with jekyll +  markdown + html files + github pages workflows)</h3>
+<ul>
+  <li><strong>Reference Repo:</strong> <a href="https://github.com/Anusree6154s/github-pages-website-demo-4">this</a></li>
+  <li><strong>Reference Website:</strong> <a href="https://anusree6154s.github.io/github-pages-website-demo-4/">this</a></li>
+  <li><strong>Pre-requisites:</strong>
+    <ul>
+      <li>Ruby installed (For windows - <a href="https://rubyinstaller.org/downloads/">https://rubyinstaller.org/downloads/</a>), the one with devkit</li>
+      <li>jekyll and bundler installed - <code class="language-plaintext highlighter-rouge">gem install jekyll bundler</code></li>
+    </ul>
+  </li>
+  <li><strong>Process:</strong>
+    <ul>
+      <li><strong>Create a <code class="language-plaintext highlighter-rouge">_config.yml</code></strong>
+        <ul>
+          <li>For properties, visit <a href="https://json.schemastore.org/jekyll.json">https://json.schemastore.org/jekyll.json</a>. In that go to the key called properties and under it every key is a possible property that can be added to the config file.</li>
+          <li>For default properties specific to any particular theme or website template, visit that template and read its documentation or code base to identiy what variables are used in its code.</li>
+          <li>Finding variables :</li>
+          <li><img src="https://github.com/user-attachments/assets/04612ac5-0aba-45f2-8b2e-fdea9d482f74" width="400" /></li>
+          <li><img src="https://github.com/user-attachments/assets/045f61eb-3b55-407a-9ace-a021514d1913" width="400" /></li>
+          <li>We will be using architect theme from <a href="https://github.com/pages-themes/architect">https://github.com/pages-themes/architect</a>. I’ll just go ahead and copy info from its <code class="language-plaintext highlighter-rouge">_config.yml</code></li>
+        </ul>
+      </li>
+      <li><strong>Create a file called <code class="language-plaintext highlighter-rouge">Gemfile</code></strong>
+        <ul>
+          <li>Its like package.json but for ruby. It contains gems (packages for installation)</li>
+          <li>In it add necessary gems for jekyll, and those related to the respective theme/template. (<a href="https://github.com/Anusree6154s/github-pages-website-demo-4/blob/main/Gemfile">example</a>)</li>
+          <li>Bundle the gemfile by running <code class="language-plaintext highlighter-rouge">bundle install</code> or just <code class="language-plaintext highlighter-rouge">bundle</code></li>
+        </ul>
+      </li>
+      <li><strong>Create a file called <code class="language-plaintext highlighter-rouge">.gitignore</code></strong> specific to jekyll, automatically by running <code class="language-plaintext highlighter-rouge">npx gitignore jekyll</code></li>
+      <li><strong>Adding files</strong>:
+        <ul>
+          <li>Add a readme file that acts a starting point</li>
+          <li>Add additonal <a href="https://jekyllrb.com/docs/front-matter/">frontmatter</a> to any post or page that you make. (<a href="https://github.com/Anusree6154s/github-pages-website-demo-4/blob/main/first-default-page.md?plain=1">example</a>)</li>
+          <li>Add custom markdown pages [optional]. (<a href="https://github.com/Anusree6154s/github-pages-website-demo-4/blob/main/first-simple-page.md">example</a>)</li>
+          <li>Add custom html pages [optional]. (<a href="https://github.com/Anusree6154s/github-pages-website-demo-4/blob/main/_layouts/default.html">example</a>)</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><strong>Running:</strong>
+    <ul>
+      <li>Running webpage locally: run <code class="language-plaintext highlighter-rouge">bundle exec jekyll serve</code></li>
+      <li>Running webpage with github: push to repo and setup github pages via settings</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="5-github-pages-website-from-scratch-with-jekyll--markdown--html-files--custom-github-workflows">5. Github pages website from scratch (with jekyll + markdown + html files + custom github workflows)</h3>
+<ul>
+  <li><strong>Reference Repo:</strong> <a href="https://github.com/Anusree6154s/documentation">this</a></li>
+  <li><strong>Reference Website:</strong> <a href="https://anusree6154s.github.io/documentation/">This current blog website</a></li>
+  <li><strong>Process:</strong>
+    <ul>
+      <li>Every thing same as <a href="#4-github-pages-website-from-scratch-with-jekyll---markdown--html-files--github-pages-workflows">4</a>, but we will build our own workflow.</li>
+      <li>This is required when we make any changes in jekyll core code, because github-pages gem do not consider any changes that is made in jekyll core code. So we make our own github workflow.</li>
+    </ul>
+  </li>
+  <li>Github Workflow:
+    <ul>
+      <li>Add a folder named <code class="language-plaintext highlighter-rouge">.github</code>, within which you add another folder <code class="language-plaintext highlighter-rouge">workflows</code>, within which you add a file named <code class="language-plaintext highlighter-rouge">jekyll.yml</code></li>
+      <li>In that file you add the following <a href="https://github.com/Anusree6154s/documentation/blob/main/.github/workflows/jekyll.yml">code</a></li>
+    </ul>
+  </li>
+  <li><strong>Running:</strong>
+    <ul>
+      <li>Same as <a href="#4-github-pages-website-from-scratch-with-jekyll---markdown--html-files--github-pages-workflows">4</a></li>
+      <li>Running webpage locally: run <code class="language-plaintext highlighter-rouge">bundle exec jekyll serve</code></li>
+      <li>Running webpage with github: push to repo and setup github pages via settings</li>
+    </ul>
+  </li>
+</ul>]]></content><author><name>Anusree Anilkumar</name></author><category term="jekyll" /><category term="ruby" /><category term="scss" /><category term="markdown" /><summary type="html"><![CDATA[This is my personal guide related to all about making github pages with and without jekyll. 1. Github pages website (without jekyll + only markdown files) Reference Repo: this Reference Website: this It contains no themes, no extra github pages features, etc. Just the simplest form of github pages website. Process: Initialise a repo Add a readme and any other markdown files that you want to put. Go to settings tab of repo, pages sections, these choose main branch and root directory. In sometime the website url will apear in the current page (just reload after a while) Features: Allows normal features of markdown files: links, markdown syntax etc No themes, automatic navbar, etc 2. Github pages website (with jekyll theme + only markdown files) Reference Repo: this Reference Website: this Process: Steps 1 to 3 same as above Add a _config.yml file which contains a theme supported by github and other configuration respective to that theme provide its repo. Features: Allows normal features of markdown files: links, markdown syntax etc Github supported themes and any features respective to that theme alone (no custom configurations outside of what that theme can provide) 3. Autogenerated Github pages website ( with jekyll theme + markdown + html files) Reference Repo: this Reference Website: this Pre-requisites: Ruby installed (For windows - https://rubyinstaller.org/downloads/), the one with devkit Jekyll and bundler installed - gem install jekyll bundler Process: Creating webpage: run jekyll new my-site Running webpage locally: run bundle exec jekyll serve Running webpage with github: push to repo and setup github pages via settings (as point 3 in here) Features: Neccessary markdown and html files, Gemfile with predefined gems, _config.yml with preset configurations and theme. Just have to add more markdown files into _posts folder to add more posts to the website. Everything else is autogenerated 4. Github pages website from scratch (with jekyll + markdown + html files + github pages workflows) Reference Repo: this Reference Website: this Pre-requisites: Ruby installed (For windows - https://rubyinstaller.org/downloads/), the one with devkit jekyll and bundler installed - gem install jekyll bundler Process: Create a _config.yml For properties, visit https://json.schemastore.org/jekyll.json. In that go to the key called properties and under it every key is a possible property that can be added to the config file. For default properties specific to any particular theme or website template, visit that template and read its documentation or code base to identiy what variables are used in its code. Finding variables : We will be using architect theme from https://github.com/pages-themes/architect. I’ll just go ahead and copy info from its _config.yml Create a file called Gemfile Its like package.json but for ruby. It contains gems (packages for installation) In it add necessary gems for jekyll, and those related to the respective theme/template. (example) Bundle the gemfile by running bundle install or just bundle Create a file called .gitignore specific to jekyll, automatically by running npx gitignore jekyll Adding files: Add a readme file that acts a starting point Add additonal frontmatter to any post or page that you make. (example) Add custom markdown pages [optional]. (example) Add custom html pages [optional]. (example) Running: Running webpage locally: run bundle exec jekyll serve Running webpage with github: push to repo and setup github pages via settings 5. Github pages website from scratch (with jekyll + markdown + html files + custom github workflows) Reference Repo: this Reference Website: This current blog website Process: Every thing same as 4, but we will build our own workflow. This is required when we make any changes in jekyll core code, because github-pages gem do not consider any changes that is made in jekyll core code. So we make our own github workflow. Github Workflow: Add a folder named .github, within which you add another folder workflows, within which you add a file named jekyll.yml In that file you add the following code Running: Same as 4 Running webpage locally: run bundle exec jekyll serve Running webpage with github: push to repo and setup github pages via settings]]></summary></entry><entry><title type="html">API Documentation Tools</title><link href="https://anusree6154s.github.io/documentation/api-documentaion" rel="alternate" type="text/html" title="API Documentation Tools" /><published>2024-10-31T00:00:00+00:00</published><updated>2024-10-31T00:00:00+00:00</updated><id>https://anusree6154s.github.io/documentation/readme</id><content type="html" xml:base="https://anusree6154s.github.io/documentation/api-documentaion"><![CDATA[<h2 id="api-documentaion-tools">Api Documentaion Tools</h2>
 
 <p>Following are the api documentation tools that helps you create api docs in pretty websites.</p>
 
@@ -449,2339 +1050,4 @@ Update project dependencies to their latest versions to improve security and per
 </code></pre></div></div>
 
 <h3 id="summary">Summary</h3>
-<p>By following this structured format, your commit messages become more informative and standardized, making it easier for collaborators and contributors to understand the changes made to the codebase.</p>]]></content><author><name>Anusree Anilkumar</name></author><summary type="html"><![CDATA[Git Commit Standards (Official)]]></summary></entry><entry><title type="html">Readme files writing guide</title><link href="https://anusree6154s.github.io/documentation/readme-file-writing" rel="alternate" type="text/html" title="Readme files writing guide" /><published>2024-10-26T00:00:00+00:00</published><updated>2024-10-26T00:00:00+00:00</updated><id>https://anusree6154s.github.io/documentation/README</id><content type="html" xml:base="https://anusree6154s.github.io/documentation/readme-file-writing"><![CDATA[<h2 id="comprehensive-guide-to-writing-readme-files">Comprehensive Guide to Writing README Files</h2>
-
-<h3 id="1-project-title">1. Project Title</h3>
-
-<ul>
-  <li><strong>What to Include</strong>: The name of the project.</li>
-  <li><strong>How to Format</strong>: Use a prominent heading (e.g., <code class="language-plaintext highlighter-rouge"># Project Title</code>).</li>
-  <li><strong>Example</strong>:
-    <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh"># My Amazing Project</span>
-</code></pre></div>    </div>
-  </li>
-</ul>
-
-<h3 id="2-description">2. Description</h3>
-
-<ul>
-  <li><strong>What to Include</strong>: A brief overview of what the project does, its purpose, and its key features.</li>
-  <li><strong>How to Format</strong>: Write a few sentences or a short paragraph.</li>
-  <li><strong>Example</strong>:
-    <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>My Amazing Project is a web application that helps users manage their tasks effectively. With features like task creation, deadline tracking, and file uploads, it simplifies task management for individuals and teams.
-</code></pre></div>    </div>
-  </li>
-</ul>
-
-<h3 id="3-table-of-contents">3. Table of Contents</h3>
-
-<ul>
-  <li><strong>What to Include</strong>: A list of sections in the README for easy navigation.</li>
-  <li><strong>How to Format</strong>: Use links to section headings.</li>
-  <li><strong>Example</strong>:
-```markdown
-    <h2 id="table-of-contents">Table of Contents</h2>
-    <ul>
-      <li><a href="#installation">Installation</a></li>
-      <li><a href="#usage">Usage</a></li>
-      <li><a href="#features">Features</a></li>
-      <li><a href="#contributing">Contributing</a></li>
-      <li><a href="#license">License</a>
-```</li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="4-installation">4. Installation</h3>
-
-<ul>
-  <li><strong>What to Include</strong>: Step-by-step instructions on how to set up the project locally. This can include prerequisites, dependencies, and installation commands.</li>
-  <li><strong>How to Format</strong>: Use code blocks for commands and list steps clearly.</li>
-  <li><strong>Example</strong>:
-    <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gu">## Installation</span>
-
-To install and set up the project, follow these steps:
-<span class="p">
-1.</span> Clone the repository:
-   <span class="p">```</span><span class="nl">bash
-</span>   git clone https://github.com/username/my-amazing-project.git
-</code></pre></div>    </div>
-    <ol>
-      <li>Navigate to the project directory:
-        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>my-amazing-project
-</code></pre></div>        </div>
-      </li>
-      <li>Install dependencies:
-        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm <span class="nb">install</span>
-</code></pre></div>        </div>
-        <p>```</p>
-      </li>
-    </ol>
-  </li>
-</ul>
-
-<h3 id="5-usage">5. Usage</h3>
-
-<ul>
-  <li><strong>What to Include</strong>: Instructions on how to use the project after installation. Include examples and screenshots if applicable.</li>
-  <li><strong>How to Format</strong>: Use code snippets and images to clarify usage.</li>
-  <li><strong>Example</strong>:
-    <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gu">## Usage</span>
-
-To start the application, run the following command:
-
-<span class="p">```</span><span class="nl">bash
-</span>npm start
-</code></pre></div>    </div>
-
-    <p>Once the application is running, open your web browser and navigate to <code class="language-plaintext highlighter-rouge">http://localhost:3000</code>.</p>
-
-    <p><img src="screenshot.png" alt="Screenshot" /></p>
-
-    <h3 id="example-of-adding-a-task">Example of Adding a Task</h3>
-
-    <ol>
-      <li>Click on the “Add Task” button.</li>
-      <li>Fill in the task details and click “Save”.
-```</li>
-    </ol>
-  </li>
-</ul>
-
-<h3 id="6-features">6. Features</h3>
-
-<ul>
-  <li><strong>What to Include</strong>: A list of key features or functionalities of the project.</li>
-  <li><strong>How to Format</strong>: Use bullet points or a numbered list.</li>
-  <li><strong>Example</strong>:
-```markdown
-    <h2 id="features">Features</h2>
-    <ul>
-      <li>Create and manage tasks</li>
-      <li>Set deadlines and reminders</li>
-      <li>Upload files related to tasks</li>
-      <li>Mark tasks as done
-```</li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="7-contributing">7. Contributing</h3>
-
-<ul>
-  <li><strong>What to Include</strong>: Guidelines for contributing to the project, such as how to report issues, request features, or submit pull requests.</li>
-  <li><strong>How to Format</strong>: Clearly outline the process.</li>
-  <li><strong>Example</strong>:
-    <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gu">## Contributing</span>
-
-We welcome contributions! To contribute, please follow these steps:
-<span class="p">
-1.</span> Fork the repository.
-<span class="p">2.</span> Create a new branch:
-   <span class="p">```</span><span class="nl">bash
-</span>   git checkout <span class="nt">-b</span> feature/YourFeature
-</code></pre></div>    </div>
-    <ol>
-      <li>Make your changes and commit them.</li>
-      <li>Push to the branch:
-        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git push origin feature/YourFeature
-</code></pre></div>        </div>
-      </li>
-      <li>Submit a pull request.
-```</li>
-    </ol>
-  </li>
-</ul>
-
-<h3 id="8-license">8. License</h3>
-
-<ul>
-  <li><strong>What to Include</strong>: Information about the project’s license, including a link to the full license text.</li>
-  <li><strong>How to Format</strong>: Mention the type of license and link to the LICENSE file.</li>
-  <li><strong>Example</strong>:
-    <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gu">## License</span>
-
-This project is licensed under the MIT License - see the <span class="p">[</span><span class="nv">LICENSE</span><span class="p">](</span><span class="sx">LICENSE</span><span class="p">)</span> file for details.
-</code></pre></div>    </div>
-  </li>
-</ul>
-
-<h3 id="9-acknowledgments">9. Acknowledgments</h3>
-
-<ul>
-  <li><strong>What to Include</strong>: Acknowledge any libraries, frameworks, or resources that were helpful in developing the project.</li>
-  <li><strong>How to Format</strong>: List the acknowledgments in bullet points.</li>
-  <li><strong>Example</strong>:
-```markdown
-    <h2 id="acknowledgments">Acknowledgments</h2>
-    <ul>
-      <li><a href="https://reactjs.org/">React</a> - A JavaScript library for building user interfaces.</li>
-      <li><a href="https://mui.com/">MUI</a> - React components for faster and easier web development.
-```</li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="10-badges-optional">10. Badges (Optional)</h3>
-
-<ul>
-  <li><strong>What to Include</strong>: Badges for build status, coverage, npm version, etc.</li>
-  <li><strong>How to Format</strong>: Use Markdown to add badges at the top of the README.</li>
-  <li><strong>Example</strong>:
-    <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">![</span><span class="nv">Build Status</span><span class="p">](</span><span class="sx">https://img.shields.io/badge/build-passing-brightgreen</span><span class="p">)</span>
-<span class="p">![</span><span class="nv">npm version</span><span class="p">](</span><span class="sx">https://img.shields.io/npm/v/npm.svg</span><span class="p">)</span>
-</code></pre></div>    </div>
-  </li>
-</ul>
-
-<h3 id="11-faq-optional">11. FAQ (Optional)</h3>
-
-<ul>
-  <li><strong>What to Include</strong>: Common questions and answers related to the project.</li>
-  <li><strong>How to Format</strong>: List questions and their answers in a clear manner.</li>
-  <li><strong>Example</strong>:
-    <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gu">## FAQ</span>
-<span class="gs">**Q: Can I use this project for commercial purposes?**</span>
-A: Yes, you can use it as long as you comply with the license terms.
-
-<span class="gs">**Q: Is there a demo available?**</span>
-A: A live demo can be found at <span class="p">[</span><span class="nv">Demo Link</span><span class="p">](</span><span class="sx">https://example.com</span><span class="p">)</span>.
-</code></pre></div>    </div>
-  </li>
-</ul>
-
-<h3 id="12-contact-information-optional">12. Contact Information (Optional)</h3>
-
-<ul>
-  <li><strong>What to Include</strong>: How users or contributors can reach out with questions or suggestions.</li>
-  <li><strong>How to Format</strong>: Provide your email or link to a contact form.</li>
-  <li><strong>Example</strong>:
-    <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gu">## Contact</span>
-
-For questions or suggestions, feel free to reach out to me at <span class="p">[</span><span class="nv">your-email@example.com</span><span class="p">](</span><span class="sx">mailto:your-email@example.com</span><span class="p">)</span>.
-</code></pre></div>    </div>
-  </li>
-</ul>
-
-<hr />
-
-<h3 id="best-practices">Best Practices</h3>
-
-<ul>
-  <li><strong>Clarity and Brevity</strong>: Be clear and concise in your descriptions. Avoid jargon unless necessary.</li>
-  <li><strong>Markdown Formatting</strong>: Use Markdown syntax effectively to format your README for better readability.</li>
-  <li><strong>Update Regularly</strong>: Keep your README updated with any changes in the project, features, or installation instructions.</li>
-  <li><strong>Include Visuals</strong>: Use screenshots, diagrams, or GIFs to illustrate how the project works.</li>
-</ul>
-
-<h3 id="example-readme-template">Example README Template</h3>
-
-<p>Here’s a simple template based on the structure outlined above:</p>
-
-<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh"># Project Title</span>
-
-A brief description of what the project does and its purpose.
-
-<span class="gu">## Table of Contents</span>
-<span class="p">-</span> <span class="p">[</span><span class="nv">Installation</span><span class="p">](</span><span class="sx">#installation</span><span class="p">)</span>
-<span class="p">-</span> <span class="p">[</span><span class="nv">Usage</span><span class="p">](</span><span class="sx">#usage</span><span class="p">)</span>
-<span class="p">-</span> <span class="p">[</span><span class="nv">Features</span><span class="p">](</span><span class="sx">#features</span><span class="p">)</span>
-<span class="p">-</span> <span class="p">[</span><span class="nv">Contributing</span><span class="p">](</span><span class="sx">#contributing</span><span class="p">)</span>
-<span class="p">-</span> <span class="p">[</span><span class="nv">License</span><span class="p">](</span><span class="sx">#license</span><span class="p">)</span>
-<span class="p">-</span> <span class="p">[</span><span class="nv">Acknowledgments</span><span class="p">](</span><span class="sx">#acknowledgments</span><span class="p">)</span>
-
-<span class="gu">## Installation</span>
-<span class="p">
-1.</span> Clone the repository:
-   <span class="p">```</span><span class="nl">bash
-</span>   git clone https://github.com/username/my-amazing-project.git
-</code></pre></div></div>
-<ol>
-  <li>Navigate to the project directory:
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>my-amazing-project
-</code></pre></div>    </div>
-  </li>
-  <li>Install dependencies:
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm <span class="nb">install</span>
-</code></pre></div>    </div>
-  </li>
-</ol>
-
-<h2 id="usage">Usage</h2>
-
-<p>To start the application, run the following command:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm start
-</code></pre></div></div>
-
-<p>Open your web browser and navigate to <code class="language-plaintext highlighter-rouge">http://localhost:3000</code>.</p>
-
-<h2 id="features-1">Features</h2>
-<ul>
-  <li>List of features here.</li>
-</ul>
-
-<h2 id="contributing">Contributing</h2>
-
-<ol>
-  <li>Fork the repository.</li>
-  <li>Create a new branch.</li>
-  <li>Make your changes and commit them.</li>
-  <li>Push to the branch and submit a pull request.</li>
-</ol>
-
-<h2 id="license">License</h2>
-
-<p>This project is licensed under the MIT License - see the <a href="LICENSE">LICENSE</a> file for details.</p>
-
-<h2 id="acknowledgments-1">Acknowledgments</h2>
-<ul>
-  <li>Libraries or resources used in the project.
-```</li>
-</ul>]]></content><author><name>Anusree Anilkumar</name></author><summary type="html"><![CDATA[Comprehensive Guide to Writing README Files]]></summary></entry><entry><title type="html">Takehome Guidelines</title><link href="https://anusree6154s.github.io/documentation/readme/" rel="alternate" type="text/html" title="Takehome Guidelines" /><published>2024-10-23T00:00:00+00:00</published><updated>2024-10-23T00:00:00+00:00</updated><id>https://anusree6154s.github.io/documentation/readme</id><content type="html" xml:base="https://anusree6154s.github.io/documentation/readme/"><![CDATA[<h1 id="take-home-coding-challenge">Take home coding challenge</h1>
-
-<h2 id="readme">Readme</h2>
-
-<p>Write your README as if it was for a production service. Include the following items:</p>
-
-<ul>
-  <li>Description of the problem and solution.</li>
-  <li>Whether the solution focuses on back-end, front-end or if it’s full stack.</li>
-  <li>Reasoning behind your technical choices, including architectural.</li>
-  <li>Trade-offs you might have made, anything you left out, or what you might do differently if you were to spend additional time on the project.</li>
-</ul>
-
-<h2 id="how-we-review">How we review</h2>
-
-<p>Your application will be reviewed by at least two of our engineers. We do take into consideration your experience level.</p>
-
-<p><strong>We value quality over feature-completeness</strong>. It is fine to leave things aside provided you call them out in your project’s README. The goal of this code sample is to help us identify what you consider production-ready code. You should consider this code ready for final review with your colleague, i.e. this would be the last step before deploying to production.</p>
-
-<p>The aspects of your code we will assess include:</p>
-
-<ul>
-  <li><strong>Architecture</strong>: how clean is the separation between the front-end and the back-end?</li>
-  <li><strong>Clarity</strong>: does the README clearly and concisely explains the problem and solution? Are technical tradeoffs explained?</li>
-  <li><strong>Correctness</strong>: does the application do what was asked? If there is anything missing, does the README explain why it is missing?</li>
-  <li><strong>Code quality</strong>: is the code simple, easy to understand, and maintainable?  Are there any code smells or other red flags? Does object-oriented code follows principles such as the single responsibility principle? Is the coding style consistent with the language’s guidelines? Is it consistent throughout the codebase?</li>
-  <li><strong>Security</strong>: are there any obvious vulnerability?</li>
-  <li><strong>Technical choices</strong>: do choices of libraries, databases, architecture etc. seem appropriate for the chosen application?</li>
-</ul>
-
-<p>Bonus point (those items are optional):</p>
-
-<ul>
-  <li><strong>UX</strong>: is the web interface understandable and pleasing to use? Is the API intuitive?</li>
-  <li><strong>Scalability</strong>: will technical choices scale well? If not, is there a discussion of those choices in the README?</li>
-  <li><strong>Production-readiness</strong>: does the code include monitoring? logging? proper error handling?</li>
-</ul>
-
-<h2 id="my-personal-notes-on-this">My personal notes on this</h2>
-<h3 id="format">Format</h3>
-<ul>
-  <li>Project Name
-    <ul>
-      <li>Description
-        <ul>
-          <li>Problem Description</li>
-          <li>Solution Description (backend, frontend, or full-stack)</li>
-        </ul>
-      </li>
-      <li>Approach
-        <ul>
-          <li>Technology Stack (and reasons for choosing them)</li>
-          <li>Architecture</li>
-          <li>Features Implemented</li>
-        </ul>
-      </li>
-      <li>Trade-offs &amp; Improvements</li>
-      <li>Future Improvements</li>
-      <li>How to run</li>
-      <li>Demo image/gif/video</li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="format-in-detail">Format in detail</h3>
-<ul>
-  <li><strong>Project Name</strong>
-    <ul>
-      <li><strong>Description</strong>
-        <ul>
-          <li><strong>Problem Description</strong>: This project solves [problem description] by addressing [specific pain points], such as improving [performance, scalability, user experience, etc.].</li>
-          <li><strong>Solution Description</strong>: This is a [backend, frontend, or full-stack] solution using [technology stack] to tackle the identified problem.</li>
-        </ul>
-      </li>
-      <li><strong>Approach</strong>
-        <ul>
-          <li><strong>Technology Stack</strong> (and Reasons for Choosing Them)
-            <ul>
-              <li><strong>Front-end</strong>: [React, Vue, etc.] - Chosen for its scalability and reusable components.</li>
-              <li><strong>Back-end</strong>: [Node.js, Python, etc.] - Selected for its asynchronous processing capabilities.</li>
-              <li><strong>Database</strong>: [PostgreSQL, MongoDB, etc.] - Picked for [structured/unstructured] data handling.</li>
-              <li><strong>Tools</strong>: [Docker, CI/CD tools, etc.] - Used for deployment and containerization to ensure consistency across environments.</li>
-            </ul>
-          </li>
-          <li><strong>Architecture</strong>
-            <ul>
-              <li>The solution uses a [RESTful/Microservice] architecture with:
-                <ul>
-                  <li><strong>API Layer</strong>: Routes requests to services.</li>
-                  <li><strong>Business Logic</strong>: Processes core operations like authentication, payments, etc.</li>
-                  <li><strong>Database Layer</strong>: Manages data storage and retrieval.</li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-          <li><strong>Features Implemented</strong>
-            <ul>
-              <li><strong>User Authentication</strong>: Secure sign-up, login, and session management.</li>
-              <li><strong>Product Listings</strong>: Display dynamic product data from the database.</li>
-              <li><strong>Shopping Cart</strong>: Add, remove, and view items in a cart with real-time updates.</li>
-              <li><strong>Checkout Process</strong>: Integration with payment gateways to complete purchases.</li>
-            </ul>
-          </li>
-        </ul>
-      </li>
-      <li><strong>Trade-offs &amp; Improvements</strong>
-        <ul>
-          <li><strong>Performance vs. Flexibility</strong>: Opted for flexibility at the expense of some performance optimization.</li>
-          <li><strong>Initial Simplicity</strong>: Chose lightweight frameworks to facilitate rapid development, leaving room for future improvements.</li>
-          <li><strong>Testing</strong>: Focused testing on core logic, with plans to implement more extensive end-to-end tests.</li>
-        </ul>
-      </li>
-      <li><strong>Future Improvements</strong>
-        <ul>
-          <li>Expand test coverage to include UI and integration testing.</li>
-          <li>Transition to microservices for improved scalability and fault isolation.</li>
-          <li>Improve CI/CD pipeline with better monitoring and automation tools.</li>
-        </ul>
-      </li>
-      <li><strong>How to Run</strong>
-        <ul>
-          <li>Clone the repo:
-            <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">git</span> <span class="nx">clone</span> <span class="nx">https</span><span class="p">:</span><span class="c1">//github.com/yourusername/project.git</span>
-</code></pre></div>            </div>
-          </li>
-          <li>Install dependencies:
-            <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">npm</span> <span class="nx">install</span>
-</code></pre></div>            </div>
-          </li>
-          <li>Run the server:
-            <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">npm</span> <span class="nx">run</span> <span class="nx">dev</span>
-</code></pre></div>            </div>
-          </li>
-        </ul>
-      </li>
-      <li><strong>Demo Image/GIF/Video</strong>
-        <ul>
-          <li>image</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="example">Example</h3>
-<h4 id="long-version">Long version</h4>
-<ul>
-  <li>
-    <h1 id="ecommerce-frontend">eCommerce Frontend</h1>
-    <ul>
-      <li>
-        <h2 id="description">Description</h2>
-        <ul>
-          <li><strong>Problem Description</strong>: Many online stores lack modern, responsive, and performant user interfaces. This eCommerce application frontend aims to provide users with a seamless and intuitive shopping experience across devices.</li>
-          <li><strong>Solution Description</strong>: This is a <strong>frontend solution</strong> built using <strong>React</strong> to create a dynamic and responsive user interface. The app improves <strong>user experience</strong>, enhances <strong>performance</strong>, and ensures <strong>scalability</strong> for future feature extensions.</li>
-        </ul>
-      </li>
-      <li>
-        <h2 id="approach">Approach</h2>
-        <ul>
-          <li>
-            <h3 id="technology-stack-and-reasons-for-choosing-them">Technology Stack (and Reasons for Choosing Them)</h3>
-            <ul>
-              <li><strong>Front-end</strong>: <strong>React</strong> – Chosen for its component-based architecture and excellent support for dynamic, state-driven UIs. React also allows easy integration of third-party libraries for UI elements.</li>
-              <li><strong>State Management</strong>: <strong>Redux</strong> – Used to manage global state across the application, such as the user’s shopping cart, to ensure consistency and performance.</li>
-              <li><strong>Styling</strong>: <strong>Tailwind CSS</strong> – A utility-first CSS framework that speeds up development while maintaining design consistency.</li>
-              <li><strong>Routing</strong>: <strong>React Router</strong> – Implemented for navigation between pages, enabling smooth transitions between product listings, cart, and checkout pages.</li>
-              <li><strong>Tools</strong>: <strong>Webpack &amp; Babel</strong> – Used for bundling and transpiling the JavaScript code for optimized performance in production.</li>
-            </ul>
-          </li>
-          <li>
-            <h3 id="architecture">Architecture</h3>
-            <ul>
-              <li>The frontend follows a <strong>component-based architecture</strong> where each page and UI element is encapsulated into reusable React components:</li>
-              <li><strong>Product Listing Page</strong>: Dynamically fetches product data and displays it in a grid layout with filters and sorting options.</li>
-              <li><strong>Product Detail Page</strong>: Provides detailed information about a selected product, including images, descriptions, and reviews.</li>
-              <li><strong>Shopping Cart</strong>: Displays the selected items, allowing users to modify quantities or remove items in real-time using state management (Redux).</li>
-              <li><strong>Checkout Page</strong>: Guides users through the purchase process, integrating payment gateway UI elements.</li>
-            </ul>
-          </li>
-          <li>
-            <h3 id="features-implemented">Features Implemented</h3>
-            <ul>
-              <li><strong>Product Browsing</strong>: Displays a catalog of products with filtering (by category, price) and sorting (by popularity, price).</li>
-              <li><strong>Product Search</strong>: A search bar allows users to quickly find specific products.</li>
-              <li><strong>Shopping Cart</strong>: Users can add items to their cart, update quantities, and view a live total of the purchase.</li>
-              <li><strong>Responsive Design</strong>: The layout adapts seamlessly across desktop, tablet, and mobile devices.</li>
-              <li><strong>User Authentication</strong>: Integrated login/logout functionality, with access to personalized features like saved shopping carts.</li>
-            </ul>
-          </li>
-        </ul>
-      </li>
-      <li>
-        <h2 id="trade-offs--improvements">Trade-offs &amp; Improvements</h2>
-        <ul>
-          <li><strong>Performance vs. Features</strong>: Initial focus was on ensuring core eCommerce features like browsing and cart functionality, with performance optimizations to follow.</li>
-          <li><strong>Custom Design vs. Framework</strong>: Opted for Tailwind CSS to speed up development and ensure design consistency, but custom styling may be introduced in future iterations.</li>
-          <li><strong>Testing</strong>: Basic unit tests are implemented, but end-to-end testing for the entire user journey is a future goal.</li>
-        </ul>
-      </li>
-      <li>
-        <h3 id="future-improvements">Future Improvements</h3>
-        <ul>
-          <li>Improve performance by lazy-loading components and implementing server-side rendering (SSR) with Next.js.</li>
-          <li>Add more comprehensive tests using tools like <strong>Cypress</strong> for end-to-end testing.</li>
-          <li>Integrate with more third-party APIs for recommendations, reviews, and payment processing.</li>
-          <li>Implement localization and internationalization (i18n) to support multiple languages and regions.</li>
-        </ul>
-      </li>
-      <li>
-        <h2 id="how-to-run">How to Run</h2>
-        <ol>
-          <li><strong>Clone the repo</strong>:
-            <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">git</span> <span class="nx">clone</span> <span class="nx">https</span><span class="p">:</span><span class="c1">//github.com/yourusername/ecommerce-frontend.git</span>
-</code></pre></div>            </div>
-          </li>
-          <li><strong>Install dependencies</strong>:
-            <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">npm</span> <span class="nx">install</span>
-</code></pre></div>            </div>
-          </li>
-          <li><strong>Run the server</strong>:
-            <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">npm</span> <span class="nx">start</span>
-</code></pre></div>            </div>
-            <p>The application will run on <code class="language-plaintext highlighter-rouge">http://localhost:3000</code>.</p>
-          </li>
-        </ol>
-      </li>
-      <li>
-        <h2 id="demo-imagegifvideo">Demo Image/GIF/Video</h2>
-        <ul>
-          <li>Here’s a preview of the eCommerce frontend in action:
-            <ul>
-              <li><img src="path/to/screenshot.png" alt="Home Page Screenshot" /></li>
-            </ul>
-          </li>
-          <li>Or a demo of the user adding products to the cart:
-            <ul>
-              <li><img src="path/to/demo.mp4" alt="Demo GIF" /></li>
-            </ul>
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-</ul>
-
-<h4 id="short-version">Short version</h4>
-<ul>
-  <li>
-    <h1 id="ecommerce-frontend-1">eCommerce Frontend</h1>
-    <ul>
-      <li>
-        <h2 id="description-1">Description</h2>
-        <ul>
-          <li><strong>Problem</strong>: Many online stores lack modern, responsive interfaces.</li>
-          <li><strong>Solution</strong>: A <strong>React</strong>-based frontend that enhances <strong>user experience</strong>, <strong>performance</strong>, and <strong>scalability</strong> for a seamless shopping experience.</li>
-        </ul>
-      </li>
-      <li>
-        <h2 id="approach-1">Approach</h2>
-        <ul>
-          <li>
-            <h3 id="technology-stack">Technology Stack</h3>
-            <ul>
-              <li><strong>Front-end</strong>: <strong>React</strong> for a dynamic UI.</li>
-              <li><strong>State Management</strong>: <strong>Redux</strong> for managing the global state.</li>
-              <li><strong>Styling</strong>: <strong>Tailwind CSS</strong> for rapid, consistent design.</li>
-              <li><strong>Routing</strong>: <strong>React Router</strong> for smooth page transitions.</li>
-              <li><strong>Build Tools</strong>: <strong>Webpack &amp; Babel</strong> for optimized performance.</li>
-            </ul>
-          </li>
-          <li>
-            <h3 id="architecture-1">Architecture</h3>
-            <ul>
-              <li><strong>Component-Based</strong>: Each UI element is a reusable component, including:
-                <ul>
-                  <li><strong>Product Listing</strong>: Displays products with filters and sorting.</li>
-                  <li><strong>Product Detail</strong>: Detailed view of selected products.</li>
-                  <li><strong>Shopping Cart</strong>: Real-time updates on item quantities and totals.</li>
-                  <li><strong>Checkout Page</strong>: Guides users through the purchase process.</li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <h3 id="features">Features</h3>
-            <ul>
-              <li><strong>Product Browsing</strong>: Catalog with filtering and sorting.</li>
-              <li><strong>Search Functionality</strong>: Quickly find products.</li>
-              <li><strong>Responsive Design</strong>: Adapts to all devices.</li>
-              <li><strong>User Authentication</strong>: Login/logout functionality.</li>
-            </ul>
-          </li>
-        </ul>
-      </li>
-      <li>
-        <h2 id="trade-offs--improvements-1">Trade-offs &amp; Improvements</h2>
-        <ul>
-          <li>Focused on core features over performance; optimizations will follow.</li>
-          <li>Basic testing is in place; end-to-end tests are planned.</li>
-        </ul>
-      </li>
-      <li>
-        <h3 id="future-improvements-1">Future Improvements</h3>
-        <ul>
-          <li>Implement lazy loading and SSR with Next.js.</li>
-          <li>Enhance testing coverage.</li>
-          <li>Add localization support.</li>
-        </ul>
-      </li>
-      <li>
-        <h2 id="how-to-run-1">How to Run</h2>
-        <ol>
-          <li><strong>Clone the repo</strong>:
-            <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/yourusername/ecommerce-frontend.git
-</code></pre></div>            </div>
-          </li>
-          <li><strong>Install dependencies</strong>:
-            <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm <span class="nb">install</span>
-</code></pre></div>            </div>
-          </li>
-          <li><strong>Run the server</strong>:
-            <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm start
-</code></pre></div>            </div>
-            <p>Access the application at <code class="language-plaintext highlighter-rouge">http://localhost:3000</code>.</p>
-          </li>
-        </ol>
-      </li>
-      <li>
-        <h2 id="demo">Demo</h2>
-        <ul>
-          <li><img src="path/to/screenshot.png" alt="Home Page Screenshot" /></li>
-          <li>Or a demo of adding products to the cart:</li>
-          <li><img src="path/to/demo.mp4" alt="Demo GIF" /></li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-</ul>
-
-<blockquote>
-  <p>[!NOTE]
-can take demo and deployemnt urls to the top instead of bottom, just below the title for quicker access</p>
-</blockquote>]]></content><author><name>Anusree Anilkumar</name></author><summary type="html"><![CDATA[Take home coding challenge template and guide]]></summary></entry><entry><title type="html">Readme files formatting guide</title><link href="https://anusree6154s.github.io/documentation/readme-formatting-guidelines" rel="alternate" type="text/html" title="Readme files formatting guide" /><published>2024-10-23T00:00:00+00:00</published><updated>2024-10-23T00:00:00+00:00</updated><id>https://anusree6154s.github.io/documentation/README</id><content type="html" xml:base="https://anusree6154s.github.io/documentation/readme-formatting-guidelines"><![CDATA[<h2 id="readme-formatting-guidelinesrules">Readme Formatting Guidelines/Rules</h2>
-<ul>
-  <li><a href="https://medium.com/analytics-vidhya/writing-github-readme-e593f278a796">Majority guidelines</a></li>
-  <li><a href="https://gist.github.com/kigiri/4b1d64eba2d465a2ffc1342a0e9e7d6f">Image alignment/resize guidelines</a></li>
-</ul>]]></content><author><name>Anusree Anilkumar</name></author><summary type="html"><![CDATA[Comprehensive Guide to Formatting README Files]]></summary></entry><entry><title type="html">Email Service Guide</title><link href="https://anusree6154s.github.io/documentation/email-service" rel="alternate" type="text/html" title="Email Service Guide" /><published>2024-10-22T00:00:00+00:00</published><updated>2024-10-22T00:00:00+00:00</updated><id>https://anusree6154s.github.io/documentation/README</id><content type="html" xml:base="https://anusree6154s.github.io/documentation/email-service"><![CDATA[<h3 id="from-frontend">From Frontend</h3>
-<ol>
-  <li>EmailJS: https://github.com/emailjs-com/emailjs-sdk</li>
-</ol>
-
-<h3 id="from-backend">From backend</h3>
-<ol>
-  <li>EmailJS :https://github.com/emailjs-com/emailjs-sdk</li>
-  <li>Nodemailer</li>
-</ol>]]></content><author><name>Anusree Anilkumar</name></author><summary type="html"><![CDATA[Guide to how to integrate email service with any project]]></summary></entry><entry><title type="html">Deployment Websites</title><link href="https://anusree6154s.github.io/documentation/deployment" rel="alternate" type="text/html" title="Deployment Websites" /><published>2024-09-21T00:00:00+00:00</published><updated>2024-09-21T00:00:00+00:00</updated><id>https://anusree6154s.github.io/documentation/README</id><content type="html" xml:base="https://anusree6154s.github.io/documentation/deployment"><![CDATA[<h3 id="netlify">netlify:</h3>
-
-<ul>
-  <li>using netlify-cli for cli, can do from portal too</li>
-  <li>only for static websites</li>
-  <li>can do for private gitlab instances (along with github, gitlab, etc) (so from crio cli for static websites)</li>
-  <li>can do for webservers too but require to do using serverless-http which didnt work right for me (methods exist in internet)</li>
-</ul>
-
-<h3 id="render">render</h3>
-
-<ul>
-  <li>using cli is paid, portal is free</li>
-  <li>specially for webservers</li>
-  <li>cannot do for private gitlab instances (so not from crio cli)</li>
-</ul>]]></content><author><name>Anusree Anilkumar</name></author><summary type="html"><![CDATA[Personal pros and cons of different deployment websites]]></summary></entry><entry><title type="html">Passport Jwt</title><link href="https://anusree6154s.github.io/documentation/passport-jwt/" rel="alternate" type="text/html" title="Passport Jwt" /><published>2024-08-19T00:00:00+00:00</published><updated>2024-08-19T00:00:00+00:00</updated><id>https://anusree6154s.github.io/documentation/passport-jwt</id><content type="html" xml:base="https://anusree6154s.github.io/documentation/passport-jwt/"><![CDATA[<h1 id="passport-jwt-documentaion">Passport-jwt Documentaion</h1>
-
-<h2 id="table-of-contents">Table of Contents</h2>
-
-<ol>
-  <li><a href="#overview">Overview</a></li>
-  <li><a href="#features-and-usage">Features and Usage</a>
-    <ul>
-      <li><a href="#installation-and-import">Installation and Import</a></li>
-      <li><a href="#Configuration">Configuration</a>
-        <ul>
-          <li><a href="#basic">Basic Code Structure</a></li>
-          <li><a href="#Parts">Parts of Code in detail</a>
-            <ul>
-              <li><a href="Imports">Imports</a></li>
-              <li><a href="#passport"><code class="language-plaintext highlighter-rouge">passport.use(name[optional], strategy)</code></a></li>
-              <li><a href="#Strategy"><code class="language-plaintext highlighter-rouge">new Startegy(options, verifyCallback)</code></a></li>
-            </ul>
-          </li>
-        </ul>
-      </li>
-      <li><a href="#full-structure">Full Code Structure (seperated into modules)</a></li>
-    </ul>
-  </li>
-  <li><a href="#authentication">Authentication</a>
-    <ul>
-      <li><a href="#With">With session support (w/o callback)</a></li>
-      <li><a href="#Without">Without session support (w/ callback)</a></li>
-    </ul>
-  </li>
-  <li><a href="#passing-jwt-token">Methods to pass JWT Token</a></li>
-</ol>
-
-<h2 id="overview">Overview</h2>
-
-<ul>
-  <li>A middleware for Express.js framework that provides authentication and authorization using JSON Web Tokens (JWT).</li>
-  <li>A passport strategy to work with JWT</li>
-  <li>This only handles what we can do with a JWT token created using passport. To create a token checkout <a href="http://passportdocumentation">Passport</a></li>
-</ul>
-
-<h2 id="features-and-usage">Features and Usage</h2>
-
-<ol>
-  <li>
-    <p>Installation and Import
-<a id="installation-and-import"></a> - Install: <code class="language-plaintext highlighter-rouge">npm install passport-jwt</code> - Import: <code class="language-plaintext highlighter-rouge">const { Strategy, ExtractJwt } = require("passport-jwt");</code> - <em>passport-jwt is a class with 2 properties - Strategy and ExtractJwt</em> - <em>Strategy is a class with 2 parameters passed to its contructor</em> - <em>ExtractJwt is an object with various sub properties</em></p>
-  </li>
-  <li>
-    <p>Configuration
-<a id="Configuration"></a></p>
-
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Basic Structure:
-</code></pre></div>    </div>
-
-    <p><a id="basic"></a></p>
-
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  ```javascript
-  const JwtStrategy = require("passport-jwt").Strategy;
-  const ExtractJwt = require("passport-jwt").ExtractJwt;
-  const passport = require("passport");
-
-  // Options for the strategy
-  const opts = {
-    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(), // Extract token from Authorization header
-    secretOrKey: "your_jwt_secret_key", // Secret key for verifying token
-  };
-
-  // JWT Strategy
-  passport.use(
-    new JwtStrategy(opts, (jwtPayload, done) =&gt; {
-      // Find the user based on the jwtPayload.sub (subject)
-      User.findOne({ id: jwtPayload.sub }, (err, user) =&gt; {
-        if (err) {
-          return done(err, false);
-        }
-        if (user) {
-          return done(null, user);
-        } else {
-          return done(null, false); // User not found
-        }
-      });
-    })
-  );
-  ```
-
-- Parts of the configuration:
-</code></pre></div>    </div>
-
-    <p><a id="Parts"></a></p>
-
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  1. Imports:
-</code></pre></div>    </div>
-
-    <p><a id="Imports"></a> - <code class="language-plaintext highlighter-rouge">const {Strategy,ExtractJwt} = require("passport-jwt")</code> - <code class="language-plaintext highlighter-rouge">const passport = require("passport");</code> 2. passport.use() method to register strategy (2 ways):
-<a id="passport"></a></p>
-    <details>
-<summary>
-<code>passport.use(Strategy)</code> - Default Strategy
-</summary>
-
-         - Registers a strategy directly.
-         - Will be treated as the default strategy.
-         - Allows you to refer to the strategy by the name _jwt_ later in the *passport* method `passport.authenticate('jwt')`.
-         </details>
-
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     &lt;details&gt;
-         &lt;summary&gt;
-         &lt;code&gt;passport.use(name, Strategy)&lt;/code&gt; - Named Strategy [optional]
-         &lt;/summary&gt;
-
-     - Allows you to refer to the strategy by the name _jwt_ later in the *passport* method `passport.authenticate('name')`.
-     &lt;/details&gt;
-  3. Strategy (has 2 parameters):
-</code></pre></div>    </div>
-
-    <p><a id="Strategy"></a> - Has two parameters: <code class="language-plaintext highlighter-rouge">opts</code> and <code class="language-plaintext highlighter-rouge">verify</code></p>
-
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>        - Parameters:
-            &lt;details&gt;
-            &lt;summary&gt;
-                &lt;code&gt;`opts`&lt;/code&gt; - (object) Options
-            &lt;/summary&gt;
-
-            - This parameter is an object that defines various options for the strategy.
-
-            - Example:
-                ```js
-                const opts = {
-                    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-                    secretOrKey: "your_jwt_secret_key",
-                    issuer: "your_issuer", // optional
-                    algorithms: ["HS256"], // optional
-                    ignoreExpiration: false, // optional, defaults to false
-                };
-                ```
-            - Properties:
-
-                1. &lt;details&gt;
-                        &lt;summary&gt;
-                        &lt;code&gt;jwtFromRequest&lt;/code&gt; - (function) To specify method of Jwt extraction
-                        &lt;/summary&gt;
-
-                    - Specifies how the JWT will be extracted from the incoming request from client using _ExtractJwt_ class.
-                    - Example
-                        ```javascript
-                        const opts = {
-                            jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken();
-                        }
-                        ```
-
-                    - All options (Properties of ExtractJwt):
-
-                    1. &lt;details&gt;
-                        &lt;summary&gt;
-                        &lt;code&gt;ExtractJwt.fromAuthHeaderAsBearerToken()&lt;/code&gt;
-                        &lt;/summary&gt;
-
-                        - **Usage**: Extracts the JWT from the Authorization header, assuming the JWT is prefixed by the word Bearer.
-                        - **Input parameter**: none
-                        - **Example**:
-
-                        ```js
-                        jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken();
-                        ```
-
-                        &lt;/details&gt;
-
-                    2. &lt;details&gt;
-                        &lt;summary&gt;
-                        &lt;code&gt;ExtractJwt.fromHeader(header_name)&lt;/code&gt;
-                        &lt;/summary&gt;
-
-                        - **Usage**: Extracts the JWT from a custom header in the request.
-                        - **Input parameter**: header_name (string) - The name of the custom header containing the JWT.
-                        - **Example**:
-
-                        ```js
-                        jwtFromRequest: ExtractJwt.fromHeader('auth_token')
-                        ```
-
-                        &lt;/details&gt;
-
-
-                    3. &lt;details&gt;
-                        &lt;summary&gt;
-                        &lt;code&gt;ExtractJwt.fromBodyField(field_name)&lt;/code&gt;
-                        &lt;/summary&gt;
-
-                        - **Usage**:  Extracts the JWT from a specific field in the request body (typically used in form submissions or JSON payloads).
-                        - **Input parameter**: field_name (string) - The name of the field in the request body that contains the JWT.
-                        - **Example**:
-
-                        ```js
-                        jwtFromRequest: ExtractJwt.fromBodyField('token')
-                        ```
-
-                        &lt;/details&gt;
-
-                    4. &lt;details&gt;
-                        &lt;summary&gt;
-                        &lt;code&gt;ExtractJwt.fromUrlQueryParameter(param_name)&lt;/code&gt;
-                        &lt;/summary&gt;
-
-                        - **Usage**:  Extracts the JWT from a URL query parameter.
-                        - **Input parameter**: param_name (string) - The name of the query parameter in the URL that contains the JWT.
-                        - **Example**:
-
-                        ```js
-                        jwtFromRequest: ExtractJwt.fromUrlQueryParameter('token')
-                        ```
-                        &lt;/details&gt;
-
-                    5. &lt;details&gt;
-                        &lt;summary&gt;
-                        &lt;code&gt;fromAuthHeaderWithScheme(auth_scheme) &lt;/code&gt;
-                        &lt;/summary&gt;
-
-                        - **Usage**:  Extracts the JWT from Authorization Header with the specified auth_scheme
-                        - **Input parameter**: (string) Auth scheme like Bearer, Token, etc
-                        - **Example**:
-
-                            ```js
-                            jwtFromRequest: ExtractJwt.ExtractJwt.fromAuthHeaderWithScheme('Token')
-                            ```
-                        &lt;/details&gt;
-
-                    6. &lt;details&gt;
-                        &lt;summary&gt;
-                        &lt;code&gt;fromExtractors([array of extractor functions]) &lt;/code&gt;
-                        &lt;/summary&gt;
-
-                        - **Usage**:  Lets us define multiple extractors to extract jwt from different sources one after other.
-                        - **Input parameter**: (array) Array of extractors
-                        - **Example**:
-
-                            ```js
-                            const extractors = [
-                                ExtractJwt.fromAuthHeaderAsBearerToken(),         // Try the Bearer token from Authorization header
-                                ExtractJwt.fromUrlQueryParameter('auth_token')    // Then try the token from the URL query parameter
-                            ];
-
-                            const opts = {
-                                jwtFromRequest: ExtractJwt.fromExtractors(extractors),
-                                secretOrKey: 'your_secret_key'
-                            };
-                            ```
-                        &lt;/details&gt;
-
-                    7. &lt;details&gt;
-                        &lt;summary&gt;
-                        &lt;code&gt;Custom Extractors&lt;/code&gt;
-                        &lt;/summary&gt;
-
-                        - **Usage**:  Lets us define custom extractoinof tokens from anywhere
-                        - **Example**:
-                            ```js
-                            //when extracting from cookies using cookie parser
-                            var cookieParser = require('cookie-parser')
-                            const express = require('express');
-
-                            const app = express()
-                            app.use(cookieParser())
-
-                            //custom extractor
-                            var cookieExtractor = function (req) {
-                            var token = null;
-                            if (req &amp;&amp; req.cookies) {
-                                token = req.cookies["jwt"];
-                            }
-                            return token;
-                            };
-
-                            const opts = {
-                                jwtFromRequest: cookieExtractor,
-                                secretOrKey: 'your_secret_key'
-                            };
-                            ```
-                        &lt;/details&gt;
-
-
-                    &lt;/details&gt;
-
-                2. &lt;details&gt;
-                    &lt;summary&gt;
-                        &lt;code&gt;secretOrKey&lt;/code&gt; - (string or buffer) Secret key to verify JWT
-                    &lt;/summary&gt;
-
-                    - The key used to verify the JWT signature. This is essential for validating the authenticity of the token.
-
-                    - **For symmetric algorithms** (e.g., HS256, HS384, HS512), `secretOrKey` will be a shared secret string or buffer used by both the server that signs the JWT and the server that verifies it.
-                    - **For asymmetric algorithms** (e.g., RS256, RS384, RS512), `secretOrKey` will be a public key that verifies the JWT, while the corresponding private key is used to sign the JWT.
-
-                    - Examples:
-                        - Symmetric key:
-                            ```js
-                            const opts = {
-                                secretOrKey: 'your_jwt_secret_key' //can be any random word
-                            };
-                            ```
-                        - Asymmetric key:
-                            ```js
-                            const opts = {
-                                secretOrKey: fs.readFileSync('./path/to/public.key', 'utf8')
-                            };
-                            ```
-                        - Note:
-                            - If using symmetric encryption (e.g., HS256), the same secretOrKey must be used for both signing and verifying the token.
-                            - If using asymmetric encryption (e.g., RS256), the secretOrKey should be the public key, while the private key is used to sign the token.
-                            - It is important to securely manage this key, as exposure could compromise the security of your system.
-
-                    &lt;/details&gt;
-
-                3. &lt;details&gt;
-                    &lt;summary&gt;
-                        &lt;code&gt;secretOrKeyProvider&lt;/code&gt; - (function) [optional] Function to get secretOrKey from anywhere
-                    &lt;/summary&gt;
-
-                    - This function dynamically provides the secret or public key for verifying the JWT. It is useful in cases where the key needs to be determined based on the request, such as in multi-tenant applications or when using different keys for different users.
-                    - Do not use both `secretOrKey` and `secretOrKeyProvider`. Use either of them
-                    - Parameters:
-                        - `request`: The original HTTP request object.
-                        - `rawJwtToken`: The raw JWT token extractedfrom the request.
-                        - `done`: A function to return the key, with the parameters:
-                            - `err`
-                            - `secretOrKey` (string or buffer)
-                    - Example:
-                        ```js
-                            const opts = {
-                                secretOrKeyProvider: (request, rawJwtToken, done) =&gt; {
-                                    // Logic to determine the secret or key dynamically
-                                    const secretOrKey = getSecretForTenant(request); // Example function to get the secret key based on tenant
-                                    done(null, secretOrKey); // Pass the key to the callback function
-                                }
-                            };
-                        ```
-
-                        - Note:
-                            1. If secretOrKeyProvider is provided, it overrides the static secretOrKey option
-                            2. Useful in scenarios where the key might change per request or per user, such as:
-                                - Multi-tenant applications where each tenant has a different key.
-                                - Using different keys for different users or services.
-                            3. If the key cannot be determined (e.g., a database lookup fails), call done(err) to signal an error.
-                            4. When using asymmetric encryption (e.g., RS256), the secretOrKeyProvider would return the public key for verification.
-
-                        - Example for multi-tenant application:
-                            ```js
-                            const opts = {
-                                secretOrKeyProvider: (request, rawJwtToken, done) =&gt; {
-                                    // Get the tenant's key based on some property of the request (e.g., subdomain or user ID)
-                                    const tenantKey = getTenantKeyFromDb(request.tenantId); // Example function to retrieve tenant's key
-                                    done(null, tenantKey);
-                                }
-                            };
-                            ```
-                        - Use Case:
-                            - Multi-tenant systems where different tenants have different signing keys.
-                            - Dynamic environments where the key cannot be determined statically and must be retrieved or computed based on the incoming request.
-                    &lt;/details&gt;
-
-                4. &lt;details&gt;
-                        &lt;summary&gt;
-                        &lt;code&gt;issuer&lt;/code&gt; - (string or array) [optional]  Verifies the issuer (iss) claim of the token.
-                        &lt;/summary&gt;
-                        - Examples:
-
-                        ```js
-                        const opts = {
-                                    issuer: 'https://accounts.google.com'
-                                };
-                        ```
-                        ```js
-                        const opts = {
-                                issuer: [
-                                    'https://accounts.google.com',
-                                    'https://your-tenant-name.auth0.com/',
-                                    'https://dev-123456.okta.com'
-                                ]
-                            };
-                        ```
-                        - Use Cases:
-                            - **Single Issuer Application**: If all tokens are issued by your application, you would set the issuer option to your app's identifier.
-                            - **Third-Party Tokens**: If you're working with tokens issued by third parties (e.g., OAuth providers or external identity systems), you would set issuer to the known trusted issuer.
-                    &lt;/details&gt;
-
-                5. &lt;details&gt;
-                    &lt;summary&gt;
-                    &lt;code&gt;algorithms&lt;/code&gt; - (array) [optional] List of allowed algorithms for token verification, e.g., ['HS256', 'RS256'].
-                    &lt;/summary&gt;
-
-                    - **Purpose**: This option helps enforce which algorithms are accepted for signing JWTs, improving security by rejecting tokens signed with algorithms that are not trusted or expected.
-                    - **Default Behavior**: If the algorithms option is not provided, the strategy will allow any algorithm,
-                    - Examples:
-                        ```js
-                        const opts = {,
-                            algorithms: ['HS256', 'RS256', 'ES256'] // Accepts JWTs signed with HS256, RS256, or ES256 algorithms
-                        };
-                        ```
-                        ```js
-                        const opts = {,
-                            algorithms: ['HS256']
-                        };
-                        ```
-                    &lt;/details&gt;
-
-                6. &lt;details&gt;
-                    &lt;summary&gt;
-                    &lt;code&gt;audience&lt;/code&gt; - (string or array) [optional] To specify the recipients of Jwt
-                    &lt;/summary&gt;
-
-                    - **Purpose**: To specify the recipients of Jwt. Will be verifiesd against the recipients mentioned in *aud* coming through *jwt_payload*.
-                    - Examples:
-                        ```js
-                        const opts = {,
-                             "aud": "user-service",
-                        };
-                        ```
-                        ```js
-                        const opts = {,
-                             "aud": ["user-service", "billing-service", "yoursite.net"]
-                        };
-                        ```
-                    &lt;/details&gt;
-
-                7. &lt;details&gt;
-                        &lt;summary&gt;
-                        &lt;code&gt;ignoreExpiration&lt;/code&gt; - (boolean) [optional] Whether to ignore the token's expiration time during verification.
-                        &lt;/summary&gt;
-
-                        - **Purpose**:
-                            - When you want to accept tokens even if they have expired.
-                            - Useful in testing environments where you might not want to deal with token expiration.
-                            - The `exp` claim in a JWT specifies the expiration time of the token. Expiry is not set by passport-jwt.
-                        - **Default Behavior**: By default, ignoreExpiration is false, meaning that Passport-JWT will check the exp claim to ensure the token is not expired.
-                        - Examples:
-                            ```js
-                            const opts = {
-                                ignoreExpiration: true // Accepts expired tokens
-                            };
-                            ```
-                            ```js
-                            const opts = {
-                                ignoreExpiration: false // Enforces expiration check
-                            };
-                            ```
-                    &lt;/details&gt;
-
-                8. &lt;details&gt;
-                    &lt;summary&gt;
-                    &lt;code&gt;passReqToCallback&lt;/code&gt; - (boolean) [optional] Whether to pass the request object to the verification callback.
-                    &lt;/summary&gt;
-
-                    - The `passReqToCallback` option specifies whether the request object should be passed to the `verify` callback function in the `JwtStrategy`.
-                    - Useful if you need access to the `req` object for additional logic inside verify callback.
-                    - Example:
-                        ```js
-                        const opts = {
-                            passReqToCallback: true // Passes the request object to the verify callback
-                        };
-                        ```
-                        ```js
-                        passport.use(new JwtStrategy(opts, (req, jwtPayload, done) =&gt; { //now you can add req as parameter
-                            // Access request object
-                            console.log(req.headers); // Example of accessing headers
-
-                            User.findById(jwtPayload.sub, (err, user) =&gt; {
-                                if (err) return done(err, false);
-                                if (user) return done(null, user);
-                                return done(null, false);
-                            });
-                        }));
-                        ```
-                    &lt;/details&gt;
-
-                9. &lt;details&gt;
-                    &lt;summary&gt;
-                    &lt;code&gt;jsonWebTokenOptions &lt;/code&gt; - (object) [optional + deprecated] To pass options to customise token verification
-                    &lt;/summary&gt;
-
-                    - **Purpose**: To pass options directly to the underlying jsonwebtoken.verify() and customise token verification.
-                    - **Deprecated**: Though deprecated, still allows you to pass audience / issuer / algorithms / ignoreExpiration on the options
-                    - **Properties**:
-                        - &lt;details&gt;&lt;summary&gt;&lt;code&gt;algorithms&lt;/code&gt;: (array) Specifies allowed signing algorithms.&lt;/summary&gt;
-
-                            - Specifies which algorithms are allowed for verifying the JWT.
-                            - eg: `algorithms: ['HS256']`
-                            &lt;/details&gt;
-                        - &lt;details&gt;&lt;summary&gt;&lt;code&gt;audience&lt;/code&gt;: (string | RegExp | array) Specifies the expected audience of the JWT.&lt;/summary&gt;
-
-                            -  Specifies the expected audience of the JWT (who the token is intended for). It can be a string, regex, or array of strings/regexes.
-                            - eg: `audience: 'your-app-client-id'`
-                            &lt;/details&gt;
-                        - &lt;details&gt;&lt;summary&gt;&lt;code&gt;clockTimestamp&lt;/code&gt;: (integer) Sets a fixed time for token validation.&lt;/summary&gt;
-
-                            - The time in seconds since the epoch to use as the current time when verifying the JWT.
-                            ```js
-                            clockTimestamp: Math.floor(Date.now() / 1000) // current time in seconds
-                            ```
-                            &lt;/details&gt;
-                        - &lt;details&gt;&lt;summary&gt;&lt;code&gt;clockTolerance&lt;/code&gt;: (integer) Helps with clock skew issues.&lt;/summary&gt;
-
-                            - Specifies the allowed clock skew (in seconds) when verifying the exp and nbf claims (useful when different servers have slightly unsynchronized clocks).
-                            - eg: `clockTolerance: 5`
-                            &lt;/details&gt;
-                        - &lt;details&gt;&lt;summary&gt;&lt;code&gt;complete&lt;/code&gt;: (boolean) Returns `{ payload, header, signature }` if true.&lt;/summary&gt;
-
-                            -  If true, returns an object with the decoded { payload, header, signature } instead of just the payload.
-                            - eg: `complete: true`
-                            &lt;/details&gt;
-                        - &lt;details&gt;&lt;summary&gt;&lt;code&gt;issuer&lt;/code&gt;: (string | array) Specifies the expected issuer of the JWT.&lt;/summary&gt;
-
-                            - Specifies the expected issuer of the JWT (the entity that issued the token). Can be a string or an array of strings.
-                            - eg: `issuer: 'auth.your-app.com'`
-                            &lt;/details&gt;
-                        - &lt;details&gt;&lt;summary&gt;&lt;code&gt;ignoreExpiration&lt;/code&gt;: (boolean) Ignores the `exp` claim if true.&lt;/summary&gt;
-
-                            -  If true, ignores the exp claim during verification (useful in development, but not recommended in production).
-                            - eg: `ignoreExpiration: true`
-                            &lt;/details&gt;
-                        - &lt;details&gt;&lt;summary&gt;&lt;code&gt;ignoreNotBefore&lt;/code&gt;: (boolean) Ignores the `nbf` claim if true.&lt;/summary&gt;
-
-                            - If true, ignores the nbf (Not Before) claim when verifying the token.
-                            - eg: `ignoreNotBefore: true`
-                            &lt;/details&gt;
-                        - &lt;details&gt;&lt;summary&gt;&lt;code&gt;jwtid&lt;/code&gt;: (string) Validates the token ID (jti) claim.&lt;/summary&gt;
-
-                             - The jti (JWT ID) claim specifies a unique identifier for the token to prevent replay attacks.
-                             - eg: `jwtid: 'unique-jwt-id-12345'`
-                            &lt;/details&gt;
-                        - &lt;details&gt;&lt;summary&gt;&lt;code&gt;nonce&lt;/code&gt;: (string) Checks the `nonce` claim (used in OpenID Connect).&lt;/summary&gt;
-
-                            -  Used to check the nonce claim in OpenID Connect to prevent replay attacks. The nonce is a string used to associate a client session with an ID token.
-                            - eg: `nonce: 'nonce-value-generated-at-auth-time'`
-                            &lt;/details&gt;
-                        - &lt;details&gt;&lt;summary&gt;&lt;code&gt;subject&lt;/code&gt;: (string) Specifies the expected `sub` (Subject) claim.&lt;/summary&gt;
-
-                             - Specifies the expected sub (Subject) claim of the JWT, which typically identifies the principal (user) of the token.
-                             - eg: `subject: 'user-id-12345'`
-                            &lt;/details&gt;
-                        - &lt;details&gt;&lt;summary&gt;&lt;code&gt;maxAge&lt;/code&gt;: (string | number) Limits how old a token can be.&lt;/summary&gt;
-
-                            -  Specifies the maximum allowable age (in seconds or a time string) for the JWT since its iat (Issued At) claim. Used to reject old tokens.
-                            - eg: `maxAge: '24h'`
-                            &lt;/details&gt;
-                        - &lt;details&gt;&lt;summary&gt;&lt;code&gt;allowInvalidAsymmetricKeyTypes&lt;/code&gt;: (boolean) Allows invalid asymmetric key types if true.&lt;/summary&gt;
-
-                            - When set to true, allows invalid asymmetric key types during verification (not recommended unless necessary).
-                            - eg: `allowInvalidAsymmetricKeyTypes: true`
-                            &lt;/details&gt;
-                    - Examples:
-                        ```js
-                        const opts = {
-                            jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-                            secretOrKey: 'your_secret_key',
-                            jsonWebTokenOptions: {
-                                clockTolerance: 5,  // Allow 5 seconds of clock skew
-                                maxAge: '1d',       // Only accept tokens no more than 1 day old
-                                algorithms: ['HS256'],  // Only accept tokens signed with HS256
-                                ignoreNotBefore: true, // Will ignore token's Not before dates
-                                ignoreExpiration: false // Will validate the 'expiration' claim
-                            }
-                        };
-
-                        passport.use(new JwtStrategy(opts, (jwtPayload, done) =&gt; {
-                            User.findById(jwtPayload.sub, (err, user) =&gt; {
-                                if (err) return done(err, false);
-                                if (user) return done(null, user);
-                                return done(null, false);
-                            });
-                        }));
-                        ```
-                    &lt;/details&gt;
-            &lt;/details&gt;
-
-            &lt;details&gt;
-            &lt;summary&gt;
-                &lt;code&gt;`verify`&lt;/code&gt; - (function) Verify Callback
-            &lt;/summary&gt;
-
-            - **Purpose**: Callback used in the `JwtStrategy` to validate the JWT and determine if it should be accepted.
-            - **Parameters**:
-                - &lt;details&gt;
-                    &lt;summary&gt;
-                    &lt;code&gt;payload&lt;/code&gt; - (object) Payload for verify callback
-                    &lt;/summary&gt;
-
-                    - **Purpose**: It is the decoded JWT payload, which contains the claims from the token (e.g., user ID, roles).
-                    - It is an object that contains the claims from the decoded JWT. We can only access these claim values and set it. It is set using *jwt.sign()* using [*jsonwebtoken*](http://jwtdocumentation) module.
-                    - **Properties**  **(Claims)**:
-                        1. `sub`: The **subject** of the token, usually the user ID. This is a standard claim and is often used to identify the user.
-                        2. `exp`: The **expiration** time of the token, specified as a Unix timestamp. This is a standard claim used to determine if the token has expired.
-                        3. `iat`: The **issued-at** time, specified as a Unix timestamp. This indicates when the token was issued.
-                        4. `iss`: The **issuer** of the token, which is a standard claim indicating who issued the token.
-                        5. `aud`: The **audience** for which the token is intended. This is a standard claim indicating the recipient(s) of the token.
-                        6. `nbf`: **Not Before** - The time before which the token should not be considered valid.
-                        7. `jti`: **JWT ID** - A unique identifier for the token, which can be used to prevent replay attacks.
-
-                        &gt; **Note** : we can also have any custom claims. eg: roles, name.
-                    - Example:
-                        ```js
-                        //setting claims in some other file
-                        const jwt = require('jsonwebtoken')
-                        fucntion signIn(req, res){
-                            const payload = {
-                                sub: user._id,
-                                roles: user.roles,
-                                exp: Math.floor(Date.now() / 1000) + (60 * 60)
-                                //etc
-                            }
-                            const token = jwt.sign(payload, 'your_jwt_secret_key')
-                            res.send({token})
-                        }
-
-                        //accessing those claims
-                        passport.use(new JwtStrategy(opts, (jwtPayload, done) =&gt; {
-                            console.log('User ID:', jwtPayload.sub);
-                            console.log('Token Expiry Time:', jwtPayload.exp);
-                            console.log('User Roles:', jwtPayload.roles);
-
-                            User.findById(jwtPayload.sub, (err, user) =&gt; {
-                                if (err) return done(err, false);
-                                if (user) return done(null, user);
-                                return done(null, false);
-                            });
-                        }));
-
-                        ```
-                    &lt;/details&gt;
-
-                - &lt;details&gt;
-                    &lt;summary&gt;
-                    &lt;code&gt;done&lt;/code&gt; - (fucntion) To indicate the result of the verification.
-                    &lt;/summary&gt;
-
-                    - **Purpose**: To indicate the result of the verification.
-                    - **Parameters**:
-                        - `err`: Error during verification if any
-                        - `user`: Any sort of data that comes out after the logic inside verify callback
-                        - `info`: [optional] Any message regarding error or user
-                    - Example:
-                        ```js
-                        //without info
-                        passport.use(new JwtStrategy(opts, (jwtPayload, done) =&gt; {
-                            User.findById(jwtPayload.sub, (err, user) =&gt; {
-                                if (err) return done(err, false);
-                                if (user) return done(null, user); // Verification successful
-                                return done(null, false); // No user found, but no error
-                            });
-                        }));
-                        ```
-                        ```js
-                        //with info
-                        passport.use(new JwtStrategy(opts, (jwtPayload, done) =&gt; {
-                            User.findById(jwtPayload.sub, (err, user) =&gt; {
-                                if (err) return done(err, false);
-                                if (!user) return done(null, false, { message: 'User not found' });
-                            });
-                        }));
-                        ```
-                      &lt;/details&gt;
-
-                    - &lt;details&gt;
-                        &lt;summary&gt;
-                        &lt;code&gt;req&lt;/code&gt; [conditional]
-                        &lt;/summary&gt;
-
-                        - Only when inside opts, passReqToCallback is true
-                        ```js
-                        const opts = {passReqToCallback: true}
-
-                        const verify = (req, payload, done)=&gt;{
-                            // handle payload data
-                        }
-                        ```
-                        &lt;/details&gt;
-
-                - Example:
-                    ```js
-                    const verify = (jwtPayload, done) =&gt; {
-                        // jwtPayload contains the decoded JWT payload
-                        User.findById(jwtPayload.sub, (err, user) =&gt; {
-                            if (err) return done(err, false); // Error during user lookup
-                            if (user) return done(null, user); // User found, authentication successful
-                            return done(null, false); // User not found, authentication failed
-                        });
-                    }
-
-                    passport.use(new JwtStrategy(opts, verify));
-                    ```
-             &lt;/details&gt;
-
-        - Example:
-            ```js
-            const JwtStrategy = new Startegy(opts, verify)
-            passport.use(JwtStrategy);
-            ```
-        - Strategy is of 2 tyes:
-            - &lt;details&gt;&lt;summary&gt;With req&lt;/summary&gt;
-
-                - paasing opts with true for passReqToCallback enables us to use `req` in verify callbak
-                ```js
-                const opts = { passReqToCallback:true }
-
-                const verify = (req, payload, done)=&gt;{
-
-                }
-                ```
-                &lt;/details&gt;
-            - &lt;details&gt;&lt;summary&gt;Without req&lt;/summary&gt;
-                ```js
-                opts = { passReqToCallback:false }
-                ```
-                &lt;/details&gt;
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <p>Full Structure (for deafult strategy):
-<a id="full-structure"></a> - Default Strategy:
-```javascript
-const { Strategy, ExtractJwt } = require(“passport-jwt”);
-const passport = require(“passport”); //to use for passport.use()</p>
-
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>        // Options for the strategy
-        const opts = {
-            jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-            secretOrKey: "your_jwt_secret_key",
-            //etc
-        };
-
-        //verify callback for strategy
-        const verify = (jwtPayload, done) =&gt; {
-            User.findOne({ id: jwtPayload.sub }, (err, user) =&gt; {
-            if (err) {
-                return done(err, false);
-            }
-            if (user) {
-                return done(null, user);
-            } else {
-                return done(null, false); // User not found
-            }
-            });
-        };
-
-        //new jwt-Strategy
-        const JwtStrategy = new Strategy(opts, verify)
-
-        //using new jwt-strategy in passport
-        passport.use(JwtStrategy);
-
-        //authenticating default jwt-strategy
-        passport.authenticate('jwt')
-    ```
-
-- Named Strategy:
-    ```javascript
-        const { Strategy, ExtractJwt } = require("passport-jwt");
-        const passport = require("passport");
-
-        const opts = {
-            jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-            secretOrKey: "your_jwt_secret_key",
-            //etc
-        };
-
-        const verify = (jwtPayload, done) =&gt; {
-            User.findOne({ id: jwtPayload.sub }, (err, user) =&gt; {
-            if (err) {
-                return done(err, false);
-            }
-            if (user) {
-                return done(null, user);
-            } else {
-                return done(null, false);
-            }
-            });
-        };
-
-        const JwtStrategy = new Strategy(opts, verify)
-
-        //using named jwt-strategy in passport
-        passport.use('my-jwt', JwtStrategy);
-
-        //authenticating named jwt-strategy
-        passport.authenticate('my-jwt')
-    ```
-</code></pre></div>    </div>
-  </li>
-</ol>
-
-<h2 id="authenticating-jwt-after-strategy-configuration">Authenticating jwt after strategy configuration</h2>
-
-<ul>
-  <li>Ways:
-    <ul>
-      <li>As of understood till date, passport jwt can be authenticated in 2ways:
-        <ul>
-          <li>With session support (<strong>without callback</strong>)</li>
-          <li>Without session support (<strong>with callback</strong>)</li>
-        </ul>
-      </li>
-      <li>With session support (without callback), one would need to many extar methods like <code class="language-plaintext highlighter-rouge">passport.serializeUser</code>, <code class="language-plaintext highlighter-rouge">session()</code>, etc. We would not have to specifically set <code class="language-plaintext highlighter-rouge">req.user</code> to user. Passport would do it internally for us.</li>
-      <li>Without session support (with callback), we dont need any extra methods. But we would need to set <code class="language-plaintext highlighter-rouge">req.user</code> to user explicitly by us.</li>
-    </ul>
-  </li>
-</ul>
-
-<ol>
-  <li>
-    <p>Without session support (<strong>with callback</strong>)
-<a id="Without"></a> - in the <a href="https://github.com/jaredhanson/passport/blob/217018dbc46dcd4118dd6f2c60c8d97010c587f8/lib/middleware/authenticate.js#L221">internal code</a>, if passport.authenticate gets a callback, it doesnt call any other internal function. It just returns that callback with user and err, to handle by ourself.
-```js
-// Options for JWT strategy, including extractor function and secret key
-const optsJwt = {
-jwtFromRequest: cookieExtractor,
-secretOrKey: constant.secretKey
-}
-// Function to verify JWT token and retrieve user information
-const verifyJwt = async function (jwt_payload, done) {
-if (!jwt_payload.id) return done(null, false);</p>
-
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    try {
-        let user = await User.findOne({ _id: jwt_payload.id });
-
-        if (user) return done(null, santizeUser(user));
-        else return done(null, false);
-
-    } catch (error) {
-        return done(err, false);
-    }
-}
-
-// Options for Local strategy, specifying the field for username
-const optsLocal = { usernameField: "email" }
-// Function to verify local credentials and handle authentication
-const verifyLocal = async function (email, password, done) {
-    try {
-        const user = await User.findOne({ email: email }).exec();
-
-        if (!user) {
-            return done(null, false, { message: "No such user email" });
-        }
-
-        crytpoJwt(user, password, done)
-
-    } catch (error) {
-        return done(error);
-    }
-}
-
-// Initialize Passport with JWT strategy
-passport.use("jwt",new JwtStrategy(optsJwt, verifyJwt););
-
-// Middleware to authenticate requests using JWT strategy
-app.use((req, res, next) =&gt; {
-    passport.authenticate("jwt", (err, user, info) =&gt; {
-        if (err || !user)
-            return next(new ApiError(httpStatus.UNAUTHORIZED, "Please authenticate"))
-
-        req.user = user;
-        next()
-    })(req, res, next)
-})
-```
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <p>With session support (<strong>without callback</strong>)
-<a id="With"></a> - When with callback, internalluy, passport passes many checks and process including - needing a session - needing to use passport.serializeUser atleast once with a callback containing user.id/user - In the latest version, for authenticating using <em>passport-jwt</em> configured strategy, we need to use 2 extra methods from <em>passport</em> package and 1 method from <em>express-session</em> package: - <details></details></p>
-    <summary>
-<code>passport.authenticate()</code> from passport
-</summary>
-
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>        - `passport.authenticate()` is a passport middleware. It has been [customised internally](https://github.com/mikenicholson/passport-jwt/blob/master/lib/strategy.js#L90) to authenticate jwt via passport-jwt package.
-        - 3 paramters:
-            - strategy: (string|array)
-            - options
-            - callback [optional]
-        - &lt;details&gt;
-            &lt;summary&gt;It is wrapped inside a wrapper as an express middleware to access req, res and next. Without the wrapper it won't pass on to the next function.
-            &lt;/summary&gt;
-
-            ```js
-            app.use((req, res, next)=&gt;{
-                passport.authenticate('jwt')(req, res, next)
-            })
-            ```
-            &lt;/details&gt;
-        - &lt;details&gt;
-            &lt;summary&gt;
-            In older versions it would itself be placed as a middleware, but not anymore
-            &lt;/summary&gt;
-
-            ```js
-            app.use(passport.authenticate('jwt'))
-            ```
-            &lt;/details&gt;
-
-        - Parameters:
-            - &lt;details&gt;
-                &lt;summary&gt;
-                    &lt;code&gt;strategy&lt;/code&gt;: (string or array)
-                &lt;/summary&gt;
-
-                - **Purpose**: To point to the strategies named during configuration.
-                - **Example**: jwt, my-jwt, [jwt, my-jwt], etc
-                &lt;/details&gt;
-
-            - &lt;details&gt;
-                &lt;summary&gt;
-                    &lt;code&gt;options&lt;/code&gt;: (object) [optional]
-                &lt;/summary&gt;
-
-                - **Purpose**: Options to control the behavior of the authentication middleware.
-                - It controls the behaviour at individual route/request level in comparison to opts options which controls behaviour at global/strategy level.
-                - If there are conflicting options between opts and authenticateOptions, then authenticateOptions will override for that particular route.
-                - **Properties**:
-                    &lt;details&gt;
-                    &lt;summary&gt;1. authInfo&lt;/summary&gt;
-                    &lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt; Whether to include additional authentication information.&lt;/p&gt;
-                    &lt;p&gt;&lt;strong&gt;Default:&lt;/strong&gt; undefined (additional info is not included).&lt;/p&gt;
-                    &lt;p&gt;&lt;strong&gt;Example:&lt;/strong&gt;&lt;/p&gt;
-                    &lt;pre&gt;&lt;code&gt;passport.authenticate('strategy', { authInfo: true });&lt;/code&gt;&lt;/pre&gt;
-                    &lt;/details&gt;
-
-                    &lt;details&gt;
-                    &lt;summary&gt;2. assignProperty&lt;/summary&gt;
-                    &lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt; Assigns the object provided by the verify callback to the specified property on the &lt;code&gt;req&lt;/code&gt; object.&lt;/p&gt;
-                    &lt;p&gt;&lt;strong&gt;Default:&lt;/strong&gt; undefined (the object is assigned to &lt;code&gt;req.user&lt;/code&gt;).&lt;/p&gt;
-                    &lt;p&gt;&lt;strong&gt;Example:&lt;/strong&gt;&lt;/p&gt;
-                    &lt;pre&gt;&lt;code&gt;passport.authenticate('strategy', { assignProperty: 'userAccount' });&lt;/code&gt;&lt;/pre&gt;
-                    &lt;/details&gt;
-
-                    &lt;details&gt;
-                    &lt;summary&gt;3. failureFlash&lt;/summary&gt;
-                    &lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt; True to flash failure messages or a string to use as a flash message for failures.&lt;/p&gt;
-                    &lt;p&gt;&lt;strong&gt;Default:&lt;/strong&gt; undefined (failure messages are not flashed).&lt;/p&gt;
-                    &lt;p&gt;&lt;strong&gt;Example:&lt;/strong&gt;&lt;/p&gt;
-                    &lt;pre&gt;&lt;code&gt;passport.authenticate('strategy', { failureFlash: 'Login failed' });&lt;/code&gt;&lt;/pre&gt;
-                    &lt;/details&gt;
-
-                    &lt;details&gt;
-                    &lt;summary&gt;4. failureMessage&lt;/summary&gt;
-                    &lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt; True to store failure message in &lt;code&gt;req.session.messages&lt;/code&gt;, or a string to use as an override message for failure.&lt;/p&gt;
-                    &lt;p&gt;&lt;strong&gt;Default:&lt;/strong&gt; undefined (failure messages are not stored).&lt;/p&gt;
-                    &lt;p&gt;&lt;strong&gt;Example:&lt;/strong&gt;&lt;/p&gt;
-                    &lt;pre&gt;&lt;code&gt;passport.authenticate('strategy', { failureMessage: 'Login unsuccessful' });&lt;/code&gt;&lt;/pre&gt;
-                    &lt;/details&gt;
-
-                    &lt;details&gt;
-                    &lt;summary&gt;5. failureRedirect&lt;/summary&gt;
-                    &lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt; URL to redirect to after a failed login attempt.&lt;/p&gt;
-                    &lt;p&gt;&lt;strong&gt;Default:&lt;/strong&gt; undefined (no redirect occurs).&lt;/p&gt;
-                    &lt;p&gt;&lt;strong&gt;Example:&lt;/strong&gt;&lt;/p&gt;
-                    &lt;pre&gt;&lt;code&gt;passport.authenticate('strategy', { failureRedirect: '/login' });&lt;/code&gt;&lt;/pre&gt;
-                    &lt;/details&gt;
-
-                    &lt;details&gt;
-                    &lt;summary&gt;6. failWithError&lt;/summary&gt;
-                    &lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt; Whether to fail with an error.&lt;/p&gt;
-                    &lt;p&gt;&lt;strong&gt;Default:&lt;/strong&gt; undefined (does not fail with error).&lt;/p&gt;
-                    &lt;p&gt;&lt;strong&gt;Example:&lt;/strong&gt;&lt;/p&gt;
-                    &lt;pre&gt;&lt;code&gt;passport.authenticate('strategy', { failWithError: true });&lt;/code&gt;&lt;/pre&gt;
-                    &lt;/details&gt;
-
-                    &lt;details&gt;
-                    &lt;summary&gt;7. keepSessionInfo&lt;/summary&gt;
-                    &lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt; Whether to keep session information.&lt;/p&gt;
-                    &lt;p&gt;&lt;strong&gt;Default:&lt;/strong&gt; undefined (session info is not specifically retained).&lt;/p&gt;
-                    &lt;p&gt;&lt;strong&gt;Example:&lt;/strong&gt;&lt;/p&gt;
-                    &lt;pre&gt;&lt;code&gt;passport.authenticate('strategy', { keepSessionInfo: true });&lt;/code&gt;&lt;/pre&gt;
-                    &lt;/details&gt;
-
-                    &lt;details&gt;
-                    &lt;summary&gt;8. session&lt;/summary&gt;
-                    &lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt; Save login state in session.&lt;/p&gt;
-                    &lt;p&gt;&lt;strong&gt;Default:&lt;/strong&gt; true (session is used by default).&lt;/p&gt;
-                    &lt;p&gt;&lt;strong&gt;Example:&lt;/strong&gt;&lt;/p&gt;
-                    &lt;pre&gt;&lt;code&gt;passport.authenticate('strategy', { session: false });&lt;/code&gt;&lt;/pre&gt;
-                    &lt;/details&gt;
-
-                    &lt;details&gt;
-                    &lt;summary&gt;9. scope&lt;/summary&gt;
-                    &lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt; Scope of access required.&lt;/p&gt;
-                    &lt;p&gt;&lt;strong&gt;Default:&lt;/strong&gt; undefined (no scope is specified).&lt;/p&gt;
-                    &lt;p&gt;&lt;strong&gt;Example:&lt;/strong&gt;&lt;/p&gt;
-                    &lt;pre&gt;&lt;code&gt;passport.authenticate('strategy', { scope: ['read', 'write'] });&lt;/code&gt;&lt;/pre&gt;
-                    &lt;/details&gt;
-
-                    &lt;details&gt;
-                    &lt;summary&gt;10. successFlash&lt;/summary&gt;
-                    &lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt; True to flash success messages or a string to use as a flash message for success.&lt;/p&gt;
-                    &lt;p&gt;&lt;strong&gt;Default:&lt;/strong&gt; undefined (success messages are not flashed).&lt;/p&gt;
-                    &lt;p&gt;&lt;strong&gt;Example:&lt;/strong&gt;&lt;/p&gt;
-                    &lt;pre&gt;&lt;code&gt;passport.authenticate('strategy', { successFlash: 'Login successful' });&lt;/code&gt;&lt;/pre&gt;
-                    &lt;/details&gt;
-
-                    &lt;details&gt;
-                    &lt;summary&gt;11. successMessage&lt;/summary&gt;
-                    &lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt; True to store success message in &lt;code&gt;req.session.messages&lt;/code&gt;, or a string to use as an override message for success.&lt;/p&gt;
-                    &lt;p&gt;&lt;strong&gt;Default:&lt;/strong&gt; undefined (success messages are not stored).&lt;/p&gt;
-                    &lt;p&gt;&lt;strong&gt;Example:&lt;/strong&gt;&lt;/p&gt;
-                    &lt;pre&gt;&lt;code&gt;passport.authenticate('strategy', { successMessage: 'Welcome back!' });&lt;/code&gt;&lt;/pre&gt;
-                    &lt;/details&gt;
-
-                    &lt;details&gt;
-                    &lt;summary&gt;12. successRedirect&lt;/summary&gt;
-                    &lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt; URL to redirect to after a successful login.&lt;/p&gt;
-                    &lt;p&gt;&lt;strong&gt;Default:&lt;/strong&gt; undefined (no redirect occurs).&lt;/p&gt;
-                    &lt;p&gt;&lt;strong&gt;Example:&lt;/strong&gt;&lt;/p&gt;
-                    &lt;pre&gt;&lt;code&gt;passport.authenticate('strategy', { successRedirect: '/dashboard' });&lt;/code&gt;&lt;/pre&gt;
-                    &lt;/details&gt;
-
-                    &lt;details&gt;
-                    &lt;summary&gt;13. successReturnToOrRedirect&lt;/summary&gt;
-                    &lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt; URL to redirect to or return to after a successful login.&lt;/p&gt;
-                    &lt;p&gt;&lt;strong&gt;Default:&lt;/strong&gt; undefined (no redirect or return occurs).&lt;/p&gt;
-                    &lt;p&gt;&lt;strong&gt;Example:&lt;/strong&gt;&lt;/p&gt;
-                    &lt;pre&gt;&lt;code&gt;passport.authenticate('strategy', { successReturnToOrRedirect: '/profile' });&lt;/code&gt;&lt;/pre&gt;
-                    &lt;/details&gt;
-
-                    &lt;details&gt;
-                    &lt;summary&gt;14. state&lt;/summary&gt;
-                    &lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt; State parameter for the request.&lt;/p&gt;
-                    &lt;p&gt;&lt;strong&gt;Default:&lt;/strong&gt; undefined (no state is set).&lt;/p&gt;
-                    &lt;p&gt;&lt;strong&gt;Example:&lt;/strong&gt;&lt;/p&gt;
-                    &lt;pre&gt;&lt;code&gt;passport.authenticate('strategy', { state: 'xyz' });&lt;/code&gt;&lt;/pre&gt;
-                    &lt;/details&gt;
-
-                    &lt;details&gt;
-                    &lt;summary&gt;15. pauseStream&lt;/summary&gt;
-                    &lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt; Pause the request stream before deserializing the user object from the session.&lt;/p&gt;
-                    &lt;p&gt;&lt;strong&gt;Default:&lt;/strong&gt; false (stream is not paused).&lt;/p&gt;
-                    &lt;p&gt;&lt;strong&gt;Example:&lt;/strong&gt;&lt;/p&gt;
-                    &lt;pre&gt;&lt;code&gt;passport.authenticate('strategy', { pauseStream: true });&lt;/code&gt;&lt;/pre&gt;
-                    &lt;/details&gt;
-
-                    &lt;details&gt;
-                    &lt;summary&gt;16. userProperty&lt;/summary&gt;
-                    &lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt; Property on &lt;code&gt;req&lt;/code&gt; that will be set to the authenticated user object.&lt;/p&gt;
-                    &lt;p&gt;&lt;strong&gt;Default:&lt;/strong&gt; 'user' (authenticated user is set to &lt;code&gt;req.user&lt;/code&gt;).&lt;/p&gt;
-                    &lt;p&gt;&lt;strong&gt;Example:&lt;/strong&gt;&lt;/p&gt;
-                    &lt;pre&gt;&lt;code&gt;passport.authenticate('strategy', { userProperty: 'currentUser' });&lt;/code&gt;&lt;/pre&gt;
-                    &lt;/details&gt;
-
-                    &lt;details&gt;
-                    &lt;summary&gt;17. passReqToCallback&lt;/summary&gt;
-                    &lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt; Whether to pass the request object to the callback.&lt;/p&gt;
-                    &lt;p&gt;&lt;strong&gt;Default:&lt;/strong&gt; undefined (request object is not passed to the callback).&lt;/p&gt;
-                    &lt;p&gt;&lt;strong&gt;Overrides:&lt;/strong&gt; Overrides passReqToCallback set in opts of strategy configuration&lt;/p&gt;
-                    &lt;p&gt;&lt;strong&gt;Example:&lt;/strong&gt;&lt;/p&gt;
-                    &lt;pre&gt;&lt;code&gt;passport.authenticate('strategy', { passReqToCallback: true });&lt;/code&gt;&lt;/pre&gt;
-                    &lt;/details&gt;
-
-                    &lt;details&gt;
-                    &lt;summary&gt;18. prompt&lt;/summary&gt;
-                    &lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt; Prompt parameter for the request.&lt;/p&gt;
-                    &lt;p&gt;&lt;strong&gt;Default:&lt;/strong&gt; undefined (no prompt is set).&lt;/p&gt;
-                    &lt;p&gt;&lt;strong&gt;Example:&lt;/strong&gt;&lt;/p&gt;
-                    &lt;pre&gt;&lt;code&gt;passport.authenticate('strategy', { prompt: 'login' });&lt;/code&gt;&lt;/pre&gt;
-                    &lt;/details&gt;
-
-                &lt;/details&gt;
-
-
-            - &lt;details&gt;
-                &lt;summary&gt;
-                    &lt;code&gt;callback&lt;/code&gt;: (function) [optional]
-                &lt;/summary&gt;
-
-                - **Purpose**: Handles the result of the authentication process and provides feedback or further actions based on the outcome.
-
-                - **Parameters**:
-                    1. &lt;details&gt;
-                        &lt;summary&gt;
-                            &lt;code&gt;err&lt;/code&gt;: (Error or &lt;code&gt;null&lt;/code&gt;)
-                        &lt;/summary&gt;
-
-                        - **Description**: Contains any error that occurred during the authentication process.
-                        - **Type**: err | false
-                        - **Example**: An error object if something went wrong, otherwise `null`.
-                        &lt;/details&gt;
-
-                    2. &lt;details&gt;
-                        &lt;summary&gt;
-                            &lt;code&gt;user&lt;/code&gt;: (object | string | Array)
-                        &lt;/summary&gt;
-
-                        - **Description**: The authenticated user object if authentication was successful, or `false` if no user was authenticated.
-                        - **Type**: User | false | null
-                        - **Example**: The user data retrieved from the database if authentication is successful.
-                        &lt;/details&gt;
-
-                    3. &lt;details&gt;
-                        &lt;summary&gt;
-                            &lt;code&gt;info&lt;/code&gt;: (Object or &lt;code&gt;false&lt;/code&gt;)
-                        &lt;/summary&gt;
-
-                        - **Description**: Contains additional information or error messages about the authentication process. This can include details about why authentication failed.
-                        - **Type**: object | string | Array
-                        - **Example**: An object with a `message` property if authentication fails, or `false` if no additional information is available.
-                        &lt;/details&gt;
-
-                    4. &lt;details&gt;
-                        &lt;summary&gt;
-                            &lt;code&gt;status&lt;/code&gt;: (number | Array)
-                        &lt;/summary&gt;
-
-                        - **Description**: The HTTP status code representing the result of the authentication attempt.
-                        - **Type**: number | Array (HTTP status code)
-                        - **Example**: `401` for unauthorized access, `200` for successful authentication.
-                        &lt;/details&gt;
-                &lt;/details&gt;
-
-
-
-
-        - Examples:
-            ```js
-            //default strategy without optional parameters
-            app.post("/profile", (req, res, next) =&gt; {
-                passport.authenticate("jwt")(req, res, next)
-            });
-            ```
-            &lt;details&gt;
-                &lt;summary&gt;
-                more examples
-                &lt;/summary&gt;
-
-                ```js
-                //custom strategy without optional parameters
-                app.post("/profile", (req, res, next) =&gt; {
-                    passport.authenticate("my-jwt")(req, res, next)
-                });
-                ```
-                ```js
-                //default strategy with optional parameters
-                app.post("/profile", (req, res, next) =&gt; {
-                    passport.authenticate("jwt", { session: false }, function(err, user, info, status) {
-                        if (err) {
-                            return res
-                                    .status(500)
-                                    .json({ message: 'An error occurred', error: err });
-                        }
-
-                        if (!user) {
-                            return res
-                                    .status(401)
-                                    .json({ message: 'Unauthorized', info: info });
-                        }
-
-                        //in case of callback we need to set req.user=user
-                        req.user=user
-
-                        res.send(status).json(user.profile);
-                    })(req, res, next)
-                });
-                ```
-                &lt;/details&gt;
-        &lt;/details&gt;
-    - &lt;details&gt;
-        &lt;summary&gt;
-        &lt;code&gt;passport.serializeUser()&lt;/code&gt; from passport
-        &lt;/summary&gt;
-
-        - We need passport.serializeUser() during the process of logIn which happens inside passport.authenticate()
-        - &lt;details&gt;
-            &lt;summary&gt;Input parameter: &lt;code&gt;callback function&lt;/code&gt;
-            &lt;/summary&gt;
-
-            - &lt;details&gt;&lt;summary&gt;input parameters of cb fn: &lt;code&gt;user&lt;/code&gt;, &lt;code&gt;done&lt;/code&gt;&lt;/summary&gt;
-
-                - `user`: The user object returned from the authentication process.
-                - &lt;details&gt;&lt;summary&gt;&lt;code&gt;done&lt;/code&gt;: A callback function that you call after serializing the user, which takes two parameters: &lt;code&gt;err&lt;/code&gt;, &lt;code&gt;id&lt;/code&gt;&lt;/summary&gt;
-
-                    - `err`: Any error that occurred during serialization.
-                    - `id`: The user ID or any unique identifier that will be stored in the session.
-                    ```js
-                    passport.serializeUser((user, done)=&gt;{
-                        done(err, id)
-                    });
-                    ```
-                    &lt;/details&gt;
-
-                ```js
-                passport.serializeUser((user, done)=&gt;{});
-                ```
-                &lt;/details&gt;
-
-            ```js
-            passport.serializeUser(callback);
-            ```
-
-            &lt;/details&gt;
-
-        ```js
-        // structure of serialiseUser
-        passport.serializeUser((user, done) =&gt; {
-            done(null, user.id);
-        });
-        //err can be null or err
-        //user can be false, user, user.id, or anything related to user
-        ```
-        &lt;/details&gt;
-    - &lt;details&gt;
-        &lt;summary&gt;
-        &lt;code&gt;session()&lt;/code&gt; from express-session
-        &lt;/summary&gt;
-
-        - session() is also necssary to logIn using passport.authenticate()
-        - Parameter: `sessionOptions` (object)
-        - So structure is `session(sessionOptions)
-        - ```js
-            //structure of session
-            const express = require("express");
-            const session = require("express-session");
-
-            const app = express()
-
-            app.use(session({
-                    secret: process.env.SESSION_SECRET,
-                resave: false,
-                    saveUninitialized: false,
-            }))
-            ```
-
-        - Session option keys:
-            &lt;details&gt;
-            &lt;summary&gt;&lt;strong&gt;1. secret&lt;/strong&gt;&lt;/summary&gt;
-            &lt;ul&gt;
-                &lt;li&gt;&lt;strong&gt;Type:&lt;/strong&gt; string | array&lt;/li&gt;
-                &lt;li&gt;&lt;strong&gt;Default:&lt;/strong&gt; N/A&lt;/li&gt;
-                &lt;li&gt;&lt;strong&gt;Description:&lt;/strong&gt; String(s) used to sign the session ID cookie.&lt;/li&gt;
-                &lt;li&gt;&lt;strong&gt;Example:&lt;/strong&gt; &lt;code&gt;secret: 'mySecret'&lt;/code&gt;&lt;/li&gt;
-            &lt;/ul&gt;
-            &lt;/details&gt;
-
-            &lt;details&gt;
-            &lt;summary&gt;&lt;strong&gt;2. genid(req)&lt;/strong&gt;&lt;/summary&gt;
-            &lt;ul&gt;
-                &lt;li&gt;&lt;strong&gt;Type:&lt;/strong&gt; function [(req: express.Request) =&gt; string]&lt;/li&gt;
-                &lt;li&gt;&lt;strong&gt;Default:&lt;/strong&gt; Uses uid-safe library to generate a unique session ID.&lt;/li&gt;
-                &lt;li&gt;&lt;strong&gt;Description:&lt;/strong&gt; Function to generate session IDs.&lt;/li&gt;
-                &lt;li&gt;&lt;strong&gt;Example:&lt;/strong&gt; &lt;code&gt;genid: () =&gt; 'customID'&lt;/code&gt;&lt;/li&gt;
-            &lt;/ul&gt;
-            &lt;/details&gt;
-
-            &lt;details&gt;
-            &lt;summary&gt;&lt;strong&gt;3. name&lt;/strong&gt;&lt;/summary&gt;
-            &lt;ul&gt;
-                &lt;li&gt;&lt;strong&gt;Type:&lt;/strong&gt; string &lt;/li&gt;
-                &lt;li&gt;&lt;strong&gt;Default:&lt;/strong&gt; 'connect.sid'&lt;/li&gt;
-                &lt;li&gt;&lt;strong&gt;Description:&lt;/strong&gt; Name of the session ID cookie.&lt;/li&gt;
-                &lt;li&gt;&lt;strong&gt;Example:&lt;/strong&gt; &lt;code&gt;name: 'session_id'&lt;/code&gt;&lt;/li&gt;
-            &lt;/ul&gt;
-            &lt;/details&gt;
-
-            &lt;details&gt;
-            &lt;summary&gt;&lt;strong&gt;4. store&lt;/strong&gt;&lt;/summary&gt;
-            &lt;ul&gt;
-                &lt;li&gt;&lt;strong&gt;Type:&lt;/strong&gt; Store &lt;/li&gt;
-                &lt;li&gt;&lt;strong&gt;Default:&lt;/strong&gt; MemoryStore (in-memory session store)&lt;/li&gt;
-                &lt;li&gt;&lt;strong&gt;Description:&lt;/strong&gt; Specifies session store instance.&lt;/li&gt;
-                &lt;li&gt;&lt;strong&gt;Example:&lt;/strong&gt; &lt;code&gt;store: new RedisStore()&lt;/code&gt;&lt;/li&gt;
-            &lt;/ul&gt;
-            &lt;/details&gt;
-
-            &lt;details&gt;
-            &lt;summary&gt;&lt;strong&gt;5. cookie&lt;/strong&gt;&lt;/summary&gt;
-            &lt;ul&gt;
-                &lt;li&gt;&lt;strong&gt;Type:&lt;/strong&gt; object &lt;/li&gt;
-                &lt;li&gt;&lt;strong&gt;Default:&lt;/strong&gt; N/A&lt;/li&gt;
-                &lt;li&gt;&lt;strong&gt;Description:&lt;/strong&gt; Options for the session cookie (e.g., maxAge, secure).&lt;/li&gt;
-                &lt;li&gt;&lt;strong&gt;CookieOptions:&lt;/strong&gt;
-                &lt;details&gt;
-                    &lt;summary&gt;&lt;strong&gt;1. maxAge&lt;/strong&gt;&lt;/summary&gt;
-                    &lt;ul&gt;
-                        &lt;li&gt;&lt;strong&gt;Type:&lt;/strong&gt; number &lt;/li&gt;
-                        &lt;li&gt;&lt;strong&gt;Default:&lt;/strong&gt; N/A&lt;/li&gt;
-                        &lt;li&gt;&lt;strong&gt;Description:&lt;/strong&gt; Specifies the maximum age of the cookie in milliseconds.&lt;/li&gt;
-                        &lt;li&gt;&lt;strong&gt;Example:&lt;/strong&gt; &lt;code&gt;maxAge: 3600000&lt;/code&gt; (1 hour)&lt;/li&gt;
-                    &lt;/ul&gt;
-                    &lt;/details&gt;
-
-            &lt;details&gt;
-                &lt;summary&gt;&lt;strong&gt;2. partitioned&lt;/strong&gt;&lt;/summary&gt;
-                &lt;ul&gt;
-                    &lt;li&gt;&lt;strong&gt;Type:&lt;/strong&gt; boolean &lt;/li&gt;
-                    &lt;li&gt;&lt;strong&gt;Default:&lt;/strong&gt; false&lt;/li&gt;
-                    &lt;li&gt;&lt;strong&gt;Description:&lt;/strong&gt; Specifies the `Partitioned` attribute for the cookie. Not fully standardized yet.&lt;/li&gt;
-                    &lt;li&gt;&lt;strong&gt;Example:&lt;/strong&gt; &lt;code&gt;partitioned: true&lt;/code&gt;&lt;/li&gt;
-                &lt;/ul&gt;
-                &lt;/details&gt;
-
-            &lt;details&gt;
-                &lt;summary&gt;&lt;strong&gt;3. priority&lt;/strong&gt;&lt;/summary&gt;
-                &lt;ul&gt;
-                    &lt;li&gt;&lt;strong&gt;Type:&lt;/strong&gt; "low" | "medium" | "high" &lt;/li&gt;
-                    &lt;li&gt;&lt;strong&gt;Default:&lt;/strong&gt; "medium"&lt;/li&gt;
-                    &lt;li&gt;&lt;strong&gt;Description:&lt;/strong&gt; Specifies the `Priority` attribute of the cookie (low, medium, or high).&lt;/li&gt;
-                    &lt;li&gt;&lt;strong&gt;Example:&lt;/strong&gt; &lt;code&gt;priority: 'high'&lt;/code&gt;&lt;/li&gt;
-                &lt;/ul&gt;
-                &lt;/details&gt;
-
-            &lt;details&gt;
-                &lt;summary&gt;&lt;strong&gt;4. signed&lt;/strong&gt;&lt;/summary&gt;
-                &lt;ul&gt;
-                    &lt;li&gt;&lt;strong&gt;Type:&lt;/strong&gt; boolean &lt;/li&gt;
-                    &lt;li&gt;&lt;strong&gt;Default:&lt;/strong&gt; false&lt;/li&gt;
-                    &lt;li&gt;&lt;strong&gt;Description:&lt;/strong&gt; Specifies whether the cookie is signed with the secret.&lt;/li&gt;
-                    &lt;li&gt;&lt;strong&gt;Example:&lt;/strong&gt; &lt;code&gt;signed: true&lt;/code&gt;&lt;/li&gt;
-                &lt;/ul&gt;
-                &lt;/details&gt;
-
-            &lt;details&gt;
-                &lt;summary&gt;&lt;strong&gt;5. expires&lt;/strong&gt;&lt;/summary&gt;
-                &lt;ul&gt;
-                    &lt;li&gt;&lt;strong&gt;Type:&lt;/strong&gt; Date | null &lt;/li&gt;
-                    &lt;li&gt;&lt;strong&gt;Default:&lt;/strong&gt; No expiration set (non-persistent cookie).&lt;/li&gt;
-                    &lt;li&gt;&lt;strong&gt;Description:&lt;/strong&gt; Specifies the expiration date for the cookie.&lt;/li&gt;
-                    &lt;li&gt;&lt;strong&gt;Example:&lt;/strong&gt; &lt;code&gt;expires: new Date(Date.now() + 3600000)&lt;/code&gt;&lt;/li&gt;
-                &lt;/ul&gt;
-                &lt;/details&gt;
-
-            &lt;details&gt;
-                &lt;summary&gt;&lt;strong&gt;6. httpOnly&lt;/strong&gt;&lt;/summary&gt;
-                &lt;ul&gt;
-                    &lt;li&gt;&lt;strong&gt;Type:&lt;/strong&gt; boolean &lt;/li&gt;
-                    &lt;li&gt;&lt;strong&gt;Default:&lt;/strong&gt; true&lt;/li&gt;
-                    &lt;li&gt;&lt;strong&gt;Description:&lt;/strong&gt; Specifies whether the cookie is HTTP-only, preventing access from client-side JavaScript.&lt;/li&gt;
-                    &lt;li&gt;&lt;strong&gt;Example:&lt;/strong&gt; &lt;code&gt;httpOnly: false&lt;/code&gt;&lt;/li&gt;
-                &lt;/ul&gt;
-                &lt;/details&gt;
-
-            &lt;details&gt;
-                &lt;summary&gt;&lt;strong&gt;7. path&lt;/strong&gt;&lt;/summary&gt;
-                &lt;ul&gt;
-                    &lt;li&gt;&lt;strong&gt;Type:&lt;/strong&gt; string &lt;/li&gt;
-                    &lt;li&gt;&lt;strong&gt;Default:&lt;/strong&gt; '/'&lt;/li&gt;
-                    &lt;li&gt;&lt;strong&gt;Description:&lt;/strong&gt; Specifies the path for which the cookie is valid.&lt;/li&gt;
-                    &lt;li&gt;&lt;strong&gt;Example:&lt;/strong&gt; &lt;code&gt;path: '/admin'&lt;/code&gt;&lt;/li&gt;
-                &lt;/ul&gt;
-                &lt;/details&gt;
-
-            &lt;details&gt;
-                &lt;summary&gt;&lt;strong&gt;8. domain&lt;/strong&gt;&lt;/summary&gt;
-                &lt;ul&gt;
-                    &lt;li&gt;&lt;strong&gt;Type:&lt;/strong&gt; string &lt;/li&gt;
-                    &lt;li&gt;&lt;strong&gt;Default:&lt;/strong&gt; No domain set.&lt;/li&gt;
-                    &lt;li&gt;&lt;strong&gt;Description:&lt;/strong&gt; Specifies the domain for which the cookie is valid.&lt;/li&gt;
-                    &lt;li&gt;&lt;strong&gt;Example:&lt;/strong&gt; &lt;code&gt;domain: 'example.com'&lt;/code&gt;&lt;/li&gt;
-                &lt;/ul&gt;
-                &lt;/details&gt;
-
-            &lt;details&gt;
-                &lt;summary&gt;&lt;strong&gt;9. secure&lt;/strong&gt;&lt;/summary&gt;
-                &lt;ul&gt;
-                    &lt;li&gt;&lt;strong&gt;Type:&lt;/strong&gt; boolean | "auto" &lt;/li&gt;
-                    &lt;li&gt;&lt;strong&gt;Default:&lt;/strong&gt; false&lt;/li&gt;
-                    &lt;li&gt;&lt;strong&gt;Description:&lt;/strong&gt; Specifies whether the cookie is only sent over HTTPS.&lt;/li&gt;
-                    &lt;li&gt;&lt;strong&gt;Example:&lt;/strong&gt; &lt;code&gt;secure: true&lt;/code&gt;&lt;/li&gt;
-                &lt;/ul&gt;
-                &lt;/details&gt;
-
-            &lt;details&gt;
-                &lt;summary&gt;&lt;strong&gt;10. encode&lt;/strong&gt;&lt;/summary&gt;
-                &lt;ul&gt;
-                    &lt;li&gt;&lt;strong&gt;Type:&lt;/strong&gt; (val: string) =&gt; string &lt;/li&gt;
-                    &lt;li&gt;&lt;strong&gt;Default:&lt;/strong&gt; Default encoder for cookie values.&lt;/li&gt;
-                    &lt;li&gt;&lt;strong&gt;Description:&lt;/strong&gt; Specifies a custom encoding function for the cookie value.&lt;/li&gt;
-                    &lt;li&gt;&lt;strong&gt;Example:&lt;/strong&gt; &lt;code&gt;encode: encodeURIComponent&lt;/code&gt;&lt;/li&gt;
-                &lt;/ul&gt;
-                &lt;/details&gt;
-
-            &lt;details&gt;
-                &lt;summary&gt;&lt;strong&gt;11. sameSite&lt;/strong&gt;&lt;/summary&gt;
-                &lt;ul&gt;
-                    &lt;li&gt;&lt;strong&gt;Type:&lt;/strong&gt; boolean | "lax" | "strict" | "none" &lt;/li&gt;
-                    &lt;li&gt;&lt;strong&gt;Default:&lt;/strong&gt; false&lt;/li&gt;
-                    &lt;li&gt;&lt;strong&gt;Description:&lt;/strong&gt; Specifies the `SameSite` attribute for cross-site cookie control (strict, lax, or none).&lt;/li&gt;
-                    &lt;li&gt;&lt;strong&gt;Example:&lt;/strong&gt; &lt;code&gt;sameSite: 'strict'&lt;/code&gt;&lt;/li&gt;
-                &lt;/ul&gt;
-                &lt;/details&gt;
-
-            &lt;/li&gt;
-                &lt;li&gt;&lt;strong&gt;Example:&lt;/strong&gt; &lt;code&gt;cookie: { maxAge: 60000 }&lt;/code&gt;&lt;/li&gt;
-            &lt;/ul&gt;
-
-
-            &lt;/details&gt;
-
-            &lt;details&gt;
-            &lt;summary&gt;&lt;strong&gt;6. rolling&lt;/strong&gt;&lt;/summary&gt;
-            &lt;ul&gt;
-                &lt;li&gt;&lt;strong&gt;Type:&lt;/strong&gt; boolean &lt;/li&gt;
-                &lt;li&gt;&lt;strong&gt;Default:&lt;/strong&gt; false&lt;/li&gt;
-                &lt;li&gt;&lt;strong&gt;Description:&lt;/strong&gt; Resets session expiration on every response.&lt;/li&gt;
-                &lt;li&gt;&lt;strong&gt;Example:&lt;/strong&gt; &lt;code&gt;rolling: true&lt;/code&gt;&lt;/li&gt;
-            &lt;/ul&gt;
-            &lt;/details&gt;
-
-            &lt;details&gt;
-            &lt;summary&gt;&lt;strong&gt;7. resave&lt;/strong&gt;&lt;/summary&gt;
-            &lt;ul&gt;
-                &lt;li&gt;&lt;strong&gt;Type:&lt;/strong&gt; boolean &lt;/li&gt;
-                &lt;li&gt;&lt;strong&gt;Default:&lt;/strong&gt; true (deprecated)&lt;/li&gt;
-                &lt;li&gt;&lt;strong&gt;Description:&lt;/strong&gt; Forces session to be saved on every request, even if unmodified.&lt;/li&gt;
-                &lt;li&gt;&lt;strong&gt;Example:&lt;/strong&gt; &lt;code&gt;resave: false&lt;/code&gt;&lt;/li&gt;
-            &lt;/ul&gt;
-            &lt;/details&gt;
-
-            &lt;details&gt;
-            &lt;summary&gt;&lt;strong&gt;8. proxy&lt;/strong&gt;&lt;/summary&gt;
-            &lt;ul&gt;
-                &lt;li&gt;&lt;strong&gt;Type:&lt;/strong&gt; boolean &lt;/li&gt;
-                &lt;li&gt;&lt;strong&gt;Default:&lt;/strong&gt; undefined&lt;/li&gt;
-                &lt;li&gt;&lt;strong&gt;Description:&lt;/strong&gt; Trust reverse proxy when setting secure cookies.&lt;/li&gt;
-                &lt;li&gt;&lt;strong&gt;Example:&lt;/strong&gt; &lt;code&gt;proxy: true&lt;/code&gt;&lt;/li&gt;
-            &lt;/ul&gt;
-            &lt;/details&gt;
-
-            &lt;details&gt;
-            &lt;summary&gt;&lt;strong&gt;9. saveUninitialized&lt;/strong&gt;&lt;/summary&gt;
-            &lt;ul&gt;
-                &lt;li&gt;&lt;strong&gt;Type:&lt;/strong&gt; boolean &lt;/li&gt;
-                &lt;li&gt;&lt;strong&gt;Default:&lt;/strong&gt; true (deprecated)&lt;/li&gt;
-                &lt;li&gt;&lt;strong&gt;Description:&lt;/strong&gt; Saves uninitialized sessions. Useful for login sessions.&lt;/li&gt;
-                &lt;li&gt;&lt;strong&gt;Example:&lt;/strong&gt; &lt;code&gt;saveUninitialized: false&lt;/code&gt;&lt;/li&gt;
-            &lt;/ul&gt;
-            &lt;/details&gt;
-
-            &lt;details&gt;
-            &lt;summary&gt;&lt;strong&gt;10. unset&lt;/strong&gt;&lt;/summary&gt;
-            &lt;ul&gt;
-                &lt;li&gt;&lt;strong&gt;Type:&lt;/strong&gt; "destroy" | "keep" &lt;/li&gt;
-                &lt;li&gt;&lt;strong&gt;Default:&lt;/strong&gt; 'keep'&lt;/li&gt;
-                &lt;li&gt;&lt;strong&gt;Description:&lt;/strong&gt; Controls behavior when session is deleted.&lt;/li&gt;
-                &lt;li&gt;&lt;strong&gt;Example:&lt;/strong&gt; &lt;code&gt;unset: 'destroy'&lt;/code&gt;&lt;/li&gt;
-            &lt;/ul&gt;
-            &lt;/details&gt;
-
-            &lt;/details&gt;
-
-- Complete structure for authentication:
-    ```js
-    const express = require('express');
-    const session = require("express-session");
-    const passport = require("passport");
-
-    const app = express()
-
-    app.use(session({ //to be called on top
-        secret: process.env.SESSION_SECRET,
-    }))
-
-    app.use((req, res, next)=&gt;{ //can be called anywhere
-        passport.authenticate('jwt')(req, res, next)
-    })
-
-    passport.serializeUser(()=&gt;{
-
-    })
-    ```
-</code></pre></div>    </div>
-  </li>
-</ol>
-
-<h2 id="sending-jwt-from-client-to-server">Sending jwt from client to server</h2>
-
-<ol>
-  <li>
-    <details>
-<summary>
-Using Authorisation header (most common)
-</summary>
-
-- <details>
-    <summary>
-    Bearer Token: The most common and standard method for JWTs.
-    </summary>
-
-  ```js
-  // Client-side (e.g., using Axios in JavaScript)
-  axios.get("/protected-resource", {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-
-  // Server-side (Express with Passport)
-  const opts = {
-    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(), // Extract JWT from Bearer Token
-    secretOrKey: SECRET_KEY,
-  };
-  ```
-
-    <details>
-
-- <details>
-    <summary>
-    Custom Scheme: Allows custom authentication schemes as needed.
-    </summary>
-
-  ```js
-  // Client-side (e.g., using Axios in JavaScript)
-  axios.get("/protected-resource", {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-
-  // Server-side (Express)
-  const customSchemeExtractor = (req) =&gt; {
-    const authHeader = req.headers["authorization"];
-    if (authHeader &amp;&amp; authHeader.startsWith("customScheme ")) {
-      return authHeader.split(" ")[1];
-    }
-    return null;
-  };
-
-  const opts = {
-    jwtFromRequest: customSchemeExtractor, // Use custom extractor
-    secretOrKey: SECRET_KEY,
-  };
-  ```
-
-    <details>
-
-- <details>
-    <summary>
-    Digest Authentication: Less common for JWTs, used in specific scenarios.
-    </summary>
-
-  ```js
-  // Client-side (e.g., using Axios in JavaScript)
-  axios.get("/protected-resource", {
-    headers: {
-      Authorization: `Digest ${token}`,
-    },
-  });
-
-  // Server-side (Express)
-  const digestExtractor = (req) =&gt; {
-    const authHeader = req.headers["authorization"];
-    if (authHeader &amp;&amp; authHeader.startsWith("Digest ")) {
-      return authHeader.split(" ")[1];
-    }
-    return null;
-  };
-
-  const opts = {
-    jwtFromRequest: digestExtractor, // Use custom extractor
-    secretOrKey: SECRET_KEY,
-  };
-  ```
-
-    <details>
-
-- <details>
-      <summary>
-      Basic Authentication: Typically used for credentials, not recommended for JWTs.
-      </summary>
-
-      ```js
-      // (Not Recommended for JWTs)
-      // Client-side (e.g., using Axios in JavaScript)
-      axios.get('/protected-resource', {
-           headers: {
-              'Authorization': `Basic ${token}`
-          }
-      });
-
-      // Server-side (Express)
-      const basicExtractor = (req) =&gt; {
-          const authHeader = req.headers['authorization'];
-          if (authHeader &amp;&amp; authHeader.startsWith('Basic ')) {
-              return authHeader.split(' ')[1];
-          }
-          return null;
-      };
-
-  const opts = {
-  jwtFromRequest: basicExtractor, // Use custom extractor
-  secretOrKey: SECRET_KEY,
-  }
-  ```
-  <details>
-  </details>
-
-</details></details></details></details></details></details></details></details>
-  </li>
-  <li>
-    <details>
-<summary>
-Using cookies
-</summary>
-
-- For client side: - We dont have to do anything. just run both server an dclient on same url (eg: http://localhost:3000), client using build file and server direclty running using node index. - when both run on same server: - cookies sent to client from sever will be stored as Set-Cookies in header and - server itself will read it back when any req is sent from client to server
-  ```js
-  //client side
-  axios.get('/protected-resource')
-
-      // server side
-      const cookieParser = require('cookie-parser')
-      const express = require('express');
-
-      const app = express()
-      app.use(cookieParser())
-
-      //custom extractor
-      var cookieExtractor = function (req) {
-      var token = null;
-      if (req &amp;&amp; req.cookies) {
-          token = req.cookies["jwt"];
-      }
-      return token;
-      };
-
-      const opts = {
-          jwtFromRequest: cookieExtractor,
-          secretOrKey: 'your_secret_key'
-      };
-      ```
-
-  </details>
-  </li>
-  <li>
-    <details>
-<summary>
-Using URL Query Parameters
-</summary>
-
-```js
-// Client-side (e.g., using Axios)
-axios.get("/protected-resource?token=" + token);
-
-// Custom extractor function for query parameters
-const queryParamExtractor = (req) =&gt; {
-  return req.query.token; // Extract JWT from query parameter 'token'
-};
-
-const opts = {
-  jwtFromRequest: queryParamExtractor, // Use custom extractor
-  secretOrKey: SECRET_KEY,
-};
-```
-
-</details>
-  </li>
-  <li>
-    <details>
-<summary>
-Using Custom Headers
-</summary>
-
-```js
-// Client-side (e.g., using Axios)
-axios.get("/protected-resource", {
-  headers: {
-    "X-Custom-Header": token, // Replace 'X-Custom-Header' with your custom header name
-  },
-});
-
-// Custom extractor function for custom headers
-const customHeaderExtractor = (req) =&gt; {
-  return req.headers["x-custom-header"]; // Replace 'x-custom-header' with your custom header name
-};
-
-const opts = {
-  jwtFromRequest: customHeaderExtractor, // Use custom extractor
-  secretOrKey: SECRET_KEY,
-};
-```
-
-</details>
-  </li>
-</ol>]]></content><author><name>Anusree Anilkumar</name></author><summary type="html"><![CDATA[Passport JWT Documentation]]></summary></entry></feed>
+<p>By following this structured format, your commit messages become more informative and standardized, making it easier for collaborators and contributors to understand the changes made to the codebase.</p>]]></content><author><name>Anusree Anilkumar</name></author><summary type="html"><![CDATA[Git Commit Standards (Official)]]></summary></entry></feed>

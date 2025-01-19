@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>OAuth/OIDC App Configurations | Blog &amp; Docs</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="OAuth/OIDC App Configurations" />
+<meta name="author" content="Anusree Anilkumar" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="OAuth/OIDC App Configurations Table of Contents OAuth config Google Facebook Twitter Github OIDC config Google OAuth Configuration Google OAuth visit https://console.cloud.google.com/ add project/choose project add project fill oauth consent screen. keep setting same in all. just change names wherever neccessary. fill those place that are filled or choose project add credentials getting google api key for apps like nodemailer getting google cient id and secret for oauth adding redirect uris and source url (needs to be changed each time you change hostname or create a new deployment url) Facebook visit facebook developer portal https://developers.facebook.com/ create a new app/choose existing app create new app - NOT COMPLETED BECAUSE I DONT KNO WHY BUT APP IS WORKING NO MATTER WHAT CHANGE I MAKE Twitter Github OIDC Configuration Google OIDC follow all same steps as in google oauth, except the last step - just callback url is different" />
+<meta property="og:description" content="OAuth/OIDC App Configurations Table of Contents OAuth config Google Facebook Twitter Github OIDC config Google OAuth Configuration Google OAuth visit https://console.cloud.google.com/ add project/choose project add project fill oauth consent screen. keep setting same in all. just change names wherever neccessary. fill those place that are filled or choose project add credentials getting google api key for apps like nodemailer getting google cient id and secret for oauth adding redirect uris and source url (needs to be changed each time you change hostname or create a new deployment url) Facebook visit facebook developer portal https://developers.facebook.com/ create a new app/choose existing app create new app - NOT COMPLETED BECAUSE I DONT KNO WHY BUT APP IS WORKING NO MATTER WHAT CHANGE I MAKE Twitter Github OIDC Configuration Google OIDC follow all same steps as in google oauth, except the last step - just callback url is different" />
+<link rel="canonical" href="https://anusree6154s.github.io/documentation/oauth-oidc" />
+<meta property="og:url" content="https://anusree6154s.github.io/documentation/oauth-oidc" />
+<meta property="og:site_name" content="Blog &amp; Docs" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-01-19T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="OAuth/OIDC App Configurations" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Anusree Anilkumar"},"dateModified":"2025-01-19T00:00:00+00:00","datePublished":"2025-01-19T00:00:00+00:00","description":"OAuth/OIDC App Configurations Table of Contents OAuth config Google Facebook Twitter Github OIDC config Google OAuth Configuration Google OAuth visit https://console.cloud.google.com/ add project/choose project add project fill oauth consent screen. keep setting same in all. just change names wherever neccessary. fill those place that are filled or choose project add credentials getting google api key for apps like nodemailer getting google cient id and secret for oauth adding redirect uris and source url (needs to be changed each time you change hostname or create a new deployment url) Facebook visit facebook developer portal https://developers.facebook.com/ create a new app/choose existing app create new app - NOT COMPLETED BECAUSE I DONT KNO WHY BUT APP IS WORKING NO MATTER WHAT CHANGE I MAKE Twitter Github OIDC Configuration Google OIDC follow all same steps as in google oauth, except the last step - just callback url is different","headline":"OAuth/OIDC App Configurations","mainEntityOfPage":{"@type":"WebPage","@id":"https://anusree6154s.github.io/documentation/oauth-oidc"},"url":"https://anusree6154s.github.io/documentation/oauth-oidc"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/documentation/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://anusree6154s.github.io/documentation/feed.xml" title="Blog &amp; Docs" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/documentation/">Blog &amp; Docs</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/documentation/about">About Me</a><a class="page-link" href="/documentation/table-of-contents">Table of Contents</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">OAuth/OIDC App Configurations</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2025-01-19T00:00:00+00:00" itemprop="datePublished">19 Jan 2025
+      </time></p>
+      <p><span  class="tag-badge">
+            jwt
+        </span><span  class="tag-badge">
+            oauth2
+        </span><span  class="tag-badge">
+            typescript
+        </span><span  class="tag-badge">
+            nextjs
+        </span><span  class="tag-badge">
+            oidc
+        </span><span  class="tag-badge">
+            passwordless-authentication
+        </span></span>
+</p>
+  </header>
+
+  
+
+
+<div class="parent-link">
+  This post is part of <a href="/documentation/oauth-config-setup">OAuth Config Setup in Different Apps</a>.
+</div>
+
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h1 id="oauthoidc-app-configurations">OAuth/OIDC App Configurations</h1>
+
+<h3 id="table-of-contents">Table of Contents</h3>
+<ol>
+  <li><a href="#oauth-configuration">OAuth config</a>
+    <ol>
+      <li><a href="#google-oauth">Google</a></li>
+      <li><a href="#facebook">Facebook</a></li>
+      <li><a href="#twitter">Twitter</a></li>
+      <li><a href="#github">Github</a></li>
+    </ol>
+  </li>
+  <li><a href="#oidc-configuration">OIDC config</a>
+    <ol>
+      <li><a href="#google-oidc">Google</a></li>
+    </ol>
+  </li>
+</ol>
+
+<h2 id="oauth-configuration">OAuth Configuration</h2>
+
+<h3 id="google-oauth">Google OAuth</h3>
+<ol>
+  <li>visit https://console.cloud.google.com/
+    <ul>
+      <li><img width="400" alt="image" src="https://github.com/user-attachments/assets/f4118bef-c176-47af-9dfe-1d70f8672e2f" /></li>
+    </ul>
+  </li>
+  <li>add project/choose project
+    <ul>
+      <li>add project
+        <ul>
+          <li><img width="300" alt="image" src="https://github.com/user-attachments/assets/5bdb6739-ad8f-4986-b13e-b882ddcc19a5" /></li>
+          <li><img width="400" alt="image" src="https://github.com/user-attachments/assets/3e3741c1-a5ae-4fd7-a93e-5d8b5a1dc878" /></li>
+          <li><img width="400" alt="image" src="https://github.com/user-attachments/assets/6c3f61ca-55f3-49bb-8123-5c70caaecbb3" /></li>
+          <li>fill oauth consent screen. keep setting same in all. just change names wherever neccessary. fill those place that are filled
+            <ul>
+              <li><img width="300" alt="image" src="https://github.com/user-attachments/assets/92473ec7-6e6c-40e0-a094-9ed377d260d1" /></li>
+              <li><img width="400" alt="image" src="https://github.com/user-attachments/assets/cb4d8375-c38a-4ee8-bcca-312678d37d26" /></li>
+              <li><img width="400" alt="image" src="https://github.com/user-attachments/assets/c7653316-4e71-412c-a029-bec9c0fc12f2" /></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>or choose project</li>
+      <li><img width="400" alt="image" src="https://github.com/user-attachments/assets/999366b0-f8fb-4fec-995b-2aad27529eee" /></li>
+    </ul>
+  </li>
+  <li>add credentials
+    <ul>
+      <li><img width="200" alt="image" src="https://github.com/user-attachments/assets/acf3044d-2c89-41e9-b2b2-b223ee0e0602" /></li>
+      <li><img width="400" alt="image" src="https://github.com/user-attachments/assets/acbe9869-2959-4847-b10d-d6fd2506f34b" /></li>
+      <li>getting google api key for apps like nodemailer
+        <ul>
+          <li><img width="400" alt="image" src="https://github.com/user-attachments/assets/48996fca-30f0-4f64-a6df-36d934e57517" /></li>
+          <li><img width="400" alt="image" src="https://github.com/user-attachments/assets/a6a7037f-3b20-4191-a319-5ce0b408ebe1" /></li>
+        </ul>
+      </li>
+      <li>getting google cient id and secret for oauth
+        <ul>
+          <li><img width="500" alt="image" src="https://github.com/user-attachments/assets/d6aa41a8-a35d-46a2-8f0e-98dff4632fab" /></li>
+          <li><img width="500" alt="image" src="https://github.com/user-attachments/assets/ee9a6e10-18cd-4364-9c67-4d7817aa606b" /></li>
+          <li><img width="500" alt="image" src="https://github.com/user-attachments/assets/ae7f9b61-8621-4b15-acb4-feffba10d8d5" /></li>
+          <li><img width="300" alt="image" src="https://github.com/user-attachments/assets/9d355a62-decf-4fef-b312-f17e2ab23f52" /></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>adding redirect uris and source url (needs to be changed each time you change hostname or create a new deployment url)
+    <ul>
+      <li><img width="400" alt="image" src="https://github.com/user-attachments/assets/ed9bde68-6c83-4ca7-b319-ee38574acdd1" /></li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="facebook">Facebook</h3>
+<ol>
+  <li>visit facebook developer portal https://developers.facebook.com/
+    <ul>
+      <li><img width="600" alt="image" src="https://github.com/user-attachments/assets/1f69d3c0-2494-41b2-aac1-cee03118cacc" /></li>
+    </ul>
+  </li>
+  <li>create a new app/choose existing app
+    <ul>
+      <li>create new app</li>
+      <li><img width="600" alt="image" src="https://github.com/user-attachments/assets/c53caf90-f6a3-4de1-8e75-f93001b1d383" /></li>
+      <li><img width="400" alt="image" src="https://github.com/user-attachments/assets/5067b56f-d3ca-4d12-9459-63bdf4d569fc" /></li>
+      <li><img width="600" alt="image" src="https://github.com/user-attachments/assets/edc41216-1066-4ffc-9b71-2267b9e3a3e7" /></li>
+      <li><img width="400" alt="image" src="https://github.com/user-attachments/assets/25cca23d-a911-492c-bf9c-3f745ac076ab" /></li>
+      <li><img width="432" alt="image" src="https://github.com/user-attachments/assets/0f878b3d-02ba-4ba4-886a-fa99fea6b024" /></li>
+      <li><img width="430" alt="image" src="https://github.com/user-attachments/assets/29d2c4b8-34fe-46be-906f-0ed3cf450124" /></li>
+      <li><img width="212" alt="image" src="https://github.com/user-attachments/assets/c12339ef-5b45-4ba1-83b3-89734779f878" />
+    - NOT COMPLETED BECAUSE I DONT KNO WHY BUT APP IS WORKING NO MATTER WHAT CHANGE I MAKE</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="twitter">Twitter</h3>
+
+<ul>
+  <li><img width="600" alt="image" src="https://github.com/user-attachments/assets/596f9791-9eae-483f-9a14-9bc49391d99f" /></li>
+  <li><img width="400" alt="image" src="https://github.com/user-attachments/assets/0c4c1cbe-4f9f-41ab-9a96-970c0dc387df" /></li>
+  <li><img width="400" alt="image" src="https://github.com/user-attachments/assets/5ce047e0-42f1-4f88-af39-293615133007" /></li>
+  <li><img width="300" alt="image" src="https://github.com/user-attachments/assets/d84544ad-4eab-4504-9f75-848b0170487d" /></li>
+  <li><img width="300" alt="image" src="https://github.com/user-attachments/assets/67e867dd-327f-428c-8557-d19a1bb80a11" /></li>
+  <li><img width="600" alt="image" src="https://github.com/user-attachments/assets/983f6cd8-4c62-405c-95c7-cb478324fc02" /></li>
+  <li><img width="300" alt="image" src="https://github.com/user-attachments/assets/431f9c14-5afd-4220-8949-6646ae36d287" /></li>
+  <li><img width="300" alt="image" src="https://github.com/user-attachments/assets/db41f022-39e3-465d-9d2b-edbeb8c95f0a" /></li>
+  <li><img width="400" alt="image" src="https://github.com/user-attachments/assets/05e79721-938d-4de5-b447-4b7bdeb3257f" /></li>
+  <li><img width="400" alt="image" src="https://github.com/user-attachments/assets/7fbe7571-a483-45c3-bf0c-1a3cc85e21f8" /></li>
+</ul>
+
+<h3 id="github">Github</h3>
+<ul>
+  <li><img width="300" alt="image" src="https://github.com/user-attachments/assets/c495dd2f-a80c-43c3-a068-9b78ebe820cc" /></li>
+  <li><img width="200" alt="image" src="https://github.com/user-attachments/assets/33f8a77d-2ff0-47ff-bec8-eade05ce381c" /></li>
+  <li><img width="200" alt="image" src="https://github.com/user-attachments/assets/d0a9920d-1cfc-4679-b5ce-80b9ec03e991" /></li>
+  <li><img width="200" alt="image" src="https://github.com/user-attachments/assets/f9e08de4-3ad5-49ff-91be-8a1f95f77d4f" /></li>
+  <li><img width="600" alt="image" src="https://github.com/user-attachments/assets/793ca42d-bef2-4e83-a504-cdedabbdc925" /></li>
+  <li><img width="300" alt="image" src="https://github.com/user-attachments/assets/27169d01-91f2-4416-b8a5-221248a19d1e" /></li>
+  <li><img width="600" alt="image" src="https://github.com/user-attachments/assets/28e7561b-7f06-4901-877b-dc1efe4ab58d" /></li>
+  <li><img width="600" alt="image" src="https://github.com/user-attachments/assets/ccfc0e2f-3246-4ef2-bdd1-8a28cc6b196d" /></li>
+</ul>
+
+<h2 id="oidc-configuration">OIDC Configuration</h2>
+<h3 id="google-oidc">Google OIDC</h3>
+<ul>
+  <li>follow all same steps as in <a href="#goggle-oauth">google oauth</a>, except the last step - just callback url is different
+    <ul>
+      <li><img width="400" alt="image" src="https://github.com/user-attachments/assets/1cbf5d6d-dc88-4aab-9a82-61e10ed305e6" /></li>
+    </ul>
+  </li>
+</ul>
+
+  </div>
+
+  
+  <div>
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = 'https://anusree6154s.github.io/documentation/oauth-oidc';
+      this.page.identifier = 'https://anusree6154s.github.io/documentation/oauth-oidc';
+    };
+
+    (function() {
+      var d = document, s = d.createElement('script');
+
+      s.src = 'https://anusree-anilkumar-blog.disqus.com/embed.js';
+
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript><a class="u-url" href="/documentation/oauth-oidc" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/documentation/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Blog &amp; Docs</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Anusree Anilkumar</li><li><a class="u-email" href="mailto:anilkumaranusree113@gmail.com">anilkumaranusree113@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/Anusree6154s"><svg class="svg-icon"><use xlink:href="/documentation/assets/minima-social-icons.svg#github"></use></svg> <span class="username">Anusree6154s</span></a></li><li><a href="https://www.linkedin.com/in/anusreeanilkumar1"><svg class="svg-icon"><use xlink:href="/documentation/assets/minima-social-icons.svg#linkedin"></use></svg> <span class="username">anusreeanilkumar1</span></a></li><li><a href="https://www.twitter.com/anu6154s"><svg class="svg-icon"><use xlink:href="/documentation/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">anu6154s</span></a></li><li><a href="/documentation/feed.xml"><svg class="svg-icon"><use xlink:href="/documentation/assets/minima-social-icons.svg#rss"></use></svg> <span>rss</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>This site is my personal documentation, made public for anyone who might find my code scribbles useful! ❤️</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
