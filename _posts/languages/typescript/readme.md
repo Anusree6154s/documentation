@@ -43,6 +43,7 @@ To study basic and advanced typescript:
   13. [Dynamic Import Types](#13-dynamic-import-types)
   14. [Compiler Configuration](#14-compiler-configuration)
   15. [Advanced Decorator Usage](#15-advanced-decorator-usage)
+- [Interview Questions](#3-interview-questions)
 
 <br>
 <br>
@@ -910,3 +911,96 @@ Advanced TypeScript concepts often come into play when building:
 - Complex type-safe APIs.
 - Enterprise-level projects requiring strict type safety.
 - Integration with JavaScript libraries using type declarations.
+
+<br>
+<br>
+
+## <ins>Interview Questions</ins>
+
+Here are some commonly asked questions in TypeScript interviews:
+
+1. What is TypeScript, and how does it differ from JavaScript?
+2. What are the key benefits of using TypeScript over JavaScript?
+3. Explain the concept of types in TypeScript.
+4. What are the primitive types in TypeScript?
+5. What is type inference in TypeScript?
+6. Can you explain the `any` type in TypeScript? When should it be used?
+7. What is the difference between `interface` and `type` in TypeScript?
+8. What are generics in TypeScript? Can you provide an example?
+9. What is the `unknown` type in TypeScript, and how does it differ from `any`?
+10. How do you define optional properties in TypeScript interfaces or types?
+11. What are tuples in TypeScript? Provide an example.
+12. How does TypeScript handle null and undefined values?
+13. What is a union type in TypeScript? Provide an example.
+14. What is an intersection type in TypeScript? Provide an example.
+15. Explain the concept of "type guards" in TypeScript.
+16. What are enums in TypeScript? How are they different from strings or numbers?
+17. How can you declare and use classes in TypeScript?
+18. What is the `never` type in TypeScript? Provide a use case for it.
+19. How do you extend interfaces or types in TypeScript?
+20. What are decorators in TypeScript? How are they used?
+21. What is the difference between `public`, `private`, and `protected` access modifiers in TypeScript?
+22. How do you handle modules in TypeScript?
+23. How can you use TypeScript with third-party JavaScript libraries that don't have type definitions?
+24. What are ambient declarations in TypeScript?
+25. Explain the difference between `const`, `let`, and `var` in TypeScript.
+26. What is the purpose of the `as` keyword in TypeScript?
+27. What is the difference between type assertions and type casting in TypeScript?
+28. What are some of the TypeScript configuration options (tsconfig.json)?
+29. How do you configure TypeScript for a React project?
+30. How do you work with promises and async/await in TypeScript?
+31. What is the `Readonly` utility type in TypeScript?
+32. How do you handle errors in TypeScript?
+33. What are some common pitfalls to avoid when using TypeScript?
+34. How does TypeScript support asynchronous programming?
+35. What is the purpose of `strict` mode in TypeScript, and what are the advantages of enabling it?
+
+<br>
+
+Here’s a mix of easy, medium, and advanced TypeScript interview questions:
+
+### Easy Level:
+1. What is TypeScript and why is it used?
+2. How do you install TypeScript?
+3. What is the difference between `let` and `const` in TypeScript?
+4. What are type aliases in TypeScript, and how do you use them?
+5. Can you explain the purpose of the `void` type in TypeScript?
+6. What are the basic types in TypeScript (number, string, boolean, etc.)?
+7. What is the syntax for defining a function in TypeScript?
+8. How do you declare an array in TypeScript?
+9. How do you define a parameter type in a function in TypeScript?
+10. What are default values for function parameters in TypeScript?
+
+### Medium Level:
+11. What are the advantages of using `interface` over `type` in TypeScript?
+12. What is the purpose of `strictNullChecks` in TypeScript?
+13. Can you explain how TypeScript helps in avoiding null pointer exceptions?
+14. What is the difference between `undefined` and `null` in TypeScript?
+15. What is the `keyof` type operator in TypeScript? Provide an example.
+16. Explain the difference between an object type and a class type in TypeScript.
+17. How do you use `readonly` properties in TypeScript?
+18. What is type widening in TypeScript? Can you give an example?
+19. How does TypeScript handle function overloading? Provide an example.
+20. Can you explain type inference and how it works in TypeScript?
+
+### Advanced Level:
+21. What is the purpose of generics in TypeScript? How do you implement them in functions or classes?
+22. What is the `this` keyword in TypeScript, and how is its behavior different from JavaScript?
+23. How do you use mapped types in TypeScript?
+24. What are conditional types in TypeScript? Provide an example.
+25. What is type narrowing, and how does TypeScript perform it?
+26. How do you create and use custom decorators in TypeScript?
+27. What is the `never` type in TypeScript? When should you use it?
+28. Can you explain how TypeScript works with modules and namespaces?
+29. How does TypeScript handle asynchronous programming (async/await) in terms of type safety?
+30. What is the `unknown` type, and how is it different from `any` in TypeScript?
+31. How can you create a union of types that only accepts a subset of values in TypeScript?
+32. What are "advanced" types in TypeScript and how do they differ from primitive types?
+33. How do you use `declaration merging` in TypeScript? Provide an example.
+34. What is the purpose of `tsconfig.json`? What are some of the most commonly used options?
+35. How can TypeScript help when working with large codebases?
+36. What is the `in` operator in TypeScript, and how does it work in conjunction with type guards?
+37. How do you declare and use abstract classes in TypeScript?
+38. What is a `construct signature` in TypeScript, and when would you use it?
+39. What are `template literal types` in TypeScript, and how do they work?
+40. How do you deal with third-party libraries in TypeScript when they don’t have type definitions?
