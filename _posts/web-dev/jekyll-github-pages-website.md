@@ -90,7 +90,7 @@ This is my personal guide related to all about making github pages with and with
 - **Reference Website:** [This current blog website](https://anusree6154s.github.io/documentation/)
 - **Process:**
   - Every thing same as [4](#4-github-pages-website-from-scratch-with-jekyll---markdown--html-files--github-pages-workflows), but we will build our own workflow.
-  - This is required when we make any changes in jekyll core code, because github-pages gem do not consider any changes that is made in jekyll core code. So we make our own github workflow.
+  - This is required when we make any changes in jekyll core code, because github-pages gem do not consider any changes that is made in jekyll core code like [this](). So we make our own github workflow.
 - Github Workflow:
   - Add a folder named `.github`, within which you add another folder `workflows`, within which you add a file named `jekyll.yml`
   - In that file you add the following [code](https://github.com/Anusree6154s/documentation/blob/main/.github/workflows/jekyll.yml) 
