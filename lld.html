@@ -1,0 +1,1272 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Low Level Design Guide | Blog &amp; Docs</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="Low Level Design Guide" />
+<meta name="author" content="Anusree Anilkumar" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="To study basic and advanced Low Level Design" />
+<meta property="og:description" content="To study basic and advanced Low Level Design" />
+<link rel="canonical" href="https://anusree6154s.github.io/documentation/lld" />
+<meta property="og:url" content="https://anusree6154s.github.io/documentation/lld" />
+<meta property="og:site_name" content="Blog &amp; Docs" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-01-19T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Low Level Design Guide" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Anusree Anilkumar"},"dateModified":"2025-01-19T00:00:00+00:00","datePublished":"2025-01-19T00:00:00+00:00","description":"To study basic and advanced Low Level Design","headline":"Low Level Design Guide","mainEntityOfPage":{"@type":"WebPage","@id":"https://anusree6154s.github.io/documentation/lld"},"url":"https://anusree6154s.github.io/documentation/lld"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/documentation/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://anusree6154s.github.io/documentation/feed.xml" title="Blog &amp; Docs" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/documentation/">Blog &amp; Docs</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/documentation/about">About Me</a><a class="page-link" href="/documentation/table-of-contents">Table of Contents</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  
+  
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Low Level Design Guide</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2025-01-19T00:00:00+00:00" itemprop="datePublished">19 Jan 2025
+      </time></p>
+      <p><span  class="tag-badge">
+            low-level-design
+        </span></span>
+</p>
+  </header>
+
+  
+
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h2 id="table-of-contents"><u>Table of Contents</u></h2>
+
+<ul>
+  <li>Basic
+    <ol>
+      <li>Object-Oriented Programming (OOP) Fundamentals</li>
+      <li>Class Design and Relationships</li>
+      <li>Design Patterns (Foundational)</li>
+      <li>Basic UML Diagrams</li>
+      <li>Error Handling and Exception Design</li>
+      <li>Coding Principles</li>
+      <li>Code Modularity</li>
+      <li>Data Structures</li>
+      <li>Testing Fundamentals</li>
+    </ol>
+  </li>
+  <li>Advanced
+    <ol>
+      <li>Advanced Design Patterns</li>
+      <li>SOLID Principles</li>
+      <li>Clean Code Practices</li>
+      <li>Advanced UML Diagrams</li>
+      <li>Concurrency and Parallelism</li>
+      <li>Microservices and API Design</li>
+      <li>Data-Intensive Design</li>
+      <li>Advanced Testing
+9.Performance Considerations</li>
+      <li>Event-Driven Architecture</li>
+      <li>Domain-Driven Design (DDD)</li>
+      <li>Security and Resilience in Design</li>
+    </ol>
+  </li>
+  <li>Interview Questions</li>
+</ul>
+
+<h2 id="basic"><u>Basic</u></h2>
+
+<p>Low-level design (LLD) is the process of detailing the components and modules of a system, creating a blueprint that focuses on the implementation aspects. It is concerned with specifying the internal structure and interactions of individual modules and their components.</p>
+
+<h4 id="object-oriented-programming-oop-fundamentals"><strong>Object-Oriented Programming (OOP) Fundamentals</strong></h4>
+
+<p>OOP is a programming paradigm based on the concept of “objects”, which bundle data (attributes) and methods (functions) together. OOP enables better organization, reusability, and scalability in programming.</p>
+
+<ol>
+  <li>
+    <p><strong>Classes and Objects:</strong></p>
+
+    <ul>
+      <li><strong>Class:</strong> A blueprint for creating objects, defining their attributes and behaviors.</li>
+      <li><strong>Object:</strong> An instance of a class containing real values instead of variables.</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Inheritance:</strong></p>
+
+    <ul>
+      <li>A mechanism where a new class (subclass) inherits properties and methods from an existing class (superclass). It promotes code reuse.</li>
+      <li>Example: A <code class="language-plaintext highlighter-rouge">Dog</code> class can inherit from a <code class="language-plaintext highlighter-rouge">Animal</code> class.</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Encapsulation:</strong></p>
+
+    <ul>
+      <li>Encapsulation refers to the bundling of data and the methods that operate on the data into a single unit (class). It also restricts direct access to some of the object’s components (through access modifiers like private, protected).</li>
+      <li>This is done using getters and setters to access private fields.</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Polymorphism:</strong></p>
+
+    <ul>
+      <li>Polymorphism means “many shapes” and refers to the ability of different classes to provide different implementations of the same method.</li>
+      <li>It can be achieved through <strong>method overriding</strong> (runtime polymorphism) and <strong>method overloading</strong> (compile-time polymorphism).</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Abstraction:</strong></p>
+    <ul>
+      <li>Abstraction hides the complexity by exposing only essential features of an object. It can be achieved through abstract classes or interfaces, allowing the user to focus on high-level operations.</li>
+    </ul>
+  </li>
+</ol>
+
+<hr />
+
+<h3 id="class-design-and-relationships"><strong>Class Design and Relationships</strong></h3>
+
+<p>Class design involves creating the structure and behavior of classes, ensuring that classes are well-organized and efficient.</p>
+
+<ol>
+  <li>
+    <p><strong>Cohesion:</strong></p>
+
+    <ul>
+      <li>Cohesion refers to how closely related and focused the responsibilities of a class or module are. High cohesion means the class has a clear, single responsibility, leading to better maintainability and readability.</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Coupling:</strong></p>
+
+    <ul>
+      <li>Coupling refers to the degree of dependence between classes. Low coupling means fewer dependencies between classes, which makes the system more flexible and easier to change.</li>
+      <li>Ideally, classes should be <strong>loosely coupled</strong>.</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Relationships:</strong></p>
+    <ul>
+      <li><strong>Aggregation:</strong> A “has-a” relationship, where one object contains another, but the contained object can exist independently of the container.</li>
+      <li><strong>Composition:</strong> A stronger form of aggregation where the contained object cannot exist without the container. It’s a “part-of” relationship.</li>
+      <li><strong>Association:</strong> A relationship where objects can interact with each other, typically by using each other’s methods.</li>
+      <li><strong>Dependency:</strong> A weaker relationship, where one object relies on another for certain functionality.</li>
+    </ul>
+  </li>
+</ol>
+
+<hr />
+
+<h3 id="design-patterns-foundational"><strong>Design Patterns (Foundational)</strong></h3>
+
+<p>Design patterns are standard solutions to common design problems.</p>
+
+<ol>
+  <li>
+    <p><strong>Singleton:</strong></p>
+
+    <ul>
+      <li>Ensures a class has only one instance and provides a global point of access to it. Often used for resources like database connections or configuration settings.</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Factory Method:</strong></p>
+
+    <ul>
+      <li>Defines an interface for creating objects, but allows subclasses to alter the type of objects that will be created. It decouples object creation from its usage.</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Strategy:</strong></p>
+
+    <ul>
+      <li>Defines a family of algorithms, encapsulates each one, and makes them interchangeable. This allows the algorithm to be selected at runtime.</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Observer:</strong></p>
+
+    <ul>
+      <li>Defines a dependency between objects so that when one object changes state, all its dependent objects are notified and updated automatically.</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Adapter:</strong></p>
+    <ul>
+      <li>Allows incompatible interfaces to work together. The adapter pattern acts as a bridge between two incompatible interfaces.</li>
+    </ul>
+  </li>
+</ol>
+
+<hr />
+
+<h3 id="basic-uml-diagrams"><strong>Basic UML Diagrams</strong></h3>
+
+<p>Unified Modeling Language (UML) is a standardized way to visualize the design of a system.</p>
+
+<ol>
+  <li>
+    <p><strong>Class Diagrams:</strong></p>
+
+    <ul>
+      <li>Represent the static structure of a system, showing the system’s classes, their attributes, methods, and relationships.</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Sequence Diagrams:</strong></p>
+
+    <ul>
+      <li>Illustrate how objects interact in a particular sequence of events. They focus on the order of messages exchanged between objects.</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Component Diagrams:</strong></p>
+    <ul>
+      <li>Show the components or modules of a system and their interactions. They provide a high-level view of system architecture.</li>
+    </ul>
+  </li>
+</ol>
+
+<hr />
+
+<h3 id="error-handling-and-exception-design"><strong>Error Handling and Exception Design</strong></h3>
+
+<p>Designing robust systems requires handling errors gracefully.</p>
+
+<ol>
+  <li>
+    <p><strong>Exception Hierarchies:</strong></p>
+
+    <ul>
+      <li>Organizing exceptions into a hierarchy allows for better management and classification of errors. For example, <code class="language-plaintext highlighter-rouge">IOException</code> could be a subclass of <code class="language-plaintext highlighter-rouge">Exception</code>.</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Graceful Error Handling Mechanisms:</strong></p>
+    <ul>
+      <li>Ensures that an application does not crash due to errors and can recover or provide useful feedback to users. Using try-catch blocks and handling exceptions at appropriate levels in the system is crucial.</li>
+    </ul>
+  </li>
+</ol>
+
+<hr />
+
+<h3 id="coding-principles"><strong>Coding Principles</strong></h3>
+
+<p>These principles help maintain clean, readable, and maintainable code.</p>
+
+<ol>
+  <li>
+    <p><strong>DRY (Don’t Repeat Yourself):</strong></p>
+
+    <ul>
+      <li>Avoid duplication by ensuring that every piece of knowledge or logic has a single, unambiguous representation.</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>KISS (Keep It Simple, Stupid):</strong></p>
+
+    <ul>
+      <li>Focus on simplicity. The simpler a solution is, the easier it is to maintain and extend.</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>YAGNI (You Aren’t Gonna Need It):</strong></p>
+    <ul>
+      <li>Avoid adding functionality until it’s necessary. This principle helps prevent overengineering and unnecessary complexity.</li>
+    </ul>
+  </li>
+</ol>
+
+<hr />
+
+<h3 id="code-modularity"><strong>Code Modularity</strong></h3>
+
+<p>Designing software with modular components improves reusability, testability, and maintainability.</p>
+
+<ol>
+  <li><strong>Designing Modules or Components for Reusability and Testability:</strong>
+    <ul>
+      <li>Each module should have a single responsibility, be easily reusable across the system, and be easy to test in isolation (using unit tests).</li>
+    </ul>
+  </li>
+</ol>
+
+<hr />
+
+<h3 id="data-structures"><strong>Data Structures</strong></h3>
+
+<p>Data structures are used to store and organize data efficiently.</p>
+
+<ol>
+  <li>
+    <p><strong>Array:</strong></p>
+
+    <ul>
+      <li>A collection of elements, identified by index or key. Fixed in size.</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Linked List:</strong></p>
+
+    <ul>
+      <li>A linear data structure where elements (nodes) are linked using pointers. It can grow dynamically.</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Stack:</strong></p>
+
+    <ul>
+      <li>A collection where elements are added and removed in a Last In First Out (LIFO) order.</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Queue:</strong></p>
+
+    <ul>
+      <li>A collection where elements are added and removed in a First In First Out (FIFO) order.</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Hash Table:</strong></p>
+
+    <ul>
+      <li>A data structure that stores key-value pairs. It allows for efficient lookups, insertions, and deletions based on keys.</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Basic Tree Structures (Binary Tree, Binary Search Tree):</strong></p>
+    <ul>
+      <li><strong>Binary Tree:</strong> A tree data structure where each node has at most two children.</li>
+      <li><strong>Binary Search Tree:</strong> A binary tree where nodes are arranged such that for each node, its left child is smaller and its right child is larger.</li>
+    </ul>
+  </li>
+</ol>
+
+<hr />
+
+<h3 id="testing-fundamentals"><strong>Testing Fundamentals</strong></h3>
+
+<p>Testing is crucial to ensure the correctness and reliability of the system.</p>
+
+<ol>
+  <li>
+    <p><strong>Unit Testing:</strong></p>
+
+    <ul>
+      <li>Involves testing individual units or components of the software in isolation to ensure that each part functions as expected.</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Mocking and Stubbing:</strong></p>
+
+    <ul>
+      <li><strong>Mocking:</strong> Creating fake objects that simulate the behavior of real objects for testing purposes.</li>
+      <li><strong>Stubbing:</strong> Providing predefined responses to function calls during testing.</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Integration Testing Basics:</strong></p>
+    <ul>
+      <li>Focuses on testing the interactions between different components or systems to ensure that they work together as expected.</li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="advanced"><u>Advanced</u></h2>
+
+<p>Low-level design refers to the detailed design of individual components, functions, and modules within a system. Advanced topics delve into the strategies for creating more efficient and maintainable designs.</p>
+
+<hr />
+
+<h3 id="advanced-design-patterns"><strong>Advanced Design Patterns</strong></h3>
+
+<p>Design patterns are standard solutions to common problems in software design. Here’s an overview of the ones you listed:</p>
+
+<ol>
+  <li>
+    <p><strong>Builder Pattern</strong></p>
+
+    <ul>
+      <li>Separates the construction of a complex object from its representation, allowing for different representations to be created using the same construction process.</li>
+      <li>Useful for constructing objects with many parameters or optional configurations.</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Prototype Pattern</strong></p>
+
+    <ul>
+      <li>Used to create new objects by copying an existing object, often known as the prototype.</li>
+      <li>Helps in creating objects with complex states without knowing their exact class.</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Mediator Pattern</strong></p>
+
+    <ul>
+      <li>Defines an object that controls how a set of objects interact, preventing direct communication between them.</li>
+      <li>Used to reduce dependencies between objects and to centralize communication logic.</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Chain of Responsibility Pattern</strong></p>
+
+    <ul>
+      <li>Allows a chain of objects to handle a request, passing it along the chain until one object processes it.</li>
+      <li>Useful for situations where multiple handlers might need to process a request, like in event processing.</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Command Pattern</strong></p>
+
+    <ul>
+      <li>Encapsulates a request as an object, allowing for parameterization of clients with queues, requests, and operations.</li>
+      <li>Often used in undo/redo systems or event handling.</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Visitor Pattern</strong></p>
+
+    <ul>
+      <li>Lets you add further operations to objects without having to modify the objects themselves.</li>
+      <li>Used to separate an algorithm from the objects it operates on, ideal for operations on complex object structures.</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Decorator Pattern</strong></p>
+    <ul>
+      <li>Attaches additional responsibilities to an object dynamically.</li>
+      <li>Provides a flexible alternative to subclassing for extending functionality.</li>
+    </ul>
+  </li>
+</ol>
+
+<hr />
+
+<h3 id="solid-principles"><strong>SOLID Principles</strong></h3>
+
+<p>SOLID is a set of principles that guide software design to make systems more understandable, flexible, and maintainable:</p>
+
+<ol>
+  <li>
+    <p><strong>Single Responsibility Principle (SRP)</strong></p>
+
+    <ul>
+      <li>A class should have only one reason to change, meaning it should have one job or responsibility.</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Open/Closed Principle (OCP)</strong></p>
+
+    <ul>
+      <li>Software entities (classes, modules, functions) should be open for extension but closed for modification.</li>
+      <li>New functionality should be added through extension, not by modifying existing code.</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Liskov Substitution Principle (LSP)</strong></p>
+
+    <ul>
+      <li>Objects of a superclass should be replaceable with objects of a subclass without affecting the correctness of the program.</li>
+      <li>Subtypes must behave in a way that doesn’t alter the expected behavior of the base class.</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Interface Segregation Principle (ISP)</strong></p>
+
+    <ul>
+      <li>A client should not be forced to implement interfaces it doesn’t use.</li>
+      <li>Split larger interfaces into smaller ones so that clients only implement what they need.</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Dependency Inversion Principle (DIP)</strong></p>
+    <ul>
+      <li>High-level modules should not depend on low-level modules. Both should depend on abstractions.</li>
+      <li>Abstractions should not depend on details; details should depend on abstractions.</li>
+    </ul>
+  </li>
+</ol>
+
+<hr />
+
+<h3 id="clean-code-practices"><strong>Clean Code Practices</strong></h3>
+
+<p>Clean code is code that is easy to read, maintain, and understand. Some important practices are:</p>
+
+<ul>
+  <li><strong>Writing maintainable, readable, and scalable code</strong>: Code should be easy to understand and adapt to changing requirements. It’s about clarity over cleverness.</li>
+  <li><strong>Refactoring legacy code</strong>: Continuously improving and simplifying existing code, without changing its behavior, to keep it maintainable.</li>
+  <li><strong>Effective naming conventions</strong>: Descriptive, clear, and consistent names for variables, functions, and classes that convey their purpose.</li>
+</ul>
+
+<hr />
+
+<h3 id="advanced-uml-diagrams"><strong>Advanced UML Diagrams</strong></h3>
+
+<p>UML (Unified Modeling Language) diagrams help visualize system design and architecture. Advanced UML diagrams include:</p>
+
+<ol>
+  <li>
+    <p><strong>State Diagrams</strong></p>
+
+    <ul>
+      <li>Illustrate the states an object can be in and the transitions between these states.</li>
+      <li>Useful in modeling finite state machines or complex lifecycle processes.</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Activity Diagrams</strong></p>
+
+    <ul>
+      <li>Represent workflows of activities and actions, often used to show the flow of control or data in a process.</li>
+      <li>Useful for modeling business processes or algorithms.</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Deployment Diagrams</strong></p>
+    <ul>
+      <li>Show the physical deployment of artifacts (like code and database) on hardware nodes.</li>
+      <li>Helpful in understanding the distribution of software in a system.</li>
+    </ul>
+  </li>
+</ol>
+
+<hr />
+
+<h3 id="concurrency-and-parallelism"><strong>Concurrency and Parallelism</strong></h3>
+
+<p>Concurrency involves managing multiple tasks at once, while parallelism is executing tasks simultaneously. Key topics include:</p>
+
+<ul>
+  <li><strong>Thread safety and synchronization</strong>: Ensures that shared data is protected from race conditions and inconsistent states when accessed by multiple threads.</li>
+  <li><strong>Deadlock detection and prevention</strong>: Identifying and avoiding situations where threads are stuck waiting on each other.</li>
+  <li><strong>Asynchronous programming</strong>: Writing programs that can perform tasks in the background without blocking the main thread.</li>
+  <li><strong>Design patterns for concurrency</strong>: Patterns like <strong>Producer-Consumer</strong> and <strong>Thread Pool</strong> manage concurrency by structuring how tasks are processed.</li>
+</ul>
+
+<hr />
+
+<h3 id="microservices-and-api-design"><strong>Microservices and API Design</strong></h3>
+
+<p>Microservices involve designing applications as a collection of loosely coupled services. Key considerations are:</p>
+
+<ul>
+  <li><strong>API versioning and design best practices</strong>: Ensuring backward compatibility while evolving APIs.</li>
+  <li><strong>Contract-first design</strong>: Designing the API contract (e.g., Swagger/OpenAPI) before implementing the API.</li>
+  <li><strong>API security</strong>: Authenticating and authorizing users or services using techniques like OAuth.</li>
+  <li><strong>Fault tolerance patterns</strong>:
+    <ul>
+      <li><strong>Circuit Breaker</strong>: Prevents system overload by detecting failures.</li>
+      <li><strong>Retry</strong>: Retries a failed operation a set number of times.</li>
+      <li><strong>Bulkhead</strong>: Isolates failure to prevent it from affecting the whole system.</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="data-intensive-design"><strong>Data-Intensive Design</strong></h3>
+
+<p>Designing systems that deal with large volumes of data. Key considerations are:</p>
+
+<ul>
+  <li><strong>Advanced data structures</strong>: Structures like <strong>AVL trees</strong>, <strong>Red-Black Trees</strong>, <strong>Tries</strong>, and <strong>Graphs</strong> help in optimizing data retrieval and storage.</li>
+  <li><strong>Caching mechanisms</strong>: Techniques like <strong>LRU cache</strong> reduce repeated access to slow resources like databases.</li>
+  <li><strong>Memory optimization techniques</strong>: Efficient use of memory through data structure design, object pooling, and garbage collection optimization.</li>
+</ul>
+
+<hr />
+
+<h3 id="advanced-testing"><strong>Advanced Testing</strong></h3>
+
+<p>Advanced testing techniques ensure high-quality and reliable software:</p>
+
+<ul>
+  <li><strong>Test-driven development (TDD)</strong>: Writing tests before code to guide development and ensure correctness.</li>
+  <li><strong>Behavior-driven development (BDD)</strong>: Extending TDD by writing tests in a more natural language format, describing behaviors.</li>
+  <li><strong>Integration and end-to-end testing</strong>: Testing the interaction of multiple components and the entire system from the user’s perspective.</li>
+</ul>
+
+<hr />
+
+<h3 id="performance-considerations"><strong>Performance Considerations</strong></h3>
+
+<p>Performance is critical for high-traffic systems:</p>
+
+<ul>
+  <li><strong>Big-O complexity analysis</strong>: Understanding the time and space complexity of algorithms to choose efficient solutions.</li>
+  <li><strong>Profiling and optimization</strong>: Identifying and removing performance bottlenecks in your code.</li>
+  <li><strong>Database query optimization</strong>: Writing efficient SQL queries and designing efficient database schemas.</li>
+</ul>
+
+<hr />
+
+<h3 id="event-driven-architecture"><strong>Event-Driven Architecture</strong></h3>
+
+<p>Event-driven architecture (EDA) revolves around systems reacting to events or changes in state:</p>
+
+<ul>
+  <li><strong>Event sourcing</strong>: Storing all changes to application state as a sequence of events.</li>
+  <li><strong>CQRS</strong>: Separates the command (write) and query (read) sides of a system, allowing for more scalable solutions.</li>
+  <li><strong>Messaging systems</strong>: Technologies like <strong>RabbitMQ</strong> or <strong>Kafka</strong> facilitate the decoupling of system components by enabling asynchronous communication.</li>
+</ul>
+
+<hr />
+
+<h3 id="domain-driven-design-ddd"><strong>Domain-Driven Design (DDD)</strong></h3>
+
+<p>DDD focuses on modeling systems based on the domain they are solving problems for:</p>
+
+<ul>
+  <li><strong>Entities, Value Objects, Aggregates</strong>: Core building blocks of DDD, where entities have identities, value objects have no identity, and aggregates are collections of related entities.</li>
+  <li><strong>Repositories</strong>: Abstraction for accessing and persisting aggregates.</li>
+  <li><strong>Bounded Contexts</strong>: Defining clear boundaries around a specific part of the domain, ensuring teams work with a consistent model.</li>
+  <li><strong>Ubiquitous language</strong>: A common language shared by both developers and business experts to describe the system and its domain.</li>
+</ul>
+
+<hr />
+
+<h3 id="security-and-resilience-in-design"><strong>Security and Resilience in Design</strong></h3>
+
+<p>Security and resilience are key to creating robust systems:</p>
+
+<ul>
+  <li><strong>Secure coding practices</strong>: Writing code to protect against vulnerabilities such as SQL injection, XSS, etc.</li>
+  <li><strong>Threat modeling and mitigation</strong>: Identifying potential threats and designing the system to mitigate those risks.</li>
+  <li><strong>Resilient system design</strong>: Patterns like <strong>fallbacks</strong>, <strong>circuit breakers</strong>, and <strong>retry mechanisms</strong> to ensure a system continues to function even when some components fail.</li>
+</ul>
+
+<h2 id="interview-questions"><u>Interview Questions</u></h2>
+
+<h3 id="basic-level-design-questions"><strong>Basic-Level Design Questions</strong></h3>
+
+<p>These questions are intended to test a candidate’s understanding of basic design principles, object-oriented design, and familiarity with common patterns and algorithms.</p>
+
+<ol>
+  <li>
+    <p><strong>Design a parking lot system:</strong></p>
+
+    <ul>
+      <li>Design classes for parking spots, vehicles, and the parking lot.</li>
+      <li>What types of vehicles should your system support?</li>
+      <li>How would you handle parking spot availability?</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Design a library management system:</strong></p>
+
+    <ul>
+      <li>Create a system for borrowing and returning books.</li>
+      <li>How will you manage book inventory?</li>
+      <li>How would you handle overdue books?</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Design a basic ATM system:</strong></p>
+
+    <ul>
+      <li>Design classes for account management, transactions, and receipts.</li>
+      <li>How would you implement security (PIN, transaction limits)?</li>
+      <li>How would you handle different account types (checking, savings)?</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Design a simple file system:</strong></p>
+
+    <ul>
+      <li>What classes would be involved in a file system?</li>
+      <li>How would you manage files and directories?</li>
+      <li>How would you handle file permissions?</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Design a simple email system:</strong></p>
+
+    <ul>
+      <li>What classes would you need for email management?</li>
+      <li>How would you structure the system to send, receive, and delete emails?</li>
+      <li>How would you implement spam filters?</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Design a simple messaging app (chat system):</strong></p>
+    <ul>
+      <li>Design classes for sending, receiving, and storing messages.</li>
+      <li>How would you implement message encryption?</li>
+      <li>How would you handle user authentication and message delivery?</li>
+    </ul>
+  </li>
+</ol>
+
+<hr />
+
+<h3 id="intermediate-level-design-questions"><strong>Intermediate-Level Design Questions</strong></h3>
+
+<p>These questions often involve more complex systems and integration of multiple components or subsystems. Candidates should also consider scalability, reliability, and performance.</p>
+
+<ol>
+  <li>
+    <p><strong>Design an online bookstore system:</strong></p>
+
+    <ul>
+      <li>How would you handle inventory management, order processing, and payment systems?</li>
+      <li>What database schemas would you consider for book information, users, and orders?</li>
+      <li>How would you handle discounts, promotions, and recommendations?</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Design a URL shortening service (like bit.ly):</strong></p>
+
+    <ul>
+      <li>How would you generate unique shortened URLs?</li>
+      <li>How would you store mappings between original and shortened URLs?</li>
+      <li>How would you ensure the system is scalable to handle billions of URLs?</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Design a movie ticket booking system:</strong></p>
+
+    <ul>
+      <li>How would you design the system to manage theaters, showtimes, and reservations?</li>
+      <li>How would you handle overbookings and seat availability?</li>
+      <li>How would you manage user preferences, payments, and cancellations?</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Design a notification system (e.g., push notifications, emails):</strong></p>
+
+    <ul>
+      <li>How would you handle different types of notifications (emails, SMS, in-app)?</li>
+      <li>How would you ensure the system can handle millions of notifications per day?</li>
+      <li>How would you prioritize or throttle notifications?</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Design a social media platform (e.g., Twitter):</strong></p>
+
+    <ul>
+      <li>How would you design the architecture to support following, posting, and likes?</li>
+      <li>How would you scale the system to handle millions of users and posts?</li>
+      <li>How would you design a feed system with personalized recommendations?</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Design an e-commerce shopping cart system:</strong></p>
+    <ul>
+      <li>How would you design cart items, user sessions, and payment processing?</li>
+      <li>How would you implement pricing calculations, discounts, and tax calculations?</li>
+      <li>How would you manage cart persistence (e.g., between sessions)?</li>
+    </ul>
+  </li>
+</ol>
+
+<hr />
+
+<h3 id="advanced-level-design-questions"><strong>Advanced-Level Design Questions</strong></h3>
+
+<p>These questions are for senior positions and require candidates to design highly scalable, fault-tolerant, and performant systems with a strong focus on trade-offs, edge cases, and real-world constraints.</p>
+
+<ol>
+  <li>
+    <p><strong>Design a distributed cache (e.g., Redis or Memcached):</strong></p>
+
+    <ul>
+      <li>How would you design a distributed caching system to store key-value pairs?</li>
+      <li>How would you ensure consistency and handle cache invalidation?</li>
+      <li>How would you implement replication and sharding in the cache?</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Design a real-time collaborative document editing system (e.g., Google Docs):</strong></p>
+
+    <ul>
+      <li>How would you handle concurrent edits from multiple users in real time?</li>
+      <li>How would you design a conflict resolution mechanism?</li>
+      <li>How would you implement offline support and eventual consistency?</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Design a large-scale file storage system (e.g., Dropbox, Google Drive):</strong></p>
+
+    <ul>
+      <li>How would you handle file uploads, downloads, and synchronization across devices?</li>
+      <li>How would you ensure fault tolerance and data redundancy?</li>
+      <li>How would you design a system to manage access control, versioning, and sharing?</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Design a recommendation system (e.g., for an e-commerce platform or a movie app):</strong></p>
+
+    <ul>
+      <li>How would you build a recommendation engine based on user preferences and behaviors?</li>
+      <li>What algorithms would you use (collaborative filtering, content-based filtering)?</li>
+      <li>How would you handle cold starts, scalability, and personalization?</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Design a real-time stock trading platform:</strong></p>
+
+    <ul>
+      <li>How would you design a system that supports buying and selling of stocks in real time?</li>
+      <li>How would you handle trading volumes, low latency, and transaction consistency?</li>
+      <li>How would you ensure market data updates and provide order matching?</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Design a large-scale event logging and monitoring system:</strong></p>
+    <ul>
+      <li>How would you design a system to handle billions of events and logs per day?</li>
+      <li>How would you ensure the system is fault-tolerant and scalable?</li>
+      <li>How would you handle querying, indexing, and storing log data for quick access?</li>
+    </ul>
+  </li>
+</ol>
+
+<hr />
+
+<h3 id="general-design-and-best-practices"><strong>General Design and Best Practices</strong></h3>
+
+<ol>
+  <li>
+    <p><strong>Explain the SOLID principles:</strong></p>
+
+    <ul>
+      <li>How do each of the SOLID principles help improve the design and maintainability of a system?</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Discuss the trade-offs between different types of databases (SQL vs. NoSQL):</strong></p>
+
+    <ul>
+      <li>How would you decide whether to use a relational database or a NoSQL database in your system?</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>How do you ensure the scalability and reliability of your system?</strong></p>
+
+    <ul>
+      <li>What strategies would you use to scale a system horizontally or vertically?</li>
+      <li>How do you handle failover and fault tolerance?</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Design a multi-tiered application:</strong></p>
+
+    <ul>
+      <li>How would you separate the concerns of your application into multiple layers (e.g., presentation, business logic, data access)?</li>
+      <li>What kind of communication would occur between the layers, and how would you ensure loose coupling?</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Explain how you would perform load testing and capacity planning for your system.</strong></p>
+  </li>
+</ol>
+
+<hr />
+
+<h3 id="behavioral-design-questions"><strong>Behavioral Design Questions</strong></h3>
+
+<p>These assess the candidate’s thought process and approach to designing systems, especially when under constraints.</p>
+
+<ol>
+  <li><strong>What steps would you take if you were asked to design a system that must be highly available and fault-tolerant?</strong></li>
+  <li><strong>How do you ensure that your system design is flexible and can accommodate future changes?</strong></li>
+  <li><strong>How would you approach debugging and optimizing a low-level design?</strong></li>
+  <li><strong>Can you describe a situation where you had to make a difficult design trade-off? What was your reasoning?</strong></li>
+</ol>
+
+<hr />
+
+<h3 id="tips-for-preparing"><strong>Tips for Preparing</strong></h3>
+
+<ul>
+  <li>Practice UML diagrams (Class, Sequence, Use Case, etc.) to represent your design.</li>
+  <li>Focus on designing systems that are modular, scalable, and maintainable.</li>
+  <li>Be ready to discuss performance, complexity, and edge cases during the design.</li>
+  <li>Communicate clearly and break down the design problem step by step.</li>
+</ul>
+
+<p><br /></p>
+
+<h3 id="basic-level-lld-questions"><strong>Basic-Level LLD Questions</strong></h3>
+
+<ol>
+  <li>
+    <p><strong>Design a ticket reservation system:</strong></p>
+
+    <ul>
+      <li>What classes and data structures would you need?</li>
+      <li>How would you handle seat availability, cancellations, and booking limits?</li>
+      <li>What would happen if a user tries to book the same seat simultaneously?</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Design a basic cash register system:</strong></p>
+
+    <ul>
+      <li>How would you implement classes for cash registers, transactions, and receipts?</li>
+      <li>How would you handle discount and tax calculations?</li>
+      <li>How would you implement inventory management for products?</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Design an online voting system:</strong></p>
+
+    <ul>
+      <li>How would you store and validate votes?</li>
+      <li>How would you ensure that multiple users cannot vote more than once?</li>
+      <li>How would you handle the results calculation and the integrity of voting data?</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Design a system for managing a conference schedule:</strong></p>
+
+    <ul>
+      <li>How would you design a system to handle sessions, speakers, and attendees?</li>
+      <li>How would you manage session timings and conflicts?</li>
+      <li>How would you allow attendees to register and track their sessions?</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Design a simple calendar application:</strong></p>
+    <ul>
+      <li>How would you handle recurring events and reminders?</li>
+      <li>How would you design the system to allow multiple users to add events?</li>
+      <li>How would you manage different time zones for events?</li>
+    </ul>
+  </li>
+</ol>
+
+<hr />
+
+<h3 id="intermediate-level-lld-questions"><strong>Intermediate-Level LLD Questions</strong></h3>
+
+<ol>
+  <li>
+    <p><strong>Design a payment gateway system:</strong></p>
+
+    <ul>
+      <li>How would you handle multiple types of payment methods (credit card, PayPal, etc.)?</li>
+      <li>How would you implement fraud detection and security?</li>
+      <li>How would you design the system to handle successful, pending, or failed transactions?</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Design a ride-sharing application (like Uber or Lyft):</strong></p>
+
+    <ul>
+      <li>How would you handle the matching of drivers with riders?</li>
+      <li>How would you design the system to track real-time location updates?</li>
+      <li>How would you handle surge pricing based on demand?</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Design an inventory management system:</strong></p>
+
+    <ul>
+      <li>How would you manage stock levels, suppliers, and product catalog?</li>
+      <li>How would you design it to handle inventory across multiple warehouses?</li>
+      <li>How would you handle product return and exchange?</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Design a logging and monitoring system (e.g., for server logs):</strong></p>
+
+    <ul>
+      <li>How would you store logs for querying and reporting?</li>
+      <li>How would you handle log levels (e.g., info, warn, error)?</li>
+      <li>How would you ensure logs are processed and stored at scale in real-time?</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Design a file compression tool (like ZIP or TAR):</strong></p>
+
+    <ul>
+      <li>How would you design the algorithm to compress and decompress files?</li>
+      <li>How would you handle large file sizes and compression ratios?</li>
+      <li>How would you optimize the performance of compression and decompression?</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Design a URL shortener service (e.g., bit.ly):</strong></p>
+    <ul>
+      <li>How would you generate a unique short URL for a long URL?</li>
+      <li>How would you store the mapping of short URLs to long URLs?</li>
+      <li>How would you ensure scalability as the service grows?</li>
+    </ul>
+  </li>
+</ol>
+
+<hr />
+
+<h3 id="advanced-level-lld-questions"><strong>Advanced-Level LLD Questions</strong></h3>
+
+<ol>
+  <li>
+    <p><strong>Design a distributed message queue system (like Kafka or RabbitMQ):</strong></p>
+
+    <ul>
+      <li>How would you design the architecture for high throughput and low latency?</li>
+      <li>How would you handle message persistence, ordering, and delivery guarantees?</li>
+      <li>How would you handle message acknowledgment, retries, and failure handling?</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Design a multi-user online game system (like Chess, Checkers, etc.):</strong></p>
+
+    <ul>
+      <li>How would you manage users, game states, and moves?</li>
+      <li>How would you handle real-time communication between players (web sockets, polling)?</li>
+      <li>How would you design for scaling with millions of simultaneous players?</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Design a global search engine (like Google):</strong></p>
+
+    <ul>
+      <li>How would you handle crawling and indexing the web?</li>
+      <li>How would you design the ranking algorithm (PageRank, etc.)?</li>
+      <li>How would you scale the search engine to handle billions of queries per day?</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Design a distributed file system (like HDFS or GFS):</strong></p>
+
+    <ul>
+      <li>How would you handle file storage, redundancy, and replication across multiple nodes?</li>
+      <li>How would you design the system to ensure fault tolerance in case of server failures?</li>
+      <li>How would you manage file access, permissions, and metadata?</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Design a social networking platform (like Facebook or Instagram):</strong></p>
+
+    <ul>
+      <li>How would you design a user feed, including posts, likes, and comments?</li>
+      <li>How would you handle friend relationships and privacy settings?</li>
+      <li>How would you manage scalability as the user base grows?</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Design a real-time chat application (like Slack or WhatsApp):</strong></p>
+
+    <ul>
+      <li>How would you manage user connections, message delivery, and presence status?</li>
+      <li>How would you design it to scale with millions of users and messages?</li>
+      <li>How would you implement message encryption and privacy?</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Design a distributed caching system (e.g., for large-scale web applications):</strong></p>
+    <ul>
+      <li>How would you ensure that the cache can scale horizontally and handle high loads?</li>
+      <li>How would you manage cache eviction policies (LRU, LFU)?</li>
+      <li>How would you design a system to ensure consistency between the cache and the underlying database?</li>
+    </ul>
+  </li>
+</ol>
+
+<hr />
+
+<h3 id="edge-cases-and-performance-oriented-lld-questions"><strong>Edge Cases and Performance-Oriented LLD Questions</strong></h3>
+
+<ol>
+  <li>
+    <p><strong>Design a rate-limiting system (e.g., for API calls or user actions):</strong></p>
+
+    <ul>
+      <li>How would you design the system to limit requests per user or IP address?</li>
+      <li>What algorithms would you use (Token Bucket, Leaky Bucket)?</li>
+      <li>How would you handle burst traffic and ensure fair rate-limiting?</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Design a system to detect duplicate images (e.g., in an image hosting platform):</strong></p>
+
+    <ul>
+      <li>How would you compare images to detect similarity?</li>
+      <li>What hashing or fingerprinting algorithms would you use (e.g., perceptual hash)?</li>
+      <li>How would you scale this for millions of images?</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Design a system for calculating distance between locations (like Google Maps):</strong></p>
+
+    <ul>
+      <li>How would you calculate the shortest path between two locations?</li>
+      <li>How would you handle real-time traffic data in the system?</li>
+      <li>How would you manage scalability if the system needs to serve millions of requests?</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Design a logging and alerting system that can handle millions of events per second:</strong></p>
+    <ul>
+      <li>How would you ensure real-time ingestion and storage of log data?</li>
+      <li>How would you process logs for alert generation and anomaly detection?</li>
+      <li>How would you design the system to scale and handle both high throughput and low latency?</li>
+    </ul>
+  </li>
+</ol>
+
+<hr />
+
+<h3 id="behavioral-and-problem-solving-lld-questions"><strong>Behavioral and Problem-Solving LLD Questions</strong></h3>
+
+<ol>
+  <li>
+    <p><strong>Design a system that must be both highly available and partition-tolerant (using CAP Theorem):</strong></p>
+
+    <ul>
+      <li>How would you make trade-offs between consistency, availability, and partition tolerance?</li>
+      <li>How would you design for eventual consistency in this system?</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>How would you design a system with the following constraints:</strong></p>
+
+    <ul>
+      <li>High throughput and low latency.</li>
+      <li>Fault tolerance and high availability.</li>
+      <li>Real-time data processing.</li>
+      <li>How would you balance these requirements in your design?</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Design a system where multiple components need to collaborate, but you cannot modify all the components:</strong></p>
+
+    <ul>
+      <li>How would you implement communication between these components?</li>
+      <li>How would you ensure that each component can evolve independently?</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>How would you design a system that needs to ensure data consistency across multiple data stores (e.g., SQL and NoSQL)?</strong></p>
+    <ul>
+      <li>What patterns would you apply (e.g., event sourcing, CQRS)?</li>
+      <li>How would you handle conflicts and ensure the system remains consistent?</li>
+    </ul>
+  </li>
+</ol>
+
+<hr />
+
+<h3 id="system-design-trade-offs-and-optimizations"><strong>System Design Trade-offs and Optimizations</strong></h3>
+
+<ol>
+  <li>
+    <p><strong>How would you optimize the performance of a system under heavy load (e.g., millions of requests per second)?</strong></p>
+
+    <ul>
+      <li>How would you handle bottlenecks in databases, CPU, memory, or network?</li>
+      <li>How would you scale the system horizontally and vertically?</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Explain how you would handle data migrations when updating a system:</strong></p>
+
+    <ul>
+      <li>How would you ensure minimal downtime?</li>
+      <li>How would you design the system to be backward compatible during the migration?</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Design a system that requires high fault tolerance but also needs to perform background tasks at regular intervals (e.g., scheduled jobs):</strong></p>
+    <ul>
+      <li>How would you ensure that tasks complete even if part of the system fails?</li>
+      <li>How would you schedule tasks without blocking critical system processes?</li>
+    </ul>
+  </li>
+</ol>
+
+<hr />
+
+<h3 id="advanced-algorithms-and-data-structures-questions"><strong>Advanced Algorithms and Data Structures Questions</strong></h3>
+
+<ol>
+  <li>
+    <p><strong>Design an autocomplete feature using a trie data structure:</strong></p>
+
+    <ul>
+      <li>How would you implement the search and insert operations efficiently?</li>
+      <li>How would you scale the autocomplete service to handle large dictionaries?</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Design a distributed rate limiter for a global API:</strong></p>
+    <ul>
+      <li>How would you ensure fair distribution of requests and prevent abuse?</li>
+      <li>How would you handle distributed state in the rate limiter?</li>
+    </ul>
+  </li>
+</ol>
+
+  </div>
+
+  
+  <div style="margin-top: 20px;">
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = 'https://anusree6154s.github.io/documentation/lld';
+      this.page.identifier = 'https://anusree6154s.github.io/documentation/lld';
+    };
+
+    (function() {
+      var d = document, s = d.createElement('script');
+
+      s.src = 'https://anusree-anilkumar-blog.disqus.com/embed.js';
+
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript><a class="u-url" href="/documentation/lld" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/documentation/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Blog &amp; Docs</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Anusree Anilkumar</li><li><a class="u-email" href="mailto:anilkumaranusree113@gmail.com">anilkumaranusree113@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/Anusree6154s"><svg class="svg-icon"><use xlink:href="/documentation/assets/minima-social-icons.svg#github"></use></svg> <span class="username">Anusree6154s</span></a></li><li><a href="https://www.linkedin.com/in/anusreeanilkumar1"><svg class="svg-icon"><use xlink:href="/documentation/assets/minima-social-icons.svg#linkedin"></use></svg> <span class="username">anusreeanilkumar1</span></a></li><li><a href="https://www.twitter.com/anu6154s"><svg class="svg-icon"><use xlink:href="/documentation/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">anu6154s</span></a></li><li><a href="/documentation/feed.xml"><svg class="svg-icon"><use xlink:href="/documentation/assets/minima-social-icons.svg#rss"></use></svg> <span>rss</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>This site is my personal documentation, made public for anyone who might find my code scribbles useful! ❤️</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
