@@ -183,7 +183,7 @@ body::-webkit-scrollbar-thumb {
   backdrop-filter: blur(10px) !important;
   -webkit-backdrop-filter: blur(10px) !important;
   width: 100% !important;
-  height: 15vh !important;
+  height: 70px !important;
   // border: none;
   // display: flex;
   // align-items: center;
@@ -254,9 +254,16 @@ body::-webkit-scrollbar-thumb {
     background-color: transparent;
     border: none;
 
+    position: absolute;
+    top: 50%;
+    right: 10%;
+    transform: translateY(-50%);
+
     @media (min-width: 600px) {
       background-color: unset;
       border: unset;
+      position: unset;
+      transform: unset;
     }
 
     label[for="nav-trigger"] {
@@ -264,10 +271,17 @@ body::-webkit-scrollbar-thumb {
       border: 1px solid #ffffff45;
       border-radius: 5px;
 
+      position: absolute;
+      top: 50%;
+      right: 10%;
+      transform: translateY(-50%);
+
       @media (min-width: 600px) {
         background: unset;
         border: unset;
         border-radius: unset;
+        position: unset;
+        transform: unset;
       }
 
       .menu-icon {
@@ -287,8 +301,9 @@ body::-webkit-scrollbar-thumb {
       margin-top: 40%;
       width: 100vw;
       position: absolute;
-      top: 63%;
-      right: -45%;
+      top: 100%;
+      right: 0%;
+      transform: translateX(10%);
 
       @media (min-width: 600px) {
         display: flex;
@@ -299,11 +314,10 @@ body::-webkit-scrollbar-thumb {
 
         background: unset;
         padding: 0%;
-        margin-top: 0%;
+        margin-top: 0%;  
         width: auto;
         position: unset;
-        top: unset;
-        right: unset;
+        justify-content: flex-start;
       }
 
       @media (min-width: 1300px) {
@@ -536,8 +550,7 @@ body::-webkit-scrollbar-thumb {
 
         @media (min-width: 600px) {
           padding: 2.5%;
-        }  
-
+        }
 
         @media (min-width: 900px) {
           height: 40px;
@@ -550,7 +563,7 @@ body::-webkit-scrollbar-thumb {
 
         @media (min-width: 1440px) {
           height: 60px;
-        }  
+        }
 
         span {
           display: inline-block;
@@ -1439,7 +1452,7 @@ body::-webkit-scrollbar-thumb {
       filter: blur(22px);
 
       @media (min-width: 1300px) {
-     filter: blur(50px);
+        filter: blur(50px);
       }
     }
 
