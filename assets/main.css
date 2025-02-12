@@ -883,7 +883,7 @@ body::-webkit-scrollbar-thumb {
         .home .page-landing .socials a {
           height: 45px;
           padding: 1.5%; } }
-      @media (min-width: 1024px) {
+      @media (min-width: 1440px) {
         .home .page-landing .socials a {
           height: 60px; } }
       .home .page-landing .socials a span {
