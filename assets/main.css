@@ -627,7 +627,7 @@ body::-webkit-scrollbar-thumb {
   backdrop-filter: blur(10px) !important;
   -webkit-backdrop-filter: blur(10px) !important;
   width: 100% !important;
-  height: 15vh !important;
+  height: 70px !important;
   animation: slideDown 1s ease;
   transform: translateY(100px);
   transition: background-color 0.5s ease; }
@@ -674,20 +674,32 @@ body::-webkit-scrollbar-thumb {
     flex: 1;
     height: 100%;
     background-color: transparent;
-    border: none; }
+    border: none;
+    position: absolute;
+    top: 50%;
+    right: 10%;
+    transform: translateY(-50%); }
     @media (min-width: 600px) {
       .site-header .site-nav {
         background-color: unset;
-        border: unset; } }
+        border: unset;
+        position: unset;
+        transform: unset; } }
     .site-header .site-nav label[for="nav-trigger"] {
       background: #ffffff12;
       border: 1px solid #ffffff45;
-      border-radius: 5px; }
+      border-radius: 5px;
+      position: absolute;
+      top: 50%;
+      right: 10%;
+      transform: translateY(-50%); }
       @media (min-width: 600px) {
         .site-header .site-nav label[for="nav-trigger"] {
           background: unset;
           border: unset;
-          border-radius: unset; } }
+          border-radius: unset;
+          position: unset;
+          transform: unset; } }
       .site-header .site-nav label[for="nav-trigger"] .menu-icon svg {
         fill: #ffffff94; }
         @media (min-width: 600px) {
@@ -700,8 +712,9 @@ body::-webkit-scrollbar-thumb {
       margin-top: 40%;
       width: 100vw;
       position: absolute;
-      top: 63%;
-      right: -45%; }
+      top: 100%;
+      right: 0%;
+      transform: translateX(10%); }
       @media (min-width: 600px) {
         .site-header .site-nav .trigger {
           display: flex;
@@ -714,8 +727,7 @@ body::-webkit-scrollbar-thumb {
           margin-top: 0%;
           width: auto;
           position: unset;
-          top: unset;
-          right: unset; } }
+          justify-content: flex-start; } }
       @media (min-width: 1300px) {
         .site-header .site-nav .trigger {
           font-size: 150%; } }
