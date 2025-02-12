@@ -3,6 +3,6 @@
     # Don't use DATE_FILENAME_MATCHER so we don't need to put those stupid dates
     # in the filename. 
     def read_posts(dir)
-      read_publishable(dir, "_posts", /.*\.md$/)
+      read_publishable(dir, "content", /.*\.md$/)
     end
   end

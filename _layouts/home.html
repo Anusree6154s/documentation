@@ -2,45 +2,148 @@
 layout: default
 ---
 
-<div class="home">
+<section class="home">
+  <article class="page-landing">
+    <!-- <p class="landing-title1">Tech, Projects & Everything I Learn </p> -->
+    <div class="content">
+      <p class="landing-content1">Welcome to my <span>Tech Blog</span></p>
+      <p class="landing-content2">This is where curiosity meets creation.</p>
+      <p class="landing-content3">
+        I share the journey behind my latest projects, document lessons learned,
+        and explore exciting discoveries in tech and beyond.
+      </p>
+      <div class="socials">
+        <a href="https://www.linkedin.com/in/anusreeanilkumar1/"
+          ><span></span
+        ></a>
+        <a href="https://github.com/Anusree6154s"><span></span></a>
+        <a href="https://x.com/anu6154s"><span></span></a>
+        <a href="mailto:anilkumaranusree113@gmail.com"><span></span></a>
+        <a href="https://wa.me/9699973230" target="_blank"><span></span></a>
+      </div>
+    </div>
+  </article>
+
   {%- if page.title -%}
-    <h1 class="page-heading">{{ page.title }}</h1>
-  {%- endif -%}
+  <h1 class="page-heading">{{ page.title }}</h1>
+  {%- endif -%} {{ content }} {%- if site.posts.size > 0 -%}
+  <article class="posts-container" id="latest-posts">
+    <!-- <h2 class="post-list-heading">{{ page.list_title | default: "Posts" }}</h2> -->
+    <!-- <h2 class="post-list-heading">LATEST POSTS</h2> -->
+    <div class="post-list-heading heading1">
+      <p class="section-title">LATEST POSTS</p>
+      <p class="title">Ideas, Learnings, and Updates</p>
+      <p class="description">
+        Exploring technology one challenge at a time, documenting the wins,
+        failures, and everything in between.
+      </p>
+    </div>
 
-  {{ content }}
-
-  {%- if site.posts.size > 0 -%}
-    <h2 class="post-list-heading">{{ page.list_title | default: "Posts" }}</h2>
     <ul class="post-list">
-      {%- for post in site.posts -%}
-      {% unless post.hidden %}
+      {% assign count = 0 %} {%- for post in site.posts -%} {% unless
+      post.hidden %}
       <li>
-        {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
-        <span class="post-meta">{{ post.date | date: date_format }}</span>
-        <span style="font-size: small; color: grey;">
+        <div class="post-content">
+          <!-- {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%} -->
+          <!-- {%- assign date_format_day = "%-d %b" -%} 
+{%- assign date_format_year = "%Y" -%} -->
+          <!-- <span class="post-meta"> -->
+          <!-- <span>{{ post.date | date: date_format_day }}</span>
+          <span>{{ post.date | date: date_format_year }}</span> -->
+          <!-- {{ post.date | date: date_format }} -->
+          <!-- </span> -->
           <h3>
-              <a class="post-link" href="{{ post.url | relative_url }}">
-                  {{ post.title | escape }}
-                </a>
-            </h3>
-            <p>
-                    {%- for tag in post.tags -%}
-                    <span style="margin-right: 5px; background-color: whitesmoke; border-radius: 5px; padding: 2px 5px; text-align: center;">
-                        {{ tag | escape }}
-                    </span>
-                    {%- endfor -%}
-                </span>
-            </p>
+            <a class="post-link" href="{{ post.url | relative_url }}">
+              {{ post.title | escape }}
+            </a>
+          </h3>
+          <p class="post-description">
+            {%- assign date_format = site.minima.date_format | default: "%b %-d,
+            %Y" -%}
+            <span class="post-meta"> {{ post.date | date: date_format }} </span>
 
-        {%- if site.show_excerpts -%}
-          {{ post.excerpt }}
-        {%- endif -%}
+            {%- if post.tags.size>0 -%}
+            <span class="post-dot"> </span>
+            {%- for tag in post.tags -%}
+            <span class="post-tag"> {{ tag | escape }} </span>
+            {%- endfor -%} {%- endif -%}
+          </p>
+
+          {%- if site.show_excerpts -%} 
+            {{ post.excerpt }}  
+          {%- endif -%}
+        </div>
+        <div class="post-read-more">
+          <div class="arrow-container">
+            <!-- <span>Read More</span> -->
+            <!-- <span class="arrow"></span> -->
+            <div class="arrow arrow-first"></div>
+            <div class="arrow arrow-second"></div>
+            <div class="arrow arrow-third"></div>
+          </div>
+        </div>
       </li>
-      {% endunless %}
-      {%- endfor -%}
+
+      {% assign count = count | plus: 1 %} {% if count == 10 %} {% break %} {%
+      endif %} {% endunless %} {%- endfor -%}
     </ul>
 
-    <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | relative_url }}">via RSS</a></p>
+    <div class="post-view-more">
+      <a href="/documentation/all-posts">
+        <span>VIEW MORE POSTS</span>
+        <span class="arrow-container"><span class="arrow"></span></span>
+      </a>
+    </div>
+  </article>
   {%- endif -%}
 
-</div>
+  <article class="projects-container" id="projects">
+    <div class="post-list-heading heading2">
+      <p class="section-title">PROJECTS</p>
+      <p class="title">Building on Thoughts, Crafting with Purpose</p>
+      <p class="description">
+        From concept to creation, projects that reflect my research and growth
+        in technology. Each entry showcases a blend of experimentation,
+        problem-solving, and hands-on development.
+      </p>
+    </div>
+
+    <div class="projects-view-more">
+      <a href="#">
+        <span>VIEW PROJECTS</span>
+        <span class="arrow-container"><span class="arrow"></span></span>
+      </a>
+    </div>
+
+    <div class="carousel basic carousel-1">
+      {% include group.html %} {% include group.html %}
+    </div>
+    <div class="carousel basic carousel-2">
+      {% include group-2.html %} {% include group-2.html %}
+    </div>
+  </article>
+
+  <article class="bottom-container" id="profile">
+    <div class="background-container background-container1">
+      <div class="background-inner"></div>
+    </div>
+    <div class="background-container background-container2">
+      <div class="background-inner"></div>
+    </div>
+    <div class="background-container background-container2">
+      <div class="background-inner"></div>
+    </div>
+
+    <div class="profile-container">
+      <p>PROFILE</p>
+      <p>Beyond the Code</p>
+      <p>
+        From small beginnings to thoughtful creations — explore what defines me.
+        Discover more in my profile.
+      </p>
+      <a href="mailto:anilkumaranusree113@gmail.com">VIEW PROFILE</a>
+    </div>
+  </article>
+
+  <!-- <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | relative_url }}">via RSS</a></p> -->
+</section>

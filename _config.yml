@@ -14,7 +14,8 @@ rss: rss
 
 show_excerpts: true
 theme: minima
-highlighter: rouge
+
+
 plugins:
   - jekyll-feed
 
@@ -35,6 +36,7 @@ exclude:
 include:
   - _pages
   - _layouts
+  - content #https://chatgpt.com/share/6790bb9a-d5e4-8007-8bf7-790c1c43a7e4
 
 disqus:
     shortname: anusree-anilkumar-blog
