@@ -21,46 +21,56 @@
 {"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Anusree Anilkumar"},"dateModified":"2025-01-22T00:00:00+00:00","datePublished":"2025-01-22T00:00:00+00:00","description":"To study basic and advanced React","headline":"React Concepts Guide","mainEntityOfPage":{"@type":"WebPage","@id":"https://anusree6154s.github.io/documentation/react"},"url":"https://anusree6154s.github.io/documentation/react"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/documentation/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://anusree6154s.github.io/documentation/feed.xml" title="Blog &amp; Docs" /></head>
-<body><header class="site-header" role="banner">
+<body><header class="site-header">
+  <div class="loader"></div>
 
-  <div class="wrapper"><a class="site-title" rel="author" href="/documentation/">Blog &amp; Docs</a><nav class="site-nav">
-        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
-        <label for="nav-trigger">
-          <span class="menu-icon">
-            <svg viewBox="0 0 18 15" width="18px" height="15px">
-              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
-            </svg>
-          </span>
-        </label>
+    <div class="wrapper"><!-- <a class="site-title" rel="author" href="/documentation/">Blog &amp; Docs</a> -->
+          <a class="site-title"  rel="author" href="/documentation/"><span>BITS</span><span> & </span><span>BYTES</span></a><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewBox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+              </svg>
+            </span>
+          </label>
+  
+          <div class="trigger">
+            <!--<a class="page-link" href="/documentation/about">About Me</a>-->
 
-        <div class="trigger"><a class="page-link" href="/documentation/about">About Me</a><a class="page-link" href="/documentation/table-of-contents">Table of Contents</a></div>
-      </nav></div>
-</header>
-<main class="page-content" aria-label="Content">
+            <a class="page-link" href="/documentation/#latest-posts">LATEST POSTS</a>
+            <a class="page-link" href="/documentation/all-posts">ALL POSTS</a>
+            <a class="page-link" href="/documentation/#projects">PROJECTS</a>
+            <a class="page-link" href="/documentation/#profile">PROFILE</a>
+            <a class="page-link" href="/documentation/#contact">CONTACT</a>
+          </div>
+        </nav></div>
+    
+  </header><main class="page-content" aria-label="Content">
       <div class="wrapper">
         <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
   
-  
+
 
   <header class="post-header">
+    
     <h1 class="post-title p-name" itemprop="name headline">React Concepts Guide</h1>
     <p class="post-meta">
       <time class="dt-published" datetime="2025-01-22T00:00:00+00:00" itemprop="datePublished">22 Jan 2025
       </time></p>
-      <p><span  class="tag-badge">
+      <p class="tag-container"><span  class="tag-badge">
             react
         </span></span>
 </p>
-  </header>
+  </header> 
 
   
-
 
   <div class="post-content e-content" itemprop="articleBody">
     <h2 id="table-of-concepts">Table of Concepts</h2>
 
 <ul>
-  <li>Basic
+  <li>Basic React
     <ol>
       <li>Core Concepts</li>
       <li>Rendering</li>
@@ -74,7 +84,7 @@
       <li>Performance Optimization (Introductory)</li>
     </ol>
   </li>
-  <li>Advanced React (Advanced Topics)
+  <li>Advanced React
     <ol>
       <li>Hooks (Advanced)</li>
       <li>State Management (Advanced)</li>
@@ -94,6 +104,272 @@
     </ol>
   </li>
 </ul>
+
+<p>Certainly! Here’s an explanation of the key React topics you mentioned. React is a JavaScript library for building user interfaces, particularly for single-page applications. Below, I’ll break down the basics of each topic:</p>
+
+<hr />
+
+<h3 id="core-concepts"><strong>Core Concepts</strong></h3>
+
+<h4 id="jsx-javascript-xml"><strong>JSX (JavaScript XML)</strong></h4>
+<ul>
+  <li>JSX is a syntax extension for JavaScript that looks similar to HTML.</li>
+  <li>It allows you to write HTML elements and components directly in your JavaScript code.</li>
+  <li>Example:
+    <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">element</span> <span class="o">=</span> <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Hello, world!<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;;</span>
+</code></pre></div>    </div>
+  </li>
+  <li>JSX gets transpiled into standard JavaScript using tools like Babel.</li>
+</ul>
+
+<h4 id="components-functional-and-class"><strong>Components (Functional and Class)</strong></h4>
+<ul>
+  <li><strong>Functional Components</strong>: These are simple JavaScript functions that return JSX.
+    <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">Greeting</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Hello, World!<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;;</span>
+</code></pre></div>    </div>
+  </li>
+  <li><strong>Class Components</strong>: ES6 classes that extend <code class="language-plaintext highlighter-rouge">React.Component</code> and include a <code class="language-plaintext highlighter-rouge">render</code> method.
+    <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">Greeting</span> <span class="kd">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
+  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Hello, World!<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h4 id="props-and-state"><strong>Props and State</strong></h4>
+<ul>
+  <li><strong>Props</strong>: Short for “properties,” they are inputs passed to components.
+    <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">Welcome</span> <span class="o">=</span> <span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Hello, <span class="si">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">name</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;;</span>
+</code></pre></div>    </div>
+  </li>
+  <li><strong>State</strong>: A component’s internal data that changes over time, used with <code class="language-plaintext highlighter-rouge">useState</code> (functional components) or <code class="language-plaintext highlighter-rouge">this.state</code> (class components).</li>
+</ul>
+
+<h4 id="component-lifecycle-class-components"><strong>Component Lifecycle (Class Components)</strong></h4>
+<p>Lifecycle methods manage what happens at different stages of a component’s life:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">componentDidMount()</code>: Runs after the component is mounted.</li>
+  <li><code class="language-plaintext highlighter-rouge">componentDidUpdate()</code>: Runs after the component updates.</li>
+  <li><code class="language-plaintext highlighter-rouge">componentWillUnmount()</code>: Runs before the component is removed.</li>
+</ul>
+
+<hr />
+
+<h3 id="rendering"><strong>Rendering</strong></h3>
+
+<h4 id="conditional-rendering"><strong>Conditional Rendering</strong></h4>
+<ul>
+  <li>Rendering elements based on conditions.
+    <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">isLoggedIn</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+<span class="k">return</span> <span class="nx">isLoggedIn</span> <span class="p">?</span> <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Welcome back!<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span> <span class="p">:</span> <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Please sign in.<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;;</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h4 id="lists-and-keys"><strong>Lists and Keys</strong></h4>
+<ul>
+  <li>Rendering a list of items with the <code class="language-plaintext highlighter-rouge">map</code> method.</li>
+  <li>Keys help React identify which items have changed.
+    <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">items</span> <span class="o">=</span> <span class="p">[</span><span class="dl">'</span><span class="s1">Item 1</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Item 2</span><span class="dl">'</span><span class="p">];</span>
+<span class="k">return</span> <span class="nx">items</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">item</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">&lt;</span><span class="nt">li</span> <span class="na">key</span><span class="p">=</span><span class="si">{</span><span class="nx">index</span><span class="si">}</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">item</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;);</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="handling-events"><strong>Handling Events</strong></h3>
+
+<h4 id="event-handling"><strong>Event Handling</strong></h4>
+<ul>
+  <li>React uses camelCase for event names (e.g., <code class="language-plaintext highlighter-rouge">onClick</code>).
+    <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">handleClick</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">Clicked!</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">&lt;</span><span class="nt">button</span> <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="nx">handleClick</span><span class="si">}</span><span class="p">&gt;</span>Click Me<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;;</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h4 id="synthetic-events"><strong>Synthetic Events</strong></h4>
+<ul>
+  <li>A cross-browser wrapper around the browser’s native event.</li>
+</ul>
+
+<hr />
+
+<h3 id="forms"><strong>Forms</strong></h3>
+
+<h4 id="controlled-vs-uncontrolled-components"><strong>Controlled vs. Uncontrolled Components</strong></h4>
+<ul>
+  <li><strong>Controlled</strong>: Component controls form input values using <code class="language-plaintext highlighter-rouge">state</code>.
+    <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="p">[</span><span class="nx">value</span><span class="p">,</span> <span class="nx">setValue</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="dl">''</span><span class="p">);</span>
+<span class="k">return</span> <span class="p">&lt;</span><span class="nt">input</span> <span class="na">value</span><span class="p">=</span><span class="si">{</span><span class="nx">value</span><span class="si">}</span> <span class="na">onChange</span><span class="p">=</span><span class="si">{</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">setValue</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">value</span><span class="p">)</span><span class="si">}</span> <span class="p">/&gt;;</span>
+</code></pre></div>    </div>
+  </li>
+  <li><strong>Uncontrolled</strong>: Use <code class="language-plaintext highlighter-rouge">ref</code> to access DOM elements directly.</li>
+</ul>
+
+<h4 id="form-handling-and-validation"><strong>Form Handling and Validation</strong></h4>
+<ul>
+  <li>Handle form submissions and validate input values programmatically.
+    <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">handleSubmit</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">value</span><span class="p">.</span><span class="nx">trim</span><span class="p">()</span> <span class="o">===</span> <span class="dl">''</span><span class="p">)</span> <span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">Value required</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">};</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="styling"><strong>Styling</strong></h3>
+
+<h4 id="inline-styles"><strong>Inline Styles</strong></h4>
+<ul>
+  <li>Define styles directly in JSX.
+    <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">style</span> <span class="o">=</span> <span class="p">{</span> <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">blue</span><span class="dl">'</span><span class="p">,</span> <span class="na">fontSize</span><span class="p">:</span> <span class="dl">'</span><span class="s1">20px</span><span class="dl">'</span> <span class="p">};</span>
+<span class="k">return</span> <span class="p">&lt;</span><span class="nt">h1</span> <span class="na">style</span><span class="p">=</span><span class="si">{</span><span class="nx">style</span><span class="si">}</span><span class="p">&gt;</span>Styled Text<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;;</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h4 id="css-modules"><strong>CSS Modules</strong></h4>
+<ul>
+  <li>Locally scoped CSS classes by importing CSS files as modules.
+    <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">/* styles.module.css */</span>
+<span class="nc">.header</span> <span class="p">{</span> <span class="nl">color</span><span class="p">:</span> <span class="no">red</span><span class="p">;</span> <span class="p">}</span>
+</code></pre></div>    </div>
+    <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">styles</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./styles.module.css</span><span class="dl">'</span><span class="p">;</span>
+<span class="p">&lt;</span><span class="nt">h1</span> <span class="na">className</span><span class="p">=</span><span class="si">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">header</span><span class="si">}</span><span class="p">&gt;</span>Hello<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;;</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h4 id="styled-components-optional"><strong>Styled-Components (Optional)</strong></h4>
+<ul>
+  <li>CSS-in-JS library to style components.
+    <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">styled</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">styled-components</span><span class="dl">'</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">StyledButton</span> <span class="o">=</span> <span class="nx">styled</span><span class="p">.</span><span class="nx">button</span><span class="s2">`background: blue; color: white;`</span><span class="p">;</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="state-management-basic"><strong>State Management (Basic)</strong></h3>
+
+<h4 id="using-the-usestate-hook"><strong>Using the <code class="language-plaintext highlighter-rouge">useState</code> Hook</strong></h4>
+<ul>
+  <li>Manages state in functional components.
+    <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="p">[</span><span class="nx">count</span><span class="p">,</span> <span class="nx">setCount</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h4 id="context-api-introduction"><strong>Context API (Introduction)</strong></h4>
+<ul>
+  <li>Provides a way to pass data through the component tree without props.
+    <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">ThemeContext</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createContext</span><span class="p">(</span><span class="dl">'</span><span class="s1">light</span><span class="dl">'</span><span class="p">);</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="routing"><strong>Routing</strong></h3>
+
+<h4 id="react-router-basics-v6"><strong>React Router Basics (v6+)</strong></h4>
+<ul>
+  <li>Define routes for navigation.
+    <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">BrowserRouter</span><span class="p">,</span> <span class="nx">Routes</span><span class="p">,</span> <span class="nx">Route</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-router-dom</span><span class="dl">'</span><span class="p">;</span>
+<span class="p">&lt;</span><span class="nc">BrowserRouter</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nc">Routes</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nc">Route</span> <span class="na">path</span><span class="p">=</span><span class="s">"/"</span> <span class="na">element</span><span class="p">=</span><span class="si">{</span><span class="p">&lt;</span><span class="nc">Home</span> <span class="p">/&gt;</span><span class="si">}</span> <span class="p">/&gt;</span>
+  <span class="p">&lt;/</span><span class="nc">Routes</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nc">BrowserRouter</span><span class="p">&gt;;</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h4 id="navigation-and-link-components"><strong>Navigation and Link Components</strong></h4>
+<ul>
+  <li>Use <code class="language-plaintext highlighter-rouge">Link</code> to navigate between routes without refreshing.
+    <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">&lt;</span><span class="nc">Link</span> <span class="na">to</span><span class="p">=</span><span class="s">"/about"</span><span class="p">&gt;</span>About<span class="p">&lt;/</span><span class="nc">Link</span><span class="p">&gt;;</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="error-handling"><strong>Error Handling</strong></h3>
+
+<h4 id="error-boundaries-class-components"><strong>Error Boundaries (Class Components)</strong></h4>
+<ul>
+  <li>Catch errors in a component tree using <code class="language-plaintext highlighter-rouge">componentDidCatch</code> and <code class="language-plaintext highlighter-rouge">getDerivedStateFromError</code>.
+    <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">ErrorBoundary</span> <span class="kd">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
+  <span class="nx">componentDidCatch</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">info</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span> <span class="p">}</span>
+  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">children</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="working-with-apis"><strong>Working with APIs</strong></h3>
+
+<h4 id="fetching-data-using-fetch-or-axios"><strong>Fetching Data (Using Fetch or Axios)</strong></h4>
+<ul>
+  <li>Use <code class="language-plaintext highlighter-rouge">fetch</code> or <code class="language-plaintext highlighter-rouge">axios</code> to get data.
+    <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">fetch</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://api.example.com/data</span><span class="dl">'</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">())</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">data</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">setData</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
+<span class="p">},</span> <span class="p">[]);</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h4 id="handling-promises-and-asyncawait"><strong>Handling Promises and Async/Await</strong></h4>
+<ul>
+  <li>Prefer async/await for cleaner asynchronous code.
+    <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">fetchData</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://api.example.com/data</span><span class="dl">'</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+  <span class="nx">setData</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+<span class="p">};</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="performance-optimization-introductory"><strong>Performance Optimization (Introductory)</strong></h3>
+
+<h4 id="reactmemo"><strong>React.memo</strong></h4>
+<ul>
+  <li>Prevents unnecessary re-renders by memoizing components.
+    <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">MemoizedComponent</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">memo</span><span class="p">(</span><span class="nx">MyComponent</span><span class="p">);</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h4 id="usecallback-and-usememo-basic-use-cases"><strong><code class="language-plaintext highlighter-rouge">useCallback</code> and <code class="language-plaintext highlighter-rouge">useMemo</code> (Basic Use Cases)</strong></h4>
+<ul>
+  <li><strong><code class="language-plaintext highlighter-rouge">useCallback</code></strong>: Memoizes functions.
+    <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">memoizedCallback</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="nx">doSomething</span><span class="p">();</span> <span class="p">},</span> <span class="p">[</span><span class="nx">dependencies</span><span class="p">]);</span>
+</code></pre></div>    </div>
+  </li>
+  <li><strong><code class="language-plaintext highlighter-rouge">useMemo</code></strong>: Memoizes values.
+    <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">computedValue</span> <span class="o">=</span> <span class="nx">useMemo</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">computeExpensiveValue</span><span class="p">(),</span> <span class="p">[</span><span class="nx">dependencies</span><span class="p">]);</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<hr />
+
+<p>This overview provides a foundation for React. Let me know if you’d like a deeper dive into any specific topic!</p>
 
   </div>
 
@@ -118,29 +394,84 @@
   <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript><a class="u-url" href="/documentation/react" hidden></a>
 </article>
       </div>
-    </main><footer class="site-footer h-card">
-  <data class="u-url" href="/documentation/"></data>
+    </main><!-- <footer class="site-footer h-card">
+    <data class="u-url" href="/documentation/"></data>
+  
+    <div class="wrapper">
+  
+      <div class="footer-col-wrapper">
+        <div class="footer-col">
+          <p class="feed-subscribe">
+            <a href="https://anusree6154s.github.io/documentation/feed.xml">
+              <svg class="svg-icon orange">
+                <path d="M12.8 16C12.8 8.978 7.022 3.2 0 3.2V0c8.777 0 16 7.223 16 16h-3.2zM2.194
+                  11.61c1.21 0 2.195.985 2.195 2.196 0 1.21-.99 2.194-2.2 2.194C.98 16 0 15.017 0
+                  13.806c0-1.21.983-2.195 2.194-2.195zM10.606
+                  16h-3.11c0-4.113-3.383-7.497-7.496-7.497v-3.11c5.818 0 10.606 4.79 10.606 10.607z"
+                />
+              </svg><span>Subscribe</span>
+            </a>
+          </p>
+          <ul class="contact-list">
+            
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p>This site is my personal documentation, made public for anyone who might find my code scribbles useful! ❤️</p>
+        </div>
+      </div>
+  
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/Anusree6154s"><svg class="svg-icon"><use xlink:href="/documentation/assets/minima-social-icons.svg#github"></use></svg> <span class="username">Anusree6154s</span></a></li><li><a href="https://www.linkedin.com/in/anusreeanilkumar1"><svg class="svg-icon"><use xlink:href="/documentation/assets/minima-social-icons.svg#linkedin"></use></svg> <span class="username">anusreeanilkumar1</span></a></li><li><a href="https://www.twitter.com/anu6154s"><svg class="svg-icon"><use xlink:href="/documentation/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">anu6154s</span></a></li><li><a href="/documentation/feed.xml"><svg class="svg-icon"><use xlink:href="/documentation/assets/minima-social-icons.svg#rss"></use></svg> <span>rss</span></a></li></ul>
+</div>
+  
+    </div>
+  
+  </footer> -->
 
-  <div class="wrapper">
-
-    <h2 class="footer-heading">Blog &amp; Docs</h2>
-
-    <div class="footer-col-wrapper">
-      <div class="footer-col footer-col-1">
-        <ul class="contact-list">
-          <li class="p-name">Anusree Anilkumar</li><li><a class="u-email" href="mailto:anilkumaranusree113@gmail.com">anilkumaranusree113@gmail.com</a></li></ul>
+<footer id="contact">
+  <section class="footer-inner">
+    <div class="contact">
+      <div class="contact-inner">
+        <p>CONTACT</p>
+        <p>
+          <span class="logo"></span><span>anilkumaranusree113@gmail.com</span>
+        </p>
+        <p><span class="logo"></span><span>+91-9699973230</span></p>
+        <p><span class="logo"></span><span>Surat, Gujarat, India</span></p>
       </div>
 
-      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/Anusree6154s"><svg class="svg-icon"><use xlink:href="/documentation/assets/minima-social-icons.svg#github"></use></svg> <span class="username">Anusree6154s</span></a></li><li><a href="https://www.linkedin.com/in/anusreeanilkumar1"><svg class="svg-icon"><use xlink:href="/documentation/assets/minima-social-icons.svg#linkedin"></use></svg> <span class="username">anusreeanilkumar1</span></a></li><li><a href="https://www.twitter.com/anu6154s"><svg class="svg-icon"><use xlink:href="/documentation/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">anu6154s</span></a></li><li><a href="/documentation/feed.xml"><svg class="svg-icon"><use xlink:href="/documentation/assets/minima-social-icons.svg#rss"></use></svg> <span>rss</span></a></li></ul>
-</div>
-
-      <div class="footer-col footer-col-3">
-        <p>This site is my personal documentation, made public for anyone who might find my code scribbles useful! ❤️</p>
+      <div class="socials">
+        <a href="https://www.linkedin.com/in/anusreeanilkumar1/"
+          ><span></span
+        ></a>
+        <a href="https://github.com/Anusree6154s"><span></span></a>
+        <a href="https://x.com/anu6154s"><span></span></a>
       </div>
     </div>
+    <div class="list">
+      <div class="sections">
+        <p>SECTIONS</p>
+        <a href="/documentation/#latest-posts">Latest Posts</a>
+        <a href="/documentation/all-posts">All Posts</a>
+        <a href="/documentation/#projects">Projects</a>
+        <a href="/documentation/#profile">Profile</a>
+      </div>
+      <div class="links">
+        <p>LINKS</p>
+        <a href="https://www.">Personal Portfolio</a>
+        <a href="https://www.crio.do/learn/portfolio/anilkumaranusree113/"
+          >Crio.Do Portfolio</a
+        >
+        <a href="https://www.">All Projects</a>
+        <a
+          href="https://drive.google.com/file/d/1Y8_r1SKBmwClHUr-pszQpEmI3XLBEbTO/view?usp=sharing"
+          >Resume</a
+        >
+      </div>
+    </div>
+  </section>
 
-  </div>
-
+  <section class="sub-footer">@ 2025 Anusree Anilkumar</section>
 </footer>
 </body>
 

@@ -21,47 +21,57 @@
 {"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Anusree Anilkumar"},"dateModified":"2025-01-19T00:00:00+00:00","datePublished":"2025-01-19T00:00:00+00:00","description":"1. Contextual Typing TypeScript uses the surrounding context to infer types, especially in scenarios like function callbacks. Example: const names = [&quot;Alice&quot;, &quot;Bob&quot;, &quot;Charlie&quot;]; // The type of `name` is inferred as string names.forEach((name) =&gt; { console.log(name.toUpperCase()); }); Here, the type of name is inferred from the array names, which is of type string[]. 2. Best Common Type When inferring the type of a more complex expression, TypeScript tries to find the best common type. Example: const mixedArray = [1, &quot;string&quot;, true]; // Type: (string | number | boolean)[] TypeScript combines all the types in the array and assigns the union type (string | number | boolean) to the mixedArray variable. 3. Type Assertions with Inference Sometimes, you may know more about a type than TypeScript does. In such cases, you can use type assertions to explicitly tell TypeScript what type to consider. Example: let someValue: unknown = &quot;Hello, world!&quot;; let stringLength = (someValue as string).length; // Type: number 4. Limitations of Type Inference Type inference works well for simple cases but may require explicit types in more complex scenarios. Example: function parseInput(input: string | number) { if (typeof input === &quot;string&quot;) { return input.toUpperCase(); // Return type inferred as string } else { return input.toFixed(2); // Return type inferred as string } } Here, TypeScript infers the return type as string, but using explicit typing can clarify intent. 5. Inference in Generics Generics also benefit from type inference, allowing you to omit the generic type when TypeScript can infer it. Example: function identity&lt;T&gt;(value: T): T { return value; } let inferredString = identity(&quot;Hello&quot;); // T inferred as string let inferredNumber = identity(42); // T inferred as number 6. Return Type Inference in Arrow Functions TypeScript can infer the return type of arrow functions based on their bodies. Example: const multiply = (a: number, b: number) =&gt; a * b; // Return type inferred as number Explicit return types are still helpful for clarity: const multiply = (a: number, b: number): number =&gt; a * b; 7. Type Inference with Destructuring TypeScript infers types even in destructuring assignments. Example: const point = { x: 10, y: 20 }; // x and y inferred as number const { x, y } = point; const colors = [&quot;red&quot;, &quot;blue&quot;, &quot;green&quot;]; const [firstColor, secondColor] = colors; // Inferred as string","headline":"More about Inferences in Typescript","mainEntityOfPage":{"@type":"WebPage","@id":"https://anusree6154s.github.io/documentation/inferences"},"url":"https://anusree6154s.github.io/documentation/inferences"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/documentation/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://anusree6154s.github.io/documentation/feed.xml" title="Blog &amp; Docs" /></head>
-<body><header class="site-header" role="banner">
+<body><header class="site-header">
+  <div class="loader"></div>
 
-  <div class="wrapper"><a class="site-title" rel="author" href="/documentation/">Blog &amp; Docs</a><nav class="site-nav">
-        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
-        <label for="nav-trigger">
-          <span class="menu-icon">
-            <svg viewBox="0 0 18 15" width="18px" height="15px">
-              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
-            </svg>
-          </span>
-        </label>
+    <div class="wrapper"><!-- <a class="site-title" rel="author" href="/documentation/">Blog &amp; Docs</a> -->
+          <a class="site-title"  rel="author" href="/documentation/"><span>BITS</span><span> & </span><span>BYTES</span></a><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewBox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+              </svg>
+            </span>
+          </label>
+  
+          <div class="trigger">
+            <!--<a class="page-link" href="/documentation/about">About Me</a>-->
 
-        <div class="trigger"><a class="page-link" href="/documentation/about">About Me</a><a class="page-link" href="/documentation/table-of-contents">Table of Contents</a></div>
-      </nav></div>
-</header>
-<main class="page-content" aria-label="Content">
+            <a class="page-link" href="/documentation/#latest-posts">LATEST POSTS</a>
+            <a class="page-link" href="/documentation/all-posts">ALL POSTS</a>
+            <a class="page-link" href="/documentation/#projects">PROJECTS</a>
+            <a class="page-link" href="/documentation/#profile">PROFILE</a>
+            <a class="page-link" href="/documentation/#contact">CONTACT</a>
+          </div>
+        </nav></div>
+    
+  </header><main class="page-content" aria-label="Content">
       <div class="wrapper">
         <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
   
-  
-  
-  <div class="parent-link">
-    This post is part of <a href="/documentation/typescript-learners-guide">Typescript learners guide</a>.
-  </div>
-  
+
 
   <header class="post-header">
+    
+      
+        <div class="parent-link">
+          This post is part of <a href="/documentation/typescript-learners-guide">Typescript learners guide</a>.
+        </div>
+    
     <h1 class="post-title p-name" itemprop="name headline">More about Inferences in Typescript</h1>
     <p class="post-meta">
       <time class="dt-published" datetime="2025-01-19T00:00:00+00:00" itemprop="datePublished">19 Jan 2025
       </time></p>
-      <p><span  class="tag-badge">
+      <p class="tag-container"><span  class="tag-badge">
             typescript
         </span><span  class="tag-badge">
             inferences
         </span></span>
 </p>
-  </header>
+  </header> 
 
   
-
 
   <div class="post-content e-content" itemprop="articleBody">
     <h3 id="1-contextual-typing"><strong>1. Contextual Typing</strong></h3>
@@ -188,29 +198,84 @@
   <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript><a class="u-url" href="/documentation/inferences" hidden></a>
 </article>
       </div>
-    </main><footer class="site-footer h-card">
-  <data class="u-url" href="/documentation/"></data>
+    </main><!-- <footer class="site-footer h-card">
+    <data class="u-url" href="/documentation/"></data>
+  
+    <div class="wrapper">
+  
+      <div class="footer-col-wrapper">
+        <div class="footer-col">
+          <p class="feed-subscribe">
+            <a href="https://anusree6154s.github.io/documentation/feed.xml">
+              <svg class="svg-icon orange">
+                <path d="M12.8 16C12.8 8.978 7.022 3.2 0 3.2V0c8.777 0 16 7.223 16 16h-3.2zM2.194
+                  11.61c1.21 0 2.195.985 2.195 2.196 0 1.21-.99 2.194-2.2 2.194C.98 16 0 15.017 0
+                  13.806c0-1.21.983-2.195 2.194-2.195zM10.606
+                  16h-3.11c0-4.113-3.383-7.497-7.496-7.497v-3.11c5.818 0 10.606 4.79 10.606 10.607z"
+                />
+              </svg><span>Subscribe</span>
+            </a>
+          </p>
+          <ul class="contact-list">
+            
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p>This site is my personal documentation, made public for anyone who might find my code scribbles useful! ❤️</p>
+        </div>
+      </div>
+  
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/Anusree6154s"><svg class="svg-icon"><use xlink:href="/documentation/assets/minima-social-icons.svg#github"></use></svg> <span class="username">Anusree6154s</span></a></li><li><a href="https://www.linkedin.com/in/anusreeanilkumar1"><svg class="svg-icon"><use xlink:href="/documentation/assets/minima-social-icons.svg#linkedin"></use></svg> <span class="username">anusreeanilkumar1</span></a></li><li><a href="https://www.twitter.com/anu6154s"><svg class="svg-icon"><use xlink:href="/documentation/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">anu6154s</span></a></li><li><a href="/documentation/feed.xml"><svg class="svg-icon"><use xlink:href="/documentation/assets/minima-social-icons.svg#rss"></use></svg> <span>rss</span></a></li></ul>
+</div>
+  
+    </div>
+  
+  </footer> -->
 
-  <div class="wrapper">
-
-    <h2 class="footer-heading">Blog &amp; Docs</h2>
-
-    <div class="footer-col-wrapper">
-      <div class="footer-col footer-col-1">
-        <ul class="contact-list">
-          <li class="p-name">Anusree Anilkumar</li><li><a class="u-email" href="mailto:anilkumaranusree113@gmail.com">anilkumaranusree113@gmail.com</a></li></ul>
+<footer id="contact">
+  <section class="footer-inner">
+    <div class="contact">
+      <div class="contact-inner">
+        <p>CONTACT</p>
+        <p>
+          <span class="logo"></span><span>anilkumaranusree113@gmail.com</span>
+        </p>
+        <p><span class="logo"></span><span>+91-9699973230</span></p>
+        <p><span class="logo"></span><span>Surat, Gujarat, India</span></p>
       </div>
 
-      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/Anusree6154s"><svg class="svg-icon"><use xlink:href="/documentation/assets/minima-social-icons.svg#github"></use></svg> <span class="username">Anusree6154s</span></a></li><li><a href="https://www.linkedin.com/in/anusreeanilkumar1"><svg class="svg-icon"><use xlink:href="/documentation/assets/minima-social-icons.svg#linkedin"></use></svg> <span class="username">anusreeanilkumar1</span></a></li><li><a href="https://www.twitter.com/anu6154s"><svg class="svg-icon"><use xlink:href="/documentation/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">anu6154s</span></a></li><li><a href="/documentation/feed.xml"><svg class="svg-icon"><use xlink:href="/documentation/assets/minima-social-icons.svg#rss"></use></svg> <span>rss</span></a></li></ul>
-</div>
-
-      <div class="footer-col footer-col-3">
-        <p>This site is my personal documentation, made public for anyone who might find my code scribbles useful! ❤️</p>
+      <div class="socials">
+        <a href="https://www.linkedin.com/in/anusreeanilkumar1/"
+          ><span></span
+        ></a>
+        <a href="https://github.com/Anusree6154s"><span></span></a>
+        <a href="https://x.com/anu6154s"><span></span></a>
       </div>
     </div>
+    <div class="list">
+      <div class="sections">
+        <p>SECTIONS</p>
+        <a href="/documentation/#latest-posts">Latest Posts</a>
+        <a href="/documentation/all-posts">All Posts</a>
+        <a href="/documentation/#projects">Projects</a>
+        <a href="/documentation/#profile">Profile</a>
+      </div>
+      <div class="links">
+        <p>LINKS</p>
+        <a href="https://www.">Personal Portfolio</a>
+        <a href="https://www.crio.do/learn/portfolio/anilkumaranusree113/"
+          >Crio.Do Portfolio</a
+        >
+        <a href="https://www.">All Projects</a>
+        <a
+          href="https://drive.google.com/file/d/1Y8_r1SKBmwClHUr-pszQpEmI3XLBEbTO/view?usp=sharing"
+          >Resume</a
+        >
+      </div>
+    </div>
+  </section>
 
-  </div>
-
+  <section class="sub-footer">@ 2025 Anusree Anilkumar</section>
 </footer>
 </body>
 
