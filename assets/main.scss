@@ -8,6 +8,8 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/monokai.min.css");
 @import url("./css/syntax.css");
 
+
+
 @keyframes slideDown {
   0% {
     transform: translateY(-100px);
@@ -21,15 +23,15 @@
     transform: translateX(0);
   }
   100% {
-    transform: translateX(-100%);
+    transform: translateX(var(--group-move-distance));
   }
 }
 @keyframes scrolling-back {
   0% {
-    transform: translateX(-100%);
+    transform: translateX(var(--group-move-distance));
   }
   100% {
-    transform: translateX(0%);
+    transform: translateX(0%);  
   }
 }
 
@@ -314,7 +316,7 @@ body::-webkit-scrollbar-thumb {
 
         background: unset;
         padding: 0%;
-        margin-top: 0%;  
+        margin-top: 0%;
         width: auto;
         position: unset;
         justify-content: flex-start;
@@ -1203,7 +1205,7 @@ body::-webkit-scrollbar-thumb {
   align-items: center;
 
   @media (min-width: 600px) {
-    padding: 8% 10%;
+    padding: 12% 10%;
   }
 
   @media (min-width: 1300px) {
@@ -1332,7 +1334,7 @@ body::-webkit-scrollbar-thumb {
     gap: 10px;
     position: relative;
     overflow: hidden;
-    height: 75vh;
+    height: 300px;
 
     p {
       animation: slide-in 1s ease forwards, fade-in 1s ease forwards;
@@ -1743,16 +1745,31 @@ pre,
   padding: 0px;
 }
 
+:root {
+  --number-of-cards: 3; //edit these as you add more projects to carousel
+  --width-of-cards: 300px;
+  --margin-right-width: 20px;
+  --total-card-width: 320px; //calc(var(--width-of-cards)+var(--margin-right-width))
+  --group-width: 1920px; //calc(2 * var(--number-of-cards) * var(--total-card-width))
+  --group-move-distance: -960px; //calc(var(--number-of-cards) * var(--total-card-width))
+}  
+
+// $number-of-cards: 3; //edit these as you add more projects to carousel
+// $width-of-cards: 300px;
+// $margin-right-width: 20px;
+// $total-card-width: $width-of-cards + $margin-right-width;
+// $group-width: 2 * ($number-of-cards + $total-card-width);
+// $group-move-distance: $number-of-cards * $total-card-width;
+
 .carousel {
   margin: 0 auto;
   padding: 20px 0;
-  // max-width: 700px;
   width: 80%;
   overflow: hidden;
-  display: flex;
+  // display: flex;
+  // gap: 20px;
 
   .card {
-    width: 200px;
     color: white;
     border-radius: 24px;
     box-shadow: rgba(0, 0, 0, 10%) 5px 5px 20px 0;
@@ -1760,23 +1777,31 @@ pre,
     font-size: xx-large;
     justify-content: center;
     align-items: center;
-    min-height: 200px;
+    background: #ffffff17;
+    width: var(--width-of-cards);
+    aspect-ratio: 1.5 / 1;
+    border: 1px solid #ffffff36;
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+    margin-right: var(--margin-right-width);
 
-    @media (min-width: 768px) {
+    img {
       width: 100%;
-      aspect-ratio: 1 / 1;
+      height: 100%;
+      z-index: -2;
+      object-fit: contain;
     }
 
-    &:nth-child(1) {
-      background: #7958ff;
+    .sub-title {
+      font-size: 50%;
+      margin-bottom: 0px;
+      text-align: center;
     }
 
-    &:nth-child(2) {
-      background: #5d34f2;
-    }
-
-    &:nth-child(3) {
-      background: #4300da;
+    .tech-stack {
+      font-size: 30%;
+      margin-bottom: 0px;
     }
   }
 
@@ -1786,13 +1811,13 @@ pre,
 
   &:hover .group {
     animation-play-state: paused;
-  }
+  }  
 
   .group {
     display: flex;
-    gap: 20px;
-    /* Add padding to the right to create a gap between the last and first card. */
-    padding-right: 20px;
+    width: var(--group-width);
+    // width: 1920px;
+    // gap: 20px;
     will-change: transform; /* We should be nice to the browser - let it know what we're going to animate. */
     animation: scrolling 15s linear infinite;
   }
