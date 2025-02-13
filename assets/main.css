@@ -517,10 +517,10 @@ table {
   0% {
     transform: translateX(0); }
   100% {
-    transform: translateX(-100%); } }
+    transform: translateX(var(--group-move-distance)); } }
 @keyframes scrolling-back {
   0% {
-    transform: translateX(-100%); }
+    transform: translateX(var(--group-move-distance)); }
   100% {
     transform: translateX(0%); } }
 @keyframes slide-up {
@@ -1325,7 +1325,7 @@ body::-webkit-scrollbar-thumb {
   align-items: center; }
   @media (min-width: 600px) {
     .post {
-      padding: 8% 10%; } }
+      padding: 12% 10%; } }
   @media (min-width: 1300px) {
     .post {
       padding: 10% 10%; } }
@@ -1414,7 +1414,7 @@ body::-webkit-scrollbar-thumb {
   gap: 10px;
   position: relative;
   overflow: hidden;
-  height: 75vh; }
+  height: 300px; }
   .all-posts .heading p {
     animation: slide-in 1s ease forwards, fade-in 1s ease forwards;
     margin: 0px;
@@ -1704,14 +1704,20 @@ pre,
 .page-content {
   padding: 0px; }
 
+:root {
+  --number-of-cards: 3;
+  --width-of-cards: 300px;
+  --margin-right-width: 20px;
+  --total-card-width: 320px;
+  --group-width: 1920px;
+  --group-move-distance: -960px; }
+
 .carousel {
   margin: 0 auto;
   padding: 20px 0;
   width: 80%;
-  overflow: hidden;
-  display: flex; }
+  overflow: hidden; }
   .carousel .card {
-    width: 200px;
     color: white;
     border-radius: 24px;
     box-shadow: rgba(0, 0, 0, 0.1) 5px 5px 20px 0;
@@ -1719,26 +1725,33 @@ pre,
     font-size: xx-large;
     justify-content: center;
     align-items: center;
-    min-height: 200px; }
-    @media (min-width: 768px) {
-      .carousel .card {
-        width: 100%;
-        aspect-ratio: 1 / 1; } }
-    .carousel .card:nth-child(1) {
-      background: #7958ff; }
-    .carousel .card:nth-child(2) {
-      background: #5d34f2; }
-    .carousel .card:nth-child(3) {
-      background: #4300da; }
+    background: #ffffff17;
+    width: var(--width-of-cards);
+    aspect-ratio: 1.5 / 1;
+    border: 1px solid #ffffff36;
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+    margin-right: var(--margin-right-width); }
+    .carousel .card img {
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      object-fit: contain; }
+    .carousel .card .sub-title {
+      font-size: 50%;
+      margin-bottom: 0px;
+      text-align: center; }
+    .carousel .card .tech-stack {
+      font-size: 30%;
+      margin-bottom: 0px; }
   .carousel > * {
     flex: 0 0 100%; }
   .carousel:hover .group {
     animation-play-state: paused; }
   .carousel .group {
     display: flex;
-    gap: 20px;
-    /* Add padding to the right to create a gap between the last and first card. */
-    padding-right: 20px;
+    width: var(--group-width);
     will-change: transform;
     /* We should be nice to the browser - let it know what we're going to animate. */
     animation: scrolling 15s linear infinite; }
