@@ -508,83 +508,6 @@ table {
   .highlight .il {
     color: #099; }
 
-@keyframes slideDown {
-  0% {
-    transform: translateY(-100px); }
-  100% {
-    transform: translateY(100px); } }
-@keyframes scrolling {
-  0% {
-    transform: translateX(0); }
-  100% {
-    transform: translateX(var(--group-move-distance)); } }
-@keyframes scrolling-back {
-  0% {
-    transform: translateX(var(--group-move-distance)); }
-  100% {
-    transform: translateX(0%); } }
-@keyframes slide-up {
-  from {
-    transform: translateY(10px); }
-  to {
-    transform: translateY(-10px); } }
-@keyframes fade-in {
-  from {
-    opacity: 0; }
-  to {
-    opacity: 1; } }
-@keyframes slide-in {
-  from {
-    transform: translateY(10px); }
-  to {
-    transform: translateY(0px); } }
-@property --bg-angle {
-  inherits: false;
-  initial-value: 0deg;
-  syntax: "<angle>"; }
-/**
- * To animate the gradient, we set the custom property to 1 full
- * rotation. The animation starts at the default value of `0deg`.
- */
-@keyframes spin {
-  to {
-    --bg-angle: 360deg; } }
-@keyframes growBackground {
-  0% {
-    transform: scale(1); }
-  100% {
-    transform: scale(1.05);
-    /* Slight zoom effect */ } }
-@keyframes slideIn {
-  to {
-    opacity: 1;
-    transform: translateX(0); } }
-@keyframes arrow-movement1 {
-  0% {
-    opacity: 1;
-    left: 35%; }
-  100% {
-    opacity: 0;
-    left: 45%; } }
-@keyframes arrow-movement2 {
-  0% {
-    opacity: 1;
-    left: 50%; }
-  100% {
-    opacity: 0;
-    left: 60%; } }
-@keyframes arrow-movement3 {
-  0% {
-    opacity: 1;
-    left: 65%; }
-  100% {
-    opacity: 0;
-    left: 75%; } }
-@keyframes fill-progress {
-  0% {
-    width: 0%; }
-  100% {
-    width: 100%; } }
 * {
   box-sizing: border-box;
   transition: all 0.2s ease; }
@@ -823,7 +746,7 @@ body::-webkit-scrollbar-thumb {
             width: 60%; } }
         @media (min-width: 900px) {
           .home .page-landing .content p:nth-child(1) {
-            font-size: 300%;
+            font-size: 200%;
             width: 100%;
             line-height: 130%; } }
         @media (min-width: 1300px) {
@@ -841,7 +764,7 @@ body::-webkit-scrollbar-thumb {
             width: unset; } }
         @media (min-width: 900px) {
           .home .page-landing .content p:nth-child(2) {
-            font-size: 150%; } }
+            font-size: 120%; } }
         @media (min-width: 1300px) {
           .home .page-landing .content p:nth-child(2) {
             font-size: 200%; } }
@@ -852,6 +775,9 @@ body::-webkit-scrollbar-thumb {
           .home .page-landing .content p:nth-child(3) {
             width: unset; } }
         @media (min-width: 900px) {
+          .home .page-landing .content p:nth-child(3) {
+            width: 60%; } }
+        @media (min-width: 1300px) {
           .home .page-landing .content p:nth-child(3) {
             width: 70%;
             font-size: 140%; } }
@@ -870,6 +796,10 @@ body::-webkit-scrollbar-thumb {
     @media (min-width: 768px) {
       .home .page-landing .socials {
         padding: 7% 0%;
+        justify-content: flex-start; } }
+    @media (min-width: 900px) {
+      .home .page-landing .socials {
+        padding: 2% 0%;
         justify-content: flex-start; } }
     @media (min-width: 1024px) {
       .home .page-landing .socials {
@@ -893,8 +823,8 @@ body::-webkit-scrollbar-thumb {
           height: 40px; } }
       @media (min-width: 1024px) {
         .home .page-landing .socials a {
-          height: 45px;
-          padding: 1.5%; } }
+          height: 35px;
+          padding: 1%; } }
       @media (min-width: 1440px) {
         .home .page-landing .socials a {
           height: 60px; } }
@@ -1907,3 +1837,81 @@ footer .footer-inner {
   @media (min-width: 1300px) {
     .sub-footer {
       font-size: 130%; } }
+
+@keyframes slideDown {
+  0% {
+    transform: translateY(-100px); }
+  100% {
+    transform: translateY(100px); } }
+@keyframes scrolling {
+  0% {
+    transform: translateX(0); }
+  100% {
+    transform: translateX(var(--group-move-distance)); } }
+@keyframes scrolling-back {
+  0% {
+    transform: translateX(var(--group-move-distance)); }
+  100% {
+    transform: translateX(0%); } }
+@keyframes slide-up {
+  from {
+    transform: translateY(10px); }
+  to {
+    transform: translateY(-10px); } }
+@keyframes fade-in {
+  from {
+    opacity: 0; }
+  to {
+    opacity: 1; } }
+@keyframes slide-in {
+  from {
+    transform: translateY(10px); }
+  to {
+    transform: translateY(0px); } }
+@property --bg-angle {
+  inherits: false;
+  initial-value: 0deg;
+  syntax: "<angle>"; }
+/**
+ * To animate the gradient, we set the custom property to 1 full
+ * rotation. The animation starts at the default value of `0deg`.
+ */
+@keyframes spin {
+  to {
+    --bg-angle: 360deg; } }
+@keyframes growBackground {
+  0% {
+    transform: scale(1); }
+  100% {
+    transform: scale(1.05);
+    /* Slight zoom effect */ } }
+@keyframes slideIn {
+  to {
+    opacity: 1;
+    transform: translateX(0); } }
+@keyframes arrow-movement1 {
+  0% {
+    opacity: 1;
+    left: 35%; }
+  100% {
+    opacity: 0;
+    left: 45%; } }
+@keyframes arrow-movement2 {
+  0% {
+    opacity: 1;
+    left: 50%; }
+  100% {
+    opacity: 0;
+    left: 60%; } }
+@keyframes arrow-movement3 {
+  0% {
+    opacity: 1;
+    left: 65%; }
+  100% {
+    opacity: 0;
+    left: 75%; } }
+@keyframes fill-progress {
+  0% {
+    width: 0%; }
+  100% {
+    width: 100%; } }
