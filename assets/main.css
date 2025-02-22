@@ -582,10 +582,10 @@ body::-webkit-scrollbar-thumb {
         font-size: x-large; } }
     @media (min-width: 900px) {
       .site-header .site-title {
-        font-size: xx-large; } }
+        font-size: 300%; } }
     @media (min-width: 1300px) {
       .site-header .site-title {
-        font-size: 300%; } }
+        font-size: 400%; } }
     .site-header .site-title span:nth-child(1) {
       font-weight: bold !important; }
     .site-header .site-title span:nth-child(2) {
@@ -686,6 +686,9 @@ body::-webkit-scrollbar-thumb {
         transition: width 0.2s ease; }
       .site-header .site-nav .page-link:hover::after {
         width: 100%; }
+  @media (min-width: 1300px) {
+    .site-header {
+      height: 100px !important; } }
 
 .home .page-landing {
   background: linear-gradient(to bottom, transparent 90%, #101010 100%), url("./imgs/bg-pattern-2.svg") repeat, url("./imgs/header-bg.png");
