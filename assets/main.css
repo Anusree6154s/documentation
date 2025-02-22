@@ -776,7 +776,7 @@ body::-webkit-scrollbar-thumb {
             width: unset; } }
         @media (min-width: 900px) {
           .home .page-landing .content p:nth-child(3) {
-            width: 60%; } }
+            width: 40%; } }
         @media (min-width: 1300px) {
           .home .page-landing .content p:nth-child(3) {
             width: 70%;
@@ -1345,6 +1345,9 @@ body::-webkit-scrollbar-thumb {
   position: relative;
   overflow: hidden;
   height: 300px; }
+  @media (min-width: 1300px) {
+    .all-posts .heading {
+      height: 450px; } }
   .all-posts .heading p {
     animation: slide-in 1s ease forwards, fade-in 1s ease forwards;
     margin: 0px;
@@ -1395,11 +1398,11 @@ body::-webkit-scrollbar-thumb {
     transform: translate(-50%, 30%);
     opacity: 0;
     animation: fade-in 1s ease forwards;
-    animation-delay: 1s;
-    width: 50%; }
+    animation-delay: 1s; }
     @media (min-width: 1300px) {
       .all-posts .heading .background-container {
-        height: 70%; } }
+        height: 400px;
+        width: 400px; } }
   .all-posts .heading .background1 {
     height: 100%;
     left: 50%;
@@ -1677,8 +1680,6 @@ pre,
       margin-bottom: 0px; }
   .carousel > * {
     flex: 0 0 100%; }
-  .carousel:hover .group {
-    animation-play-state: paused; }
   .carousel .group {
     display: flex;
     width: var(--group-width);
