@@ -382,9 +382,9 @@ body::-webkit-scrollbar-thumb {
           }
 
           @media (min-width: 900px) {
-            width: 60%;
+            width: 40%;  
           }
-
+    
           @media (min-width: 1300px) {
             width: 70%;
             font-size: 140%;
@@ -1220,6 +1220,10 @@ body::-webkit-scrollbar-thumb {
     overflow: hidden;
     height: 300px;
 
+    @media (min-width: 1300px) {
+      height: 450px;
+    }
+
     p {
       animation: slide-in 1s ease forwards, fade-in 1s ease forwards;
       margin: 0px;
@@ -1277,18 +1281,18 @@ body::-webkit-scrollbar-thumb {
       top: unset;
       left: 50%;
       bottom: 0;
-      height: 250px;
+      height: 250px;  
       width: 250px;
       border-radius: 0px;
       right: 0%;
       transform: translate(-50%, 30%);
       opacity: 0;
       animation: fade-in 1s ease forwards;
-      animation-delay: 1s;
-      width: 50%;
+      animation-delay: 1s;  
 
       @media (min-width: 1300px) {
-        height: 70%;
+        height: 400px;
+        width: 400px;
       }
     }
 
@@ -1693,9 +1697,6 @@ pre,
     flex: 0 0 100%;
   }
 
-  &:hover .group {
-    animation-play-state: paused;
-  }  
 
   .group {
     display: flex;
