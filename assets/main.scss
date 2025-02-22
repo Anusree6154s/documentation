@@ -8,10 +8,6 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/monokai.min.css");
 @import url("./css/syntax.css");
 
-
-
-
-
 * {
   box-sizing: border-box;
   transition: all 0.2s ease;
@@ -105,11 +101,11 @@ body::-webkit-scrollbar-thumb {
     }
 
     @media (min-width: 900px) {
-      font-size: xx-large;
+      font-size: 300%;
     }
 
     @media (min-width: 1300px) {
-      font-size: 300%;
+      font-size: 400%;
     }
 
     span:nth-child(1) {
@@ -245,6 +241,10 @@ body::-webkit-scrollbar-thumb {
       }
     }
   }
+
+  @media (min-width: 1300px) {
+    height: 100px !important;
+  }  
 }
 
 // home
@@ -310,11 +310,11 @@ body::-webkit-scrollbar-thumb {
           transparent 90%
         );
       }
-      
+
       // @media (min-width: 1024px) {
-        //   width: 40%;
+      //   width: 40%;
       // }
-      
+
       p {
         margin: 0px;
         opacity: 0;
@@ -327,24 +327,24 @@ body::-webkit-scrollbar-thumb {
           font-weight: bold;
           margin-bottom: 5px;
           animation-delay: 1s;
-            
+
           @media (min-width: 320px) {
             width: 90%;
           }
-          
+
           @media (min-width: 375px) {
             width: 80%;
           }
-          
+
           @media (min-width: 768px) {
             width: 60%;
-          } 
-          
+          }
+
           @media (min-width: 900px) {
             font-size: 200%;
             width: 100%;
             line-height: 130%;
-          }    
+          }
 
           @media (min-width: 1300px) {
             font-size: 400%;
@@ -382,9 +382,9 @@ body::-webkit-scrollbar-thumb {
           }
 
           @media (min-width: 900px) {
-            width: 40%;  
+            width: 40%;
           }
-    
+
           @media (min-width: 1300px) {
             width: 70%;
             font-size: 140%;
@@ -443,7 +443,7 @@ body::-webkit-scrollbar-thumb {
         }
 
         @media (min-width: 1024px) {
-          height: 35px;  
+          height: 35px;
           padding: 1%;
         }
 
@@ -1281,14 +1281,14 @@ body::-webkit-scrollbar-thumb {
       top: unset;
       left: 50%;
       bottom: 0;
-      height: 250px;  
+      height: 250px;
       width: 250px;
       border-radius: 0px;
       right: 0%;
       transform: translate(-50%, 30%);
       opacity: 0;
       animation: fade-in 1s ease forwards;
-      animation-delay: 1s;  
+      animation-delay: 1s;
 
       @media (min-width: 1300px) {
         height: 400px;
@@ -1640,7 +1640,7 @@ pre,
   --total-card-width: 320px; //calc(var(--width-of-cards)+var(--margin-right-width))
   --group-width: 1920px; //calc(2 * var(--number-of-cards) * var(--total-card-width))
   --group-move-distance: -960px; //calc(var(--number-of-cards) * var(--total-card-width))
-}  
+}
 
 // $number-of-cards: 3; //edit these as you add more projects to carousel
 // $width-of-cards: 300px;
@@ -1696,7 +1696,6 @@ pre,
   > * {
     flex: 0 0 100%;
   }
-
 
   .group {
     display: flex;
@@ -1926,7 +1925,7 @@ footer .footer-inner {
     transform: translateX(var(--group-move-distance));
   }
   100% {
-    transform: translateX(0%);  
+    transform: translateX(0%);
   }
 }
 
