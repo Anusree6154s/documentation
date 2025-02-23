@@ -502,6 +502,10 @@ body::-webkit-scrollbar-thumb {
     margin-bottom: 5%;
 
     .post-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+        
       @media (min-width: 1300px) {
         margin-bottom: 8%;
       }

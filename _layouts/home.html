@@ -42,47 +42,47 @@ layout: default
     <ul class="post-list">
       {% assign count = 0 %} {%- for post in site.posts -%} {% unless
       post.hidden %}
-      <li>
-        <div class="post-content">
-          <!-- {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%} -->
-          <!-- {%- assign date_format_day = "%-d %b" -%} 
-{%- assign date_format_year = "%Y" -%} -->
-          <!-- <span class="post-meta"> -->
-          <!-- <span>{{ post.date | date: date_format_day }}</span>
-          <span>{{ post.date | date: date_format_year }}</span> -->
-          <!-- {{ post.date | date: date_format }} -->
-          <!-- </span> -->
-          <h3>
-            <a class="post-link" href="{{ post.url | relative_url }}">
-              {{ post.title | escape }}
-            </a>
-          </h3>
-          <p class="post-description">
-            {%- assign date_format = site.minima.date_format | default: "%b %-d,
-            %Y" -%}
-            <span class="post-meta"> {{ post.date | date: date_format }} </span>
+      <a href="{{ post.url | relative_url }}">
+        <li>
+          <div class="post-content">
+            <!-- {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%} -->
+            <!-- {%- assign date_format_day = "%-d %b" -%} 
+    {%- assign date_format_year = "%Y" -%} -->
+            <!-- <span class="post-meta"> -->
+            <!-- <span>{{ post.date | date: date_format_day }}</span>
+              <span>{{ post.date | date: date_format_year }}</span> -->
+            <!-- {{ post.date | date: date_format }} -->
+            <!-- </span> -->
+            <h3>
+              <span class="post-link"> {{ post.title | escape }} </span>
+            </h3>
+            <p class="post-description">
+              {%- assign date_format = site.minima.date_format | default: "%b
+              %-d, %Y" -%}
+              <span class="post-meta">
+                {{ post.date | date: date_format }}
+              </span>
 
-            {%- if post.tags.size>0 -%}
-            <span class="post-dot"> </span>
-            {%- for tag in post.tags -%}
-            <span class="post-tag"> {{ tag | escape }} </span>
-            {%- endfor -%} {%- endif -%}
-          </p>
+              {%- if post.tags.size>0 -%}
+              <span class="post-dot"> </span>
+              {%- for tag in post.tags -%}
+              <span class="post-tag"> {{ tag | escape }} </span>
+              {%- endfor -%} {%- endif -%}
+            </p>
 
-          {%- if site.show_excerpts -%} 
-            {{ post.excerpt }}  
-          {%- endif -%}
-        </div>
-        <div class="post-read-more">
-          <div class="arrow-container">
-            <!-- <span>Read More</span> -->
-            <!-- <span class="arrow"></span> -->
-            <div class="arrow arrow-first"></div>
-            <div class="arrow arrow-second"></div>
-            <div class="arrow arrow-third"></div>
+            {%- if site.show_excerpts -%} {{ post.excerpt }} {%- endif -%}
           </div>
-        </div>
-      </li>
+          <div class="post-read-more">
+            <div class="arrow-container">
+              <!-- <span>Read More</span> -->
+              <!-- <span class="arrow"></span> -->
+              <div class="arrow arrow-first"></div>
+              <div class="arrow arrow-second"></div>
+              <div class="arrow arrow-third"></div>
+            </div>
+          </div>
+        </li>
+      </a>  
 
       {% assign count = count | plus: 1 %} {% if count == 10 %} {% break %} {%
       endif %} {% endunless %} {%- endfor -%}
@@ -116,17 +116,13 @@ layout: default
     </div>
 
     <div class="carousel basic carousel-1">
-      <div class="group">
-      {% include group.html %} 
-      {% include group.html %} 
-    </div>
+      <div class="group">{% include group.html %} {% include group.html %}</div>
       <!-- {% include group.html %} -->
     </div>
     <div class="carousel basic carousel-2">
       <div class="group">
-      {% include group-2.html %} 
-      {% include group-2.html %}
-    </div>
+        {% include group-2.html %} {% include group-2.html %}
+      </div>
     </div>
   </article>
 
