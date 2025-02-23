@@ -1344,7 +1344,8 @@ body::-webkit-scrollbar-thumb {
       font-style: normal;
       font-family: "Figtree"; }
   .post .disqus-comments {
-    width: 80%; }
+    width: 80%;
+    margin: 0 auto; }
   .post .related-posts {
     margin-top: 20px;
     width: 100%; }
