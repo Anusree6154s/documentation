@@ -1343,6 +1343,8 @@ body::-webkit-scrollbar-thumb {
       padding: 2%;
       font-style: normal;
       font-family: "Figtree"; }
+  .post .disqus-comments {
+    width: 80%; }
 
 .all-posts .heading {
   text-align: center;
