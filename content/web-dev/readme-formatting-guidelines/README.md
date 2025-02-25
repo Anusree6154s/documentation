@@ -18,6 +18,8 @@ permalink: readme-formatting-guidelines
 
 ### **1. Formatting text**
 
+- code and results
+
 | code                                                   | result                                             |
 | ------------------------------------------------------ | -------------------------------------------------- |
 | ` **This is bold text using asterisk**`                | **This is bold text using asterisk**               |
