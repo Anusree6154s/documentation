@@ -202,11 +202,7 @@ this doesnt seem to be working anywhere. To check later</p>
     </li>
     <li><code class="language-plaintext highlighter-rouge">#0969DA</code><br />
 <code class="language-plaintext highlighter-rouge">rgb(9, 105, 218)</code><br />
-<code class="language-plaintext highlighter-rouge">hsl(212, 92%, 45%)</code>
-      <ul>
-        <li><code class="language-plaintext highlighter-rouge">rgb(9, 105, 218)</code></li>
-      </ul>
-    </li>
+<code class="language-plaintext highlighter-rouge">hsl(212, 92%, 45%)</code></li>
   </ul>
 </blockquote>
 
@@ -368,25 +364,48 @@ this doesnt seem to be working anywhere. To check later</p>
 <h3 id="24-alerts--note--warning"><strong>24. Alerts (<code class="language-plaintext highlighter-rouge">&gt; [!NOTE]</code>, <code class="language-plaintext highlighter-rouge">&gt; [!WARNING]</code>)</strong></h3>
 <ul>
   <li>
-    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gt">&gt; [!NOTE]  </span>
-<span class="gt">&gt; This is an important note.  </span>
-<span class="gt">
-&gt; [!WARNING]  </span>
-<span class="gt">&gt; This is a warning message.</span>
+    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gt"> &gt; [!NOTE]</span>
+<span class="gt"> &gt; Useful information that users should know, even when skimming content.</span>
+<span class="gt">      
+ &gt; [!TIP]</span>
+<span class="gt"> &gt; Helpful advice for doing things better or more easily.</span>
+<span class="gt">      
+ &gt; [!IMPORTANT]</span>
+<span class="gt"> &gt; Key information users need to know to achieve their goal.</span>
+<span class="gt">      
+ &gt; [!WARNING]</span>
+<span class="gt"> &gt; Urgent info that needs immediate user attention to avoid problems.</span>
+<span class="gt">      
+ &gt; [!CAUTION]</span>
+<span class="gt"> &gt; Advises about risks or negative outcomes of certain actions.</span>
 </code></pre></div>    </div>
   </li>
-  <li>
-    <blockquote>
-      <p>[!NOTE]<br />
-This is an important note.</p>
-    </blockquote>
-
-    <blockquote>
-      <p>[!WARNING]<br />
-This is a warning message.</p>
-    </blockquote>
-  </li>
 </ul>
+
+<blockquote>
+  <p>[!NOTE]
+Useful information that users should know, even when skimming content.</p>
+</blockquote>
+
+<blockquote>
+  <p>[!TIP]
+Helpful advice for doing things better or more easily.</p>
+</blockquote>
+
+<blockquote>
+  <p>[!IMPORTANT]
+Key information users need to know to achieve their goal.</p>
+</blockquote>
+
+<blockquote>
+  <p>[!WARNING]
+Urgent info that needs immediate user attention to avoid problems.</p>
+</blockquote>
+
+<blockquote>
+  <p>[!CAUTION]
+Advises about risks or negative outcomes of certain actions.</p>
+</blockquote>
 
 <h3 id="25-hide-content-using-html-comments----hidden---"><strong>25. Hide content using HTML comments (<code class="language-plaintext highlighter-rouge">&lt;!-- hidden --&gt;</code>)</strong></h3>
 <ul>
@@ -405,9 +424,509 @@ This is a warning message.</p>
   <li>Let’s rename *our-new-project* to *our-old-project*.</li>
 </ul>
 
+<p>Sure! Here’s the rewritten content in your requested format:</p>
+
+<hr />
+
+<h3 id="1-create-a-table-using-pipes--and-hyphens--">1. <strong>Create a Table using Pipes (<code class="language-plaintext highlighter-rouge">|</code>) and Hyphens (<code class="language-plaintext highlighter-rouge">-</code>)</strong></h3>
+<ul>
+  <li>
+    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code>| First Header  | Second Header |  
+| ------------- | ------------- |  
+| Content Cell  | Content Cell  |  
+| Content Cell  | Content Cell  |  
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <table>
+      <thead>
+        <tr>
+          <th>First Header</th>
+          <th>Second Header</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Content Cell</td>
+          <td>Content Cell</td>
+        </tr>
+        <tr>
+          <td>Content Cell</td>
+          <td>Content Cell</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="2-tables-do-not-require-perfect-alignment">2. <strong>Tables Do Not Require Perfect Alignment</strong></h3>
+<ul>
+  <li>
+    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code>| Command  | Description                           |  
+| ---      | ---                                   |  
+| git status | List all new or modified files       |  
+| git diff | Show file differences not yet staged |  
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <table>
+      <thead>
+        <tr>
+          <th>Command</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>git status</td>
+          <td>List all new or modified files</td>
+        </tr>
+        <tr>
+          <td>git diff</td>
+          <td>Show file differences not yet staged</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="3-use-inline-code-blocks--inside-tables">3. <strong>Use Inline Code Blocks (`) Inside Tables</strong></h3>
+<ul>
+  <li>
+    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code>| Command     | Description                                |  
+| ---        | ---                                        |  
+| <span class="sb">`git status`</span> | List all <span class="ge">*new or modified*</span> files         |  
+| <span class="sb">`git diff`</span>   | Show file differences that <span class="gs">**haven't been**</span> staged |  
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <table>
+      <thead>
+        <tr>
+          <th>Command</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code class="language-plaintext highlighter-rouge">git status</code></td>
+          <td>List all <em>new or modified</em> files</td>
+        </tr>
+        <tr>
+          <td><code class="language-plaintext highlighter-rouge">git diff</code></td>
+          <td>Show file differences that <strong>haven’t been</strong> staged</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="4-align-table-text-to-left-center-or-right">4. <strong>Align Table Text to Left, Center, or Right</strong></h3>
+<ul>
+  <li>
+    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code>| Left-aligned | Center-aligned | Right-aligned |  
+| :---        |     :---:      |          ---: |  
+| git status  | git status     | git status    |  
+| git diff    | git diff       | git diff      |  
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <table>
+      <thead>
+        <tr>
+          <th style="text-align: left">Left-aligned</th>
+          <th style="text-align: center">Center-aligned</th>
+          <th style="text-align: right">Right-aligned</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="text-align: left">git status</td>
+          <td style="text-align: center">git status</td>
+          <td style="text-align: right">git status</td>
+        </tr>
+        <tr>
+          <td style="text-align: left">git diff</td>
+          <td style="text-align: center">git diff</td>
+          <td style="text-align: right">git diff</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="5-display-a-pipe--inside-a-table-cell">5. <strong>Display a Pipe (<code class="language-plaintext highlighter-rouge">|</code>) Inside a Table Cell</strong></h3>
+<ul>
+  <li>
+    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code>| Name     | Character |  
+| ---      | ---       |  
+| Backtick | <span class="err">`</span>         |  
+| Pipe     | <span class="se">\|</span>        |  
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Character</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Backtick</td>
+          <td>`</td>
+        </tr>
+        <tr>
+          <td>Pipe</td>
+          <td>|</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
+
+<h3 id="1-create-a-collapsed-section-using-details">1. <strong>Create a Collapsed Section using <code class="language-plaintext highlighter-rouge">&lt;details&gt;</code></strong></h3>
+<ul>
+  <li>
+    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;details&gt;</span>  
+<span class="nt">&lt;summary&gt;</span>Click to expand<span class="nt">&lt;/summary&gt;</span>  
+       
+This text is hidden by default and will be revealed when clicked.  
+
+<span class="nt">&lt;/details&gt;</span>  
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <details>  
+ <summary>Click to expand</summary>  
+       
+ This text is hidden by default and will be revealed when clicked.  
+
+ </details>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="2-add-a-header-text-or-code-block-inside-a-collapsed-section">2. <strong>Add a Header, Text, or Code Block Inside a Collapsed Section</strong></h3>
+<ul>
+  <li>
+    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;details&gt;</span>  
+<span class="nt">&lt;summary&gt;</span>Tips for collapsed sections<span class="nt">&lt;/summary&gt;</span>  
+
+<span class="gu">### You can add a header  </span>
+
+You can add text within a collapsed section.  
+
+You can add an image or a code block, too.  
+
+<span class="p">```</span><span class="nl">ruby  
+</span><span class="nb">puts</span> <span class="s2">"Hello World"</span>  
+</code></pre></div>    </div>
+
+    <p>&lt;/details&gt;<br />
+```</p>
+  </li>
+  <li>
+    <details>  
+ <summary>Tips for collapsed sections</summary>  
+
+ ### You can add a header  
+
+ You can add text within a collapsed section.  
+
+ You can add an image or a code block, too.  
+
+ ```ruby  
+ puts "Hello World"  
+ ```  
+
+ </details>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="3-make-a-collapsed-section-open-by-default">3. <strong>Make a Collapsed Section Open by Default</strong></h3>
+<ul>
+  <li>
+    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;details</span> <span class="na">open</span><span class="nt">&gt;</span>  
+<span class="nt">&lt;summary&gt;</span>Always visible section<span class="nt">&lt;/summary&gt;</span>  
+
+This section starts open by default.  
+
+<span class="nt">&lt;/details&gt;</span>  
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <details open="">  
+ <summary>Always visible section</summary>  
+
+ This section starts open by default.  
+
+ </details>
+    <h3 id="1-create-a-mermaid-diagram">1. <strong>Create a Mermaid Diagram</strong></h3>
+  </li>
+  <li>
+    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">```</span><span class="nl">mermaid  
+</span><span class="sb">graph TD;  
+    A--&gt;B;  
+    A--&gt;C;  
+    B--&gt;D;  
+    C--&gt;D;  
+</span></code></pre></div>    </div>
+    <p>```</p>
+  </li>
+  <li>
+    <pre><code class="language-mermaid"> graph TD;  
+     A--&gt;B;  
+     A--&gt;C;  
+     B--&gt;D;  
+     C--&gt;D;  
+</code></pre>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="2-check-the-mermaid-version-in-use">2. <strong>Check the Mermaid Version in Use</strong></h3>
+<ul>
+  <li>
+    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">```</span><span class="nl">mermaid  
+</span><span class="sb">info  
+</span></code></pre></div>    </div>
+    <p>```</p>
+  </li>
+  <li>
+    <pre><code class="language-mermaid"> info  
+</code></pre>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="3-create-a-geojson-map">3. <strong>Create a GeoJSON Map</strong></h3>
+<ul>
+  <li>
+    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">```</span><span class="nl">geojson  
+</span><span class="sb">{  
+  "type": "FeatureCollection",  
+  "features": [  
+    {  
+      "type": "Feature",  
+      "id": 1,  
+      "properties": {  
+        "ID": 0  
+      },  
+      "geometry": {  
+        "type": "Polygon",  
+        "coordinates": [  
+          [  
+              [-90,35],  
+              [-90,30],  
+              [-85,30],  
+              [-85,35],  
+              [-90,35]  
+          ]  
+        ]  
+      }  
+    }  
+  ]  
+}  
+</span></code></pre></div>    </div>
+    <p>```</p>
+  </li>
+  <li>
+    <pre><code class="language-geojson"> {  
+   "type": "FeatureCollection",  
+   "features": [  
+     {  
+       "type": "Feature",  
+       "id": 1,  
+       "properties": {  
+         "ID": 0  
+       },  
+       "geometry": {  
+         "type": "Polygon",  
+         "coordinates": [  
+           [  
+               [-90,35],  
+               [-90,30],  
+               [-85,30],  
+               [-85,35],  
+               [-90,35]  
+           ]  
+         ]  
+       }  
+     }  
+   ]  
+ }  
+</code></pre>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="4-create-a-topojson-map">4. <strong>Create a TopoJSON Map</strong></h3>
+<ul>
+  <li>
+    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">```</span><span class="nl">topojson  
+</span><span class="sb">{  
+  "type": "Topology",  
+  "transform": {  
+    "scale": [0.0005000500050005, 0.00010001000100010001],  
+    "translate": [100, 0]  
+  },  
+  "objects": {  
+    "example": {  
+      "type": "GeometryCollection",  
+      "geometries": [  
+        {  
+          "type": "Point",  
+          "properties": {"prop0": "value0"},  
+          "coordinates": [4000, 5000]  
+        },  
+        {  
+          "type": "LineString",  
+          "properties": {"prop0": "value0", "prop1": 0},  
+          "arcs": [0]  
+        },  
+        {  
+          "type": "Polygon",  
+          "properties": {"prop0": "value0", "prop1": {"this": "that"}},  
+          "arcs": [[1]]  
+        }  
+      ]  
+    }  
+  },  
+  "arcs": [[[4000, 0], [1999, 9999], [2000, -9999], [2000, 9999]],[[0, 0], [0, 9999], [2000, 0], [0, -9999], [-2000, 0]]]  
+}  
+</span></code></pre></div>    </div>
+    <p>```</p>
+  </li>
+  <li>
+    <pre><code class="language-topojson"> {  
+   "type": "Topology",  
+   "transform": {  
+     "scale": [0.0005000500050005, 0.00010001000100010001],  
+     "translate": [100, 0]  
+   },  
+   "objects": {  
+     "example": {  
+       "type": "GeometryCollection",  
+       "geometries": [  
+         {  
+           "type": "Point",  
+           "properties": {"prop0": "value0"},  
+           "coordinates": [4000, 5000]  
+         },  
+         {  
+           "type": "LineString",  
+           "properties": {"prop0": "value0", "prop1": 0},  
+           "arcs": [0]  
+         },  
+         {  
+           "type": "Polygon",  
+           "properties": {"prop0": "value0", "prop1": {"this": "that"}},  
+           "arcs": [[1]]  
+         }  
+       ]  
+     }  
+   },  
+   "arcs": [[[4000, 0], [1999, 9999], [2000, -9999], [2000, 9999]],[[0, 0], [0, 9999], [2000, 0], [0, -9999], [-2000, 0]]]  
+ }  
+</code></pre>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="5-create-an-ascii-stl-3d-model">5. <strong>Create an ASCII STL 3D Model</strong></h3>
+<ul>
+  <li>
+    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">```</span><span class="nl">stl  
+</span><span class="sb">solid cube_corner  
+  facet normal 0.0 -1.0 0.0  
+    outer loop  
+      vertex 0.0 0.0 0.0  
+      vertex 1.0 0.0 0.0  
+      vertex 0.0 0.0 1.0  
+    endloop  
+  endfacet  
+  facet normal 0.0 0.0 -1.0  
+    outer loop  
+      vertex 0.0 0.0 0.0  
+      vertex 0.0 1.0 0.0  
+      vertex 1.0 0.0 0.0  
+    endloop  
+  endfacet  
+  facet normal -1.0 0.0 0.0  
+    outer loop  
+      vertex 0.0 0.0 0.0  
+      vertex 0.0 0.0 1.0  
+      vertex 0.0 1.0 0.0  
+    endloop  
+  endfacet  
+  facet normal 0.577 0.577 0.577  
+    outer loop  
+      vertex 1.0 0.0 0.0  
+      vertex 0.0 1.0 0.0  
+      vertex 0.0 0.0 1.0  
+    endloop  
+  endfacet  
+endsolid  
+</span></code></pre></div>    </div>
+    <p>```</p>
+  </li>
+  <li>
+    <pre><code class="language-stl"> solid cube_corner  
+   facet normal 0.0 -1.0 0.0  
+     outer loop  
+       vertex 0.0 0.0 0.0  
+       vertex 1.0 0.0 0.0  
+       vertex 0.0 0.0 1.0  
+     endloop  
+   endfacet  
+   facet normal 0.0 0.0 -1.0  
+     outer loop  
+       vertex 0.0 0.0 0.0  
+       vertex 0.0 1.0 0.0  
+       vertex 1.0 0.0 0.0  
+     endloop  
+   endfacet  
+   facet normal -1.0 0.0 0.0  
+     outer loop  
+       vertex 0.0 0.0 0.0  
+       vertex 0.0 0.0 1.0  
+       vertex 0.0 1.0 0.0  
+     endloop  
+   endfacet  
+   facet normal 0.577 0.577 0.577  
+     outer loop  
+       vertex 1.0 0.0 0.0  
+       vertex 0.0 1.0 0.0  
+       vertex 0.0 0.0 1.0  
+     endloop  
+   endfacet  
+ endsolid  
+</code></pre>
+  </li>
+</ul>
+
 <h2 id="credits">Credits</h2>
 <ol>
   <li>https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax</li>
+  <li>https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting</li>
+  <li></li>
 </ol>
 <div class="footnotes" role="doc-endnotes">
   <ol>
