@@ -72,92 +72,36 @@
 </ul>
 
 <h2 id="github-readme-formatting-styles-put-together-by-me">Github readme formatting styles put together by me</h2>
+<blockquote>
+  <p>[!WARNING]
+Many of the styles here dont work during developemnt. Instead only on github. And this needs to be viewed in github to see the right results:</p>
+</blockquote>
 
-<h3 id="1-bolden-words-using-asterisks-bold-or-__bold__"><strong>1. Bolden words using asterisks (<code class="language-plaintext highlighter-rouge">**bold**</code> or <code class="language-plaintext highlighter-rouge">__bold__</code>)</strong></h3>
+<h3 id="1-formatting-text"><strong>1. Formatting text</strong></h3>
+<p>|code|result|
+|–|–|
+|<code class="language-plaintext highlighter-rouge">**This is bold text using asterisk**</code>|<strong>This is bold text using asterisk</strong>|
+|<code class="language-plaintext highlighter-rouge"> __This is bold text using underscore__</code>| <strong>This is bold text using underscore</strong>|
+|<code class="language-plaintext highlighter-rouge">  *This text is italicized using asterisk*</code>|  <em>This text is italicized using asterisk</em>|
+|<code class="language-plaintext highlighter-rouge"> _This text is italicized using underscore_</code>| <em>This text is italicized using underscore</em>|
+|<code class="language-plaintext highlighter-rouge">~~This is text strikethrouh using tilde~~</code>|<del>This is text strikethrouh using tilde</del>|
+|<code class="language-plaintext highlighter-rouge"> **This text is _itallic_ and bold in same phrase**</code>| <strong>This text is <em>itallic</em> and bold in same phrase</strong>|
+|<code class="language-plaintext highlighter-rouge">***This text is _itallic_ and bold combined***</code>|<strong><em>This text is _itallic_ and bold combined</em></strong>|
+|<code class="language-plaintext highlighter-rouge">This is a &lt;sub&gt;subscript&lt;/sub&gt; text</code>|This is a <sub>subscript</sub> text|
+|<code class="language-plaintext highlighter-rouge"> This is a &lt;sup&gt;superscript&lt;/sup&gt; text</code>| This is a <sup>superscript</sup> text<em>|
+|<code class="language-plaintext highlighter-rouge"> This is an &lt;ins&gt;underlined&lt;/ins&gt; text</code>| This is an <ins>underlined</ins> text|
+|<code class="language-plaintext highlighter-rouge"> This is `inline` code using backticks</code>| This is <code class="language-plaintext highlighter-rouge">inline</code> code using backticks|
+|<code class="language-plaintext highlighter-rouge">***This text is _itallic_ and bold combined***</code>|</em><strong>This text is <em>itallic</em> and bold combined</strong><em>|
+|<code class="language-plaintext highlighter-rouge">***This text is _itallic_ and bold combined***</code>|</em><strong>This text is <em>itallic</em> and bold combined</strong><em>|
+|<code class="language-plaintext highlighter-rouge">***This text is _itallic_ and bold combined***</code>|</em><strong>This text is <em>itallic</em> and bold combined</strong><em>|
+|<code class="language-plaintext highlighter-rouge">***This text is _itallic_ and bold combined***</code>|</em><strong>This text is <em>itallic</em> and bold combined</strong>*|</p>
+
 <ul>
   <li>
-    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gs">**This is bold text**</span>
-<span class="gs">__This is bold text__</span>
+    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gt">&gt; This is a quote using blockquotes</span>
 </code></pre></div>    </div>
-  </li>
-  <li><strong>This is bold text</strong><br />
-<strong>This is bold text</strong></li>
-</ul>
-
-<h3 id="2-italicize-words-using-asterisks-italic-or-_italic_"><strong>2. Italicize words using asterisks (<code class="language-plaintext highlighter-rouge">*italic*</code> or <code class="language-plaintext highlighter-rouge">_italic_</code>)</strong></h3>
-<ul>
-  <li>
-    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="ge">*This text is italicized*</span>
-<span class="ge">_This text is italicized_</span>
-</code></pre></div>    </div>
-  </li>
-  <li><em>This text is italicized</em><br />
-<em>This text is italicized</em></li>
-</ul>
-
-<h3 id="3-strikethrough-text-using-tildes-strikethrough"><strong>3. Strikethrough text using tildes (<code class="language-plaintext highlighter-rouge">~~strikethrough~~</code>)</strong></h3>
-<ul>
-  <li>
-    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~~This was mistaken text~~
-</code></pre></div>    </div>
-  </li>
-  <li><del>This was mistaken text</del></li>
-</ul>
-
-<h3 id="4-combine-bold-and-italic-bold-_italic_"><strong>4. Combine bold and italic (<code class="language-plaintext highlighter-rouge">**bold _italic_**</code>)</strong></h3>
-<ul>
-  <li>
-    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gs">**This text is _extremely_ important**</span>
-</code></pre></div>    </div>
-  </li>
-  <li><strong>This text is <em>extremely</em> important</strong></li>
-</ul>
-
-<h3 id="5-apply-both-bold-and-italic-to-text-bold-italic"><strong>5. Apply both bold and italic to text (<code class="language-plaintext highlighter-rouge">***bold italic***</code>)</strong></h3>
-<ul>
-  <li>
-    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gs">***All this text is important**</span><span class="err">*</span>
-</code></pre></div>    </div>
-  </li>
-  <li><strong><em>All this text is important</em></strong></li>
-</ul>
-
-<h3 id="6-add-subscript-text-subsubscriptsub"><strong>6. Add subscript text (<code class="language-plaintext highlighter-rouge">&lt;sub&gt;subscript&lt;/sub&gt;</code>)</strong></h3>
-<ul>
-  <li>
-    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code>This is a <span class="nt">&lt;sub&gt;</span>subscript<span class="nt">&lt;/sub&gt;</span> text
-</code></pre></div>    </div>
-  </li>
-  <li>This is a <sub>subscript</sub> text</li>
-</ul>
-
-<h3 id="7-add-superscript-text-supsuperscriptsup"><strong>7. Add superscript text (<code class="language-plaintext highlighter-rouge">&lt;sup&gt;superscript&lt;/sup&gt;</code>)</strong></h3>
-<ul>
-  <li>
-    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code>This is a <span class="nt">&lt;sup&gt;</span>superscript<span class="nt">&lt;/sup&gt;</span> text
-</code></pre></div>    </div>
-  </li>
-  <li>This is a <sup>superscript</sup> text</li>
-</ul>
-
-<h3 id="8-underline-text-insunderlineins"><strong>8. Underline text (<code class="language-plaintext highlighter-rouge">&lt;ins&gt;underline&lt;/ins&gt;</code>)</strong></h3>
-<ul>
-  <li>
-    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code>This is an <span class="nt">&lt;ins&gt;</span>underlined<span class="nt">&lt;/ins&gt;</span> text
-</code></pre></div>    </div>
-  </li>
-  <li>This is an <ins>underlined</ins> text</li>
-</ul>
-
-<h3 id="9-quote-text-using--blockquotes"><strong>9. Quote text using <code class="language-plaintext highlighter-rouge">&gt;</code> (blockquotes)</strong></h3>
-<ul>
-  <li>
-    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gt">&gt; This is a quote</span>
-</code></pre></div>    </div>
-  </li>
-  <li>
     <blockquote>
-      <p>This is a quote</p>
+      <p>This is a quote using blockquotes</p>
     </blockquote>
   </li>
 </ul>
@@ -347,19 +291,30 @@ this doesnt seem to be working anywhere. To check later</p>
 </ul>
 
 <h3 id="23-add-footnotes-1"><strong>23. Add footnotes (<code class="language-plaintext highlighter-rouge">[^1]</code>)</strong></h3>
-<ul>
-  <li>It doesnt work in preview. It can only be viewed directly on github</li>
-  <li>
-    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Here is a footnote[^1].  
-      
-<span class="p">[</span><span class="ss">^1</span><span class="p">]:</span> <span class="sx">This</span> is the footnote text.
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <p>Here is a footnote<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote" rel="footnote">1</a></sup>.</p>
 
+<ul>
+  <li>```md
+    <ul>
+      <li>Here is a simple footnote<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote" rel="footnote">1</a></sup>.</li>
+      <li>A footnote can also have multiple lines<sup id="fnref:2" role="doc-noteref"><a href="#fn:2" class="footnote" rel="footnote">2</a></sup>.</li>
+      <li>You can also use words, to fit your writing style more closely[^note].</li>
+    </ul>
+
+    <p>This allows you to have a footnote with multiple lines.
+ [^note]:
+     Named footnotes will still render with numbers instead of the text but allow easier identification and linking.<br />
+     This footnote also has been made with a different syntax using 4 spaces for new lines.
+```</p>
   </li>
+  <li>Here is a simple footnote<sup id="fnref:1:1" role="doc-noteref"><a href="#fn:1" class="footnote" rel="footnote">1</a></sup>.</li>
+  <li>A footnote can also have multiple lines<sup id="fnref:2:1" role="doc-noteref"><a href="#fn:2" class="footnote" rel="footnote">2</a></sup>.</li>
+  <li>You can also use words, to fit your writing style more closely[^note].</li>
 </ul>
+
+<p>This allows you to have a footnote with multiple lines.
+[^note]:
+    Named footnotes will still render with numbers instead of the text but allow easier identification and linking.<br />
+    This footnote also has been made with a different syntax using 4 spaces for new lines.</p>
 
 <h3 id="24-alerts--note--warning"><strong>24. Alerts (<code class="language-plaintext highlighter-rouge">&gt; [!NOTE]</code>, <code class="language-plaintext highlighter-rouge">&gt; [!WARNING]</code>)</strong></h3>
 <ul>
@@ -922,16 +877,221 @@ endsolid
   </li>
 </ul>
 
+<h3 id="1-write-inline-mathematical-expressions-using-">1. <strong>Write Inline Mathematical Expressions Using <code class="language-plaintext highlighter-rouge">$</code></strong></h3>
+<ul>
+  <li>
+    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code>This sentence uses <span class="sb">`$`</span> delimiters to show math inline: $<span class="se">\s</span>qrt{3x-1}+(1+x)^2$  
+</code></pre></div>    </div>
+  </li>
+  <li>This sentence uses <code class="language-plaintext highlighter-rouge">$</code> delimiters to show math inline: $\sqrt{3x-1}+(1+x)^2$</li>
+</ul>
+
+<hr />
+
+<h3 id="2-write-inline-mathematical-expressions-using--with-backticks">2. <strong>Write Inline Mathematical Expressions Using <code class="language-plaintext highlighter-rouge">$</code> with Backticks</strong></h3>
+<ul>
+  <li>
+    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code>This sentence uses $<span class="se">\`</span> and <span class="se">\`</span>$ delimiters to show math inline: $<span class="sb">`\sqrt{3x-1}+(1+x)^2`</span>$  
+</code></pre></div>    </div>
+  </li>
+  <li>This sentence uses $` and `$ delimiters to show math inline: $<code class="language-plaintext highlighter-rouge">\sqrt{3x-1}+(1+x)^2</code>$</li>
+</ul>
+
+<hr />
+
+<h3 id="3-write-block-mathematical-expressions-using-">3. <strong>Write Block Mathematical Expressions Using <code class="language-plaintext highlighter-rouge">$$</code></strong></h3>
+<ul>
+  <li>
+    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gs">**The Cauchy-Schwarz Inequality**</span><span class="se">\ </span> 
+$$<span class="se">\l</span>eft( <span class="se">\s</span>um_{k=1}^n a_k b_k <span class="se">\r</span>ight)^2 <span class="se">\l</span>eq <span class="se">\l</span>eft( <span class="se">\s</span>um_{k=1}^n a_k^2 <span class="se">\r</span>ight) <span class="se">\l</span>eft( <span class="se">\s</span>um_{k=1}^n b_k^2 <span class="se">\r</span>ight)$$  
+</code></pre></div>    </div>
+  </li>
+  <li><strong>The Cauchy-Schwarz Inequality</strong>\<br />
+ \(\left( \sum_{k=1}^n a_k b_k \right)^2 \leq \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right)\)</li>
+</ul>
+
+<hr />
+
+<h3 id="4-write-block-mathematical-expressions-using-math-code-blocks">4. <strong>Write Block Mathematical Expressions Using <code class="language-plaintext highlighter-rouge">math</code> Code Blocks</strong></h3>
+<ul>
+  <li>
+    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gs">**The Cauchy-Schwarz Inequality**</span>  
+<span class="p">```</span><span class="nl">math  
+</span><span class="sb">\left( \sum_{k=1}^n a_k b_k \right)^2 \leq \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right)  
+</span></code></pre></div>    </div>
+    <p>```</p>
+  </li>
+  <li><strong>The Cauchy-Schwarz Inequality</strong>
+    <pre><code class="language-math"> \left( \sum_{k=1}^n a_k b_k \right)^2 \leq \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right)  
+</code></pre>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="5-display-a-dollar-sign-inside-a-math-expression-using-">5. <strong>Display a Dollar Sign Inside a Math Expression Using <code class="language-plaintext highlighter-rouge">\</code></strong></h3>
+<ul>
+  <li>
+    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code>This expression uses <span class="sb">`\$`</span> to display a dollar sign: $<span class="sb">`\sqrt{\$4}`</span>$  
+</code></pre></div>    </div>
+  </li>
+  <li>This expression uses <code class="language-plaintext highlighter-rouge">\$</code> to display a dollar sign: $<code class="language-plaintext highlighter-rouge">\sqrt{\$4}</code>$</li>
+</ul>
+
+<hr />
+
+<h3 id="6-display-a-dollar-sign-outside-a-math-expression-using-span">6. <strong>Display a Dollar Sign Outside a Math Expression Using <code class="language-plaintext highlighter-rouge">&lt;span&gt;</code></strong></h3>
+<ul>
+  <li>
+    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code>To split <span class="nt">&lt;span&gt;</span>$<span class="nt">&lt;/span&gt;</span>100 in half, we calculate $100/2$  
+</code></pre></div>    </div>
+  </li>
+  <li>To split <span>$</span>100 in half, we calculate $100/2$</li>
+</ul>
+
+<h3 id="1-autolink-standard-urls">1. <strong>Autolink Standard URLs</strong></h3>
+<ul>
+  <li>
+    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Visit https://github.com  
+</code></pre></div>    </div>
+  </li>
+  <li>Visit https://github.com</li>
+</ul>
+
+<hr />
+
+<h3 id="2-autolink-issues-and-pull-requests-using-full-url">2. <strong>Autolink Issues and Pull Requests Using Full URL</strong></h3>
+<ul>
+  <li>
+    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://github.com/jlord/sheetsee.js/issues/26  
+</code></pre></div>    </div>
+  </li>
+  <li>https://github.com/jlord/sheetsee.js/issues/26</li>
+</ul>
+
+<hr />
+
+<h3 id="3-autolink-issues-and-pull-requests-using--and-issue-number">3. <strong>Autolink Issues and Pull Requests Using <code class="language-plaintext highlighter-rouge">#</code> and Issue Number</strong></h3>
+<ul>
+  <li>
+    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">#26  </span>
+</code></pre></div>    </div>
+  </li>
+  <li>#26</li>
+</ul>
+
+<hr />
+
+<h3 id="4-autolink-issues-and-pull-requests-using-gh--prefix">4. <strong>Autolink Issues and Pull Requests Using <code class="language-plaintext highlighter-rouge">GH-</code> Prefix</strong></h3>
+<ul>
+  <li>
+    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GH-26  
+</code></pre></div>    </div>
+  </li>
+  <li>GH-26</li>
+</ul>
+
+<hr />
+
+<h3 id="5-autolink-issues-and-pull-requests-using-usernamerepositoryissuenumber">5. <strong>Autolink Issues and Pull Requests Using <code class="language-plaintext highlighter-rouge">Username/Repository#IssueNumber</code></strong></h3>
+<ul>
+  <li>
+    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jlord/sheetsee.js#26  
+</code></pre></div>    </div>
+  </li>
+  <li>jlord/sheetsee.js#26</li>
+</ul>
+
+<hr />
+
+<h3 id="6-autolink-issues-and-pull-requests-using-orgnamerepositoryissuenumber">6. <strong>Autolink Issues and Pull Requests Using <code class="language-plaintext highlighter-rouge">OrgName/Repository#IssueNumber</code></strong></h3>
+<ul>
+  <li>
+    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code>github-linguist/linguist#4039  
+</code></pre></div>    </div>
+  </li>
+  <li>github-linguist/linguist#4039</li>
+</ul>
+
+<hr />
+
+<h3 id="7-autolink-labels-from-the-same-repository">7. <strong>Autolink Labels from the Same Repository</strong></h3>
+<ul>
+  <li>
+    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://github.com/github/docs/labels/enhancement  
+</code></pre></div>    </div>
+  </li>
+  <li>https://github.com/github/docs/labels/enhancement</li>
+</ul>
+
+<hr />
+
+<h3 id="8-autolink-commit-shas-using-full-commit-url">8. <strong>Autolink Commit SHAs Using Full Commit URL</strong></h3>
+<ul>
+  <li>
+    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://github.com/jlord/sheetsee.js/commit/a5c3785ed8d6a35868bc169f07e40e889087fd2e  
+</code></pre></div>    </div>
+  </li>
+  <li>https://github.com/jlord/sheetsee.js/commit/a5c3785ed8d6a35868bc169f07e40e889087fd2e</li>
+</ul>
+
+<hr />
+
+<h3 id="9-autolink-commit-shas-using-short-sha">9. <strong>Autolink Commit SHAs Using Short SHA</strong></h3>
+<ul>
+  <li>
+    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code>a5c3785  
+</code></pre></div>    </div>
+  </li>
+  <li>a5c3785</li>
+</ul>
+
+<hr />
+
+<h3 id="10-autolink-commit-shas-using-usersha-format">10. <strong>Autolink Commit SHAs Using <code class="language-plaintext highlighter-rouge">User@SHA</code> Format</strong></h3>
+<ul>
+  <li>
+    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jlord@a5c3785  
+</code></pre></div>    </div>
+  </li>
+  <li>jlord@a5c3785</li>
+</ul>
+
+<hr />
+
+<h3 id="11-autolink-commit-shas-using-usernamerepositorysha-format">11. <strong>Autolink Commit SHAs Using <code class="language-plaintext highlighter-rouge">Username/Repository@SHA</code> Format</strong></h3>
+<ul>
+  <li>
+    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jlord/sheetsee.js@a5c3785  
+</code></pre></div>    </div>
+  </li>
+  <li>jlord/sheetsee.js@a5c3785</li>
+</ul>
+
+<hr />
+
+<h3 id="12-autolink-external-resources-with-custom-autolinks">12. <strong>Autolink External Resources with Custom Autolinks</strong></h3>
+<ul>
+  <li>
+    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Example: JIRA-123  
+</code></pre></div>    </div>
+  </li>
+  <li>Example: JIRA-123</li>
+</ul>
+
 <h2 id="credits">Credits</h2>
 <ol>
   <li>https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax</li>
   <li>https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting</li>
-  <li></li>
+  <li>https://github.com/adam-p/markdown-here/wiki/markdown-cheatsheet</li>
 </ol>
 <div class="footnotes" role="doc-endnotes">
   <ol>
     <li id="fn:1" role="doc-endnote">
-      <p>This is the footnote text. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+      <p>My reference. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a> <a href="#fnref:1:1" class="reversefootnote" role="doc-backlink">&#8617;<sup>2</sup></a></p>
+    </li>
+    <li id="fn:2" role="doc-endnote">
+      <p>Every new line should be prefixed with 2 spaces. <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a> <a href="#fnref:2:1" class="reversefootnote" role="doc-backlink">&#8617;<sup>2</sup></a></p>
     </li>
   </ol>
 </div>
