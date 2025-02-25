@@ -12,81 +12,36 @@ permalink: readme-formatting-guidelines
 
 
 ## Github readme formatting styles put together by me
+> [!WARNING]
+> Many of the styles here dont work during developemnt. Instead only on github. And this needs to be viewed in github to see the right results: 
 
-
-### **1. Bolden words using asterisks (`**bold**` or `__bold__`)**  
-   - ```md
-     **This is bold text**
-     __This is bold text__
-     ```  
-   - **This is bold text**  
-     __This is bold text__  
-
-
-
-### **2. Italicize words using asterisks (`*italic*` or `_italic_`)**  
-   - ```md
-     *This text is italicized*
-     _This text is italicized_
-     ```  
-   - *This text is italicized*  
-     _This text is italicized_  
-
-
-
-### **3. Strikethrough text using tildes (`~~strikethrough~~`)**  
-   - ```md
-     ~~This was mistaken text~~
-     ```  
-   - ~~This was mistaken text~~  
+### **1. Formatting text**  
+|code|result|
+|--|--|
+|``` **This is bold text using asterisk**```|**This is bold text using asterisk**|
+|```  __This is bold text using underscore__```| __This is bold text using underscore__|
+|```   *This text is italicized using asterisk*```|  *This text is italicized using asterisk*|
+|```  _This text is italicized using underscore_```| _This text is italicized using underscore_|
+|``` ~~This is text strikethrouh using tilde~~```|~~This is text strikethrouh using tilde~~|
+|```  **This text is _itallic_ and bold in same phrase**```| **This text is _itallic_ and bold in same phrase**|
+|``` ***This text is _itallic_ and bold combined***```|***This text is _itallic_ and bold combined***|
+|``` This is a <sub>subscript</sub> text```|This is a <sub>subscript</sub> text|
+|```  This is a <sup>superscript</sup> text```| This is a <sup>superscript</sup> text*|
+|```  This is an <ins>underlined</ins> text```| This is an <ins>underlined</ins> text|
+|```  This is `inline` code using backticks```| This is `inline` code using backticks|
+|``` ***This text is _itallic_ and bold combined***```|***This text is _itallic_ and bold combined***|
+|``` ***This text is _itallic_ and bold combined***```|***This text is _itallic_ and bold combined***|
+|``` ***This text is _itallic_ and bold combined***```|***This text is _itallic_ and bold combined***|
+|``` ***This text is _itallic_ and bold combined***```|***This text is _itallic_ and bold combined***|
 
 
 
-### **4. Combine bold and italic (`**bold _italic_**`)**  
-   - ```md
-     **This text is _extremely_ important**
-     ```  
-   - **This text is _extremely_ important**  
 
+- ```md
+  > This is a quote using blockquotes
+  ```  
+> This is a quote using blockquotes
 
-
-### **5. Apply both bold and italic to text (`***bold italic***`)**  
-   - ```md
-     ***All this text is important***
-     ```  
-   - ***All this text is important***  
-
-
-
-### **6. Add subscript text (`<sub>subscript</sub>`)**  
-   - ```md
-     This is a <sub>subscript</sub> text
-     ```  
-   - This is a <sub>subscript</sub> text  
-
-
-
-### **7. Add superscript text (`<sup>superscript</sup>`)**  
-   - ```md
-     This is a <sup>superscript</sup> text
-     ```  
-   - This is a <sup>superscript</sup> text  
-
-
-
-### **8. Underline text (`<ins>underline</ins>`)**  
-   - ```md
-     This is an <ins>underlined</ins> text
-     ```  
-   - This is an <ins>underlined</ins> text  
-
-
-
-### **9. Quote text using `>` (blockquotes)**  
-   - ```md
-     > This is a quote
-     ```  
-   - > This is a quote  
 
 
 
@@ -229,15 +184,29 @@ permalink: readme-formatting-guidelines
 
 
 ### **23. Add footnotes (`[^1]`)**  
-   - It doesnt work in preview. It can only be viewed directly on github
+   
    - ```md
-     Here is a footnote[^1].  
+     - Here is a simple footnote[^1].
+     - A footnote can also have multiple lines[^2].   
+     - You can also use words, to fit your writing style more closely[^note].
       
-     [^1]: This is the footnote text.
+      [^1]: My reference.
+      [^2]: Every new line should be prefixed with 2 spaces.  
+        This allows you to have a footnote with multiple lines.
+      [^note]:
+          Named footnotes will still render with numbers instead of the text but allow easier identification and linking.  
+          This footnote also has been made with a different syntax using 4 spaces for new lines.
      ```  
-   - Here is a footnote[^1].  
+- Here is a simple footnote[^1].
+- A footnote can also have multiple lines[^2].  
+- You can also use words, to fit your writing style more closely[^note].
 
-     [^1]: This is the footnote text.  
+[^1]: My reference.
+[^2]: Every new line should be prefixed with 2 spaces.  
+  This allows you to have a footnote with multiple lines.
+[^note]:
+    Named footnotes will still render with numbers instead of the text but allow easier identification and linking.  
+    This footnote also has been made with a different syntax using 4 spaces for new lines.
 
 
      
@@ -672,10 +641,176 @@ Sure! Here’s the rewritten content in your requested format:
      endsolid  
      ```  
 
+### 1. **Write Inline Mathematical Expressions Using `$`**  
+   - ```md  
+     This sentence uses `$` delimiters to show math inline: $\sqrt{3x-1}+(1+x)^2$  
+     ```  
+   -  
+     This sentence uses `$` delimiters to show math inline: $\sqrt{3x-1}+(1+x)^2$  
+
+---
+
+### 2. **Write Inline Mathematical Expressions Using `$` with Backticks**  
+   - ```md  
+     This sentence uses $\` and \`$ delimiters to show math inline: $`\sqrt{3x-1}+(1+x)^2`$  
+     ```  
+   -  
+     This sentence uses $\` and \`$ delimiters to show math inline: $`\sqrt{3x-1}+(1+x)^2`$  
+
+---
+
+### 3. **Write Block Mathematical Expressions Using `$$`**  
+   - ```md  
+     **The Cauchy-Schwarz Inequality**\  
+     $$\left( \sum_{k=1}^n a_k b_k \right)^2 \leq \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right)$$  
+     ```  
+   -  
+     **The Cauchy-Schwarz Inequality**\  
+     $$\left( \sum_{k=1}^n a_k b_k \right)^2 \leq \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right)$$  
+
+---
+
+### 4. **Write Block Mathematical Expressions Using `math` Code Blocks**  
+   - ```md  
+     **The Cauchy-Schwarz Inequality**  
+     ```math  
+     \left( \sum_{k=1}^n a_k b_k \right)^2 \leq \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right)  
+     ```  
+     ```  
+   -  
+     **The Cauchy-Schwarz Inequality**  
+     ```math  
+     \left( \sum_{k=1}^n a_k b_k \right)^2 \leq \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right)  
+     ```  
+
+---
+
+### 5. **Display a Dollar Sign Inside a Math Expression Using `\`**  
+   - ```md  
+     This expression uses `\$` to display a dollar sign: $`\sqrt{\$4}`$  
+     ```  
+   -  
+     This expression uses `\$` to display a dollar sign: $`\sqrt{\$4}`$  
+
+---
+
+### 6. **Display a Dollar Sign Outside a Math Expression Using `<span>`**  
+   - ```md  
+     To split <span>$</span>100 in half, we calculate $100/2$  
+     ```  
+   -  
+     To split <span>$</span>100 in half, we calculate $100/2$  
+
+### 1. **Autolink Standard URLs**  
+   - ```md  
+     Visit https://github.com  
+     ```  
+   -  
+     Visit https://github.com  
+
+---
+
+### 2. **Autolink Issues and Pull Requests Using Full URL**  
+   - ```md  
+     https://github.com/jlord/sheetsee.js/issues/26  
+     ```  
+   -  
+     https://github.com/jlord/sheetsee.js/issues/26  
+
+---
+
+### 3. **Autolink Issues and Pull Requests Using `#` and Issue Number**  
+   - ```md  
+     #26  
+     ```  
+   -  
+     #26  
+
+---
+
+### 4. **Autolink Issues and Pull Requests Using `GH-` Prefix**  
+   - ```md  
+     GH-26  
+     ```  
+   -  
+     GH-26  
+
+---
+
+### 5. **Autolink Issues and Pull Requests Using `Username/Repository#IssueNumber`**  
+   - ```md  
+     jlord/sheetsee.js#26  
+     ```  
+   -  
+     jlord/sheetsee.js#26  
+
+---
+
+### 6. **Autolink Issues and Pull Requests Using `OrgName/Repository#IssueNumber`**  
+   - ```md  
+     github-linguist/linguist#4039  
+     ```  
+   -  
+     github-linguist/linguist#4039  
+
+---
+
+### 7. **Autolink Labels from the Same Repository**  
+   - ```md  
+     https://github.com/github/docs/labels/enhancement  
+     ```  
+   -  
+     https://github.com/github/docs/labels/enhancement  
+
+---
+
+### 8. **Autolink Commit SHAs Using Full Commit URL**  
+   - ```md  
+     https://github.com/jlord/sheetsee.js/commit/a5c3785ed8d6a35868bc169f07e40e889087fd2e  
+     ```  
+   -  
+     https://github.com/jlord/sheetsee.js/commit/a5c3785ed8d6a35868bc169f07e40e889087fd2e  
+
+---
+
+### 9. **Autolink Commit SHAs Using Short SHA**  
+   - ```md  
+     a5c3785  
+     ```  
+   -  
+     a5c3785  
+
+---
+
+### 10. **Autolink Commit SHAs Using `User@SHA` Format**  
+   - ```md  
+     jlord@a5c3785  
+     ```  
+   -  
+     jlord@a5c3785  
+
+---
+
+### 11. **Autolink Commit SHAs Using `Username/Repository@SHA` Format**  
+   - ```md  
+     jlord/sheetsee.js@a5c3785  
+     ```  
+   -  
+     jlord/sheetsee.js@a5c3785  
+
+---
+
+### 12. **Autolink External Resources with Custom Autolinks**  
+   - ```md  
+     Example: JIRA-123  
+     ```  
+   -  
+     Example: JIRA-123  
+
 
 
 
 ## Credits
 1. https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax
 2. https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting
-3. 
+3. https://github.com/adam-p/markdown-here/wiki/markdown-cheatsheet
