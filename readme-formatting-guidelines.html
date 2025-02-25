@@ -72,1268 +72,988 @@
   <li><a href="https://gist.github.com/kigiri/4b1d64eba2d465a2ffc1342a0e9e7d6f">Image alignment/resize guidelines</a></li>
 </ul>
 
-<h2 id="github-readme-formatting-styles-put-together-by-me">Github readme formatting styles put together by me</h2>
-
-<blockquote>
-  <p>[!WARNING]
-Many of the styles here dont work during developemnt. Instead only on github. And this needs to be viewed in <a href="https://github.com/Anusree6154s/documentation/blob/main/content/web-dev/readme-formatting-guidelines/README.md">github</a> to see the right results.</p>
-</blockquote>
-
-<h3 id="1-formatting-text"><strong>1. Formatting text</strong></h3>
-
-<ul>
-  <li>code and results</li>
-</ul>
-
-<p>| code                                                   | result                                             |
-| —————————————————— | ————————————————– |
-| ` <strong>This is bold text using asterisk</strong><code class="language-plaintext highlighter-rouge">                | **This is bold text using asterisk**               |
-| </code>  <strong>This is bold text using underscore</strong><code class="language-plaintext highlighter-rouge">             | **This is bold text using underscore**             |
-| </code>   <em>This text is italicized using asterisk</em><code class="language-plaintext highlighter-rouge">          | _This text is italicized using asterisk_           |
-| </code>  <em>This text is italicized using underscore</em><code class="language-plaintext highlighter-rouge">         | _This text is italicized using underscore_         |
-| </code> <del>This is text strikethrouh using tilde</del><code class="language-plaintext highlighter-rouge">           | ~~This is text strikethrouh using tilde~~          |
-| </code>  <strong>This text is <em>itallic</em> and bold in same phrase</strong><code class="language-plaintext highlighter-rouge"> | **This text is _itallic_ and bold in same phrase** |
-| </code> <strong><em>This text is _itallic_ and bold combined</em></strong><code class="language-plaintext highlighter-rouge">      | **_This text is *itallic* and bold combined_**     |
-| </code> This is a <sub>subscript</sub> text<code class="language-plaintext highlighter-rouge">                 | This is a &lt;sub&gt;subscript&lt;/sub&gt; text                |
-| </code>  This is a <sup>superscript</sup> text<code class="language-plaintext highlighter-rouge">              | This is a &lt;sup&gt;superscript&lt;/sup&gt; text\*            |
-| </code>  This is an <ins>underlined</ins> text<code class="language-plaintext highlighter-rouge">              | This is an &lt;ins&gt;underlined&lt;/ins&gt; text              |
-| </code><code class="language-plaintext highlighter-rouge">  This is </code>inline<code class="language-plaintext highlighter-rouge"> code using backticks</code><code class="language-plaintext highlighter-rouge">            | This is </code>inline<code class="language-plaintext highlighter-rouge"> code using backticks              |
-| </code> <strong><em>This text is _itallic_ and bold combined</em></strong><code class="language-plaintext highlighter-rouge">      | **_This text is *itallic* and bold combined_**     |
-| </code> <strong><em>This text is _itallic_ and bold combined</em></strong><code class="language-plaintext highlighter-rouge">      | **_This text is *itallic* and bold combined_**     |
-| </code> <strong><em>This text is _itallic_ and bold combined</em></strong><code class="language-plaintext highlighter-rouge">      | **_This text is *itallic* and bold combined_**     |
-| </code> <strong><em>This text is _itallic_ and bold combined</em></strong>`      | <strong><em>This text is *itallic* and bold combined</em></strong>     |</p>
-
-<ul>
-  <li>
-    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gt">&gt; This is a quote using blockquotes</span>
-</code></pre></div>    </div>
-    <blockquote>
-      <p>This is a quote using blockquotes</p>
-    </blockquote>
-  </li>
-</ul>
-
-<h3 id="10-inline-code-using-backticks-code"><strong>10. Inline code using backticks (<code class="language-plaintext highlighter-rouge">\</code>code``)</strong></h3>
-
-<ul>
-  <li>
-    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Use <span class="sb">`git status`</span> to check changes.
-</code></pre></div>    </div>
-  </li>
-  <li>Use <code class="language-plaintext highlighter-rouge">git status</code> to check changes.</li>
-</ul>
-
-<h3 id="11-multi-line-code-blocks-using-triple-backticks---"><strong>11. Multi-line code blocks using triple backticks (<code class="language-plaintext highlighter-rouge"> </code>`` `)</strong></h3>
-
-<ul>
-  <li>
-    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code>       <span class="p">```</span><span class="nl">
-</span>       git status
-       git add .
-       git commit -m "Commit message"
-       <span class="p">```</span>
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git status
-git add .
-git commit -m "Commit message"
-</code></pre></div>    </div>
-  </li>
-</ul>
-
-<h3 id="12-display-colors-using-hex-rgb-or-hsl"><strong>12. Display colors using HEX, RGB, or HSL</strong></h3>
-
-<blockquote>
-  <p>[!WARNING]
-this doesnt seem to be working anywhere. To check later</p>
-</blockquote>
-
-<ul>
-  <li>
-    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sb">`#0969DA`</span>
-<span class="sb">`rgb(9, 105, 218)`</span>
-<span class="sb">`hsl(212, 92%, 45%)`</span>
-</code></pre></div>    </div>
-  </li>
-  <li><code class="language-plaintext highlighter-rouge">#0969DA</code><br />
-<code class="language-plaintext highlighter-rouge">rgb(9, 105, 218)</code><br />
-<code class="language-plaintext highlighter-rouge">hsl(212, 92%, 45%)</code></li>
-</ul>
-
-<h3 id="13-add-links-texturl"><strong>13. Add links (<code class="language-plaintext highlighter-rouge">[text](URL)</code>)</strong></h3>
-
-<ul>
-  <li>
-    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="nv">GitHub Pages</span><span class="p">](</span><span class="sx">https://pages.github.com/</span><span class="p">)</span>
-</code></pre></div>    </div>
-  </li>
-  <li><a href="https://pages.github.com/">GitHub Pages</a></li>
-</ul>
-
-<h3 id="14-link-to-sections-sectionsection-name"><strong>14. Link to sections (<code class="language-plaintext highlighter-rouge">[#section](#section-name)</code>)</strong></h3>
-
-<ul>
-  <li>
-    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="nv">Go to Sample Section</span><span class="p">](</span><span class="sx">#sample-section</span><span class="p">)</span>
-</code></pre></div>    </div>
-  </li>
-  <li><a href="#sample-section">Go to Sample Section</a></li>
-</ul>
-
-<h3 id="15-add-images-alt-textimage_url"><strong>15. Add images (<code class="language-plaintext highlighter-rouge">![alt text](image_url)</code>)</strong></h3>
-
-<ul>
-  <li>
-    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">![</span><span class="nv">Octocat</span><span class="p">](</span><span class="sx">https://myoctocat.com/assets/images/base-octocat.svg</span><span class="p">)</span>
-</code></pre></div>    </div>
-  </li>
-  <li><img src="https://myoctocat.com/assets/images/base-octocat.svg" alt="Octocat" /></li>
-</ul>
-
-<h3 id="16-unordered-lists-using----or-"><strong>16. Unordered lists using <code class="language-plaintext highlighter-rouge">-</code>, <code class="language-plaintext highlighter-rouge">*</code>, or <code class="language-plaintext highlighter-rouge">+</code></strong></h3>
-
-<ul>
-  <li>```md
-    <ul>
-      <li>
-        <p>Item 1</p>
-      </li>
-      <li>
-        <p>Item 2</p>
-      </li>
-      <li>
-        <p>Item 3
-```
--</p>
-      </li>
-    </ul>
-  </li>
-  <li>
-    <p>Item 1</p>
-
-    <ul>
-      <li>Item 2</li>
-      <li>Item 3</li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="17-ordered-lists-using-numbers-1-2-3"><strong>17. Ordered lists using numbers (<code class="language-plaintext highlighter-rouge">1. 2. 3.</code>)</strong></h3>
-
-<ul>
-  <li>```md
-    <ol>
-      <li>First item</li>
-      <li>Second item</li>
-      <li>
-        <p>Third item
-```
--</p>
-
-        <ol>
-          <li>First item</li>
-          <li>Second item</li>
-          <li>Third item</li>
-        </ol>
-      </li>
-    </ol>
-  </li>
-</ul>
-
-<h3 id="18-nested-lists-indenting-sub-items"><strong>18. Nested lists (indenting sub-items)</strong></h3>
-
-<ul>
-  <li>```md
-    <ol>
-      <li>Main item
-        <ul>
-          <li>Sub-item
-            <ul>
-              <li>Sub-sub-item
-```
--</li>
-            </ul>
-          </li>
-        </ul>
-
-        <ol>
-          <li>Main item
-            <ul>
-              <li>Sub-item
-                <ul>
-                  <li>Sub-sub-item</li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-        </ol>
-      </li>
-    </ol>
-  </li>
-</ul>
-
-<h3 id="19-task-lists-using-----checkboxes"><strong>19. Task lists using <code class="language-plaintext highlighter-rouge">- [ ]</code> (checkboxes)</strong></h3>
-
-<ul class="task-list">
-  <li>```md
-    <ul class="task-list">
-      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Completed task</li>
-      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Pending task
-```
--</li>
-    </ul>
-  </li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Completed task</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Pending task</li>
-</ul>
-
-<h3 id="20-mention-users-username"><strong>20. Mention users (<code class="language-plaintext highlighter-rouge">@username</code>)</strong></h3>
-
-<ul>
-  <li>
-    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@octocat
-</code></pre></div>    </div>
-  </li>
-  <li>@octocat</li>
-</ul>
-
-<h3 id="21-reference-issues--prs-issue-number"><strong>21. Reference issues &amp; PRs (<code class="language-plaintext highlighter-rouge">#issue-number</code>)</strong></h3>
-
-<ul>
-  <li>
-    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code>See issue #123
-</code></pre></div>    </div>
-  </li>
-  <li>See issue #123</li>
-</ul>
-
-<h3 id="22-add-emojis-emoji_name"><strong>22. Add emojis (<code class="language-plaintext highlighter-rouge">:emoji_name:</code>)</strong></h3>
-
-<ul>
-  <li>
-    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:rocket: :tada:
-</code></pre></div>    </div>
-  </li>
-  <li>🚀 🎉</li>
-</ul>
-
-<h3 id="23-add-footnotes-1"><strong>23. Add footnotes (<code class="language-plaintext highlighter-rouge">[^1]</code>)</strong></h3>
-
-<ul>
-  <li>```md
-    <ul>
-      <li>Here is a simple footnote<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote" rel="footnote">1</a></sup>.</li>
-      <li>A footnote can also have multiple lines<sup id="fnref:2" role="doc-noteref"><a href="#fn:2" class="footnote" rel="footnote">2</a></sup>.</li>
-      <li>You can also use words, to fit your writing style more closely<sup id="fnref:note" role="doc-noteref"><a href="#fn:note" class="footnote" rel="footnote">3</a></sup>.</li>
-    </ul>
-
-  </li>
-  <li>Here is a simple footnote<sup id="fnref:1:1" role="doc-noteref"><a href="#fn:1" class="footnote" rel="footnote">1</a></sup>.</li>
-  <li>A footnote can also have multiple lines<sup id="fnref:2:1" role="doc-noteref"><a href="#fn:2" class="footnote" rel="footnote">2</a></sup>.</li>
-  <li>You can also use words, to fit your writing style more closely<sup id="fnref:note:1" role="doc-noteref"><a href="#fn:note" class="footnote" rel="footnote">3</a></sup>.</li>
-</ul>
-
-<h3 id="24-alerts--note--warning"><strong>24. Alerts (<code class="language-plaintext highlighter-rouge">&gt; [!NOTE]</code>, <code class="language-plaintext highlighter-rouge">&gt; [!WARNING]</code>)</strong></h3>
-
-<ul>
-  <li>
-    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gt">&gt; [!NOTE]</span>
-<span class="gt">&gt; Useful information that users should know, even when skimming content.</span>
-<span class="gt">
-&gt; [!TIP]</span>
-<span class="gt">&gt; Helpful advice for doing things better or more easily.</span>
-<span class="gt">
-&gt; [!IMPORTANT]</span>
-<span class="gt">&gt; Key information users need to know to achieve their goal.</span>
-<span class="gt">
-&gt; [!WARNING]</span>
-<span class="gt">&gt; Urgent info that needs immediate user attention to avoid problems.</span>
-<span class="gt">
-&gt; [!CAUTION]</span>
-<span class="gt">&gt; Advises about risks or negative outcomes of certain actions.</span>
-</code></pre></div>    </div>
-  </li>
-</ul>
-
-<blockquote>
-  <p>[!NOTE]
-Useful information that users should know, even when skimming content.</p>
-</blockquote>
-
-<blockquote>
-  <p>[!TIP]
-Helpful advice for doing things better or more easily.</p>
-</blockquote>
-
-<blockquote>
-  <p>[!IMPORTANT]
-Key information users need to know to achieve their goal.</p>
-</blockquote>
-
-<blockquote>
-  <p>[!WARNING]
-Urgent info that needs immediate user attention to avoid problems.</p>
-</blockquote>
-
-<blockquote>
-  <p>[!CAUTION]
-Advises about risks or negative outcomes of certain actions.</p>
-</blockquote>
-
-<h3 id="25-hide-content-using-html-comments----hidden---"><strong>25. Hide content using HTML comments (<code class="language-plaintext highlighter-rouge">&lt;!-- hidden --&gt;</code>)</strong></h3>
-
-<ul>
-  <li>
-    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- This content will not appear in the rendered Markdown --&gt;</span>
-</code></pre></div>    </div>
-  </li>
-</ul>
-
-<h3 id="26-escape-markdown-formatting-using-"><strong>26. Escape Markdown formatting using <code class="language-plaintext highlighter-rouge">\</code></strong></h3>
-
-<ul>
-  <li>
-    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Let's rename <span class="se">\*</span>our-new-project<span class="se">\*</span> to <span class="se">\*</span>our-old-project<span class="se">\*</span>.
-</code></pre></div>    </div>
-  </li>
-  <li>Let’s rename *our-new-project* to *our-old-project*.</li>
-</ul>
-
-<p>Sure! Here’s the rewritten content in your requested format:</p>
-
-<hr />
-
-<h3 id="1-create-a-table-using-pipes--and-hyphens--">1. <strong>Create a Table using Pipes (<code class="language-plaintext highlighter-rouge">|</code>) and Hyphens (<code class="language-plaintext highlighter-rouge">-</code>)</strong></h3>
-
-<ul>
-  <li>
-    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code>| First Header | Second Header |
-| ------------ | ------------- |
-| Content Cell | Content Cell  |
-| Content Cell | Content Cell  |
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <table>
-      <thead>
-        <tr>
-          <th>First Header</th>
-          <th>Second Header</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Content Cell</td>
-          <td>Content Cell</td>
-        </tr>
-        <tr>
-          <td>Content Cell</td>
-          <td>Content Cell</td>
-        </tr>
-      </tbody>
-    </table>
-  </li>
-</ul>
-
-<hr />
-
-<h3 id="2-tables-do-not-require-perfect-alignment">2. <strong>Tables Do Not Require Perfect Alignment</strong></h3>
-
-<ul>
-  <li>
-    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code>| Command    | Description                          |
-| ---------- | ------------------------------------ |
-| git status | List all new or modified files       |
-| git diff   | Show file differences not yet staged |
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <table>
-      <thead>
-        <tr>
-          <th>Command</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>git status</td>
-          <td>List all new or modified files</td>
-        </tr>
-        <tr>
-          <td>git diff</td>
-          <td>Show file differences not yet staged</td>
-        </tr>
-      </tbody>
-    </table>
-  </li>
-</ul>
-
-<hr />
-
-<h3 id="3-use-inline-code-blocks--inside-tables">3. <strong>Use Inline Code Blocks (`) Inside Tables</strong></h3>
-
-<ul>
-  <li>
-    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code>| Command      | Description                                        |
-| ------------ | -------------------------------------------------- |
-| <span class="sb">`git status`</span> | List all _new or modified_ files                   |
-| <span class="sb">`git diff`</span>   | Show file differences that <span class="gs">**haven't been**</span> staged |
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <table>
-      <thead>
-        <tr>
-          <th>Command</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code class="language-plaintext highlighter-rouge">git status</code></td>
-          <td>List all <em>new or modified</em> files</td>
-        </tr>
-        <tr>
-          <td><code class="language-plaintext highlighter-rouge">git diff</code></td>
-          <td>Show file differences that <strong>haven’t been</strong> staged</td>
-        </tr>
-      </tbody>
-    </table>
-  </li>
-</ul>
-
-<hr />
-
-<h3 id="4-align-table-text-to-left-center-or-right">4. <strong>Align Table Text to Left, Center, or Right</strong></h3>
-
-<ul>
-  <li>
-    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code>| Left-aligned | Center-aligned | Right-aligned |
-| :----------- | :------------: | ------------: |
-| git status   |   git status   |    git status |
-| git diff     |    git diff    |      git diff |
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <table>
-      <thead>
-        <tr>
-          <th style="text-align: left">Left-aligned</th>
-          <th style="text-align: center">Center-aligned</th>
-          <th style="text-align: right">Right-aligned</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td style="text-align: left">git status</td>
-          <td style="text-align: center">git status</td>
-          <td style="text-align: right">git status</td>
-        </tr>
-        <tr>
-          <td style="text-align: left">git diff</td>
-          <td style="text-align: center">git diff</td>
-          <td style="text-align: right">git diff</td>
-        </tr>
-      </tbody>
-    </table>
-  </li>
-</ul>
-
-<hr />
-
-<h3 id="5-display-a-pipe--inside-a-table-cell">5. <strong>Display a Pipe (<code class="language-plaintext highlighter-rouge">|</code>) Inside a Table Cell</strong></h3>
-
-<ul>
-  <li>
-    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code>| Name     | Character |
-| -------- | --------- |
-| Backtick | <span class="err">`</span>         |
-| Pipe     | <span class="se">\|</span>        |
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Character</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Backtick</td>
-          <td>`</td>
-        </tr>
-        <tr>
-          <td>Pipe</td>
-          <td>|</td>
-        </tr>
-      </tbody>
-    </table>
-  </li>
-</ul>
-
-<h3 id="1-create-a-collapsed-section-using-details">1. <strong>Create a Collapsed Section using <code class="language-plaintext highlighter-rouge">&lt;details&gt;</code></strong></h3>
-
-<ul>
-  <li>
-    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;details&gt;</span>  
-<span class="nt">&lt;summary&gt;</span>Click to expand<span class="nt">&lt;/summary&gt;</span>  
-    
-This text is hidden by default and will be revealed when clicked.
-
-<span class="nt">&lt;/details&gt;</span>
-</code></pre></div>    </div>
-  </li>
-  <li>
+<details> 
+<summary>Not pretty in blog. To be viewed only in <a href="https://github.com/Anusree6154s/documentation/blob/main/content/web-dev/readme-formatting-guidelines/README.md">github readme</a> </summary>
+  
+  ## Github readme formatting styles put together by me
+  
+  &gt; [!WARNING]
+  &gt; Many of the styles here dont work during developemnt. Instead only on github. And this needs to be viewed in  to see the right results.
+  
+  ### **1. Formatting text**
+  
+  - code and results
+  
+  | code                                                   | result                                             |
+  | ------------------------------------------------------ | -------------------------------------------------- |
+  | ` **This is bold text using asterisk**`                | **This is bold text using asterisk**               |
+  | `  __This is bold text using underscore__`             | **This is bold text using underscore**             |
+  | `   *This text is italicized using asterisk*`          | _This text is italicized using asterisk_           |
+  | `  _This text is italicized using underscore_`         | _This text is italicized using underscore_         |
+  | ` ~~This is text strikethrouh using tilde~~`           | ~~This is text strikethrouh using tilde~~          |
+  | `  **This text is _itallic_ and bold in same phrase**` | **This text is _itallic_ and bold in same phrase** |
+  | ` ***This text is _itallic_ and bold combined***`      | **_This text is *itallic* and bold combined_**     |
+  | ` This is a <sub>subscript</sub> text`                 | This is a <sub>subscript</sub> text                |
+  | `  This is a <sup>superscript</sup> text`              | This is a <sup>superscript</sup> text\*            |
+  | `  This is an <ins>underlined</ins> text`              | This is an <ins>underlined</ins> text              |
+  | ``  This is `inline` code using backticks``            | This is `inline` code using backticks              |
+  | ` ***This text is _itallic_ and bold combined***`      | **_This text is *itallic* and bold combined_**     |
+  | ` ***This text is _itallic_ and bold combined***`      | **_This text is *itallic* and bold combined_**     |
+  | ` ***This text is _itallic_ and bold combined***`      | **_This text is *itallic* and bold combined_**     |
+  | ` ***This text is _itallic_ and bold combined***`      | **_This text is *itallic* and bold combined_**     |
+  
+  - ```md
+    &gt; This is a quote using blockquotes
+    ```
+    &gt; This is a quote using blockquotes
+  
+  ### **10. Inline code using backticks (`\`code\``)**
+  
+  - ```md
+    Use `git status` to check changes.
+    ```
+  - Use `git status` to check changes.
+  
+  ### **11. Multi-line code blocks using triple backticks (` ``` `)**
+  
+  - ````md
+           ```
+           git status
+           git add .
+           git commit -m "Commit message"
+           ```
+    ````
+  - ```
+    git status
+    git add .
+    git commit -m "Commit message"
+    ```
+  
+  ### **12. Display colors using HEX, RGB, or HSL**
+  
+  &gt; [!WARNING]
+  &gt; this doesnt seem to be working anywhere. To check later
+  
+  - ```md
+    `#0969DA`
+    `rgb(9, 105, 218)`
+    `hsl(212, 92%, 45%)`
+    ```
+  - `#0969DA`  
+    `rgb(9, 105, 218)`  
+    `hsl(212, 92%, 45%)`
+  
+  ### **13. Add links (`[text](URL)`)**
+  
+  - ```md
+    [GitHub Pages](https://pages.github.com/)
+    ```
+  - [GitHub Pages](https://pages.github.com/)
+  
+  ### **14. Link to sections (`[#section](#section-name)`)**
+  
+  - ```md
+    [Go to Sample Section](#sample-section)
+    ```
+  - [Go to Sample Section](#sample-section)
+  
+  ### **15. Add images (`![alt text](image_url)`)**
+  
+  - ```md
+    ![Octocat](https://myoctocat.com/assets/images/base-octocat.svg)
+    ```
+  - ![Octocat](https://myoctocat.com/assets/images/base-octocat.svg)
+  
+  ### **16. Unordered lists using `-`, `*`, or `+`**
+  
+  - ```md
+    - Item 1
+  
+    * Item 2
+  
+    - Item 3
+    ```
+  -
+  - Item 1
+  
+  
+       * Item 2
+       + Item 3
+  
+  ### **17. Ordered lists using numbers (`1. 2. 3.`)**
+  
+  - ```md
+    1. First item
+    2. Second item
+    3. Third item
+    ```
+  -
+  
+  
+       1. First item
+       2. Second item
+       3. Third item
+  
+  ### **18. Nested lists (indenting sub-items)**
+  
+  - ```md
+    1. Main item
+       - Sub-item
+         - Sub-sub-item
+    ```
+  -
+  
+  
+       1. Main item
+          - Sub-item
+            - Sub-sub-item
+  
+  ### **19. Task lists using `- [ ]` (checkboxes)**
+  
+  - ```md
+    - [x] Completed task
+    - [ ] Pending task
+    ```
+  -
+  - [x] Completed task
+  - [ ] Pending task
+  
+  ### **20. Mention users (`@username`)**
+  
+  - ```md
+    @octocat
+    ```
+  - @octocat
+  
+  ### **21. Reference issues &amp; PRs (`#issue-number`)**
+  
+  - ```md
+    See issue #123
+    ```
+  - See issue #123
+  
+  ### **22. Add emojis (`:emoji_name:`)**
+  
+  - ```md
+    :rocket: :tada:
+    ```
+  - 🚀 🎉
+  
+  ### **23. Add footnotes (`[^1]`)**
+  
+  - ```md
+    - Here is a simple footnote[^1].
+    - A footnote can also have multiple lines[^2].
+    - You can also use words, to fit your writing style more closely[^note].
+  
+    [^1]: My reference.
+    [^2]:
+        Every new line should be prefixed with 2 spaces.  
+        This allows you to have a footnote with multiple lines.
+  
+    [^note]:
+        Named footnotes will still render with numbers instead of the text but allow easier identification and linking.  
+         This footnote also has been made with a different syntax using 4 spaces for new lines.
+    ```
+  - Here is a simple footnote[^1].
+  - A footnote can also have multiple lines[^2].
+  - You can also use words, to fit your writing style more closely[^note].
+  
+  [^1]: My reference.
+  [^2]:
+      Every new line should be prefixed with 2 spaces.  
+      This allows you to have a footnote with multiple lines.
+  
+  [^note]:
+      Named footnotes will still render with numbers instead of the text but allow easier identification and linking.  
+      This footnote also has been made with a different syntax using 4 spaces for new lines.
+  
+  ### **24. Alerts (`&gt; [!NOTE]`, `&gt; [!WARNING]`)**
+  
+  - ```md
+    &gt; [!NOTE]
+    &gt; Useful information that users should know, even when skimming content.
+  
+    &gt; [!TIP]
+    &gt; Helpful advice for doing things better or more easily.
+  
+    &gt; [!IMPORTANT]
+    &gt; Key information users need to know to achieve their goal.
+  
+    &gt; [!WARNING]
+    &gt; Urgent info that needs immediate user attention to avoid problems.
+  
+    &gt; [!CAUTION]
+    &gt; Advises about risks or negative outcomes of certain actions.
+    ```
+  
+  &gt; [!NOTE]
+  &gt; Useful information that users should know, even when skimming content.
+  
+  &gt; [!TIP]
+  &gt; Helpful advice for doing things better or more easily.
+  
+  &gt; [!IMPORTANT]
+  &gt; Key information users need to know to achieve their goal.
+  
+  &gt; [!WARNING]
+  &gt; Urgent info that needs immediate user attention to avoid problems.
+  
+  &gt; [!CAUTION]
+  &gt; Advises about risks or negative outcomes of certain actions.
+  
+  ### **25. Hide content using HTML comments (`<!-- hidden -->`)**
+  
+  - ```md
+    <!-- This content will not appear in the rendered Markdown -->
+    ```
+  
+  ### **26. Escape Markdown formatting using `\`**
+  
+  - ```md
+    Let's rename \*our-new-project\* to \*our-old-project\*.
+    ```
+  - Let's rename \*our-new-project\* to \*our-old-project\*.
+  
+  Sure! Here’s the rewritten content in your requested format:
+  
+  ---
+  
+  ### 1. **Create a Table using Pipes (`|`) and Hyphens (`-`)**
+  
+  - ```md
+    | First Header | Second Header |
+    | ------------ | ------------- |
+    | Content Cell | Content Cell  |
+    | Content Cell | Content Cell  |
+    ```
+  - | First Header | Second Header |
+    | ------------ | ------------- |
+    | Content Cell | Content Cell  |
+    | Content Cell | Content Cell  |
+  
+  ---
+  
+  ### 2. **Tables Do Not Require Perfect Alignment**
+  
+  - ```md
+    | Command    | Description                          |
+    | ---------- | ------------------------------------ |
+    | git status | List all new or modified files       |
+    | git diff   | Show file differences not yet staged |
+    ```
+  - | Command    | Description                          |
+    | ---------- | ------------------------------------ |
+    | git status | List all new or modified files       |
+    | git diff   | Show file differences not yet staged |
+  
+  ---
+  
+  ### 3. **Use Inline Code Blocks (`) Inside Tables**
+  
+  - ```md
+    | Command      | Description                                        |
+    | ------------ | -------------------------------------------------- |
+    | `git status` | List all _new or modified_ files                   |
+    | `git diff`   | Show file differences that **haven't been** staged |
+    ```
+  - | Command      | Description                                        |
+    | ------------ | -------------------------------------------------- |
+    | `git status` | List all _new or modified_ files                   |
+    | `git diff`   | Show file differences that **haven't been** staged |
+  
+  ---
+  
+  ### 4. **Align Table Text to Left, Center, or Right**
+  
+  - ```md
+    | Left-aligned | Center-aligned | Right-aligned |
+    | :----------- | :------------: | ------------: |
+    | git status   |   git status   |    git status |
+    | git diff     |    git diff    |      git diff |
+    ```
+  - | Left-aligned | Center-aligned | Right-aligned |
+    | :----------- | :------------: | ------------: |
+    | git status   |   git status   |    git status |
+    | git diff     |    git diff    |      git diff |
+  
+  ---
+  
+  ### 5. **Display a Pipe (`|`) Inside a Table Cell**
+  
+  - ```md
+    | Name     | Character |
+    | -------- | --------- |
+    | Backtick | `         |
+    | Pipe     | \|        |
+    ```
+  - | Name     | Character |
+    | -------- | --------- |
+    | Backtick | `         |
+    | Pipe     | \|        |
+  
+  ### 1. **Create a Collapsed Section using `<details>`**
+  
+  - ```md
     <details>  
-<summary>Click to expand</summary>  
+    <summary>Click to expand</summary>  
+      
+    This text is hidden by default and will be revealed when clicked.
+  
+    </details>
+    ```
+  
+    - <details>  
+        <summary>Click to expand</summary>  
+        
+        This text is hidden by default and will be revealed when clicked.
     
-This text is hidden by default and will be revealed when clicked.
-
-</details>
-  </li>
-</ul>
-
-<hr />
-
-<h3 id="2-add-a-header-text-or-code-block-inside-a-collapsed-section">2. <strong>Add a Header, Text, or Code Block Inside a Collapsed Section</strong></h3>
-
-<ul>
-  <li>
-    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;details&gt;</span>  
-<span class="nt">&lt;summary&gt;</span>Tips for collapsed sections<span class="nt">&lt;/summary&gt;</span>
-
-<span class="gu">### You can add a header</span>
-
-You can add text within a collapsed section.
-
-You can add an image or a code block, too.
-
-<span class="p">```</span><span class="nl">ruby
-</span><span class="nb">puts</span> <span class="s2">"Hello World"</span>
-<span class="p">```</span>
-</code></pre></div>    </div>
-
-    <p>&lt;/details&gt;<br />
-```</p>
-  </li>
-  <li>
+        </details>
+  
+  ---
+  
+  ### 2. **Add a Header, Text, or Code Block Inside a Collapsed Section**
+  
+  - ````md
     <details>  
-<summary>Tips for collapsed sections</summary>
-
-### You can add a header
-
-You can add text within a collapsed section.
-
-You can add an image or a code block, too.
-
-```ruby
-puts "Hello World"
-```
-
-</details>
-  </li>
-</ul>
-
-<hr />
-
-<h3 id="3-make-a-collapsed-section-open-by-default">3. <strong>Make a Collapsed Section Open by Default</strong></h3>
-
-<ul>
-  <li>
-    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;details</span> <span class="na">open</span><span class="nt">&gt;</span>  
-<span class="nt">&lt;summary&gt;</span>Always visible section<span class="nt">&lt;/summary&gt;</span>
-
-This section starts open by default.
-
-<span class="nt">&lt;/details&gt;</span>
-</code></pre></div>    </div>
-  </li>
-  <li>
+    <summary>Tips for collapsed sections</summary>
+  
+    ### You can add a header
+  
+    You can add text within a collapsed section.
+  
+    You can add an image or a code block, too.
+  
+    ```ruby
+    puts "Hello World"
+    ```
+  
+    </details>  
+    ````
+    
+  
+  - <details>  
+    <summary>Tips for collapsed sections</summary>
+  
+    ### You can add a header
+  
+    You can add text within a collapsed section.
+  
+    You can add an image or a code block, too.
+  
+    ```ruby
+    puts "Hello World"
+    ```
+  
+    </details>
+  
+  ---
+  
+  ### 3. **Make a Collapsed Section Open by Default**
+  
+  - ```md
     <details open="">  
-<summary>Always visible section</summary>
-
-This section starts open by default.
-
-</details>
-  </li>
-</ul>
-
-<h3 id="1-create-a-mermaid-diagram">1. <strong>Create a Mermaid Diagram</strong></h3>
-
-<ul>
-  <li>
-    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">```</span><span class="nl">mermaid
-</span><span class="sb">graph TD;
-    A--&gt;B;
-    A--&gt;C;
-    B--&gt;D;
-    C--&gt;D;</span>
-<span class="p">```</span>
-</code></pre></div>    </div>
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <pre><code class="language-mermaid">graph TD;
-    A--&gt;B;
-    A--&gt;C;
-    B--&gt;D;
-    C--&gt;D;
-</code></pre>
-  </li>
-</ul>
-
-<hr />
-
-<h3 id="2-check-the-mermaid-version-in-use">2. <strong>Check the Mermaid Version in Use</strong></h3>
-
-<ul>
-  <li>
-    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">```</span><span class="nl">mermaid
-</span><span class="sb">info</span>
-<span class="p">```</span>
-</code></pre></div>    </div>
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <pre><code class="language-mermaid">info
-</code></pre>
-  </li>
-</ul>
-
-<hr />
-
-<h3 id="3-create-a-geojson-map">3. <strong>Create a GeoJSON Map</strong></h3>
-
-<ul>
-  <li>
-    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">```</span><span class="nl">geojson
-</span><span class="sb">{
-  "type": "FeatureCollection",
-  "features": [
+    <summary>Always visible section</summary>
+  
+    This section starts open by default.
+  
+    </details>
+    ```
+  
+  - <details open="">  
+    <summary>Always visible section</summary>
+  
+    This section starts open by default.
+  
+    </details>
+  
+  ### 1. **Create a Mermaid Diagram**
+  
+  - ````md
+    ```mermaid
+    graph TD;
+        A--&gt;B;
+        A--&gt;C;
+        B--&gt;D;
+        C--&gt;D;
+    ```
+    ````
+    ```
+  
+    ```
+  - ```mermaid
+    graph TD;
+        A--&gt;B;
+        A--&gt;C;
+        B--&gt;D;
+        C--&gt;D;
+    ```
+  
+  ---
+  
+  ### 2. **Check the Mermaid Version in Use**
+  
+  - ````md
+    ```mermaid
+    info
+    ```
+    ````
+    ```
+  
+    ```
+  - ```mermaid
+    info
+    ```
+  
+  ---
+  
+  ### 3. **Create a GeoJSON Map**
+  
+  - ````md
+    ```geojson
     {
-      "type": "Feature",
-      "id": 1,
-      "properties": {
-        "ID": 0
-      },
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -90,
-              35
-            ],
-            [
-              -90,
-              30
-            ],
-            [
-              -85,
-              30
-            ],
-            [
-              -85,
-              35
-            ],
-            [
-              -90,
-              35
-            ]
-          ]
-        ]
-      }
-    }
-  ]
-}</span>
-<span class="p">```</span>
-</code></pre></div>    </div>
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <pre><code class="language-geojson">{
-  "type": "FeatureCollection",
-  "features": [
-    {
-      "type": "Feature",
-      "id": 1,
-      "properties": {
-        "ID": 0
-      },
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -90,
-              35
-            ],
-            [
-              -90,
-              30
-            ],
-            [
-              -85,
-              30
-            ],
-            [
-              -85,
-              35
-            ],
-            [
-              -90,
-              35
-            ]
-          ]
-        ]
-      }
-    }
-  ]
-}
-</code></pre>
-  </li>
-</ul>
-
-<hr />
-
-<h3 id="4-create-a-topojson-map">4. <strong>Create a TopoJSON Map</strong></h3>
-
-<ul>
-  <li>
-    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">```</span><span class="nl">topojson
-</span><span class="sb">{
-  "type": "Topology",
-  "transform": {
-    "scale": [
-      0.0005000500050005,
-      0.00010001000100010001
-    ],
-    "translate": [
-      100,
-      0
-    ]
-  },
-  "objects": {
-    "example": {
-      "type": "GeometryCollection",
-      "geometries": [
+      "type": "FeatureCollection",
+      "features": [
         {
-          "type": "Point",
+          "type": "Feature",
+          "id": 1,
           "properties": {
-            "prop0": "value0"
+            "ID": 0
           },
-          "coordinates": [
-            4000,
-            5000
-          ]
-        },
-        {
-          "type": "LineString",
-          "properties": {
-            "prop0": "value0",
-            "prop1": 0
-          },
-          "arcs": [
-            0
-          ]
-        },
-        {
-          "type": "Polygon",
-          "properties": {
-            "prop0": "value0",
-            "prop1": {
-              "this": "that"
-            }
-          },
-          "arcs": [
-            [
-              1
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -90,
+                  35
+                ],
+                [
+                  -90,
+                  30
+                ],
+                [
+                  -85,
+                  30
+                ],
+                [
+                  -85,
+                  35
+                ],
+                [
+                  -90,
+                  35
+                ]
+              ]
             ]
-          ]
+          }
         }
       ]
     }
-  },
-  "arcs": [
-    [
-      [
-        4000,
-        0
-      ],
-      [
-        1999,
-        9999
-      ],
-      [
-        2000,
-        -9999
-      ],
-      [
-        2000,
-        9999
-      ]
-    ],
-    [
-      [
-        0,
-        0
-      ],
-      [
-        0,
-        9999
-      ],
-      [
-        2000,
-        0
-      ],
-      [
-        0,
-        -9999
-      ],
-      [
-        -2000,
-        0
-      ]
-    ]
-  ]
-}</span>
-<span class="p">```</span>
-</code></pre></div>    </div>
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <pre><code class="language-topojson">{
-  "type": "Topology",
-  "transform": {
-    "scale": [
-      0.0005000500050005,
-      0.00010001000100010001
-    ],
-    "translate": [
-      100,
-      0
-    ]
-  },
-  "objects": {
-    "example": {
-      "type": "GeometryCollection",
-      "geometries": [
+    ```
+    ````
+    ```
+  
+    ```
+  - ```geojson
+    {
+      "type": "FeatureCollection",
+      "features": [
         {
-          "type": "Point",
+          "type": "Feature",
+          "id": 1,
           "properties": {
-            "prop0": "value0"
+            "ID": 0
           },
-          "coordinates": [
-            4000,
-            5000
-          ]
-        },
-        {
-          "type": "LineString",
-          "properties": {
-            "prop0": "value0",
-            "prop1": 0
-          },
-          "arcs": [
-            0
-          ]
-        },
-        {
-          "type": "Polygon",
-          "properties": {
-            "prop0": "value0",
-            "prop1": {
-              "this": "that"
-            }
-          },
-          "arcs": [
-            [
-              1
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -90,
+                  35
+                ],
+                [
+                  -90,
+                  30
+                ],
+                [
+                  -85,
+                  30
+                ],
+                [
+                  -85,
+                  35
+                ],
+                [
+                  -90,
+                  35
+                ]
+              ]
             ]
-          ]
+          }
         }
       ]
     }
-  },
-  "arcs": [
-    [
-      [
-        4000,
-        0
-      ],
-      [
-        1999,
-        9999
-      ],
-      [
-        2000,
-        -9999
-      ],
-      [
-        2000,
-        9999
+    ```
+  
+  ---
+  
+  ### 4. **Create a TopoJSON Map**
+  
+  - ````md
+    ```topojson
+    {
+      "type": "Topology",
+      "transform": {
+        "scale": [
+          0.0005000500050005,
+          0.00010001000100010001
+        ],
+        "translate": [
+          100,
+          0
+        ]
+      },
+      "objects": {
+        "example": {
+          "type": "GeometryCollection",
+          "geometries": [
+            {
+              "type": "Point",
+              "properties": {
+                "prop0": "value0"
+              },
+              "coordinates": [
+                4000,
+                5000
+              ]
+            },
+            {
+              "type": "LineString",
+              "properties": {
+                "prop0": "value0",
+                "prop1": 0
+              },
+              "arcs": [
+                0
+              ]
+            },
+            {
+              "type": "Polygon",
+              "properties": {
+                "prop0": "value0",
+                "prop1": {
+                  "this": "that"
+                }
+              },
+              "arcs": [
+                [
+                  1
+                ]
+              ]
+            }
+          ]
+        }
+      },
+      "arcs": [
+        [
+          [
+            4000,
+            0
+          ],
+          [
+            1999,
+            9999
+          ],
+          [
+            2000,
+            -9999
+          ],
+          [
+            2000,
+            9999
+          ]
+        ],
+        [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            9999
+          ],
+          [
+            2000,
+            0
+          ],
+          [
+            0,
+            -9999
+          ],
+          [
+            -2000,
+            0
+          ]
+        ]
       ]
-    ],
-    [
-      [
-        0,
-        0
-      ],
-      [
-        0,
-        9999
-      ],
-      [
-        2000,
-        0
-      ],
-      [
-        0,
-        -9999
-      ],
-      [
-        -2000,
-        0
+    }
+    ```
+    ````
+    ```
+  
+    ```
+  - ```topojson
+    {
+      "type": "Topology",
+      "transform": {
+        "scale": [
+          0.0005000500050005,
+          0.00010001000100010001
+        ],
+        "translate": [
+          100,
+          0
+        ]
+      },
+      "objects": {
+        "example": {
+          "type": "GeometryCollection",
+          "geometries": [
+            {
+              "type": "Point",
+              "properties": {
+                "prop0": "value0"
+              },
+              "coordinates": [
+                4000,
+                5000
+              ]
+            },
+            {
+              "type": "LineString",
+              "properties": {
+                "prop0": "value0",
+                "prop1": 0
+              },
+              "arcs": [
+                0
+              ]
+            },
+            {
+              "type": "Polygon",
+              "properties": {
+                "prop0": "value0",
+                "prop1": {
+                  "this": "that"
+                }
+              },
+              "arcs": [
+                [
+                  1
+                ]
+              ]
+            }
+          ]
+        }
+      },
+      "arcs": [
+        [
+          [
+            4000,
+            0
+          ],
+          [
+            1999,
+            9999
+          ],
+          [
+            2000,
+            -9999
+          ],
+          [
+            2000,
+            9999
+          ]
+        ],
+        [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            9999
+          ],
+          [
+            2000,
+            0
+          ],
+          [
+            0,
+            -9999
+          ],
+          [
+            -2000,
+            0
+          ]
+        ]
       ]
-    ]
-  ]
-}
-</code></pre>
-  </li>
-</ul>
-
-<hr />
-
-<h3 id="5-create-an-ascii-stl-3d-model">5. <strong>Create an ASCII STL 3D Model</strong></h3>
-
-<ul>
-  <li>
-    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">```</span><span class="nl">stl
-</span><span class="sb">solid cube_corner
-  facet normal 0.0 -1.0 0.0
-    outer loop
-      vertex 0.0 0.0 0.0
-      vertex 1.0 0.0 0.0
-      vertex 0.0 0.0 1.0
-    endloop
-  endfacet
-  facet normal 0.0 0.0 -1.0
-    outer loop
-      vertex 0.0 0.0 0.0
-      vertex 0.0 1.0 0.0
-      vertex 1.0 0.0 0.0
-    endloop
-  endfacet
-  facet normal -1.0 0.0 0.0
-    outer loop
-      vertex 0.0 0.0 0.0
-      vertex 0.0 0.0 1.0
-      vertex 0.0 1.0 0.0
-    endloop
-  endfacet
-  facet normal 0.577 0.577 0.577
-    outer loop
-      vertex 1.0 0.0 0.0
-      vertex 0.0 1.0 0.0
-      vertex 0.0 0.0 1.0
-    endloop
-  endfacet
-endsolid</span>
-<span class="p">```</span>
-</code></pre></div>    </div>
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <pre><code class="language-stl">solid cube_corner
-  facet normal 0.0 -1.0 0.0
-    outer loop
-      vertex 0.0 0.0 0.0
-      vertex 1.0 0.0 0.0
-      vertex 0.0 0.0 1.0
-    endloop
-  endfacet
-  facet normal 0.0 0.0 -1.0
-    outer loop
-      vertex 0.0 0.0 0.0
-      vertex 0.0 1.0 0.0
-      vertex 1.0 0.0 0.0
-    endloop
-  endfacet
-  facet normal -1.0 0.0 0.0
-    outer loop
-      vertex 0.0 0.0 0.0
-      vertex 0.0 0.0 1.0
-      vertex 0.0 1.0 0.0
-    endloop
-  endfacet
-  facet normal 0.577 0.577 0.577
-    outer loop
-      vertex 1.0 0.0 0.0
-      vertex 0.0 1.0 0.0
-      vertex 0.0 0.0 1.0
-    endloop
-  endfacet
-endsolid
-</code></pre>
-  </li>
-</ul>
-
-<h3 id="1-write-inline-mathematical-expressions-using-">1. <strong>Write Inline Mathematical Expressions Using <code class="language-plaintext highlighter-rouge">$</code></strong></h3>
-
-<ul>
-  <li>
-    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code>This sentence uses <span class="sb">`$`</span> delimiters to show math inline: $<span class="se">\s</span>qrt{3x-1}+(1+x)^2$
-</code></pre></div>    </div>
-  </li>
-  <li>This sentence uses <code class="language-plaintext highlighter-rouge">$</code> delimiters to show math inline: $\sqrt{3x-1}+(1+x)^2$</li>
-</ul>
-
-<hr />
-
-<h3 id="2-write-inline-mathematical-expressions-using--with-backticks">2. <strong>Write Inline Mathematical Expressions Using <code class="language-plaintext highlighter-rouge">$</code> with Backticks</strong></h3>
-
-<ul>
-  <li>
-    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code>This sentence uses $<span class="se">\`</span> and <span class="se">\`</span>$ delimiters to show math inline: $<span class="sb">`\sqrt{3x-1}+(1+x)^2`</span>$
-</code></pre></div>    </div>
-  </li>
-  <li>This sentence uses $` and `$ delimiters to show math inline: $<code class="language-plaintext highlighter-rouge">\sqrt{3x-1}+(1+x)^2</code>$</li>
-</ul>
-
-<hr />
-
-<h3 id="3-write-block-mathematical-expressions-using-">3. <strong>Write Block Mathematical Expressions Using <code class="language-plaintext highlighter-rouge">$$</code></strong></h3>
-
-<ul>
-  <li>
-    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gs">**The Cauchy-Schwarz Inequality**</span><span class="se">\ </span> 
-$$<span class="se">\l</span>eft( <span class="se">\s</span>um_{k=1}^n a_k b_k <span class="se">\r</span>ight)^2 <span class="se">\l</span>eq <span class="se">\l</span>eft( <span class="se">\s</span>um_{k=1}^n a_k^2 <span class="se">\r</span>ight) <span class="se">\l</span>eft( <span class="se">\s</span>um_{k=1}^n b_k^2 <span class="se">\r</span>ight)$$
-</code></pre></div>    </div>
-  </li>
-  <li><strong>The Cauchy-Schwarz Inequality</strong>\<br />
-\(\left( \sum_{k=1}^n a_k b_k \right)^2 \leq \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right)\)</li>
-</ul>
-
-<hr />
-
-<h3 id="4-write-block-mathematical-expressions-using-math-code-blocks">4. <strong>Write Block Mathematical Expressions Using <code class="language-plaintext highlighter-rouge">math</code> Code Blocks</strong></h3>
-
-<ul>
-  <li>
-    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gs">**The Cauchy-Schwarz Inequality**</span>
-
-<span class="p">```</span><span class="nl">math
-</span><span class="sb">\left( \sum_{k=1}^n a_k b_k \right)^2 \leq \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right)</span>
-<span class="p">```</span>
-</code></pre></div>    </div>
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-</code></pre></div>    </div>
-  </li>
-  <li><strong>The Cauchy-Schwarz Inequality</strong>
-    <pre><code class="language-math">\left( \sum_{k=1}^n a_k b_k \right)^2 \leq \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right)
-</code></pre>
-  </li>
-</ul>
-
-<hr />
-
-<h3 id="5-display-a-dollar-sign-inside-a-math-expression-using-">5. <strong>Display a Dollar Sign Inside a Math Expression Using <code class="language-plaintext highlighter-rouge">\</code></strong></h3>
-
-<ul>
-  <li>
-    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code>This expression uses <span class="sb">`\$`</span> to display a dollar sign: $<span class="sb">`\sqrt{\$4}`</span>$
-</code></pre></div>    </div>
-  </li>
-  <li>This expression uses <code class="language-plaintext highlighter-rouge">\$</code> to display a dollar sign: $<code class="language-plaintext highlighter-rouge">\sqrt{\$4}</code>$</li>
-</ul>
-
-<hr />
-
-<h3 id="6-display-a-dollar-sign-outside-a-math-expression-using-span">6. <strong>Display a Dollar Sign Outside a Math Expression Using <code class="language-plaintext highlighter-rouge">&lt;span&gt;</code></strong></h3>
-
-<ul>
-  <li>
-    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code>To split <span class="nt">&lt;span&gt;</span>$<span class="nt">&lt;/span&gt;</span>100 in half, we calculate $100/2$
-</code></pre></div>    </div>
-  </li>
-  <li>To split <span>$</span>100 in half, we calculate $100/2$</li>
-</ul>
-
-<h3 id="1-autolink-standard-urls">1. <strong>Autolink Standard URLs</strong></h3>
-
-<ul>
-  <li>
-    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Visit https://github.com
-</code></pre></div>    </div>
-  </li>
-  <li>Visit https://github.com</li>
-</ul>
-
-<hr />
-
-<h3 id="2-autolink-issues-and-pull-requests-using-full-url">2. <strong>Autolink Issues and Pull Requests Using Full URL</strong></h3>
-
-<ul>
-  <li>
-    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://github.com/jlord/sheetsee.js/issues/26
-</code></pre></div>    </div>
-  </li>
-  <li>https://github.com/jlord/sheetsee.js/issues/26</li>
-</ul>
-
-<hr />
-
-<h3 id="3-autolink-issues-and-pull-requests-using--and-issue-number">3. <strong>Autolink Issues and Pull Requests Using <code class="language-plaintext highlighter-rouge">#</code> and Issue Number</strong></h3>
-
-<ul>
-  <li>
-    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">#26</span>
-</code></pre></div>    </div>
-  </li>
-  <li>#26</li>
-</ul>
-
-<hr />
-
-<h3 id="4-autolink-issues-and-pull-requests-using-gh--prefix">4. <strong>Autolink Issues and Pull Requests Using <code class="language-plaintext highlighter-rouge">GH-</code> Prefix</strong></h3>
-
-<ul>
-  <li>
-    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GH-26
-</code></pre></div>    </div>
-  </li>
-  <li>GH-26</li>
-</ul>
-
-<hr />
-
-<h3 id="5-autolink-issues-and-pull-requests-using-usernamerepositoryissuenumber">5. <strong>Autolink Issues and Pull Requests Using <code class="language-plaintext highlighter-rouge">Username/Repository#IssueNumber</code></strong></h3>
-
-<ul>
-  <li>
-    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jlord/sheetsee.js#26
-</code></pre></div>    </div>
-  </li>
-  <li>jlord/sheetsee.js#26</li>
-</ul>
-
-<hr />
-
-<h3 id="6-autolink-issues-and-pull-requests-using-orgnamerepositoryissuenumber">6. <strong>Autolink Issues and Pull Requests Using <code class="language-plaintext highlighter-rouge">OrgName/Repository#IssueNumber</code></strong></h3>
-
-<ul>
-  <li>
-    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code>github-linguist/linguist#4039
-</code></pre></div>    </div>
-  </li>
-  <li>github-linguist/linguist#4039</li>
-</ul>
-
-<hr />
-
-<h3 id="7-autolink-labels-from-the-same-repository">7. <strong>Autolink Labels from the Same Repository</strong></h3>
-
-<ul>
-  <li>
-    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://github.com/github/docs/labels/enhancement
-</code></pre></div>    </div>
-  </li>
-  <li>https://github.com/github/docs/labels/enhancement</li>
-</ul>
-
-<hr />
-
-<h3 id="8-autolink-commit-shas-using-full-commit-url">8. <strong>Autolink Commit SHAs Using Full Commit URL</strong></h3>
-
-<ul>
-  <li>
-    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://github.com/jlord/sheetsee.js/commit/a5c3785ed8d6a35868bc169f07e40e889087fd2e
-</code></pre></div>    </div>
-  </li>
-  <li>https://github.com/jlord/sheetsee.js/commit/a5c3785ed8d6a35868bc169f07e40e889087fd2e</li>
-</ul>
-
-<hr />
-
-<h3 id="9-autolink-commit-shas-using-short-sha">9. <strong>Autolink Commit SHAs Using Short SHA</strong></h3>
-
-<ul>
-  <li>
-    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code>a5c3785
-</code></pre></div>    </div>
-  </li>
-  <li>a5c3785</li>
-</ul>
-
-<hr />
-
-<h3 id="10-autolink-commit-shas-using-usersha-format">10. <strong>Autolink Commit SHAs Using <code class="language-plaintext highlighter-rouge">User@SHA</code> Format</strong></h3>
-
-<ul>
-  <li>
-    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jlord@a5c3785
-</code></pre></div>    </div>
-  </li>
-  <li>jlord@a5c3785</li>
-</ul>
-
-<hr />
-
-<h3 id="11-autolink-commit-shas-using-usernamerepositorysha-format">11. <strong>Autolink Commit SHAs Using <code class="language-plaintext highlighter-rouge">Username/Repository@SHA</code> Format</strong></h3>
-
-<ul>
-  <li>
-    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jlord/sheetsee.js@a5c3785
-</code></pre></div>    </div>
-  </li>
-  <li>jlord/sheetsee.js@a5c3785</li>
-</ul>
-
-<hr />
-
-<h3 id="12-autolink-external-resources-with-custom-autolinks">12. <strong>Autolink External Resources with Custom Autolinks</strong></h3>
-
-<ul>
-  <li>
-    <div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Example: JIRA-123
-</code></pre></div>    </div>
-  </li>
-  <li>Example: JIRA-123</li>
-</ul>
-
-<h2 id="credits">Credits</h2>
-
-<ol>
-  <li>https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax</li>
-  <li>https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting</li>
-  <li>https://github.com/adam-p/markdown-here/wiki/markdown-cheatsheet</li>
-</ol>
-<div class="footnotes" role="doc-endnotes">
-  <ol>
-    <li id="fn:1" role="doc-endnote">
-      <p>My reference. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a> <a href="#fnref:1:1" class="reversefootnote" role="doc-backlink">&#8617;<sup>2</sup></a></p>
-    </li>
-    <li id="fn:2" role="doc-endnote">
-
-      <p>Every new line should be prefixed with 2 spaces.<br />
-This allows you to have a footnote with multiple lines. <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a> <a href="#fnref:2:1" class="reversefootnote" role="doc-backlink">&#8617;<sup>2</sup></a></p>
-    </li>
-    <li id="fn:note" role="doc-endnote">
-
-      <p>Named footnotes will still render with numbers instead of the text but allow easier identification and linking.<br />
-This footnote also has been made with a different syntax using 4 spaces for new lines. <a href="#fnref:note" class="reversefootnote" role="doc-backlink">&#8617;</a> <a href="#fnref:note:1" class="reversefootnote" role="doc-backlink">&#8617;<sup>2</sup></a></p>
-    </li>
-  </ol>
-</div>
+    }
+    ```
+  
+  ---
+  
+  ### 5. **Create an ASCII STL 3D Model**
+  
+  - ````md
+    ```stl
+    solid cube_corner
+      facet normal 0.0 -1.0 0.0
+        outer loop
+          vertex 0.0 0.0 0.0
+          vertex 1.0 0.0 0.0
+          vertex 0.0 0.0 1.0
+        endloop
+      endfacet
+      facet normal 0.0 0.0 -1.0
+        outer loop
+          vertex 0.0 0.0 0.0
+          vertex 0.0 1.0 0.0
+          vertex 1.0 0.0 0.0
+        endloop
+      endfacet
+      facet normal -1.0 0.0 0.0
+        outer loop
+          vertex 0.0 0.0 0.0
+          vertex 0.0 0.0 1.0
+          vertex 0.0 1.0 0.0
+        endloop
+      endfacet
+      facet normal 0.577 0.577 0.577
+        outer loop
+          vertex 1.0 0.0 0.0
+          vertex 0.0 1.0 0.0
+          vertex 0.0 0.0 1.0
+        endloop
+      endfacet
+    endsolid
+    ```
+    ````
+    ```
+  
+    ```
+  - ```stl
+    solid cube_corner
+      facet normal 0.0 -1.0 0.0
+        outer loop
+          vertex 0.0 0.0 0.0
+          vertex 1.0 0.0 0.0
+          vertex 0.0 0.0 1.0
+        endloop
+      endfacet
+      facet normal 0.0 0.0 -1.0
+        outer loop
+          vertex 0.0 0.0 0.0
+          vertex 0.0 1.0 0.0
+          vertex 1.0 0.0 0.0
+        endloop
+      endfacet
+      facet normal -1.0 0.0 0.0
+        outer loop
+          vertex 0.0 0.0 0.0
+          vertex 0.0 0.0 1.0
+          vertex 0.0 1.0 0.0
+        endloop
+      endfacet
+      facet normal 0.577 0.577 0.577
+        outer loop
+          vertex 1.0 0.0 0.0
+          vertex 0.0 1.0 0.0
+          vertex 0.0 0.0 1.0
+        endloop
+      endfacet
+    endsolid
+    ```
+  
+  ### 1. **Write Inline Mathematical Expressions Using `$`**
+  
+  - ```md
+    This sentence uses `$` delimiters to show math inline: $\sqrt{3x-1}+(1+x)^2$
+    ```
+  - This sentence uses `$` delimiters to show math inline: $\sqrt{3x-1}+(1+x)^2$
+  
+  ---
+  
+  ### 2. **Write Inline Mathematical Expressions Using `$` with Backticks**
+  
+  - ```md
+    This sentence uses $\` and \`$ delimiters to show math inline: $`\sqrt{3x-1}+(1+x)^2`$
+    ```
+  - This sentence uses $\` and \`$ delimiters to show math inline: $`\sqrt{3x-1}+(1+x)^2`$
+  
+  ---
+  
+  ### 3. **Write Block Mathematical Expressions Using `$$`**
+  
+  - ```md
+    **The Cauchy-Schwarz Inequality**\  
+    $$\left( \sum_{k=1}^n a_k b_k \right)^2 \leq \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right)$$
+    ```
+  - **The Cauchy-Schwarz Inequality**\  
+    $$\left( \sum_{k=1}^n a_k b_k \right)^2 \leq \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right)$$
+  
+  ---
+  
+  ### 4. **Write Block Mathematical Expressions Using `math` Code Blocks**
+  
+  - ````md
+    **The Cauchy-Schwarz Inequality**
+  
+    ```math
+    \left( \sum_{k=1}^n a_k b_k \right)^2 \leq \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right)
+    ```
+    ````
+    ```
+  
+    ```
+  - **The Cauchy-Schwarz Inequality**
+    ```math
+    \left( \sum_{k=1}^n a_k b_k \right)^2 \leq \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right)
+    ```
+  
+  ---
+  
+  ### 5. **Display a Dollar Sign Inside a Math Expression Using `\`**
+  
+  - ```md
+    This expression uses `\$` to display a dollar sign: $`\sqrt{\$4}`$
+    ```
+  - This expression uses `\$` to display a dollar sign: $`\sqrt{\$4}`$
+  
+  ---
+  
+  ### 6. **Display a Dollar Sign Outside a Math Expression Using `<span>`**
+  
+  - ```md
+    To split <span>$</span>100 in half, we calculate $100/2$
+    ```
+  - To split <span>$</span>100 in half, we calculate $100/2$
+  
+  ### 1. **Autolink Standard URLs**
+  
+  - ```md
+    Visit https://github.com
+    ```
+  - Visit https://github.com
+  
+  ---
+  
+  ### 2. **Autolink Issues and Pull Requests Using Full URL**
+  
+  - ```md
+    https://github.com/jlord/sheetsee.js/issues/26
+    ```
+  - https://github.com/jlord/sheetsee.js/issues/26
+  
+  ---
+  
+  ### 3. **Autolink Issues and Pull Requests Using `#` and Issue Number**
+  
+  - ```md
+    #26
+    ```
+  - #26
+  
+  ---
+  
+  ### 4. **Autolink Issues and Pull Requests Using `GH-` Prefix**
+  
+  - ```md
+    GH-26
+    ```
+  - GH-26
+  
+  ---
+  
+  ### 5. **Autolink Issues and Pull Requests Using `Username/Repository#IssueNumber`**
+  
+  - ```md
+    jlord/sheetsee.js#26
+    ```
+  - jlord/sheetsee.js#26
+  
+  ---
+  
+  ### 6. **Autolink Issues and Pull Requests Using `OrgName/Repository#IssueNumber`**
+  
+  - ```md
+    github-linguist/linguist#4039
+    ```
+  - github-linguist/linguist#4039
+  
+  ---
+  
+  ### 7. **Autolink Labels from the Same Repository**
+  
+  - ```md
+    https://github.com/github/docs/labels/enhancement
+    ```
+  - https://github.com/github/docs/labels/enhancement
+  
+  ---
+  
+  ### 8. **Autolink Commit SHAs Using Full Commit URL**
+  
+  - ```md
+    https://github.com/jlord/sheetsee.js/commit/a5c3785ed8d6a35868bc169f07e40e889087fd2e
+    ```
+  - https://github.com/jlord/sheetsee.js/commit/a5c3785ed8d6a35868bc169f07e40e889087fd2e
+  
+  ---
+  
+  ### 9. **Autolink Commit SHAs Using Short SHA**
+  
+  - ```md
+    a5c3785
+    ```
+  - a5c3785
+  
+  ---
+  
+  ### 10. **Autolink Commit SHAs Using `User@SHA` Format**
+  
+  - ```md
+    jlord@a5c3785
+    ```
+  - jlord@a5c3785
+  
+  ---
+  
+  ### 11. **Autolink Commit SHAs Using `Username/Repository@SHA` Format**
+  
+  - ```md
+    jlord/sheetsee.js@a5c3785
+    ```
+  - jlord/sheetsee.js@a5c3785
+  
+  ---
+  
+  ### 12. **Autolink External Resources with Custom Autolinks**
+  
+  - ```md
+    Example: JIRA-123
+    ```
+  - Example: JIRA-123
+  
+  ## Credits
+  
+  1. https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax
+  2. https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting
+  3. https://github.com/adam-p/markdown-here/wiki/markdown-cheatsheet
+&lt;/details&gt; 
+</span></details></details>
 
   </div>
 
