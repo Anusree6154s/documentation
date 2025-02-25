@@ -13,7 +13,7 @@ permalink: readme-formatting-guidelines
 
 ## Github readme formatting styles put together by me
 > [!WARNING]
-> Many of the styles here dont work during developemnt. Instead only on github. And this needs to be viewed in github to see the right results: 
+> Many of the styles here dont work during developemnt. Instead only on github. And this needs to be viewed in [github](https://github.com/Anusree6154s/documentation/blob/main/content/web-dev/readme-formatting-guidelines/README.md) to see the right results.
 
 ### **1. Formatting text**  
 |code|result|
