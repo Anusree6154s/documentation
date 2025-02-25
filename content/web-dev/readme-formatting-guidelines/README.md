@@ -126,7 +126,7 @@ permalink: readme-formatting-guidelines
    - `#0969DA`  
      `rgb(9, 105, 218)`  
      `hsl(212, 92%, 45%)`  
-     - `rgb(9, 105, 218)`
+    
 
 
 
@@ -246,18 +246,36 @@ permalink: readme-formatting-guidelines
 
 ### **24. Alerts (`> [!NOTE]`, `> [!WARNING]`)**  
    - ```md
-     > [!NOTE]  
-     > This is an important note.  
-
-     > [!WARNING]  
-     > This is a warning message.
+      > [!NOTE]
+      > Useful information that users should know, even when skimming content.
+      
+      > [!TIP]
+      > Helpful advice for doing things better or more easily.
+      
+      > [!IMPORTANT]
+      > Key information users need to know to achieve their goal.
+      
+      > [!WARNING]
+      > Urgent info that needs immediate user attention to avoid problems.
+      
+      > [!CAUTION]
+      > Advises about risks or negative outcomes of certain actions.
      ```  
-   -  
-     > [!NOTE]  
-     > This is an important note.  
-
-     > [!WARNING]  
-     > This is a warning message.  
+ 
+   > [!NOTE]
+   > Useful information that users should know, even when skimming content.
+   
+   > [!TIP]
+   > Helpful advice for doing things better or more easily.
+   
+   > [!IMPORTANT]
+   > Key information users need to know to achieve their goal.
+   
+   > [!WARNING]
+   > Urgent info that needs immediate user attention to avoid problems.
+   
+   > [!CAUTION]
+   > Advises about risks or negative outcomes of certain actions. 
 
 
 
@@ -272,8 +290,392 @@ permalink: readme-formatting-guidelines
    - ```md
      Let's rename \*our-new-project\* to \*our-old-project\*.
      ```  
-   - Let's rename \*our-new-project\* to \*our-old-project\*.  
+   - Let's rename \*our-new-project\* to \*our-old-project\*.
+
+Sure! Here’s the rewritten content in your requested format:  
+
+---
+
+### 1. **Create a Table using Pipes (`|`) and Hyphens (`-`)**  
+   - ```md  
+     | First Header  | Second Header |  
+     | ------------- | ------------- |  
+     | Content Cell  | Content Cell  |  
+     | Content Cell  | Content Cell  |  
+     ```  
+   -  
+     | First Header  | Second Header |  
+     | ------------- | ------------- |  
+     | Content Cell  | Content Cell  |  
+     | Content Cell  | Content Cell  |  
+
+---
+
+### 2. **Tables Do Not Require Perfect Alignment**  
+   - ```md  
+     | Command  | Description                           |  
+     | ---      | ---                                   |  
+     | git status | List all new or modified files       |  
+     | git diff | Show file differences not yet staged |  
+     ```  
+   -  
+     | Command  | Description                           |  
+     | ---      | ---                                   |  
+     | git status | List all new or modified files       |  
+     | git diff | Show file differences not yet staged |  
+
+---
+
+### 3. **Use Inline Code Blocks (`) Inside Tables**  
+   - ```md  
+     | Command     | Description                                |  
+     | ---        | ---                                        |  
+     | `git status` | List all *new or modified* files         |  
+     | `git diff`   | Show file differences that **haven't been** staged |  
+     ```  
+   -  
+     | Command     | Description                                |  
+     | ---        | ---                                        |  
+     | `git status` | List all *new or modified* files         |  
+     | `git diff`   | Show file differences that **haven't been** staged |  
+
+---
+
+### 4. **Align Table Text to Left, Center, or Right**  
+   - ```md  
+     | Left-aligned | Center-aligned | Right-aligned |  
+     | :---        |     :---:      |          ---: |  
+     | git status  | git status     | git status    |  
+     | git diff    | git diff       | git diff      |  
+     ```  
+   -  
+     | Left-aligned | Center-aligned | Right-aligned |  
+     | :---        |     :---:      |          ---: |  
+     | git status  | git status     | git status    |  
+     | git diff    | git diff       | git diff      |  
+
+---
+
+### 5. **Display a Pipe (`|`) Inside a Table Cell**  
+   - ```md  
+     | Name     | Character |  
+     | ---      | ---       |  
+     | Backtick | `         |  
+     | Pipe     | \|        |  
+     ```  
+   -  
+     | Name     | Character |  
+     | ---      | ---       |  
+     | Backtick | `         |  
+     | Pipe     | \|        |  
+
+### 1. **Create a Collapsed Section using `<details>`**  
+   - ```md  
+     <details>  
+     <summary>Click to expand</summary>  
+       
+     This text is hidden by default and will be revealed when clicked.  
+
+     </details>  
+     ```  
+   -  
+     <details>  
+     <summary>Click to expand</summary>  
+       
+     This text is hidden by default and will be revealed when clicked.  
+
+     </details>  
+
+---
+
+### 2. **Add a Header, Text, or Code Block Inside a Collapsed Section**  
+   - ```md  
+     <details>  
+     <summary>Tips for collapsed sections</summary>  
+
+     ### You can add a header  
+
+     You can add text within a collapsed section.  
+
+     You can add an image or a code block, too.  
+
+     ```ruby  
+     puts "Hello World"  
+     ```  
+
+     </details>  
+     ```  
+   -  
+     <details>  
+     <summary>Tips for collapsed sections</summary>  
+
+     ### You can add a header  
+
+     You can add text within a collapsed section.  
+
+     You can add an image or a code block, too.  
+
+     ```ruby  
+     puts "Hello World"  
+     ```  
+
+     </details>  
+
+---
+
+### 3. **Make a Collapsed Section Open by Default**  
+   - ```md  
+     <details open>  
+     <summary>Always visible section</summary>  
+
+     This section starts open by default.  
+
+     </details>  
+     ```  
+   -  
+     <details open>  
+     <summary>Always visible section</summary>  
+
+     This section starts open by default.  
+
+     </details>  
+### 1. **Create a Mermaid Diagram**  
+   - ```md  
+     ```mermaid  
+     graph TD;  
+         A-->B;  
+         A-->C;  
+         B-->D;  
+         C-->D;  
+     ```  
+     ```  
+   -  
+     ```mermaid  
+     graph TD;  
+         A-->B;  
+         A-->C;  
+         B-->D;  
+         C-->D;  
+     ```  
+
+---
+
+### 2. **Check the Mermaid Version in Use**  
+   - ```md  
+     ```mermaid  
+     info  
+     ```  
+     ```  
+   -  
+     ```mermaid  
+     info  
+     ```  
+
+---
+
+### 3. **Create a GeoJSON Map**  
+   - ```md  
+     ```geojson  
+     {  
+       "type": "FeatureCollection",  
+       "features": [  
+         {  
+           "type": "Feature",  
+           "id": 1,  
+           "properties": {  
+             "ID": 0  
+           },  
+           "geometry": {  
+             "type": "Polygon",  
+             "coordinates": [  
+               [  
+                   [-90,35],  
+                   [-90,30],  
+                   [-85,30],  
+                   [-85,35],  
+                   [-90,35]  
+               ]  
+             ]  
+           }  
+         }  
+       ]  
+     }  
+     ```  
+     ```  
+   -  
+     ```geojson  
+     {  
+       "type": "FeatureCollection",  
+       "features": [  
+         {  
+           "type": "Feature",  
+           "id": 1,  
+           "properties": {  
+             "ID": 0  
+           },  
+           "geometry": {  
+             "type": "Polygon",  
+             "coordinates": [  
+               [  
+                   [-90,35],  
+                   [-90,30],  
+                   [-85,30],  
+                   [-85,35],  
+                   [-90,35]  
+               ]  
+             ]  
+           }  
+         }  
+       ]  
+     }  
+     ```  
+
+---
+
+### 4. **Create a TopoJSON Map**  
+   - ```md  
+     ```topojson  
+     {  
+       "type": "Topology",  
+       "transform": {  
+         "scale": [0.0005000500050005, 0.00010001000100010001],  
+         "translate": [100, 0]  
+       },  
+       "objects": {  
+         "example": {  
+           "type": "GeometryCollection",  
+           "geometries": [  
+             {  
+               "type": "Point",  
+               "properties": {"prop0": "value0"},  
+               "coordinates": [4000, 5000]  
+             },  
+             {  
+               "type": "LineString",  
+               "properties": {"prop0": "value0", "prop1": 0},  
+               "arcs": [0]  
+             },  
+             {  
+               "type": "Polygon",  
+               "properties": {"prop0": "value0", "prop1": {"this": "that"}},  
+               "arcs": [[1]]  
+             }  
+           ]  
+         }  
+       },  
+       "arcs": [[[4000, 0], [1999, 9999], [2000, -9999], [2000, 9999]],[[0, 0], [0, 9999], [2000, 0], [0, -9999], [-2000, 0]]]  
+     }  
+     ```  
+     ```  
+   -  
+     ```topojson  
+     {  
+       "type": "Topology",  
+       "transform": {  
+         "scale": [0.0005000500050005, 0.00010001000100010001],  
+         "translate": [100, 0]  
+       },  
+       "objects": {  
+         "example": {  
+           "type": "GeometryCollection",  
+           "geometries": [  
+             {  
+               "type": "Point",  
+               "properties": {"prop0": "value0"},  
+               "coordinates": [4000, 5000]  
+             },  
+             {  
+               "type": "LineString",  
+               "properties": {"prop0": "value0", "prop1": 0},  
+               "arcs": [0]  
+             },  
+             {  
+               "type": "Polygon",  
+               "properties": {"prop0": "value0", "prop1": {"this": "that"}},  
+               "arcs": [[1]]  
+             }  
+           ]  
+         }  
+       },  
+       "arcs": [[[4000, 0], [1999, 9999], [2000, -9999], [2000, 9999]],[[0, 0], [0, 9999], [2000, 0], [0, -9999], [-2000, 0]]]  
+     }  
+     ```  
+
+---
+
+### 5. **Create an ASCII STL 3D Model**  
+   - ```md  
+     ```stl  
+     solid cube_corner  
+       facet normal 0.0 -1.0 0.0  
+         outer loop  
+           vertex 0.0 0.0 0.0  
+           vertex 1.0 0.0 0.0  
+           vertex 0.0 0.0 1.0  
+         endloop  
+       endfacet  
+       facet normal 0.0 0.0 -1.0  
+         outer loop  
+           vertex 0.0 0.0 0.0  
+           vertex 0.0 1.0 0.0  
+           vertex 1.0 0.0 0.0  
+         endloop  
+       endfacet  
+       facet normal -1.0 0.0 0.0  
+         outer loop  
+           vertex 0.0 0.0 0.0  
+           vertex 0.0 0.0 1.0  
+           vertex 0.0 1.0 0.0  
+         endloop  
+       endfacet  
+       facet normal 0.577 0.577 0.577  
+         outer loop  
+           vertex 1.0 0.0 0.0  
+           vertex 0.0 1.0 0.0  
+           vertex 0.0 0.0 1.0  
+         endloop  
+       endfacet  
+     endsolid  
+     ```  
+     ```  
+   -  
+     ```stl  
+     solid cube_corner  
+       facet normal 0.0 -1.0 0.0  
+         outer loop  
+           vertex 0.0 0.0 0.0  
+           vertex 1.0 0.0 0.0  
+           vertex 0.0 0.0 1.0  
+         endloop  
+       endfacet  
+       facet normal 0.0 0.0 -1.0  
+         outer loop  
+           vertex 0.0 0.0 0.0  
+           vertex 0.0 1.0 0.0  
+           vertex 1.0 0.0 0.0  
+         endloop  
+       endfacet  
+       facet normal -1.0 0.0 0.0  
+         outer loop  
+           vertex 0.0 0.0 0.0  
+           vertex 0.0 0.0 1.0  
+           vertex 0.0 1.0 0.0  
+         endloop  
+       endfacet  
+       facet normal 0.577 0.577 0.577  
+         outer loop  
+           vertex 1.0 0.0 0.0  
+           vertex 0.0 1.0 0.0  
+           vertex 0.0 0.0 1.0  
+         endloop  
+       endfacet  
+     endsolid  
+     ```  
+
+
 
 
 ## Credits
 1. https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax
+2. https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting
+3. 
