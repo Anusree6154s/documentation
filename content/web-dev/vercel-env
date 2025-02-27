@@ -3,6 +3,8 @@ title: Vercel .env extraction
 excerpt: Extracting environment variables from deployed vercel app
 date: 27 Feb 2025
 permalink: vercel-env
+tags: [vercel, env]
+layout: post
 ---
 
 ## Vercel Env Variable Extraction
