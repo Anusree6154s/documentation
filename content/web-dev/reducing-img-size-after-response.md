@@ -1,5 +1,5 @@
 ---
-title: Optimising image imported from external source
+title: External Image Optimisation
 date:  3 march 2025
 layout: post
 excerpt: Mehtods to optimise an image after it is imported from an external image source/cdn
