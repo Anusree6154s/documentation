@@ -1,0 +1,5 @@
+- [] mini app with all operators
+- [] mini app with all indexing
+- [] app with aggregation
+- [] app with transaction (probably booking app)
+- [] sharding, repication app (some way to have large amount of data)
