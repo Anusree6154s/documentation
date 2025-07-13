@@ -4,6 +4,7 @@ date: Jul 13, 2025
 layout: post
 excerpt: Some basic concepts of dart for flutter
 permalink: basics-of-dart
+tags: [flutter, dart, mobile, android, ios]
 ---
 
 Since I began learning flutter, dart was a new language for me. I came to know that dart is the most similar to java language which also I was just partially informed in.
