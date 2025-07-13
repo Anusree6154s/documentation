@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Flutter Setup Guide | Bits &amp; Bytes</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="Flutter Setup Guide" />
+<meta name="author" content="Anusree Anilkumar" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Guide to setting up flutter in vs code" />
+<meta property="og:description" content="Guide to setting up flutter in vs code" />
+<link rel="canonical" href="https://anusree6154s.github.io/documentation/setting-up-flutter" />
+<meta property="og:url" content="https://anusree6154s.github.io/documentation/setting-up-flutter" />
+<meta property="og:site_name" content="Bits &amp; Bytes" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-07-13T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Flutter Setup Guide" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Anusree Anilkumar"},"dateModified":"2025-07-13T00:00:00+00:00","datePublished":"2025-07-13T00:00:00+00:00","description":"Guide to setting up flutter in vs code","headline":"Flutter Setup Guide","mainEntityOfPage":{"@type":"WebPage","@id":"https://anusree6154s.github.io/documentation/setting-up-flutter"},"url":"https://anusree6154s.github.io/documentation/setting-up-flutter"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/documentation/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://anusree6154s.github.io/documentation/feed.xml" title="Bits &amp; Bytes" /><!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TSNY1FXG3P"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-TSNY1FXG3P');
+</script></head>
+<body><header class="site-header">
+  <div class="loader"></div>
+
+    <div class="wrapper"><!-- <a class="site-title" rel="author" href="/documentation/">Bits &amp; Bytes</a> -->
+          <a class="site-title"  rel="author" href="/documentation/"><span>BITS</span><span> & </span><span>BYTES</span></a><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewBox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+              </svg>
+            </span>
+          </label>
+  
+          <div class="trigger">
+            <!--<a class="page-link" href="/documentation/about">About Me</a>-->
+
+            <a class="page-link" href="/documentation/#latest-posts">LATEST POSTS</a>
+            <a class="page-link" href="/documentation/all-posts">ALL POSTS</a>
+            <a class="page-link" href="/documentation/#projects">PROJECTS</a>
+            <a class="page-link" href="/documentation/#profile">PROFILE</a>
+            <a class="page-link" href="/documentation/#contact">CONTACT</a>
+          </div>
+        </nav></div>
+    
+  </header><main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  
+
+
+  <header class="post-header">
+    
+    <h1 class="post-title p-name" itemprop="name headline">Flutter Setup Guide</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2025-07-13T00:00:00+00:00" itemprop="datePublished">13 Jul 2025
+      </time></p>
+      <p class="tag-container"></span>
+</p>
+  </header> 
+
+  
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>I have been looking on how to create my own gujrati learning app and thought, well why not learn something that’s used in my office. And so I chose flutter. <img src="/documentation/assets/imgs/setting-up-flutter.png" width="30" height="30" /></p>
+
+<p>Now I was used to using vs code. So went and prompted gpt to help me set up flutter in vs code, and this is its response that worked well for me:</p>
+
+<p><br /></p>
+
+<div style="border:1px solid #ccc; padding:10px; border-radius:5px">
+
+  <h3 id="flutter-development-with-vs-code">🚀 Flutter Development with <strong>VS Code</strong></h3>
+
+  <ul>
+    <li>
+      <h4 id="install-prerequisites">✅ 1. <strong>Install Prerequisites</strong></h4>
+
+      <ul>
+        <li>
+          <h5 id="flutter-sdk">📦 Flutter SDK</h5>
+
+          <ul>
+            <li>Go to: <a href="https://docs.flutter.dev/get-started/install">https://docs.flutter.dev/get-started/install</a></li>
+            <li>Download for your OS (Windows/Linux/macOS)</li>
+            <li>Extract and add the <code class="language-plaintext highlighter-rouge">flutter/bin</code> folder to your <strong>system PATH</strong></li>
+          </ul>
+
+          <blockquote>
+            <p><strong>To verify installation:</strong></p>
+          </blockquote>
+
+          <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>flutter <span class="nt">--version</span>
+</code></pre></div>          </div>
+        </li>
+        <li>
+          <h5 id="install-vs-code">💻 Install VS Code</h5>
+
+          <ul>
+            <li>Download: <a href="https://code.visualstudio.com/">https://code.visualstudio.com/</a></li>
+          </ul>
+        </li>
+        <li>
+          <h5 id="install-extensions-in-vs-code">🧩 Install Extensions in VS Code</h5>
+
+          <ol>
+            <li>Open VS Code</li>
+            <li>Go to Extensions (<code class="language-plaintext highlighter-rouge">Ctrl+Shift+X</code>)</li>
+            <li>
+              <p>Install these:</p>
+
+              <ul>
+                <li>✅ Flutter (by Dart Code)</li>
+                <li>✅ Dart (automatically gets installed with Flutter)</li>
+              </ul>
+            </li>
+          </ol>
+        </li>
+        <li>
+          <h5 id="install-android-studio-for-android-sdk--emulator">📱 Install Android Studio (for Android SDK &amp; Emulator)</h5>
+
+          <ul>
+            <li>You don’t need to use Android Studio, but you <strong>do need</strong> its SDK + emulator</li>
+          </ul>
+
+          <ol>
+            <li>Install: <a href="https://developer.android.com/studio">https://developer.android.com/studio</a></li>
+            <li>During setup, <strong>check</strong>: Android SDK + Emulator</li>
+            <li>
+              <p>After install, open Android Studio &gt; Preferences &gt; SDK Manager</p>
+
+              <ul>
+                <li>Ensure <strong>Android SDK</strong>, <strong>platform tools</strong>, and at least one <strong>API version</strong> are installed</li>
+              </ul>
+            </li>
+          </ol>
+
+          <blockquote>
+            <p><strong>For emulator</strong>:</p>
+          </blockquote>
+
+          <ul>
+            <li>Create one using AVD Manager inside Android Studio</li>
+            <li>Or use a <strong>real Android device</strong> in developer mode + USB debugging</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <h4 id="check-flutter-environment">⚙️ 2. <strong>Check Flutter Environment</strong></h4>
+
+      <p>Run:</p>
+
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>flutter doctor
+</code></pre></div>      </div>
+
+      <p>✅ It should show checkmarks for:</p>
+
+      <ul>
+        <li>Flutter</li>
+        <li>Dart</li>
+        <li>Android toolchain</li>
+        <li>VS Code</li>
+        <li>(iOS only if on macOS)</li>
+      </ul>
+    </li>
+    <li>
+      <h4 id="create-a-new-flutter-project">📁 3. <strong>Create a New Flutter Project</strong></h4>
+
+      <p>In terminal or VS Code terminal:</p>
+
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>flutter create my_app
+<span class="nb">cd </span>my_app
+code <span class="nb">.</span>    <span class="c">## opens the project in VS Code</span>
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <h4 id="run-your-app">👨‍💻 4. <strong>Run Your App</strong></h4>
+
+      <ol>
+        <li>Connect your Android device or start an emulator</li>
+        <li>
+          <p>In terminal:</p>
+
+          <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>flutter run
+</code></pre></div>          </div>
+        </li>
+      </ol>
+
+      <p>Or use <strong>F5</strong> in VS Code to launch the debugger.</p>
+    </li>
+    <li>
+      <h4 id="start-coding">📂 5. <strong>Start Coding</strong></h4>
+
+      <ul>
+        <li>Your main file: <code class="language-plaintext highlighter-rouge">lib/main.dart</code></li>
+        <li>Modify the default code or replace with your own UI</li>
+      </ul>
+    </li>
+    <li>
+      <h4 id="hot-reload--restart">🔁 6. <strong>Hot Reload / Restart</strong></h4>
+
+      <ul>
+        <li>Save file to see changes instantly (<strong>hot reload</strong>)</li>
+        <li>Use <code class="language-plaintext highlighter-rouge">r</code> or <code class="language-plaintext highlighter-rouge">R</code> in terminal when app is running</li>
+        <li>Or use the <strong>Flutter toolbar</strong> in VS Code</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h4 id="optional-android-app-icon--name">🛠 Optional: Android App Icon &amp; Name</h4>
+
+  <ul>
+    <li>Edit in <code class="language-plaintext highlighter-rouge">android/app/src/main/AndroidManifest.xml</code></li>
+    <li>Use package: <a href="https://pub.dev/packages/flutter_launcher_icons"><code class="language-plaintext highlighter-rouge">flutter_launcher_icons</code></a></li>
+  </ul>
+
+</div>
+
+  </div>
+
+  
+  <div class="related-posts">
+  
+
+  <div class="disqus-comments"><div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = 'https://anusree6154s.github.io/documentation/setting-up-flutter';
+      this.page.identifier = 'https://anusree6154s.github.io/documentation/setting-up-flutter';
+    };
+
+    (function() {
+      var d = document, s = d.createElement('script');
+
+      s.src = 'https://anusree-anilkumar-blog.disqus.com/embed.js';
+
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript></div>
+
+  <a class="u-url" href="/documentation/setting-up-flutter" hidden></a>
+</article>
+      </div>
+    </main><!-- <footer class="site-footer h-card">
+    <data class="u-url" href="/documentation/"></data>
+  
+    <div class="wrapper">
+  
+      <div class="footer-col-wrapper">
+        <div class="footer-col">
+          <p class="feed-subscribe">
+            <a href="https://anusree6154s.github.io/documentation/feed.xml">
+              <svg class="svg-icon orange">
+                <path d="M12.8 16C12.8 8.978 7.022 3.2 0 3.2V0c8.777 0 16 7.223 16 16h-3.2zM2.194
+                  11.61c1.21 0 2.195.985 2.195 2.196 0 1.21-.99 2.194-2.2 2.194C.98 16 0 15.017 0
+                  13.806c0-1.21.983-2.195 2.194-2.195zM10.606
+                  16h-3.11c0-4.113-3.383-7.497-7.496-7.497v-3.11c5.818 0 10.606 4.79 10.606 10.607z"
+                />
+              </svg><span>Subscribe</span>
+            </a>
+          </p>
+          <ul class="contact-list">
+            
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p>Tech Blog</p>
+        </div>
+      </div>
+  
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/Anusree6154s"><svg class="svg-icon"><use xlink:href="/documentation/assets/minima-social-icons.svg#github"></use></svg> <span class="username">Anusree6154s</span></a></li><li><a href="https://www.linkedin.com/in/anusreeanilkumar1"><svg class="svg-icon"><use xlink:href="/documentation/assets/minima-social-icons.svg#linkedin"></use></svg> <span class="username">anusreeanilkumar1</span></a></li><li><a href="https://www.twitter.com/anu6154s"><svg class="svg-icon"><use xlink:href="/documentation/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">anu6154s</span></a></li><li><a href="/documentation/feed.xml"><svg class="svg-icon"><use xlink:href="/documentation/assets/minima-social-icons.svg#rss"></use></svg> <span>rss</span></a></li></ul>
+</div>
+  
+    </div>
+  
+  </footer> -->
+
+<footer id="contact">
+  <section class="footer-inner">
+    <div class="contact">
+      <div class="contact-inner">
+        <p>CONTACT</p>
+        <p>
+          <span class="logo"></span><span>anilkumaranusree113@gmail.com</span>
+        </p>
+        <p><span class="logo"></span><span>+91-9699973230</span></p>
+        <p><span class="logo"></span><span>Surat, Gujarat, India</span></p>
+      </div>
+
+      <div class="socials">
+        <a href="https://www.linkedin.com/in/anusreeanilkumar1/"
+          ><span></span
+        ></a>
+        <a href="https://github.com/Anusree6154s"><span></span></a>
+        <a href="https://x.com/anu6154s"><span></span></a>
+      </div>
+    </div>
+    <div class="list">
+      <div class="sections">
+        <p>SECTIONS</p>
+        <a href="/documentation/#latest-posts">Latest Posts</a>
+        <a href="/documentation/all-posts">All Posts</a>
+        <a href="/documentation/#projects">Projects</a>
+        <a href="/documentation/#profile">Profile</a>
+      </div>
+      <div class="links">
+        <p>LINKS</p>
+        <a href="https://anusreeanilkumar.vercel.app/">Personal Portfolio</a>
+        <a href="https://www.crio.do/learn/portfolio/anilkumaranusree113/"
+          >Crio.Do Portfolio</a
+        >
+        <a href="https://anusreeanilkumar.vercel.app/projects">All Projects</a>
+        <a
+          href="https://drive.google.com/file/d/1Y8_r1SKBmwClHUr-pszQpEmI3XLBEbTO/view?usp=sharing"
+          >Resume</a
+        >
+      </div>
+    </div>
+  </section>
+
+  <section class="sub-footer">@ 2025 Anusree Anilkumar</section>
+</footer>
+</body>
+
+</html>

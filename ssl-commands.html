@@ -20,7 +20,14 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Anusree Anilkumar"},"dateModified":"2025-01-09T00:00:00+00:00","datePublished":"2025-01-09T00:00:00+00:00","description":"Generate a CA certificate: openssl genrsa -out ca.key 2048 openssl req -x509 -new -nodes -key ca.key -sha256 -days 365 -out ca.crt Generate a server certificate: openssl genrsa -out server.key 2048 openssl req -new -key server.key -out server.csr openssl x509 -req -in server.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out server.crt -days 365 -sha256 Generate a client certificate: openssl genrsa -out client.key 2048 openssl req -new -key client.key -out client.csr openssl x509 -req -in client.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out client.crt","headline":"SSL Commands","mainEntityOfPage":{"@type":"WebPage","@id":"https://anusree6154s.github.io/documentation/ssl-commands"},"url":"https://anusree6154s.github.io/documentation/ssl-commands"}</script>
 <!-- End Jekyll SEO tag -->
-<link rel="stylesheet" href="/documentation/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://anusree6154s.github.io/documentation/feed.xml" title="Bits &amp; Bytes" /></head>
+<link rel="stylesheet" href="/documentation/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://anusree6154s.github.io/documentation/feed.xml" title="Bits &amp; Bytes" /><!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TSNY1FXG3P"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-TSNY1FXG3P');
+</script></head>
 <body><header class="site-header">
   <div class="loader"></div>
 
