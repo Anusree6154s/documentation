@@ -23,6 +23,12 @@ layout: page
   {% endunless %}
   {% endfor %}
   <p class='total-posts'><span>Total Posts: {{ post_count }}</span></p>
+
+  <div class="search-container">
+    <input type="text" id="search-input" placeholder="Search posts" />
+    <ul id="results-container"></ul>
+  </div>
+
   <div class='list'>
     {% for post in site.posts %}
     {% unless post.hidden %}
