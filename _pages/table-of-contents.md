@@ -35,10 +35,8 @@ layout: page
             <p>
               {%- if post.tags.size>0 -%}
               <span class='tag-title'>TAGS: </span>
-                {%- for tag in post.tags -%}
-                    <span class='tags'>{{ tag | escape }},</span>
-                  {%- endfor -%} 
-                {%- endif -%}
+              <span class='tags'>{{ post.tags | join: ', ' | escape }}</span>
+              {%- endif -%}
             </p>
           </div>
         </div>
@@ -48,8 +46,5 @@ layout: page
     {% endfor %}
   </div>
 </div>
-
-
-  
 
 </div>
