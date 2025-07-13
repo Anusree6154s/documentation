@@ -244,7 +244,7 @@ body::-webkit-scrollbar-thumb {
 
   @media (min-width: 1300px) {
     height: 100px !important;
-  }  
+  }
 }
 
 // home
@@ -505,7 +505,7 @@ body::-webkit-scrollbar-thumb {
       display: flex;
       flex-direction: column;
       gap: 20px;
-        
+
       @media (min-width: 1300px) {
         margin-bottom: 8%;
       }
@@ -630,12 +630,10 @@ body::-webkit-scrollbar-thumb {
             color: #bebebe;
             flex-basis: 100%;
             flex-shrink: 0;
-            margin-bottom: 10px;
 
             @media (min-width: 600px) {
               flex-basis: unset;
               flex-shrink: unset;
-              margin-bottom: unset;
             }
 
             @media (min-width: 900px) {
@@ -1132,7 +1130,12 @@ body::-webkit-scrollbar-thumb {
       font-size: 14px;
       text-align: center;
       color: orange;
-      margin-bottom: 5%;
+    }
+
+    time {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
     }
 
     .tag-container {
@@ -1140,6 +1143,7 @@ body::-webkit-scrollbar-thumb {
       justify-content: center;
       align-items: center;
       gap: 10px;
+      margin-top: 5%;
 
       .tag-badge {
         padding: 2px 5px;
@@ -1213,12 +1217,12 @@ body::-webkit-scrollbar-thumb {
     }
   }
 
-  .disqus-comments{
+  .disqus-comments {
     width: 80%;
     margin: 0 auto;
   }
 
-  .related-posts{
+  .related-posts {
     margin-top: 20px;
     width: 100%;
   }
