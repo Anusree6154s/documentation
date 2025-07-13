@@ -42,7 +42,7 @@ layout: page
             </p>
           </div>
         </div>
-        <span class='date'>{{ post.date | date: "%d/%m/%Y"" }}</span>
+        <span class='date'>{{ post.date | date: "%d/%m/%Y" }}</span>
       </a>
     {% endunless %}
     {% endfor %}

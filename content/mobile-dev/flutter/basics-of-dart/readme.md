@@ -3,19 +3,20 @@ title: Basics of Dart
 date: Jul 13, 2025
 layout: post
 excerpt: Some basic concepts of dart for flutter
-permalink: setting-up-flutter
+permalink: basics-of-dart
 ---
 
 Since I began learning flutter, dart was a new language for me. I came to know that dart is the most similar to java language which also I was just partially informed in.
 
-<div align=center><img src='image.png' width=100/><p style="font-size:12px">And there I was stuck</p></div> 
+<div align=center><img src="{{'/assets/imgs/basics-of-dart.png'| relative_url}}"  width=100/><p style="font-size:12px">And there I was stuck</p></div>
 
-So here goes a small basics chart I made gpt give me that seems to be quite helpful in catching the basic flow the code it generates futher for my dart project:
+So here goes a small basics chart I made gpt give me that seems to be quite helpful in catching the basic flow of the code it generates futher for my dart project:
 
-<div style="border:1px solid #ccc; padding:10px; border-radius:5px">
+<br>
+
+<div style="border:1px solid #ccc; padding:10px; border-radius:5px" markdown="1">
 
 ## ✅ Essential Dart Concepts for Flutter Beginners
-
 
 ### 1. **Variables & Data Types**
 
@@ -27,15 +28,13 @@ bool isLoggedIn = true;
 var anything = 'Can be any type';
 ```
 
-* `var` = type inferred automatically
-* `final` / `const` = cannot be changed after initialization
+- `var` = type inferred automatically
+- `final` / `const` = cannot be changed after initialization
 
   ```dart
   final name = 'Anu';  // run-time constant
   const pi = 3.14;     // compile-time constant
   ```
-
-
 
 ### 2. **Functions**
 
@@ -49,13 +48,11 @@ void printMessage() {
 }
 ```
 
-* You can also write short functions like:
+- You can also write short functions like:
 
   ```dart
   int square(int x) => x * x;
   ```
-
-
 
 ### 3. **Classes & Objects**
 
@@ -72,18 +69,16 @@ class Person {
 }
 ```
 
-* Create an object:
+- Create an object:
 
   ```dart
   var p = Person('Anu', 21);
   p.introduce();
   ```
 
-
-
 ### 4. **Constructors**
 
-* Default, named, and optional constructors:
+- Default, named, and optional constructors:
 
   ```dart
   class Product {
@@ -95,8 +90,6 @@ class Person {
 
   var p = Product(name: 'Shoes', price: 99.99);
   ```
-
-
 
 ### 5. **Collections: Lists, Maps, Sets**
 
@@ -121,11 +114,9 @@ Set<String> cities = {'Paris', 'London', 'Paris'};
 print(cities.length);  // 2
 ```
 
-
-
 ### 6. **Control Flow**
 
-* If/Else, For, While, Switch
+- If/Else, For, While, Switch
 
 ```dart
 if (age > 18) {
@@ -139,11 +130,9 @@ for (var i = 0; i < 3; i++) {
 }
 ```
 
-
-
 ### 7. **Null Safety**
 
-* Dart doesn’t allow null unless you tell it:
+- Dart doesn’t allow null unless you tell it:
 
 ```dart
 String? name;  // nullable
@@ -152,8 +141,6 @@ name = null;   // OK
 String name2 = 'Anu';
 // name2 = null; // ❌ Error
 ```
-
-
 
 ### 8. **Async / Await & Futures**
 
@@ -172,8 +159,6 @@ void main() async {
 }
 ```
 
-
-
 ### 9. **Getters & Setters**
 
 ```dart
@@ -191,8 +176,6 @@ class Rectangle {
 }
 ```
 
-
-
 ### 10. **Basic Error Handling**
 
 ```dart
@@ -202,8 +185,6 @@ try {
   print('Caught error: $e');
 }
 ```
-
-
 
 ## 🧠 Bonus: Flutter-Specific Must-Knows
 
@@ -216,12 +197,10 @@ try {
 | `setState()`      | Rebuilds part of the UI               |
 | `async/await`     | Needed for API, DB, etc. in Flutter   |
 
-
-
 ## ✅ Summary: Start With These 10
 
 | ✅ Must-Learn Concepts |
-| --------------------- |
+| ---------------------- |
 | ✅ Variables & Types   |
 | ✅ Functions           |
 | ✅ Classes & Objects   |

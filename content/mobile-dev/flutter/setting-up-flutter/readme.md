@@ -6,103 +6,105 @@ excerpt: Guide to setting up flutter in vs code
 permalink: setting-up-flutter
 ---
 
-I have been looking on how to create my own gujrati learning app and thought, well why not learn something that's used in my office. And so I chose flutter. <img src='image.png' width=30 height=30/>
+I have been looking on how to create my own gujrati learning app and thought, well why not learn something that's used in my office. And so I chose flutter. <img src="{{ '/assets/imgs/setting-up-flutter.png' | relative_url }}" width=30 height=30/>
 
 Now I was used to using vs code. So went and prompted gpt to help me set up flutter in vs code, and this is its response that worked well for me:
 
-<div style="border:1px solid #ccc; padding:10px; border-radius:5px">
+<br>
 
-## 🚀 Flutter Development with **VS Code**
+<div style="border:1px solid #ccc; padding:10px; border-radius:5px"  markdown="1">
 
-#### ✅ 1. **Install Prerequisites**
+### 🚀 Flutter Development with **VS Code**
 
-###### 📦 Flutter SDK
+- #### ✅ 1. **Install Prerequisites**
 
-- Go to: [https://docs.flutter.dev/get-started/install](https://docs.flutter.dev/get-started/install)
-- Download for your OS (Windows/Linux/macOS)
-- Extract and add the `flutter/bin` folder to your **system PATH**
+  - ##### 📦 Flutter SDK
 
-> **To verify installation:**
+    - Go to: [https://docs.flutter.dev/get-started/install](https://docs.flutter.dev/get-started/install)
+    - Download for your OS (Windows/Linux/macOS)
+    - Extract and add the `flutter/bin` folder to your **system PATH**
 
-```bash
-flutter --version
-```
+    > **To verify installation:**
 
-###### 💻 Install VS Code
+    ```bash
+    flutter --version
+    ```
 
-- Download: [https://code.visualstudio.com/](https://code.visualstudio.com/)
+  - ##### 💻 Install VS Code
 
-###### 🧩 Install Extensions in VS Code
+    - Download: [https://code.visualstudio.com/](https://code.visualstudio.com/)
 
-1. Open VS Code
-2. Go to Extensions (`Ctrl+Shift+X`)
-3. Install these:
+  - ##### 🧩 Install Extensions in VS Code
 
-   - ✅ Flutter (by Dart Code)
-   - ✅ Dart (automatically gets installed with Flutter)
+    1.  Open VS Code
+    2.  Go to Extensions (`Ctrl+Shift+X`)
+    3.  Install these:
 
-###### 📱 Install Android Studio (for Android SDK & Emulator)
+        - ✅ Flutter (by Dart Code)
+        - ✅ Dart (automatically gets installed with Flutter)
 
-- You don’t need to use Android Studio, but you **do need** its SDK + emulator
+  - ##### 📱 Install Android Studio (for Android SDK & Emulator)
 
-1. Install: [https://developer.android.com/studio](https://developer.android.com/studio)
-2. During setup, **check**: Android SDK + Emulator
-3. After install, open Android Studio > Preferences > SDK Manager
+    - You don’t need to use Android Studio, but you **do need** its SDK + emulator
 
-   - Ensure **Android SDK**, **platform tools**, and at least one **API version** are installed
+    1.  Install: [https://developer.android.com/studio](https://developer.android.com/studio)
+    2.  During setup, **check**: Android SDK + Emulator
+    3.  After install, open Android Studio > Preferences > SDK Manager
 
-> **For emulator**:
+        - Ensure **Android SDK**, **platform tools**, and at least one **API version** are installed
 
-- Create one using AVD Manager inside Android Studio
-- Or use a **real Android device** in developer mode + USB debugging
+    > **For emulator**:
 
-#### ⚙️ 2. **Check Flutter Environment**
+    - Create one using AVD Manager inside Android Studio
+    - Or use a **real Android device** in developer mode + USB debugging
 
-Run:
+- #### ⚙️ 2. **Check Flutter Environment**
 
-```bash
-flutter doctor
-```
+  Run:
 
-✅ It should show checkmarks for:
+  ```bash
+  flutter doctor
+  ```
 
-- Flutter
-- Dart
-- Android toolchain
-- VS Code
-- (iOS only if on macOS)
+  ✅ It should show checkmarks for:
 
-#### 📁 3. **Create a New Flutter Project**
+  - Flutter
+  - Dart
+  - Android toolchain
+  - VS Code
+  - (iOS only if on macOS)
 
-In terminal or VS Code terminal:
+- #### 📁 3. **Create a New Flutter Project**
 
-```bash
-flutter create my_app
-cd my_app
-code .    ## opens the project in VS Code
-```
+  In terminal or VS Code terminal:
 
-#### 👨‍💻 4. **Run Your App**
+  ```bash
+  flutter create my_app
+  cd my_app
+  code .    ## opens the project in VS Code
+  ```
 
-1. Connect your Android device or start an emulator
-2. In terminal:
+- #### 👨‍💻 4. **Run Your App**
 
-   ```bash
-   flutter run
-   ```
+  1. Connect your Android device or start an emulator
+  2. In terminal:
 
-Or use **F5** in VS Code to launch the debugger.
+     ```bash
+     flutter run
+     ```
 
-#### 📂 5. **Start Coding**
+  Or use **F5** in VS Code to launch the debugger.
 
-- Your main file: `lib/main.dart`
-- Modify the default code or replace with your own UI
+- #### 📂 5. **Start Coding**
 
-#### 🔁 6. **Hot Reload / Restart**
+  - Your main file: `lib/main.dart`
+  - Modify the default code or replace with your own UI
 
-- Save file to see changes instantly (**hot reload**)
-- Use `r` or `R` in terminal when app is running
-- Or use the **Flutter toolbar** in VS Code
+- #### 🔁 6. **Hot Reload / Restart**
+
+  - Save file to see changes instantly (**hot reload**)
+  - Use `r` or `R` in terminal when app is running
+  - Or use the **Flutter toolbar** in VS Code
 
 #### 🛠 Optional: Android App Icon & Name
 
