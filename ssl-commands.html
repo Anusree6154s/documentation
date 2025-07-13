@@ -55,41 +55,37 @@
     
   </header><main class="page-content" aria-label="Content">
       <div class="wrapper">
-        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
-  
-
-
+        <article
+  class="post h-entry"
+  itemscope
+  itemtype="http://schema.org/BlogPosting"
+>
   <header class="post-header">
+     
+    <div class="parent-link">
+      This post is part of
+      <a href="/documentation/oauth-config-setup"
+        >OAuth Config Setup in Different Apps</a
+      >.
+    </div>
     
-      
-        <div class="parent-link">
-          This post is part of <a href="/documentation/oauth-config-setup">OAuth Config Setup in Different Apps</a>.
-        </div>
-    
-    <h1 class="post-title p-name" itemprop="name headline">SSL Commands</h1>
+
+    <h1 class="post-title p-name" itemprop="name headline">
+      SSL Commands
+    </h1>
+
     <p class="post-meta">
-      <time class="dt-published" datetime="2025-01-09T00:00:00+00:00" itemprop="datePublished">09 Jan 2025
-      </time></p>
-      <p class="tag-container"><span  class="tag-badge">
-            jwt
-        </span><span  class="tag-badge">
-            oauth2
-        </span><span  class="tag-badge">
-            typescript
-        </span><span  class="tag-badge">
-            nextjs
-        </span><span  class="tag-badge">
-            oidc
-        </span><span  class="tag-badge">
-            passwordless-authentication
-        </span></span>
-</p>
-  </header> 
+      <time
+        class="dt-published"
+        datetime="2025-01-09T00:00:00+00:00"
+        itemprop="datePublished"
+      >
+        <span>09 Jan 2025</span>
+        <span>•</span>
+        <span>0 views</span>
+      </time></p><p class="tag-container"><span class="tag-badge"> jwt </span><span class="tag-badge"> oauth2 </span><span class="tag-badge"> typescript </span><span class="tag-badge"> nextjs </span><span class="tag-badge"> oidc </span><span class="tag-badge"> passwordless-authentication </span></p></header>
 
-  
-
-  <div class="post-content e-content" itemprop="articleBody">
-    <p>Generate a CA certificate:</p>
+  <div class="post-content e-content" itemprop="articleBody"><p>Generate a CA certificate:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>openssl genrsa <span class="nt">-out</span> ca.key 2048
 openssl req <span class="nt">-x509</span> <span class="nt">-new</span> <span class="nt">-nodes</span> <span class="nt">-key</span> ca.key <span class="nt">-sha256</span> <span class="nt">-days</span> 365 <span class="nt">-out</span> ca.crt
@@ -108,12 +104,11 @@ openssl x509 <span class="nt">-req</span> <span class="nt">-in</span> server.csr
 openssl req <span class="nt">-new</span> <span class="nt">-key</span> client.key <span class="nt">-out</span> client.csr
 openssl x509 <span class="nt">-req</span> <span class="nt">-in</span> client.csr <span class="nt">-CA</span> ca.crt <span class="nt">-CAkey</span> ca.key <span class="nt">-CAcreateserial</span> <span class="nt">-out</span> client.crt
 </code></pre></div></div>
-
-  </div>
+</div>
 
   
   <div class="related-posts">
-  
+    
 
   <div class="disqus-comments"><div id="disqus_thread"></div>
   <script>
@@ -135,6 +130,7 @@ openssl x509 <span class="nt">-req</span> <span class="nt">-in</span> client.csr
 
   <a class="u-url" href="/documentation/ssl-commands" hidden></a>
 </article>
+
       </div>
     </main><!-- <footer class="site-footer h-card">
     <data class="u-url" href="/documentation/"></data>
