@@ -27,7 +27,9 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-TSNY1FXG3P');
-</script></head>
+</script><!-- Simple Jekyll Search JS -->
+  <script src="https://unpkg.com/simple-jekyll-search@1.9.2/dest/simple-jekyll-search.min.js"></script>
+</head>
 <body><header class="site-header">
   <div class="loader"></div>
 
@@ -208,6 +210,17 @@ secrets/
 
   <section class="sub-footer">@ 2025 Anusree Anilkumar</section>
 </footer>
-</body>
+<script>
+      SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('results-container'),
+        json: '/documentation/search.json',
+        searchResultTemplate: '<li class="search-list"><a href="{url}">{title}</a></li>',
+        noResultsText: '<li class="search-list">No results found</li>',
+        limit: 5
+      });
+    </script>
+
+  </body>
 
 </html>
