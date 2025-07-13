@@ -1225,6 +1225,19 @@ body::-webkit-scrollbar-thumb {
   .related-posts {
     margin-top: 20px;
     width: 100%;
+
+     a {
+    color: #1ab2ff;
+    word-wrap: break-word;
+
+    &:visited {
+      color: #cd8dff;
+    }
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
   }
 }
 
