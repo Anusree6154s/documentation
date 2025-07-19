@@ -24,7 +24,7 @@
         const { code, state } = parseParams();
         console.log("code", code, "state", state);
 
-        if (code && state && state === "netlify-cms-dev") {
+        if (code && state) {
           window.opener.postMessage({ code, state }, window.location.origin);
           window.close();
         } else {
