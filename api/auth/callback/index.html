@@ -18,6 +18,7 @@
       }
 
       const { code, state } = parseParams();
+      console.log('code', code, 'state', state)
 
       if (code && state) {
         window.opener.postMessage(
