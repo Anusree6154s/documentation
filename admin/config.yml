@@ -1,0 +1,27 @@
+backend:
+  name: github
+  repo: anusree6154s/documentation
+  branch: main
+  site_domain: anusree6154s.github.io/documentation
+  base_url: https://netlify-cms-github-oauth-bf5t.onrender.com
+  auth_endpoint: /auth?site=anusree6154s.github.io/documentation
+
+media_folder: "assets/uploads"
+public_folder: "/assets/uploads"
+
+collections:
+  - name: "pages"
+    label: "Content Pages"
+    folder: "content"
+    create: true
+    format: frontmatter
+    slug: "{{slug}}/README"
+    path: "{{slug}}/README"  # This is where CMS will write the file
+    extension: "md"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Permalink", name: "permalink", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Excerpt", name: "excerpt", widget: "string", required: false }
+      - { label: "Tags", name: "tags", widget: "list", required: false }
+      - { label: "Body", name: "body", widget: "markdown" }
