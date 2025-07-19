@@ -26,7 +26,7 @@
 
         if (code && state) {
           window.opener.postMessage({ code, state }, "*");
-          window.close();
+        //   window.close();
         } else {
           document.body.innerHTML = "<p>Error: Missing code/state.</p>";
         }
