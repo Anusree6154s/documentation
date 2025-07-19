@@ -25,7 +25,7 @@
         console.log("code", code, "state", state);
 
         if (code && state) {
-          window.opener.postMessage({ code, state }, window.location.origin);
+          window.opener.postMessage({ code, state }, "*");
           window.close();
         } else {
           document.body.innerHTML = "<p>Error: Missing code/state.</p>";
