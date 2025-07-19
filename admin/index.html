@@ -9,7 +9,12 @@
   </head>
   <body>
     <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
-
+    <script>
+      window.addEventListener("message", async (e) => {
+        const { code, state } = e.data || {};
+        console.log("📩 Message received from popup:", e.data);
+      });
+    </script>
     <!-- <script>
       async function initializeCMS() {
         try {
