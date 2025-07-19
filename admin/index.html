@@ -3,6 +3,9 @@
   <head>
     <meta charset="utf-8" />
     <title>Content Manager</title>
+    <script>
+      window.CMS_MANUAL_INIT = true;
+    </script>
   </head>
   <body>
     <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
@@ -10,6 +13,9 @@
       window.addEventListener("message", (e) => {
         console.log("📩 Message received from popup:", e.data);
       });
+    </script>
+    <script>
+      CMS.init();
     </script>
   </body>
 </html>
