@@ -15,11 +15,16 @@
         const { code, state } = e.data || {};
         console.log("📩 Message received from popup:", e.data);
         if (code) {
+          console.log("🚀 ~ window.addEventListener ~ code:", code);
           const response = await fetch(
             `https://netlify-cms-github-oauth-bf5t.onrender.com/auth/callback?code=${code}&state=${state}`
           );
           const data = await response.json();
           if (data.token) {
+            console.log(
+              "🚀 ~ window.addEventListener ~ data.token:",
+              data.token
+            );
             // Token obtained — now tell CMS about this token
             CMS.auth.login(data.token); // Or use CMS.api.login(data.token) depending on Netlify CMS version
             CMS.init();
