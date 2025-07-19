@@ -3,38 +3,37 @@
   <head>
     <meta charset="utf-8" />
     <title>Logging in…</title>
-    <script>
-      // This script passes the token to Netlify CMS
-      function parseParams() {
-        const params = {};
-        window.location.search
-          .substr(1)
-          .split("&")
-          .forEach((item) => {
-            const [key, value] = item.split("=");
-            if (key) params[key] = decodeURIComponent(value);
-          });
-        return params;
-      }
-
-      const { code, state } = parseParams();
-      console.log('code', code, 'state', state)
-
-      if (code && state) {
-        window.opener.postMessage(
-          {
-            code: code,
-            state: state,
-          },
-          window.location.origin
-        );
-        window.close();
-      } else {
-        document.body.innerHTML = "<p>Error: Missing code/state.</p>";
-      }
-    </script>
   </head>
   <body>
     <p>Completing login…</p>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        function parseParams() {
+          const params = {};
+          window.location.search
+            .substr(1)
+            .split("&")
+            .forEach((item) => {
+              const [key, value] = item.split("=");
+              if (key) params[key] = decodeURIComponent(value);
+            });
+          return params;
+        }
+
+        const { code, state } = parseParams();
+        console.log('code', code, 'state', state)
+
+        if (code && state) {
+          window.opener.postMessage(
+            { code, state },
+            window.location.origin
+          );
+          window.close();
+        } else {
+          document.body.innerHTML = "<p>Error: Missing code/state.</p>";
+        }
+      });
+    </script>
   </body>
 </html>
