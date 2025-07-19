@@ -44,22 +44,38 @@
             const data = await response.json();
 
             if (data.token) {
-              console.log("🚀 ~ window.addEventListener ~ data.token:", data.token);
+              console.log(
+                "🚀 ~ window.addEventListener ~ data.token:",
+                data.token
+              );
 
-              await CMS.auth.login(data.token);
+              //   await CMS.auth.login(data.token);
 
-              // Clear the page content just to be safe
-              document.body.innerHTML = "";
+              //   // Clear the page content just to be safe
+              //   document.body.innerHTML = "";
 
-              // Re-initialize CMS for authenticated session
-              await initializeCMS();
+              //   // Re-initialize CMS for authenticated session
+              //   await initializeCMS();
+
+              // Construct the user object as CMS expects
+              const user = {
+                token: data.token,
+                // You can optionally add: 'provider': 'github', 'login': 'your-user', 'name': 'Your Name'
+              };
+              // Save token for Netlify CMS
+              localStorage.setItem("netlify-cms-user", JSON.stringify(user));
+              // Reload to trigger CMS to detect user
+              window.location.reload();
             } else {
               console.error("OAuth callback failed", data);
               document.body.innerHTML =
                 "<p>Authentication failed: No token returned.</p>";
             }
           } catch (err) {
-            console.error("❌ Error during OAuth token exchange or CMS login:", err);
+            console.error(
+              "❌ Error during OAuth token exchange or CMS login:",
+              err
+            );
             document.body.innerHTML = `<p>Authentication error: ${err.message}</p>`;
           }
         }
