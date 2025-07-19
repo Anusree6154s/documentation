@@ -4,7 +4,7 @@ backend:
   branch: main
   site_domain: anusree6154s.github.io/documentation
   base_url: https://netlify-cms-github-oauth-bf5t.onrender.com
-  auth_endpoint: /auth?site=anusree6154s.github.io/documentation
+  auth_endpoint: /auth?site=https://anusree6154s.github.io/documentation
 
 media_folder: "assets/uploads"
 public_folder: "/assets/uploads"
