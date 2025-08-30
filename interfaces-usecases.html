@@ -84,12 +84,7 @@
       >
         <span>19 Jan 2025</span>
         <span>•</span>
-        <span>0 views</span>
-        <br/>
-        <img
-          src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fanusree6154s.github.io%2Fdocumentation/interfaces-usecases"
-          alt="hit count image"
-        />
+        <span><span id="visitor-count">0</span> views</span> 
       </time></p><p class="tag-container"><span class="tag-badge"> typescript </span><span class="tag-badge"> interfaces </span></p></header>
 
   <div class="post-content e-content" itemprop="articleBody"><h3 id="interfaces"><strong>Interfaces</strong></h3>
@@ -448,6 +443,25 @@
         noResultsText: '<li class="search-list">No results found</li>',
         limit: 5
       });
+      
+       document.addEventListener('DOMContentLoaded', () => {
+    const apiUrl = 'https://documentation-backend-pi.vercel.app';
+    const pageUrl = window.location.href;
+
+    fetch(apiUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ url: pageUrl })
+    })
+    .then(response => response.json())
+    .then(data => {
+      const countEl = document.getElementById('visitor-count');
+      if (countEl) {
+        countEl.textContent = `${data.count}`;
+      }
+    })
+    .catch(error => console.error('Error updating visitor count:', error));
+  });
     </script>
 
   </body>

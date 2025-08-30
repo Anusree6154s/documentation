@@ -77,12 +77,7 @@
       >
         <span>26 Oct 2024</span>
         <span>•</span>
-        <span>0 views</span>
-        <br/>
-        <img
-          src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fanusree6154s.github.io%2Fdocumentation/git -commit-standards"
-          alt="hit count image"
-        />
+        <span><span id="visitor-count">0</span> views</span> 
       </time></p></header>
 
   <div class="post-content e-content" itemprop="articleBody"><p>git cheat sheet: https://media.licdn.com/dms/image/v2/D4D22AQFWkWeD6D4ksA/feedshare-shrink_1280/feedshare-shrink_1280/0/1729225766763?e=1732147200&amp;v=beta&amp;t=lRJJDZeffcMU0rbvRJi0oSef2p3xGOG9BQWXG9dhrTQ</p>
@@ -277,6 +272,25 @@ Update project dependencies to their latest versions to improve security and per
         noResultsText: '<li class="search-list">No results found</li>',
         limit: 5
       });
+      
+       document.addEventListener('DOMContentLoaded', () => {
+    const apiUrl = 'https://documentation-backend-pi.vercel.app';
+    const pageUrl = window.location.href;
+
+    fetch(apiUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ url: pageUrl })
+    })
+    .then(response => response.json())
+    .then(data => {
+      const countEl = document.getElementById('visitor-count');
+      if (countEl) {
+        countEl.textContent = `${data.count}`;
+      }
+    })
+    .catch(error => console.error('Error updating visitor count:', error));
+  });
     </script>
 
   </body>
