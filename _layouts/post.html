@@ -32,12 +32,7 @@ layout: default
         date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
         <span>{{ page.date | date: date_format }}</span>
         <span>•</span>
-        <span>{{ views | default: 0 }} views</span>
-        <br/>
-        <img
-          src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fanusree6154s.github.io%2Fdocumentation{{ page.url }}"
-          alt="hit count image"
-        />
+        <span><span id="visitor-count">0</span> views</span> 
       </time>
 
       {%- if page.author -%} •
